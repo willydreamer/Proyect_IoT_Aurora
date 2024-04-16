@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListaSupervisoresActivity">
+
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigation"
+        android:background="@color/color_2"
+
+        >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Supervisores"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lista de Supervisores"
+            android:textSize="25sp"
+            android:layout_marginTop="80dp"
+            android:paddingRight="125dp"
+            android:textAlignment="center" />
+
+        <SearchView
+            android:layout_width="399dp"
+            android:layout_height="184dp"
+            android:layout_marginLeft="6dp"
+            android:paddingTop="120dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="473dp"
+            android:layout_marginTop="180dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp">
+
+                <FrameLayout
+                    android:id="@+id/container1"
+                    android:layout_width="393dp"
+                    android:layout_height="80dp"
+                    android:layout_above="@id/bottomNavigation"
+                    android:background="@android:color/white">
+
+                    <ImageView
+                        android:id="@+id/imagenPerfil1"
+                        android:layout_width="65dp"
+                        android:layout_height="69dp"
+                        android:src="@drawable/baseline_account_circle_24" />
+
+                    <LinearLayout
+                        android:layout_width="303dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="65dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nombre1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Christian Luis Gonzales Fernández" />
+
+                        <TextView
+                            android:id="@+id/dni1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="DNI:70298682" />
+
+                        <TextView
+                            android:id="@+id/correo1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="Correo: calledchristian79@gmail.com" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="300dp"
+                        android:text="Ver" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/container2"
+                    android:layout_width="393dp"
+                    android:layout_height="80dp"
+                    android:layout_above="@id/bottomNavigation"
+                    android:background="@android:color/white">
+
+                    <ImageView
+                        android:id="@+id/imagenPerfil2"
+                        android:layout_width="65dp"
+                        android:layout_height="69dp"
+                        android:src="@drawable/baseline_account_circle_24" />
+
+                    <LinearLayout
+                        android:layout_width="303dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="65dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nombre2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Willy Rodrigo Huallpa" />
+
+                        <TextView
+                            android:id="@+id/dni2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="DNI:70298682" />
+
+                        <TextView
+                            android:id="@+id/correo2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="Correo: willy@gmail.com" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="300dp"
+                        android:text="Ver" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/container3"
+                    android:layout_width="393dp"
+                    android:layout_height="80dp"
+                    android:layout_above="@id/bottomNavigation"
+                    android:background="@android:color/white">
+
+                    <ImageView
+                        android:id="@+id/imagenPerfil3"
+                        android:layout_width="65dp"
+                        android:layout_height="69dp"
+                        android:src="@drawable/baseline_account_circle_24" />
+
+                    <LinearLayout
+                        android:layout_width="303dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="65dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nombre3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Alejandro Gutierrez" />
+
+                        <TextView
+                            android:id="@+id/dni3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="DNI:70298682" />
+
+                        <TextView
+                            android:id="@+id/correo3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="Correo: alejandro@gmail.com" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="300dp"
+                        android:text="Ver" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/container4"
+                    android:layout_width="393dp"
+                    android:layout_height="80dp"
+                    android:layout_above="@id/bottomNavigation"
+                    android:background="@android:color/white">
+
+                    <ImageView
+                        android:id="@+id/imagenPerfil4"
+                        android:layout_width="65dp"
+                        android:layout_height="69dp"
+                        android:src="@drawable/baseline_account_circle_24" />
+
+                    <LinearLayout
+                        android:layout_width="303dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="65dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nombre4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Dana Nolasco" />
+
+                        <TextView
+                            android:id="@+id/dni4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="DNI:70298682" />
+
+                        <TextView
+                            android:id="@+id/correo4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="Correo: dana@gmail.com" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="300dp"
+                        android:text="Ver" />
+
+                </FrameLayout>
+
+
+                <FrameLayout
+                    android:id="@+id/container5"
+                    android:layout_width="393dp"
+                    android:layout_height="80dp"
+                    android:layout_above="@id/bottomNavigation"
+                    android:background="@android:color/white">
+
+                    <ImageView
+                        android:id="@+id/imagenPerfil5"
+                        android:layout_width="65dp"
+                        android:layout_height="69dp"
+                        android:src="@drawable/baseline_account_circle_24" />
+
+                    <LinearLayout
+                        android:layout_width="303dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="65dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nombre5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Alfredo Benavides" />
+
+                        <TextView
+                            android:id="@+id/dni5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="DNI:70298682" />
+
+                        <TextView
+                            android:id="@+id/correo5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="Correo: alfredo@gmail.com" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="300dp"
+                        android:text="Ver" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/container6"
+                    android:layout_width="393dp"
+                    android:layout_height="80dp"
+                    android:layout_above="@id/bottomNavigation"
+                    android:background="@android:color/white">
+
+                    <ImageView
+                        android:id="@+id/imagenPerfil6"
+                        android:layout_width="65dp"
+                        android:layout_height="69dp"
+                        android:src="@drawable/baseline_account_circle_24" />
+
+                    <LinearLayout
+                        android:layout_width="303dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="65dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nombre6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="David Ramirez" />
+
+                        <TextView
+                            android:id="@+id/dni6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="DNI:70298682" />
+
+                        <TextView
+                            android:id="@+id/correo6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="Correo: david@gmail.com" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="300dp"
+                        android:text="Ver" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/container7"
+                    android:layout_width="393dp"
+                    android:layout_height="80dp"
+                    android:layout_above="@id/bottomNavigation"
+                    android:background="@android:color/white">
+
+                    <ImageView
+                        android:id="@+id/imagenPerfil7"
+                        android:layout_width="65dp"
+                        android:layout_height="69dp"
+                        android:src="@drawable/baseline_account_circle_24" />
+
+                    <LinearLayout
+                        android:layout_width="303dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="65dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nombre7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="Cristiano Ronaldo" />
+
+                        <TextView
+                            android:id="@+id/dni7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="DNI:70298682" />
+
+                        <TextView
+                            android:id="@+id/correo7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="10dp"
+                            android:text="Correo: @gmail.com" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="300dp"
+                        android:text="Ver" />
+
+                </FrameLayout>
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_corner"
+        app:itemIconTint="@color/icon_tint"
+        app:itemRippleColor="@color/color_accent"
+        app:itemTextColor="@color/color_accent"
+        app:menu="@menu/bottom_navegation" />
+
+</RelativeLayout>

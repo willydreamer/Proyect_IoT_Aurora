@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@mipmap/ic_launcher_2_foreground"
+        />
+    <item
+        android:id="@+id/sites"
+        android:title="Sitios"
+        android:icon="@mipmap/ic_launcher_foreground"
+        />
+    <item
+        android:id="@+id/create"
+        android:title="Create"
+        android:icon="@drawable/baseline_add_24"
+        />
+    <item
+        android:id="@+id/supervisor"
+        android:title="Supervisores"
+        android:icon="@mipmap/ic_launcher_3_foreground"
+        />
+    <item
+        android:id="@+id/configuration"
+        android:title="Settings"
+        android:icon="@mipmap/ic_launcher_4_foreground"
+        />
+</menu>

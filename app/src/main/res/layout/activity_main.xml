@@ -19,8 +19,11 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/round_corner"
         android:layout_alignParentBottom="true"
+        app:itemRippleColor="@color/color_accent"
+        app:itemIconTint="@color/icon_tint"
+        app:itemTextColor="@color/color_accent"
         app:menu="@menu/bottom_navegation" />
 
 </RelativeLayout>

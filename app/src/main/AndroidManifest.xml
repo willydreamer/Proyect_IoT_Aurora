@@ -13,9 +13,21 @@
         android:theme="@style/Theme.Aurora"
         tools:targetApi="31">
         <activity
-            android:name=".InformacionSupervisorActivity"
-            android:parentActivityName=".ListaSupervisoresActivity"
+            android:name=".Supervisor"
             android:exported="false" />
+        <activity
+            android:name=".Administrador"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginFragment"
+            android:exported="false" />
+        <activity
+            android:name=".InformacionSupervisorActivity"
+            android:exported="false"
+            android:parentActivityName=".ListaSupervisoresActivity" />
         <activity
             android:name=".CrearSupervisorActivity"
             android:exported="false" />
@@ -23,7 +35,7 @@
             android:name=".ListaSupervisoresActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".InicioFragment"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

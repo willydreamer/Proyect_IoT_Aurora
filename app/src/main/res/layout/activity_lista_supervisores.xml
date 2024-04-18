@@ -36,9 +36,11 @@
 
         <SearchView
             android:layout_width="399dp"
-            android:layout_height="184dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="113dp"
             android:layout_marginLeft="6dp"
             android:paddingTop="120dp"/>
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -99,6 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="300dp"
+                        android:onClick="irInfoSupervisor"
                         android:text="Ver" />
 
                 </FrameLayout>
@@ -151,6 +154,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="300dp"
+                        android:onClick="irInfoSupervisor"
                         android:text="Ver" />
 
                 </FrameLayout>
@@ -203,7 +207,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="300dp"
-                        android:text="Ver" />
+                        android:text="Ver"
+                        android:onClick="irInfoSupervisor"
+                        />
 
                 </FrameLayout>
 
@@ -255,7 +261,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="300dp"
-                        android:text="Ver" />
+                        android:text="Ver"
+                        android:onClick="irInfoSupervisor"/>
 
                 </FrameLayout>
 

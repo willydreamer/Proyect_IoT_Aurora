@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--basado en chat gpt -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="8dp" /> <!-- Ajusta el radio según lo redondeado que quieras que sea el borde -->
+    <solid android:color="#87BCD8" /> <!-- Cambia el color de fondo según tu preferencia -->
+</shape>
+

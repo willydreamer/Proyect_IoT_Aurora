@@ -63,15 +63,11 @@
                 android:id="@+id/imageView4"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                app:srcCompat="@drawable/upload"
                 android:layout_marginTop="52dp"
                 android:layout_marginLeft="340dp"
                 />
 
-
         </FrameLayout>
-
-
 
             <ScrollView
                 android:layout_width="match_parent"

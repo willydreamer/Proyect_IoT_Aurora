@@ -30,8 +30,8 @@
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="197dp"
-                    android:layout_height="192dp"
+                    android:layout_width="170dp"
+                    android:layout_height="136dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.565"
@@ -44,7 +44,7 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hiuston Fischer"
+                    android:text="Will Fisher"
                     android:layout_marginTop="16dp"
                     android:textSize="25sp"
                     android:textStyle="bold"
@@ -57,7 +57,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="mikehiuston@gmail.com"
+                    android:text="sfisherzzz@gmail.com"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView"
                     app:layout_constraintStart_toStartOf="@+id/textView"

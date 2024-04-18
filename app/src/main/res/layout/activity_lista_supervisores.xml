@@ -13,9 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottomNavigation"
-        android:background="@color/color_2"
-
-        >
+        android:background="@color/color_2">
 
         <TextView
             android:id="@+id/textView4"
@@ -431,6 +429,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/round_corner"
         app:itemIconTint="@color/icon_tint"
         app:itemRippleColor="@color/color_accent"

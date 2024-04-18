@@ -13,6 +13,10 @@
         android:theme="@style/Theme.Aurora"
         tools:targetApi="31">
         <activity
+            android:name=".InformacionSupervisorActivity"
+            android:parentActivityName=".ListaSupervisoresActivity"
+            android:exported="false" />
+        <activity
             android:name=".CrearSupervisorActivity"
             android:exported="false" />
         <activity

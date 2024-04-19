@@ -436,110 +436,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/container4" />
 
 
-                <!--<View
-                    android:id="@+id/st1"
-                    android:layout_width="360dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/borde_redondeado"
-                    android:backgroundTint="#0FD8C5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/search1" />
-
-                <ImageView
-                    android:id="@+id/imageView20"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toEndOf="@id/st1"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toStartOf="@id/st1"
-                    app:layout_constraintTop_toTopOf="@id/st1"
-                    app:srcCompat="@drawable/baseline_account_balance_24" />
-
-                <TextView
-                    android:id="@+id/textSitio2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:paddingLeft="110dp"
-                    android:text="I.E Micaela Bastidas"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/st1"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toStartOf="@id/st1"
-                    app:layout_constraintTop_toTopOf="@id/st1" />
-
-
-                <TextView
-                    android:id="@+id/textSitio3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:textColor="@color/white"
-                    android:paddingLeft="110dp"
-                    android:text="Amazonas San Jose, Urb Victoria"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/st1"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toStartOf="@id/st1"
-                    app:layout_constraintTop_toTopOf="@id/st1" />
-
-
-                <View
-                    android:id="@+id/st2"
-                    android:layout_width="360dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/borde_redondeado"
-                    android:backgroundTint="#0FD8C5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/st1" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toEndOf="@id/st2"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toStartOf="@id/st2"
-                    app:layout_constraintTop_toTopOf="@id/st2"
-                    app:srcCompat="@drawable/baseline_account_balance_24" />
-
-                <TextView
-                    android:id="@+id/textSitio4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:paddingLeft="110dp"
-                    android:text="I.E Jose Quiñones"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/st2"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toStartOf="@id/st2"
-                    app:layout_constraintTop_toTopOf="@id/st2" />
-
-
-                <TextView
-                    android:id="@+id/textSitio5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:textColor="@color/white"
-                    android:paddingLeft="110dp"
-                    android:text="Amazonas San Jose, Urb Victoria"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/st2"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toStartOf="@id/st2"
-                    app:layout_constraintTop_toTopOf="@id/st2" /> -->
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -869,17 +765,5 @@
 
 
     </FrameLayout>
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/round_corner"
-        app:itemIconTint="@color/icon_tint"
-        app:itemRippleColor="@color/color_accent"
-        app:itemTextColor="@color/color_accent"
-        app:menu="@menu/bottom_navegation" />
 
 </RelativeLayout>

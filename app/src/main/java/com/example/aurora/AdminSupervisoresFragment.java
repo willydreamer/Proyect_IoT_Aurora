@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,8 +17,18 @@ public class AdminSupervisoresFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.admin_fragment_supervisor, container, false);
 
-        return inflater.inflate(R.layout.admin_fragment_supervisor, container, false);
+        ImageButton flecha1 = view.findViewById(R.id.flecha1);
+        flecha1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), InformacionSupervisorActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
 
 
@@ -52,7 +63,7 @@ public class AdminSupervisoresFragment extends Fragment {
     /*public void irInfoSupervisor(View view) {
 
         //primero crear el intento
-        Intent intent = new Intent(AdminSupervisoresFragment.this, InformacionSupervisorActivity.class);
+        Intent intent = new Intent(Getactivity.this, InformacionSupervisorActivity.class);
         //iniciar activity
         Log.d("Iot", "si");
         startActivity(intent);

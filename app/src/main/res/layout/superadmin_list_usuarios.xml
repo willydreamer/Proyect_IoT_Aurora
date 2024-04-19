@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondosupervisor"
+    tools:context=".Supervisor">
+
+    <TextView
+        android:id="@+id/navega"
+        android:layout_width="277dp"
+        android:layout_height="58dp"
+        android:text="Lista de Usuarios"
+        android:textColor="#4C4C4C"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.158" />
+
+    <TextView
+        android:id="@+id/navega"
+        android:layout_width="154dp"
+        android:layout_height="41dp"
+        android:text="Usuarios"
+        android:textAlignment="center"
+        android:textColor="#4C4C4C"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.052" />
+
+    <ScrollView
+        android:layout_width="367dp"
+        android:layout_height="436dp"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="196dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:layout_margin="15sp"
+                android:background="@drawable/boton_redondeado" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_margin="15sp"
+                android:background="@drawable/boton_redondeado" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_margin="15sp"
+                android:background="@drawable/boton_redondeado" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_margin="15sp"
+                android:background="@drawable/boton_redondeado" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_margin="15sp"
+                android:background="@drawable/boton_redondeado" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_margin="15sp"
+                android:background="@drawable/boton_redondeado" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_margin="15sp"
+                android:background="@drawable/boton_redondeado" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.aurora.HomeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

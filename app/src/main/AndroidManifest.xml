@@ -16,6 +16,18 @@
             android:name=".Supervisor"
             android:exported="false" />
         <activity
+            android:name=".SuperAdminCrearAdministrador"
+            android:exported ="false"/>
+        <activity
+            android:name=".SuperAdminEditarAdministrador"
+            android:exported="false"/>
+        <activity
+            android:name=".SuperAdminListUsuarios"
+            android:exported="false"/>
+        <activity
+            android:name=".SuperAdminLogEventos"
+            android:exported="false"/>
+        <activity
             android:name=".Administrador"
             android:exported="false" />
         <activity

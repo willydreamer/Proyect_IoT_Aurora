@@ -33,7 +33,7 @@ public class LoginFragment extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (usuarioobtenido.equals("superadmin")) {
-                    Intent intent = new Intent(LoginFragment.this, MainActivity.class);
+                    Intent intent = new Intent(LoginFragment.this, SuperAdminListUsuarios.class);
                     startActivity(intent);
                     finish();
                 } else if (usuarioobtenido.equals("administrador")) {

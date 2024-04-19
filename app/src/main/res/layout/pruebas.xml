@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Texto en la parte superior -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista de usuarios"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp"/>
+
+    <!-- Contenedor principal con bordes redondeados -->
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="4/5*match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:layout_marginTop="67dp"
+        android:background="#E0E0E0"
+        android:clipToPadding="false"
+        android:padding="8dp">
+
+        <!-- ScrollView para la lista de usuarios -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp">
+
+            <!-- Lista de usuarios -->
+
+        </ScrollView>
+
+        <!-- Barra inferior con bordes redondeados -->
+        <RelativeLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/redondeado"
+            android:clipToPadding="false"
+            android:padding="8dp">
+
+            <!-- Botones de la barra inferior -->
+            <Button
+                android:id="@+id/btnAction1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Botón 1" />
+
+            <Button
+                android:id="@+id/btnAction2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Botón 2" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- Aquí puedes agregar dinámicamente los elementos de la lista de usuarios -->
+    </LinearLayout>
+
+</RelativeLayout>

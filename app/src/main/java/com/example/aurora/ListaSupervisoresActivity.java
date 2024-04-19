@@ -41,14 +41,4 @@ public class ListaSupervisoresActivity extends AppCompatActivity {
 
 
 
-    public void irInfoSupervisor(View view) {
-
-        //primero crear el intento
-        Intent intent = new Intent(this, InformacionSupervisorActivity.class);
-        //iniciar activity
-        Log.d("Iot", "si");
-        startActivity(intent);
-
-    }
-
 }

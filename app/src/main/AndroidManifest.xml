@@ -41,8 +41,13 @@
             android:exported="false"
             android:parentActivityName=".ListaSupervisoresActivity" />
         <activity
+            android:name=".ListaAsignacionSitiosActivity"
+            android:exported="false"
+            android:parentActivityName=".InformacionSupervisorActivity" />
+        <activity
             android:name=".CrearSupervisorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ListaSupervisoresActivity" />
         <activity
             android:name=".ListaSupervisoresActivity"
             android:exported="false" />

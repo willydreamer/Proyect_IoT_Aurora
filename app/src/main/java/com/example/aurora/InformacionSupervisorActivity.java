@@ -1,5 +1,6 @@
 package com.example.aurora;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,14 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         // Infla el layout de tu fragmento
         return inflater.inflate(R.layout.activity_informacion_supervisor, container, false);
     }*/
+
+     public void irAsignarSitio(View view) {
+
+        //primero crear el intento
+        Intent intent = new Intent(this, ListaAsignacionSitiosActivity.class);
+        //iniciar activity
+        startActivity(intent);
+    }
 
 
 

@@ -5,14 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondosupervisor"
     tools:context=".CrearSupervisorActivity">
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavigation"
-        android:background="@color/color_2">
+        android:background="@drawable/fondosupervisor">
 
         <TextView
             android:id="@+id/textView4"
@@ -38,8 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="139dp"
             android:layout_above="@id/bottomNavigation"
-            android:layout_marginTop="130dp"
-            android:background="@color/color_2">
+            android:layout_marginTop="160dp">
 
 
             <ImageView
@@ -54,10 +53,11 @@
                 android:id="@+id/button"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:text="Subir Foto"
-                android:textSize="15sp"
+                android:layout_marginLeft="230dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginLeft="230dp" />
+                android:backgroundTint="#009688"
+                android:text="Subir Foto"
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -73,12 +73,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="0dp"
-                android:layout_marginTop="260dp"
+                android:layout_marginTop="280dp"
                 tools:layout_editor_absoluteY="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp">
+                    android:layout_height="300dp"
+                    android:backgroundTint="#009688">
 
 
                     <View
@@ -394,14 +395,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
+                        android:backgroundTint="#009688"
                         android:text="Guardar"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/et6"
-                        />
-
-
+                        app:layout_constraintTop_toBottomOf="@+id/et6" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -417,7 +416,7 @@
     </FrameLayout>
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <!--<com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -426,6 +425,6 @@
         app:itemIconTint="@color/icon_tint"
         app:itemRippleColor="@color/color_accent"
         app:itemTextColor="@color/color_accent"
-        app:menu="@menu/bottom_navegation" />
+        app:menu="@menu/bottom_navegation" /> -->
 
 </RelativeLayout>

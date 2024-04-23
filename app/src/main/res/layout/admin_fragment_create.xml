@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateFragment"
-    android:background="@color/color_2">
+    android:background="@drawable/fondosupervisor">
 
     <TextView
         android:id="@+id/text2"

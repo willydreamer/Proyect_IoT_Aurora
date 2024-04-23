@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
@@ -28,9 +29,16 @@ public class AdminSupervisoresFragment extends Fragment {
             }
         });
 
+        Button crearBtn = view.findViewById(R.id.button19);
+        crearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CrearSupervisorActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                startActivity(intent);
+            }
+        });
         return view;
     }
-
 
 
     //para transladar de una vista a otra

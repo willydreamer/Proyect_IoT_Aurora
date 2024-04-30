@@ -8,12 +8,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class ListaAsignacionSitiosActivity extends AppCompatActivity {
+public class AdminInformacionSitioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_lista_asignacion_sitios);
+        setContentView(R.layout.activity_informacion_sitio);
+
     }
 }

@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondosupervisor"
+    tools:context=".CrearSitioActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I.E. Micaela Bastidas"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondosupervisor">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Sitios"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/imageViewProfilePrincipal"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:src="@drawable/profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewNamePrincipal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I.E. Micaela Bastidas"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewProfilePrincipal" />
+
+            <TextView
+                android:id="@+id/textViewInfoPrincipal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="APU123"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNamePrincipal" />
+
+            <ImageView
+                android:id="@+id/imageViewEdit"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginEnd="128dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/circle_edit"
+                android:src="@mipmap/ic_marcador_foreground"
+                app:layout_constraintBottom_toTopOf="@+id/textViewNamePrincipal"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_marginTop="270dp"
+            tools:layout_editor_absoluteY="16dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <!-- Fila para el encabezado 'General' y el icono de editar -->
+                <LinearLayout
+                    android:id="@+id/llHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="General"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                    <TextView
+                        android:id="@+id/btnEditar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Editar"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:textColor="#E8B92C"
+                        />
+
+                </LinearLayout>
+                <!-- Fila para 'Departamento' -->
+                <LinearLayout
+                    android:id="@+id/llDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llHeader"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tituloDepartamento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Departamento"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:textSize="16dp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_background"
+                        android:text="Apurimac"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llProvincia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llDepartment"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tituloProvincia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Provincia"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:textSize="16dp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_background"
+                        android:text="Abancay"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llDistrito"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llProvincia"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tituloDistrito"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Distrito"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:textSize="16dp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_background"
+                        android:text="San Mateo"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llCodigoUbigeo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llDistrito"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tituloCodigoUbigeo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Código de Ubigeo"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:textSize="16dp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_background"
+                        android:text="123456"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llLatitud"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llCodigoUbigeo"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tituloLatitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Latitud"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:textSize="16dp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_background"
+                        android:text="12.3456"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llLongitud"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llLatitud"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tituloLongitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Longitud"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:textSize="16dp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_background"
+                        android:text="78.9012 "
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llTipoZona"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llLongitud"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tituloTipoZona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo de Zona"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:textSize="16dp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_background"
+                        android:text="Urbana"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llOperadora"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llTipoZona"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tituloOperadora"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Operadora"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:textSize="16dp"
+                        android:paddingBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_background"
+                        android:text="Claro"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+    </FrameLayout>
+
+</RelativeLayout>

@@ -13,20 +13,26 @@
         android:theme="@style/Theme.Aurora"
         tools:targetApi="31">
         <activity
+            android:name=".AdminInformacionSitioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CrearSitioActivity"
+            android:exported="false" />
+        <activity
             android:name=".Supervisor"
             android:exported="false" />
         <activity
             android:name=".SuperAdminCrearAdministrador"
-            android:exported ="false"/>
+            android:exported="false" />
         <activity
             android:name=".SuperAdminEditarAdministrador"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SuperAdminListUsuarios"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SuperAdminLogEventos"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Administrador"
             android:exported="false" />

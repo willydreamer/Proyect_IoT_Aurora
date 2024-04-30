@@ -481,8 +481,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/container4" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_listasitios"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/search1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="15dp"
+                    />
 
-                <LinearLayout
+
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -551,6 +561,8 @@
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
+
+
                     <androidx.cardview.widget.CardView
                         android:background="@color/white"
                         android:layout_width="wrap_content"
@@ -800,7 +812,7 @@
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
+                </LinearLayout> -->
 
 
 

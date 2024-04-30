@@ -2,32 +2,31 @@ package com.example.aurora;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+
+import com.example.aurora.Adapter.ListaSupervisoresAdapter;
+
+import java.util.ArrayList;
 
 public class AdminSupervisoresFragment extends Fragment {
+
+    ArrayList<String> listaSupervisores;
+    
+    RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.admin_fragment_supervisor, container, false);
 
-        ImageButton flecha1 = view.findViewById(R.id.flecha1);
-        flecha1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), InformacionSupervisorActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                startActivity(intent);
-            }
-        });
 
         Button crearBtn = view.findViewById(R.id.button19);
         crearBtn.setOnClickListener(new View.OnClickListener() {
@@ -37,37 +36,32 @@ public class AdminSupervisoresFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        recyclerView = view.findViewById(R.id.recyclerview_listasupervisores);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+
+        listaSupervisores = new ArrayList<>();
+        listaSupervisores.add("Christian Luis Gonzales Fernández");
+        listaSupervisores.add("Willy Huallpa");
+        listaSupervisores.add("Alejandro Gutierrez");
+        listaSupervisores.add("Dana Nolasco");
+        listaSupervisores.add("Alfredo Benavides");
+
+
+        //seteamos
+        ListaSupervisoresAdapter adapter = new ListaSupervisoresAdapter(listaSupervisores);
+        recyclerView.setAdapter(adapter);
         return view;
+
+
+        //Crear instancia adapter
+        //ListaSupervisoresAdapter adapter = new ListaSupervisoresAdapter();
+        //adapter.setContext(AdminSupervisoresFragment.this);
+        //binding.recyclerView.setAdapter(adapter);
+        //binding.recyclerView.setLayoutManager(new LinearLayoutManager(AdminSupervisoresFragment.this);
+
     }
 
-
-    //para transladar de una vista a otra
-    /*@Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // Configura el botón o acción que iniciará la transición al otro fragmento
-        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Obtiene el FragmentManager
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                // Inicia una transacción de fragmento
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                // Reemplaza el fragmento actual con el nuevo fragmento
-                Fragment nuevoFragmento = new InformacionSupervisorActivity();
-                fragmentTransaction.replace(R.id.infosupers, nuevoFragmento);
-
-                // Puedes agregar el fragmento actual a la pila de retroceso
-                // fragmentTransaction.addToBackStack(null);
-
-                // Realiza la transacción
-                fragmentTransaction.commit();
-            }
-        });
-    }
     /*public void irInfoSupervisor(View view) {
 
         //primero crear el intento

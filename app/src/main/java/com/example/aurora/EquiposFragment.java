@@ -8,11 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class CreateFragment extends Fragment {
+public class EquiposFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.admin_fragment_create, container, false);
+        return inflater.inflate(R.layout.admin_fragment_equipos, container, false);
     }
 }

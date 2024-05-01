@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,7 +29,7 @@ public class AdminSupervisoresFragment extends Fragment {
         View view = inflater.inflate(R.layout.admin_fragment_supervisor, container, false);
 
 
-        Button crearBtn = view.findViewById(R.id.button19);
+        ImageButton crearBtn = view.findViewById(R.id.button19);
         crearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

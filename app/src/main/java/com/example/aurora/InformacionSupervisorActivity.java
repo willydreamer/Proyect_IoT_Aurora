@@ -40,6 +40,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         listaSitios.add(new Sitio("NW000001","Junín","Huancayo","Center","Urbana","Móvil"));
         listaSitios.add(new Sitio("NW000002","Cusco","Cusco","Center","Rural","Fijo"));
         listaSitios.add(new Sitio("NW000003","Arequipa","Arequipa","Center","Urbana","Móvil"));
+        listaSitios.add(new Sitio("NW000004","Lima","Yauyos","Center","Rural","Fijo"));
 
         ListaSitiosAdapter adapter = new ListaSitiosAdapter();
         adapter.setContext(InformacionSupervisorActivity.this);

@@ -471,7 +471,7 @@
                 </FrameLayout>
 
 
-                <SearchView
+                <!--<SearchView
                     android:id="@+id/search1"
                     android:layout_width="380dp"
                     android:layout_height="match_parent"
@@ -479,7 +479,19 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/container4" />
+                    app:layout_constraintTop_toBottomOf="@+id/container4" /> -->
+
+                <SearchView
+                    android:id="@+id/search1"
+                    android:layout_width="297dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/text_background"
+                    app:iconifiedByDefault="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/container4"
+                    app:queryHint="Buscar..." />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_listasitios"
@@ -489,6 +501,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="15dp"
+                    tools:listitem="@layout/item_lista_sitios"
                     />
 
 

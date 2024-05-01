@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Sitio implements Serializable {
 
-    private Integer idSitio;
+    private String idSitio;
 
     private String departamento;
     private String provincia;
@@ -18,13 +18,20 @@ public class Sitio implements Serializable {
                  String provincia,String distrito, String tipoDeZona,
                  String tipoDeSitio ){
 
+        this.idSitio = idSitio;
+        this.departamento = departamento;
+        this.provincia = provincia;
+        this.distrito = distrito ;
+        this.tipoDeZona = tipoDeZona;
+        this.tipoDeSitio = tipoDeSitio;
+
     }
 
-    public Integer getIdSitio() {
+    public String getIdSitio() {
         return idSitio;
     }
 
-    public void setIdSitio(Integer idSitio) {
+    public void setIdSitio(String idSitio) {
         this.idSitio = idSitio;
     }
 

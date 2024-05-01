@@ -63,6 +63,17 @@
                 android:textColor="@color/white"
                 android:textSize="11dp" />
 
+            <ImageButton
+                android:id="@+id/flecha1"
+                android:layout_width="41dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/boton_redondeado"
+                android:onClick="irInfoSupervisor"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/flechaderecha" />
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

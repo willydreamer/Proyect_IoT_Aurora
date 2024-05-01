@@ -50,7 +50,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.12" />
 
-    <SearchView
+    <!--<SearchView
                 android:id="@+id/search1"
                 android:layout_width="380dp"
                 android:layout_height="50dp"
@@ -59,7 +59,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                />
+                /> -->
+
+    <SearchView
+        android:id="@+id/search1"
+        android:layout_width="297dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="22dp"
+        app:iconifiedByDefault="false"
+        android:background="@drawable/text_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text2"
+        app:queryHint="Buscar..." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_listasupervisores"
@@ -68,7 +80,7 @@
         app:layout_constraintTop_toBottomOf="@id/search1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="230dp"/>
+        android:layout_marginTop="210dp"/>
 
     <!--<ScrollView
                 app:layout_constraintTop_toBottomOf="@id/search1"

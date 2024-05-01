@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.aurora.AdminInformacionSitioActivity;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.InformacionSupervisorActivity;
 import com.example.aurora.R;
@@ -28,13 +29,16 @@ public class ListaSitiosAdapter
 
     public class SitioViewHolder extends RecyclerView.ViewHolder{
         Sitio sitio;
+        //TextView codigoSitio;
 
         public SitioViewHolder(@NonNull View itemView) {
 
             super(itemView);
+
+
+
         }
     }
-
     /*
     public ListaSitiosAdapter(ArrayList<Sitio> listaSitios){
         this.listaSitios = listaSitios;
@@ -124,20 +128,20 @@ public class ListaSitiosAdapter
     @Override
     public void onBindViewHolder(@NonNull SitioViewHolder holder, int position) {
 
-        /*ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
-        flecha1.setOnClickListener(view -> {
-            Intent intent = new Intent(getContext(), InformacionSupervisorActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-            context.startActivity(intent);
-        });*/
 
-        //holder.setearDatosSitio(listaSitios.get(position));
-
-        Sitio sitio = listaSitios.get(position) ;
-        holder.sitio = sitio;
+        Sitio s = listaSitios.get(position) ;
+        holder.sitio = s;
         TextView codigoSitio = holder.itemView.findViewById(R.id.textTitle1);
-        codigoSitio.setText("Código: " + sitio.getIdSitio());
+        codigoSitio.setText("Código: " + s.getIdSitio());
         TextView ubicacionSitio= holder.itemView.findViewById(R.id.textSubtitle1);
-        ubicacionSitio.setText(sitio.getDepartamento() + "," + sitio.getProvincia() + "," + sitio.getDistrito());
+        ubicacionSitio.setText(s.getDepartamento() + "," + s.getProvincia() + "," + s.getDistrito());
+
+        context = holder.itemView.getContext();
+        ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
+        flecha1.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+            context.startActivity(intent);
+        });
 
     }
 

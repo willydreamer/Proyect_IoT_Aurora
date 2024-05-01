@@ -162,7 +162,8 @@
                         android:text="Departamento"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/editDepartamento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -170,7 +171,9 @@
                         android:padding="8dp"
                         android:paddingStart="16dp"
                         android:text="Apurimac"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:inputType="text"
+                        android:enabled="false" />
 
                 </LinearLayout>
 
@@ -194,7 +197,8 @@
                         android:text="Provincia"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/editProvincia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -202,7 +206,8 @@
                         android:padding="8dp"
                         android:paddingStart="16dp"
                         android:text="Abancay"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:enabled="false"/>
 
                 </LinearLayout>
 
@@ -226,7 +231,8 @@
                         android:text="Distrito"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/editDistrito"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -234,7 +240,9 @@
                         android:padding="8dp"
                         android:paddingStart="16dp"
                         android:text="San Mateo"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:enabled="false"
+                        />
 
                 </LinearLayout>
 
@@ -258,7 +266,7 @@
                         android:text="Código de Ubigeo"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -266,7 +274,8 @@
                         android:padding="8dp"
                         android:paddingStart="16dp"
                         android:text="123456"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:enabled="false"/>
 
                 </LinearLayout>
 
@@ -290,7 +299,8 @@
                         android:text="Latitud"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/editLatitud"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -298,7 +308,8 @@
                         android:padding="8dp"
                         android:paddingStart="16dp"
                         android:text="12.3456"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:enabled="false"/>
 
                 </LinearLayout>
 
@@ -322,7 +333,8 @@
                         android:text="Longitud"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/editLongitud"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -330,7 +342,8 @@
                         android:padding="8dp"
                         android:paddingStart="16dp"
                         android:text="78.9012 "
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:enabled="false"/>
 
                 </LinearLayout>
 
@@ -354,15 +367,15 @@
                         android:text="Tipo de Zona"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <Spinner
+                        android:id="@+id/spinnerTipoZona"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/text_background"
                         android:padding="8dp"
                         android:paddingStart="16dp"
-                        android:text="Urbana"
-                        android:textStyle="bold" />
+                        android:enabled="false" />
 
                 </LinearLayout>
 
@@ -386,7 +399,8 @@
                         android:text="Operadora"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <Spinner
+                        android:id="@+id/spinnerOperadora"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -394,15 +408,17 @@
                         android:padding="8dp"
                         android:paddingStart="16dp"
                         android:text="Claro"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:enabled="false"
+                        />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="15dp"
                     android:id="@+id/llHeader2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -439,23 +455,22 @@
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="110dp"
                         android:layout_gravity="center"
                         android:layout_margin="16dp"
-                        android:layout_marginBottom="-10dp"
                         android:background="@color/white"
                         app:cardCornerRadius="15dp"
                         app:cardElevation="2dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="110dp"
                             android:padding="16dp">
 
                             <ImageView
                                 android:id="@+id/imageTitulo1"
-                                android:layout_width="56dp"
-                                android:layout_height="56dp"
+                                android:layout_width="66dp"
+                                android:layout_height="65dp"
                                 android:layout_alignParentStart="true"
                                 android:layout_marginStart="4dp"
                                 android:layout_marginTop="8dp"
@@ -463,12 +478,12 @@
 
                             <TextView
                                 android:id="@+id/textTitle1"
-                                android:layout_width="wrap_content"
+                                android:layout_width="166dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_toEndOf="@id/imageTitulo1"
                                 android:text="Christian Luis Gonzales Fernández"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -479,6 +494,7 @@
                                 android:layout_marginStart="16dp"
                                 android:layout_toEndOf="@id/imageTitulo1"
                                 android:text="DNI:70298682" />
+
 
                             <TextView
                                 android:id="@+id/textSubtitle2"
@@ -492,21 +508,21 @@
 
 
                             <ImageButton
-                                android:id="@+id/flecha1"
-                                android:layout_width="41dp"
-                                android:layout_height="50dp"
-                                android:layout_marginLeft="300dp"
-                                android:layout_marginTop="20dp"
+                                android:id="@+id/trash"
+                                android:layout_width="46dp"
+                                android:layout_height="49dp"
+                                android:layout_marginLeft="290dp"
+                                android:layout_marginTop="17dp"
                                 android:background="@drawable/boton_redondeado"
                                 android:onClick="irInfoSupervisor"
                                 android:scaleType="fitCenter"
-                                android:src="@mipmap/flechaderecha"
-                                tools:layout_editor_absoluteX="289dp"
-                                tools:layout_editor_absoluteY="311dp" />
+                                android:src="@mipmap/ic_basura_foreground"
+                                app:tint="@color/red" />
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/llHeader3"
                     android:layout_width="0dp"
@@ -536,6 +552,207 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llEquipos"
+                    android:layout_width="375dp"
+                    android:layout_height="204dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llHeader3">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenEquipo1"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloEquipo1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenEquipo1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textTipoEquipo1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloEquipo1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Router"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerie1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTipoEquipo1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenEquipo2"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloEquipo2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenEquipo2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textTipoEquipo2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloEquipo2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Router"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerie2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTipoEquipo2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenEquipo3"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloEquipo3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenEquipo3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textTipoEquipo3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloEquipo3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Router"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerie3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTipoEquipo3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <!-- Fin del bloque repetido -->
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/llHeader4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -543,7 +760,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llHeader3">
+                    app:layout_constraintTop_toBottomOf="@id/llEquipos">
 
                     <ImageView
                         android:layout_width="35dp"
@@ -562,10 +779,6 @@
 
 
                 </LinearLayout>
-
-
-
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

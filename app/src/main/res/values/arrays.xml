@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipo_zona_options">
+        <item>Urbana</item>
+        <item>Rural</item>
+    </string-array>
+    <string-array name="operadora_options">
+        <item>Claro</item>
+        <item>Movistar</item>
+        <item>Entel</item>
+        <item>Bitel</item>
+    </string-array>
+</resources>

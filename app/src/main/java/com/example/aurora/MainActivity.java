@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             else if (menuItemId ==  R.id.create) {
-                replaceFragment(new CreateFragment());
+                replaceFragment(new EquiposFragment());
                 return true;
             }
             else if (menuItemId ==  R.id.supervisor) {

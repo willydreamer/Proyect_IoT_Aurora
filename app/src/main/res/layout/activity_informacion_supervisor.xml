@@ -471,7 +471,7 @@
                 </FrameLayout>
 
 
-                <SearchView
+                <!--<SearchView
                     android:id="@+id/search1"
                     android:layout_width="380dp"
                     android:layout_height="match_parent"
@@ -479,10 +479,33 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/container4" />
+                    app:layout_constraintTop_toBottomOf="@+id/container4" /> -->
+
+                <SearchView
+                    android:id="@+id/search1"
+                    android:layout_width="297dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/text_background"
+                    app:iconifiedByDefault="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/container4"
+                    app:queryHint="Buscar..." />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_listasitios"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/search1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="15dp"
+                    tools:listitem="@layout/item_lista_sitios"
+                    />
 
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -551,6 +574,8 @@
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
+
+
                     <androidx.cardview.widget.CardView
                         android:background="@color/white"
                         android:layout_width="wrap_content"
@@ -800,7 +825,7 @@
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
+                </LinearLayout> -->
 
 
 

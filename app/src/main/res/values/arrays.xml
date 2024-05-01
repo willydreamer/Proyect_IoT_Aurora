@@ -10,4 +10,10 @@
         <item>Entel</item>
         <item>Bitel</item>
     </string-array>
+    <string-array name="nombres_ficticios">
+        <item>Willy Huallpa Pillco</item>
+        <item>Chistian Dominguez</item>
+        <item>Laura NothingToSay</item>
+        <item>Mike Roblox</item>
+    </string-array>
 </resources>

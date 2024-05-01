@@ -13,9 +13,13 @@
         android:theme="@style/Theme.Aurora"
         tools:targetApi="31">
         <activity
+            android:name=".AsignarSitioActivity"
+            android:exported="false"
+            android:parentActivityName=".ListaAsignacionSitiosActivity"/>
+        <activity
             android:name=".AdminInformacionSitioActivity"
             android:exported="false"
-            android:parentActivityName=".InformacionSupervisorActivity"/>
+            android:parentActivityName=".InformacionSupervisorActivity" />
         <activity
             android:name=".CrearSitioActivity"
             android:exported="false" />

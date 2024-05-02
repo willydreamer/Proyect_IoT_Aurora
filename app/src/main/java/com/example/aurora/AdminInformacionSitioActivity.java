@@ -1,6 +1,7 @@
 package com.example.aurora;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -60,6 +61,12 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
             }
         });
 
+        binding.buttonEliminarSitio.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminInformacionSitioActivity.this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Sitio eliminado exitosamente", Toast.LENGTH_SHORT).show();
+        });
+
     }
 
     private void setupSpinner(Spinner spinner, int arrayId) {
@@ -69,6 +76,7 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
         spinner.setEnabled(false);
         spinner.setAdapter(adapter);
     }
+
     private void toggleEditMode(boolean enable) {
         binding.editDepartamento.setEnabled(enable);
         binding.editProvincia.setEnabled(enable);
@@ -117,9 +125,7 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
         builder.setMessage("¿Desea continuar?")
                 .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // Ocultar el CardView
                         binding.cardViewResponsable.setVisibility(View.GONE);
-                        // Mostrar el Spinner
                         binding.spinnerNombres.setVisibility(View.VISIBLE);
 
                     }
@@ -137,14 +143,8 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
         // Obtener el nombre seleccionado del Spinner
         String nombreSeleccionado = binding.spinnerNombres.getSelectedItem().toString();
 
-        // Aquí debes establecer el nombre, correo y DNI de la persona seleccionada
-        // en las TextViews correspondientes del CardView
-        // Por ejemplo:
         binding.textTitle1.setText(nombreSeleccionado);
-
-        // Mostrar el CardView nuevamente
         binding.cardViewResponsable.setVisibility(View.VISIBLE);
-        // Ocultar el Spinner
         binding.spinnerNombres.setVisibility(View.GONE);
     }
 

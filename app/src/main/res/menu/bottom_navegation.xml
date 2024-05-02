@@ -14,8 +14,8 @@
         android:icon="@mipmap/ic_launcher_foreground"
         />
     <item
-        android:id="@+id/create"
-        android:title="Create"
+        android:id="@+id/equipos"
+        android:title="Equipos"
         android:icon="@mipmap/ic_servidores2_foreground"
         />
     <item

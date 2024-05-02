@@ -27,7 +27,7 @@ public class Administrador extends AppCompatActivity {
                 replaceFragment(new HomeFragment());
                 return true;
             }
-            else if (menuItemId ==  R.id.create) {
+            else if (menuItemId ==  R.id.equipos) {
                 replaceFragment(new EquiposFragment());
                 return true;
             }

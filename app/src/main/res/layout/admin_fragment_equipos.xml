@@ -49,190 +49,753 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.109"></TextView>
-
-<SearchView
-    android:id="@+id/search1"
-    android:layout_width="297dp"
-    android:layout_height="40dp"
-    android:layout_marginTop="22dp"
-    app:iconifiedByDefault="false"
-    android:background="@drawable/text_background"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/text2"
-    app:queryHint="Buscar..." />
-
-<ScrollView
-    app:layout_constraintTop_toBottomOf="@id/search1"
-    android:layout_marginTop="180dp"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.592"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintVertical_bias="0.0">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="395dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintTop_toBottomOf="@+id/text2"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:background="@color/white"
-            android:layout_marginBottom="-10dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="2dp">
+            <FrameLayout
+                android:id="@+id/frameRouters"
+                android:layout_width="380dp"
+                android:layout_height="263dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/frameSwitches"
+                tools:layout_editor_absoluteX="19dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/imageTitulo1"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/circle"
-                    android:src="@mipmap/ic_marcador_foreground" />
-
-                <TextView
-                    android:id="@+id/textTitle1"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/llHeaderRouter"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@id/imageTitulo1"
-                    android:text="I.E. Micaela Bastidas"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/textSubtitle1"
-                    android:layout_width="192dp"
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Routers"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llRouters"
+                    android:layout_width="375dp"
+                    android:layout_height="204dp"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llHeader3">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenRouter1"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloRouter1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenRouter1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textRouter1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloRouter1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Router"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerieRouter1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textRouter1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenRouter2"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloRouter2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenRouter2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textRouter2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloRouter2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Router"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerieRouter2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textRouter2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenRouter3"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloRouter3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenRouter3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textRouter3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloRouter3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Router"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerieRouter3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textRouter3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <!-- Fin del bloque repetido -->
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/frameSwitches"
+                android:layout_width="380dp"
+                android:layout_height="263dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/frameEnergia"
+                app:layout_constraintTop_toBottomOf="@+id/frameRouters"
+                tools:layout_editor_absoluteX="19dp">
+
+                <LinearLayout
+                    android:id="@+id/llHeaderSwitches"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textTitle1"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_toEndOf="@id/imageTitulo1"
-                    android:text="Apurímac, Abancay, Urb La victoria 345" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_below="@+id/textSubtitle1"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_toEndOf="@+id/imageTitulo1"
-                    android:background="@drawable/rounded_background"
-                    android:paddingStart="12dp"
-                    android:paddingTop="3dp"
-                    android:paddingEnd="12dp"
-                    android:text="Alejandro Gutierrez"
-                    android:textColor="@color/white"
-                    android:textSize="11dp" />
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
 
-                <ImageButton
-                    android:id="@+id/flecha1"
-                    android:layout_width="41dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="300dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/boton_redondeado"
-                    android:onClick="irInfoSupervisor"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/flechaderecha"
-                    tools:layout_editor_absoluteX="289dp"
-                    tools:layout_editor_absoluteY="311dp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Switches"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
 
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:background="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="-10dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="2dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageTitulo2"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/circle"
-                    android:src="@mipmap/ic_marcador_foreground" />
+                <LinearLayout
+                    android:id="@+id/llEquipos"
+                    android:layout_width="375dp"
+                    android:layout_height="204dp"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llHeader3">
 
-                <TextView
-                    android:id="@+id/textTitle2"
-                    android:layout_width="wrap_content"
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenEquipo1"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloEquipo1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenEquipo1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textTipoEquipo1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloEquipo1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Switch"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerie1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTipoEquipo1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenEquipo2"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloEquipo2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenEquipo2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textTipoEquipo2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloEquipo2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Switch"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerie2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTipoEquipo2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenEquipo3"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloEquipo3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenEquipo3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textTipoEquipo3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloEquipo3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Switch"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerie3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTipoEquipo3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <!-- Fin del bloque repetido -->
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/frameEnergia"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameSwitches"
+                tools:layout_editor_absoluteX="19dp">
+
+                <LinearLayout
+                    android:id="@+id/llHeaderEnergia"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@id/imageTitulo2"
-                    android:text="Banco CPP"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/textSubtitle2"
-                    android:layout_width="192dp"
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Panel de Energia"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/frameRectificador"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameEnergia"
+                tools:layout_editor_absoluteX="19dp">
+
+                <LinearLayout
+                    android:id="@+id/llHeaderRectificador"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textTitle2"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_toEndOf="@id/imageTitulo2"
-                    android:text="Apurímac, Abancay, Urb La victoria 345" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_below="@+id/textSubtitle2"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_toEndOf="@+id/imageTitulo2"
-                    android:background="@drawable/rounded_background"
-                    android:paddingStart="12dp"
-                    android:paddingTop="3dp"
-                    android:paddingEnd="12dp"
-                    android:text="Papilon"
-                    android:textColor="@color/white"
-                    android:textSize="11dp" />
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
 
-                <ImageButton
-                    android:id="@+id/flecha2"
-                    android:layout_width="41dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="300dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/boton_redondeado"
-                    android:onClick="irInfoSupervisor"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/flechaderecha"
-                    tools:layout_editor_absoluteX="289dp"
-                    tools:layout_editor_absoluteY="311dp" />
-
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Rectificador"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
 
 
-    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+<!--            <FrameLayout-->
+<!--                android:id="@+id/frameGabinete"-->
+<!--                android:layout_width="380dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/frameRectificador"-->
+<!--                tools:layout_editor_absoluteX="19dp">-->
 
-</ScrollView>
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/llHeaderGabinete"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="35dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:src="@mipmap/ic_servidores_foreground" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Gabinete"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--                        android:textStyle="bold" />-->
+
+
+<!--                </LinearLayout>-->
+<!--            </FrameLayout>-->
+<!--            <FrameLayout-->
+<!--            android:id="@+id/frameBBU"-->
+<!--            android:layout_width="380dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/frameGabinete"-->
+<!--            tools:layout_editor_absoluteX="19dp">-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/llHeaderBBU"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="35dp"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:src="@mipmap/ic_servidores_foreground" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="BBU"-->
+<!--                    android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--                    android:textStyle="bold" />-->
+
+
+<!--            </LinearLayout>-->
+<!--        </FrameLayout>-->
+<!--            <FrameLayout-->
+<!--                android:id="@+id/frameRRU"-->
+<!--                android:layout_width="380dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/frameBBU"-->
+<!--                tools:layout_editor_absoluteX="19dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/llHeaderRRU"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="35dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:src="@mipmap/ic_servidores_foreground" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="RRU"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--                        android:textStyle="bold" />-->
+
+
+<!--                </LinearLayout>-->
+<!--            </FrameLayout>-->
+<!--            <FrameLayout-->
+<!--                android:id="@+id/frameBateria"-->
+<!--                android:layout_width="380dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/frameRRU"-->
+<!--                tools:layout_editor_absoluteX="19dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/llHeaderBateria"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="35dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:src="@mipmap/ic_servidores_foreground" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Bateria"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
+<!--            </FrameLayout>-->
+<!--            <FrameLayout-->
+<!--                android:id="@+id/frameUPS"-->
+<!--                android:layout_width="380dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/frameBateria"-->
+<!--                tools:layout_editor_absoluteX="19dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/llHeaderUPS"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="35dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:src="@mipmap/ic_servidores_foreground" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="UPS"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
+<!--            </FrameLayout>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

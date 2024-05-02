@@ -16,4 +16,16 @@
         <item>Laura NothingToSay</item>
         <item>Mike Roblox</item>
     </string-array>
+    <string-array name="tipo_equipo_options">
+        <item>Router</item>
+        <item>Switch</item>
+        <item>Panel de Energia</item>
+        <item>Rectificador</item>
+        <item>Gabinete</item>
+        <item>BBU</item>
+        <item>RRU</item>
+        <item>Bateria</item>
+        <item>UPS</item>
+
+    </string-array>
 </resources>

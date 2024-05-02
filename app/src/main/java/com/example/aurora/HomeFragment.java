@@ -90,8 +90,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-
+        return homeView;
         //Con navigation
         /*NavController navController = NavHostFragment.findNavController(HomeFragment.this);
 
@@ -111,6 +110,6 @@ public class HomeFragment extends Fragment {
             navController.navigate(R.id.action_homeFragment_to_equiposFragment);
         });*/
 
-        return homeView;
+
     }
 }

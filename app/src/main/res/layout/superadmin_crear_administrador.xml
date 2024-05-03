@@ -6,31 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondosupervisor">
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="86dp"
-        android:layout_height="57dp"
-        android:text="Apellido"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="164dp" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="111dp"
-        android:layout_height="23dp"
-        android:text="Nombre"
-        android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textColorHighlight="#000000"
-        android:textColorHint="#000000"
-        android:textColorLink="#000000"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
-        app:layout_constraintStart_toStartOf="@+id/button13"
-        app:layout_constraintTop_toTopOf="@+id/button13" />
-
     <Button
         android:id="@+id/button10"
         android:layout_width="114dp"
@@ -57,9 +32,11 @@
         android:id="@+id/button13"
         android:layout_width="345dp"
         android:layout_height="55dp"
-        android:background="@drawable/boton_redondeado"
+        android:background="@drawable/btn_background_1"
+        android:backgroundTint="#E3D8C9"
         android:clickable="false"
         android:contextClickable="false"
+        android:textColorLink="#FFFFFF"
         tools:layout_editor_absoluteX="36dp"
         tools:layout_editor_absoluteY="285dp" />
 
@@ -68,6 +45,7 @@
         android:layout_width="346dp"
         android:layout_height="49dp"
         android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#D5CFCF"
         android:clickable="false"
         android:contextClickable="false"
         tools:layout_editor_absoluteX="35dp"
@@ -117,5 +95,74 @@
         android:contextClickable="false"
         tools:layout_editor_absoluteX="35dp"
         tools:layout_editor_absoluteY="592dp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="68dp"
+        android:layout_height="23dp"
+        android:text="Nombre"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/button13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toStartOf="@+id/button13"
+        app:layout_constraintTop_toTopOf="@+id/button13"
+        app:layout_constraintVertical_bias="0.562" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apellido"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/button14"
+        app:layout_constraintEnd_toEndOf="@+id/button14"
+        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintStart_toStartOf="@+id/button14"
+        app:layout_constraintTop_toTopOf="@+id/button14" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Correo"
+        android:textColor="#000000"
+        tools:layout_editor_absoluteX="61dp"
+        tools:layout_editor_absoluteY="462dp" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Domicilio"
+        android:textColor="#000000"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="533dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teléfono:"
+        android:textColor="#000000"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="614dp" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crear Administrador"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.035" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

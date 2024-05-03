@@ -35,8 +35,6 @@ public class ListaSitiosAdapter
 
             super(itemView);
 
-
-
         }
     }
     /*

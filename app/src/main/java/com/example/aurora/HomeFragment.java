@@ -90,9 +90,22 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        ImageButton goMensajes = homeView.findViewById(R.id.imageButton2);
+        goMensajes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //primero crear el intento
+                Intent intent = new Intent(getActivity(), MensajeriaActivity.class);
+                //iniciar activity
+                startActivity(intent);
+            }
+        });
+
         return homeView;
         //Con navigation
         /*NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+
+
 
 
         ImageButton goSitios = homeView.findViewById(R.id.flecha1);

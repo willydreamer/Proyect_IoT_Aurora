@@ -16,6 +16,9 @@
             android:name=".CrearEquipoActivity"
             android:exported="false" />
         <activity
+            android:name=".MensajeriaActivity"
+            android:exported="false" />
+        <activity
             android:name=".AsignarSitioActivity"
             android:exported="false"
             android:parentActivityName=".ListaAsignacionSitiosActivity" />

@@ -1,6 +1,7 @@
 package com.example.aurora;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +16,14 @@ public class Supervisor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_supervisor);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        ImageButton flecha1 = findViewById(R.id.flecha1);
+        ImageButton flecha2 = findViewById(R.id.flecha2);
+        ImageButton flecha3 = findViewById(R.id.flecha3);
+
+        flecha1.setOnClickListener(v->{
+
         });
+
     }
 }

@@ -8,196 +8,36 @@
     android:background="@drawable/fondosupervisor"
     tools:context=".Supervisor">
 
-    <TextView
-        android:id="@+id/vacio2"
-        android:layout_width="282dp"
-        android:layout_height="44dp"
-        android:background="@drawable/boton_redondeado"
-        android:text="                         "
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="387dp" />
-
-    <TextView
-        android:id="@+id/vacio333"
-        android:layout_width="282dp"
-        android:layout_height="44dp"
-        android:background="@drawable/boton_redondeado"
-        android:text="                         "
-        android:textStyle="bold"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="477dp" />
-
-    <ImageButton
-        android:id="@+id/flecha3"
-        android:layout_width="39dp"
-        android:layout_height="44dp"
-        android:background="@drawable/boton_redondeado"
-        android:scaleType="fitCenter"
-        app:srcCompat="@mipmap/flechaderecha"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="477dp" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationSupervisor"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gestiona todos los equipos de la empresa"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="445dp" />
-
-    <TextView
-        android:id="@+id/listaequipos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lista de Equipos"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="490dp" />
-
-    <TextView
-        android:id="@+id/listaequiposporsitios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lista de Equipos por Sitio"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="400dp" />
-
-    <TextView
-        android:id="@+id/vacio1"
-        android:layout_width="282dp"
-        android:layout_height="44dp"
-        android:background="@drawable/boton_redondeado"
-        android:text="                         "
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="290dp" />
-
-    <TextView
-        android:id="@+id/listasitios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lista de Sitios"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="301dp" />
-
-    <ImageButton
-        android:id="@+id/flecha1"
-        android:layout_width="40dp"
-        android:layout_height="44dp"
-        android:background="@drawable/boton_redondeado"
-        android:scaleType="fitCenter"
-        app:srcCompat="@mipmap/flechaderecha"
-        tools:layout_editor_absoluteX="276dp"
-        tools:layout_editor_absoluteY="290dp" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gestiona los equipos bajo los sitios bajo tu cargo"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="352dp" />
-
-    <ImageButton
-        android:id="@+id/flecha2"
-        android:layout_width="40dp"
-        android:layout_height="44dp"
-        android:background="@drawable/boton_redondeado"
-        android:scaleType="fitCenter"
-        app:srcCompat="@mipmap/flechaderecha"
-        tools:layout_editor_absoluteX="276dp"
-        tools:layout_editor_absoluteY="387dp" />
-
-    <TextView
-        android:id="@+id/vacio33"
-        android:layout_width="282dp"
-        android:layout_height="44dp"
-        android:background="@drawable/boton_redondeado"
-        android:text="                         "
-        android:textStyle="bold"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="578dp" />
-
-    <TextView
-        android:id="@+id/textViewDD"
-        android:layout_width="55dp"
-        android:layout_height="17dp"
-        android:text="Descripción"
-        android:textSize="8sp"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="608dp" />
-
-    <TextView
-        android:id="@+id/acti1"
-        android:layout_width="68dp"
-        android:layout_height="24dp"
-        android:text="Actividad"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="590dp" />
-
-    <ImageButton
-        android:id="@+id/flecharepetida"
-        android:layout_width="41dp"
-        android:layout_height="50dp"
-        android:background="@drawable/boton_redondeado"
-        android:scaleType="fitCenter"
-        app:srcCompat="@mipmap/flechaderecha"
-        tools:layout_editor_absoluteX="289dp"
-        tools:layout_editor_absoluteY="578dp" />
-
-    <TextView
-        android:id="@+id/textViewD"
-        android:layout_width="38dp"
-        android:layout_height="20dp"
-        android:text="Fecha"
-        android:textSize="8sp"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="582dp" />
-
-    <TextView
-        android:id="@+id/navega"
-        android:layout_width="277dp"
-        android:layout_height="58dp"
-        android:text="Navega por tus responsabilidades"
-        android:textColor="#4C4C4C"
-        android:textSize="25sp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:itemIconTint="@color/icon_tint"
+        app:itemRippleColor="@color/color_accent"
+        app:itemTextColor="@color/color_accent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291" />
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/supervisor_bottom_navegation"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/texto2"
-        android:layout_width="278dp"
-        android:layout_height="19dp"
-        android:text="Gestiona los sitios bajo tus cargo"
+    <FrameLayout
+        android:id="@+id/containerFrame"
+        android:layout_width="412dp"
+        android:layout_height="649dp"
+        android:layout_above="@id/bottomNavigationSupervisor"
+        android:background="@color/color_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.353"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.367" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tus últimas acciones"
-        android:textColor="#4C4C4C"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="539dp" />
+        app:layout_constraintVertical_bias="0.024"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

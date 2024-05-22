@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@mipmap/ic_launcher_2_foreground"
+        />
+    <item
+        android:id="@+id/mensajeria"
+        android:title="Mensajería"
+        android:icon="@mipmap/ic_servidores2_foreground"
+        />
+    <item
+        android:id="@+id/agregar"
+        android:title="Agregar"
+        android:icon="@mipmap/ic_launcher_foreground"
+        />
+    <item
+        android:id="@+id/historial"
+        android:title="Historial"
+        android:icon="@mipmap/ic_servidores2_foreground"
+        />
+    <item
+        android:id="@+id/configuracion"
+        android:title="Configuracion"
+        android:icon="@mipmap/ic_servidores2_foreground"
+        />
+</menu>

@@ -17,7 +17,8 @@
             android:exported="false" />
         <activity
             android:name=".MensajeriaActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".HomeFragment" />
         <activity
             android:name=".AsignarSitioActivity"
             android:exported="false"

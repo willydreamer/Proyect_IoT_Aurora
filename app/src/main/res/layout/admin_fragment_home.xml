@@ -91,11 +91,14 @@
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="57dp"
-        android:layout_height="53dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
-        android:src="@android:drawable/stat_notify_chat"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:src="@drawable/mensaje_icono"
+        android:background="?attr/selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintTop_toTopOf="parent"/>

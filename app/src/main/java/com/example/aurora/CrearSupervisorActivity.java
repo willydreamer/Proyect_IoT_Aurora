@@ -75,7 +75,7 @@ public class CrearSupervisorActivity extends AppCompatActivity {
             objectOutputStream.writeObject(supervisor) ;
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e("guardarSupervisor", "IOException al guardar el supervisor", e);
+            Log.d("guardarSupervisor", "IOException al guardar el supervisor", e);
         }
 
         Intent intent = new Intent(this, AdminSupervisoresFragment.class); // Reemplaza "TuActivity" con el nombre de tu Activity

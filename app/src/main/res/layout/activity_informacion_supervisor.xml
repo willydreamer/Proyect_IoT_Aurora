@@ -105,14 +105,14 @@
                         android:layout_width="137dp"
                         android:layout_height="131dp"
                         android:layout_marginLeft="20dp"
-                        app:srcCompat="@drawable/baseline_account_circle_24" />
+                        app:srcCompat="@drawable/perfil_icono" />
 
 
                     <Button
                         android:id="@+id/button"
-                        android:layout_width="160dp"
+                        android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="220dp"
+                        android:layout_marginLeft="205dp"
                         android:layout_marginTop="30dp"
                         android:backgroundTint="#4CAF50"
                         android:text="Estado: Activo"
@@ -120,11 +120,14 @@
 
                     <ImageButton
                         android:id="@+id/imageButton5"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="230dp"
-                        android:layout_marginTop="70dp"
-                        app:srcCompat="@android:drawable/ic_menu_edit" />
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="45dp"
+                        android:scaleType="centerInside"
+                        android:layout_gravity="center"
+                        android:src="@drawable/editicon"
+                        android:background="?attr/selectableItemBackground" />
 
                     <TextView
                         android:id="@+id/textView5"
@@ -145,6 +148,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/borde_redondeado"
+                    android:backgroundTint="#34A1F8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/container2" />
@@ -192,6 +196,7 @@
                     android:layout_width="360dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
+                    android:backgroundTint="#34A1F8"
                     android:background="@drawable/borde_redondeado"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -241,6 +246,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/borde_redondeado"
+                    android:backgroundTint="#34A1F8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/et2" />
@@ -292,6 +298,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/borde_redondeado"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:backgroundTint="#34A1F8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/et3" />
 
@@ -342,6 +349,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/borde_redondeado"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:backgroundTint="#34A1F8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/et4" />
 
@@ -393,6 +401,7 @@
                     android:background="@drawable/borde_redondeado"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:backgroundTint="#34A1F8"
                     app:layout_constraintTop_toBottomOf="@id/et5" />
 
 

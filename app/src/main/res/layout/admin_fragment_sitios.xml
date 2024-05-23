@@ -9,6 +9,7 @@
     >
 
     <TextView
+        android:fontFamily="@font/conforma"
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,6 +37,7 @@
     </ImageButton>
 
     <TextView
+        android:fontFamily="@font/conforma"
         android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,6 +105,8 @@
                         android:src="@mipmap/ic_marcador_foreground" />
 
                     <TextView
+                        android:fontFamily="@font/conforma"
+
                         android:id="@+id/textTitle1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -113,6 +117,8 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:fontFamily="@font/conforma"
+
                         android:id="@+id/textSubtitle1"
                         android:layout_width="192dp"
                         android:layout_height="wrap_content"
@@ -123,6 +129,8 @@
                         android:text="Apurímac, Abancay, Urb La victoria 345" />
 
                     <TextView
+                        android:fontFamily="@font/conforma"
+
                         android:id="@+id/textView1"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"

@@ -10,4 +10,10 @@
     <color name="color_accent">#368380</color>
     <color name="color_2">#E3EDED</color>
     <color name="red">#F93544</color>
+
+    <color name="primaryColor">#6200EE</color>
+    <color name="primaryLightColor">#BB86FC</color>
+    <color name="messageColor1">#FFCDD2</color>
+    <color name="messageColor2">#C8E6C9</color>
+        <!-- Agrega más colores según sea necesario -->
 </resources>

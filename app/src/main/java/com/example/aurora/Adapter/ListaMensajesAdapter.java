@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aurora.AdminInformacionSitioActivity;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.InformacionSupervisorActivity;
+import com.example.aurora.MensajeriaChatActivity;
 import com.example.aurora.R;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class ListaMensajesAdapter extends RecyclerView.Adapter<ListaMensajesAdap
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {
-            Intent intent = new Intent(getContext(), InformacionSupervisorActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+            Intent intent = new Intent(getContext(), MensajeriaChatActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
             context.startActivity(intent);
         });
 

@@ -6,6 +6,60 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondosupervisor">
 
+    <TextView
+        android:id="@+id/textViewNE"
+        android:layout_width="341dp"
+        android:layout_height="46dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="293dp" />
+
+    <TextView
+        android:id="@+id/textViewAE"
+        android:layout_width="341dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNE" />
+
+    <TextView
+        android:id="@+id/textViewCE"
+        android:layout_width="341dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAE" />
+
+    <TextView
+        android:id="@+id/textViewDE"
+        android:layout_width="340dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCE" />
+
+    <TextView
+        android:id="@+id/textViewTE"
+        android:layout_width="341dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDE" />
+
     <Button
         android:id="@+id/button10"
         android:layout_width="114dp"
@@ -14,62 +68,27 @@
         android:backgroundTint="#96E6A7"
         android:text="Estado: activo"
         android:textSize="8sp"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="233dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
 
     <Button
         android:id="@+id/button12"
         android:layout_width="105dp"
-        android:layout_height="30dp"
+        android:layout_height="32dp"
         android:background="@drawable/boton_redondeado"
-        android:backgroundTint="#71B680"
+        android:backgroundTint="#96E6A7"
         android:text="Subir foto"
         android:textSize="10sp"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="233dp" />
-
-    <Button
-        android:id="@+id/button13"
-        android:layout_width="345dp"
-        android:layout_height="55dp"
-        android:background="@drawable/btn_background_1"
-        android:backgroundTint="#E3D8C9"
-        android:clickable="false"
-        android:contextClickable="false"
-        android:textColorLink="#FFFFFF"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="285dp" />
-
-    <Button
-        android:id="@+id/button14"
-        android:layout_width="346dp"
-        android:layout_height="49dp"
-        android:background="@drawable/boton_redondeado"
-        android:backgroundTint="#D5CFCF"
-        android:clickable="false"
-        android:contextClickable="false"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="365dp" />
-
-    <Button
-        android:id="@+id/button15"
-        android:layout_width="342dp"
-        android:layout_height="54dp"
-        android:background="@drawable/boton_redondeado"
-        android:clickable="false"
-        android:contextClickable="false"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="443dp" />
-
-    <Button
-        android:id="@+id/button16"
-        android:layout_width="345dp"
-        android:layout_height="53dp"
-        android:background="@drawable/boton_redondeado"
-        android:clickable="false"
-        android:contextClickable="false"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="518dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.849"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -86,20 +105,14 @@
         app:layout_constraintVertical_bias="0.154"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/button17"
-        android:layout_width="343dp"
-        android:layout_height="52dp"
-        android:background="@drawable/boton_redondeado"
-        android:clickable="false"
-        android:contextClickable="false"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="592dp" />
-
     <TextView
         android:id="@+id/textView14"
         android:layout_width="68dp"
         android:layout_height="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginBottom="11dp"
         android:text="Nombre"
         android:textAllCaps="false"
         android:textColor="#000000"
@@ -107,51 +120,70 @@
         android:textColorHint="#000000"
         android:textColorLink="#000000"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toStartOf="@+id/button13"
-        app:layout_constraintTop_toTopOf="@+id/button13"
-        app:layout_constraintVertical_bias="0.562" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewNE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewNE"
+        app:layout_constraintStart_toStartOf="@+id/textViewNE"
+        app:layout_constraintTop_toTopOf="@+id/textViewNE" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="267dp"
+        android:layout_marginBottom="13dp"
         android:text="Apellido"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/button14"
-        app:layout_constraintEnd_toEndOf="@+id/button14"
-        app:layout_constraintHorizontal_bias="0.088"
-        app:layout_constraintStart_toStartOf="@+id/button14"
-        app:layout_constraintTop_toTopOf="@+id/button14" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewAE"
+        app:layout_constraintStart_toStartOf="@+id/textViewAE"
+        app:layout_constraintTop_toTopOf="@+id/textViewAE" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="275dp"
+        android:layout_marginBottom="13dp"
         android:text="Correo"
         android:textColor="#000000"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="462dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewCE"
+        app:layout_constraintStart_toStartOf="@+id/textViewCE"
+        app:layout_constraintTop_toTopOf="@+id/textViewCE" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="259dp"
+        android:layout_marginBottom="12dp"
         android:text="Domicilio"
         android:textColor="#000000"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="533dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewDE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDE"
+        app:layout_constraintStart_toStartOf="@+id/textViewDE"
+        app:layout_constraintTop_toTopOf="@+id/textViewDE" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="259dp"
+        android:layout_marginBottom="13dp"
         android:text="Teléfono:"
         android:textColor="#000000"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="614dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTE"
+        app:layout_constraintStart_toStartOf="@+id/textViewTE"
+        app:layout_constraintTop_toTopOf="@+id/textViewTE" />
 
     <TextView
         android:id="@+id/textView15"
@@ -164,5 +196,92 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.035" />
+
+    <EditText
+        android:id="@+id/editTextText6"
+        android:layout_width="161dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#E6E2E2"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewNE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewNE"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewNE"
+        app:layout_constraintTop_toTopOf="@+id/textViewNE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextText7"
+        android:layout_width="161dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#E6E2E2"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewAE"
+        app:layout_constraintStart_toStartOf="@+id/textViewAE"
+        app:layout_constraintTop_toTopOf="@+id/textViewAE" />
+
+    <EditText
+        android:id="@+id/editTextText8"
+        android:layout_width="161dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#E6E2E2"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewCE"
+        app:layout_constraintStart_toStartOf="@+id/textViewCE"
+        app:layout_constraintTop_toTopOf="@+id/textViewCE" />
+
+    <EditText
+        android:id="@+id/editTextText9"
+        android:layout_width="161dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#E6E2E2"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewDE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDE"
+        app:layout_constraintStart_toStartOf="@+id/textViewDE"
+        app:layout_constraintTop_toTopOf="@+id/textViewDE" />
+
+    <EditText
+        android:id="@+id/editTextText10"
+        android:layout_width="161dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#E6E2E2"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTE"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTE"
+        app:layout_constraintStart_toStartOf="@+id/textViewTE"
+        app:layout_constraintTop_toTopOf="@+id/textViewTE" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

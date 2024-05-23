@@ -37,68 +37,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.052" />
 
-    <ScrollView
-        android:layout_width="367dp"
-        android:layout_height="436dp"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="196dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <Button
-
-                android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_margin="15sp"
-                android:background="@drawable/boton_redondeado"
-                android:backgroundTint="#FFFFFF" />
-
-            <Button
-
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:layout_margin="15sp"
-                android:background="@drawable/boton_redondeado" />
-
-            <Button
-
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:layout_margin="15sp"
-                android:background="@drawable/boton_redondeado" />
-
-            <Button
-
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:layout_margin="15sp"
-                android:background="@drawable/boton_redondeado" />
-
-            <Button
-
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:layout_margin="15sp"
-                android:background="@drawable/boton_redondeado" />
-
-            <Button
-
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:layout_margin="15sp"
-                android:background="@drawable/boton_redondeado" />
-
-            <Button
-
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:layout_margin="15sp"
-                android:background="@drawable/boton_redondeado" />
-
-        </LinearLayout>
-    </ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="334dp"
+        android:layout_height="483dp"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="197dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

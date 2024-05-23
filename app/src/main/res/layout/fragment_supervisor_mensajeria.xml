@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SupervisorMensajeriaFragment"
+    android:background="@drawable/fondosupervisor">
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="128sp"
+        android:layout_marginTop="85sp"
+        android:text="Mi Mensajería"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="175sp"
+        android:layout_marginTop="20sp"
+        android:text="Mensajería"/>
+
+    <SearchView
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="43sp"
+        android:layout_marginTop="135sp"
+        android:background="@drawable/text_background" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="305dp"
+        android:layout_height="463dp"
+        android:layout_marginLeft="55sp"
+        android:layout_marginTop="210sp" />
+</FrameLayout>

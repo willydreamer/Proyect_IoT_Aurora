@@ -1,18 +1,12 @@
 package com.example.aurora;
 
 import android.os.Bundle;
-import android.widget.ImageButton;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.aurora.databinding.ActivityMainBinding;
 import com.example.aurora.databinding.ActivitySupervisorBinding;
 
 public class Supervisor extends AppCompatActivity {
@@ -24,29 +18,29 @@ public class Supervisor extends AppCompatActivity {
         binding = ActivitySupervisorBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
+        replaceFragment(new SupervisorHomeFragmentVista());
 
         binding.bottomNavigationSupervisor.setOnItemSelectedListener(item -> {
             int menuItemId =  item.getItemId();
 
             if (menuItemId ==  R.id.home) {
-                replaceFragment(new HomeFragment());
+                replaceFragment(new SupervisorHomeFragmentVista());
                 return true;
             }
             else if (menuItemId ==  R.id.mensajeria) {
-                replaceFragment(new EquiposFragment());
+                replaceFragment(new SupervisorMensajeriaFragment());
                 return true;
             }
-            else if (menuItemId ==  R.id.supervisor) {
-                replaceFragment(new AdminSupervisoresFragment());
+            else if (menuItemId ==  R.id.agregar) {
+                replaceFragment(new SupervisorAgregarFragment());
                 return true;
             }
-            else if (menuItemId ==  R.id.configuration) {
-                replaceFragment(new ConfigurationFragment());
+            else if (menuItemId ==  R.id.historial) {
+                replaceFragment(new SupervisorHistorialFragment());
                 return true;
             }
-            else if (menuItemId ==  R.id.sites) {
-                replaceFragment(new AdminSitiosFragment());
+            else if (menuItemId ==  R.id.ajustes) {
+                replaceFragment(new SupervisorAjustesFragment());
                 return true;
             }
             return true;
@@ -56,7 +50,7 @@ public class Supervisor extends AppCompatActivity {
     private  void replaceFragment (Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.container, fragment);
+        transaction.replace(R.id.containerFrame, fragment);
         transaction.commit();
 
     }

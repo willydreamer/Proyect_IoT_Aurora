@@ -4,13 +4,7 @@
     <style name="Base.Theme.Aurora" parent="Theme.Material3.DayNight">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:fontFamily">@font/varelaround</item>
-        <item name="fontFamily">@font/varelaround</item>
     </style>
 
-    <style name="Theme.Aurora" parent="Base.Theme.Aurora">
-        <item name="android:fontFamily">@font/varelaround</item>
-        <item name="fontFamily">@font/varelaround</item>
-    </style>
-
+    <style name="Theme.Aurora" parent="Base.Theme.Aurora" />
 </resources>

@@ -107,6 +107,7 @@
                             android:layout_marginTop="40dp"
                             android:backgroundTint="#009688"
                             android:text="Subir Foto"
+                            android:onClick="guardarSupervisor"
                             android:textSize="15sp" />
 
                         <ImageView
@@ -434,6 +435,7 @@
                         android:layout_marginTop="12dp"
                         android:backgroundTint="#009688"
                         android:text="Guardar"
+                        android:onClick="guardarSupervisor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"

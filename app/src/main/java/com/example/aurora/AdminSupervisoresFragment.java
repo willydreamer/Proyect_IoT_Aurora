@@ -71,4 +71,6 @@ public class AdminSupervisoresFragment extends Fragment {
         Log.d("Iot", "si");
         startActivity(intent);
     }*/
+
+
 }

@@ -48,7 +48,749 @@
     tools:layout_editor_absoluteX="64dp"
     tools:layout_editor_absoluteY="664dp" /> -->
 
-    <View
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="190dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <View
+                android:id="@+id/vacio333"
+                android:layout_width="282dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/boton_redondeado"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView18"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/navega"
+                android:layout_width="277dp"
+                android:layout_height="58dp"
+                android:text="Navega por tus responsabilidades"
+                android:textColor="#4C4C4C"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.35"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.010" />
+
+
+
+            <TextView
+                android:id="@+id/texto2"
+                android:layout_width="278dp"
+                android:layout_height="19dp"
+                android:text="Gestiona los Sitios de la Empresa"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.353"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.080" />
+
+            <View
+                android:id="@+id/vacio1"
+                android:layout_width="282dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/boton_redondeado"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/texto2"
+                tools:ignore="MissingConstraints" />
+
+            <View
+                android:id="@+id/vacio2"
+                android:layout_width="282dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/boton_redondeado"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView17"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="63dp"
+                android:text="Gestiona los Supervisores de la Empresa"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vacio1" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="90dp"
+                android:text="Gestiona Los Equipos de la Empresa"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vacio2" />
+
+            <TextView
+                android:id="@+id/listasitios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:text="Lista de Sitios"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/vacio1"
+                app:layout_constraintTop_toTopOf="@+id/vacio1" />
+
+            <TextView
+                android:id="@+id/listaequiposporsitios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:text="Lista de Supervisores"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/vacio2"
+                app:layout_constraintTop_toTopOf="@+id/vacio2" />
+
+            <TextView
+                android:id="@+id/listaequipos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:text="Lista de Equipos"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/vacio333"
+                app:layout_constraintTop_toTopOf="@+id/vacio333" />
+
+            <ImageButton
+                android:id="@+id/flecha3"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="240dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/boton_redondeado"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="@+id/vacio333"
+                app:layout_constraintTop_toTopOf="@+id/vacio333"
+                app:srcCompat="@mipmap/flechaderecha" />
+
+
+            <ImageButton
+                android:id="@+id/flecha2"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="240dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/boton_redondeado"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="@+id/vacio2"
+                app:layout_constraintTop_toTopOf="@+id/vacio2"
+                app:srcCompat="@mipmap/flechaderecha" />
+
+            <ImageButton
+                android:id="@+id/flecha1"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="240dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/boton_redondeado"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="@+id/vacio1"
+                app:layout_constraintTop_toTopOf="@+id/vacio1"
+                app:srcCompat="@mipmap/flechaderecha" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="127dp"
+                android:text="Tus últimas acciones"
+                android:textColor="#4C4C4C"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vacio333" />
+
+
+            <FrameLayout
+                android:id="@+id/frameRouters"
+                android:layout_width="380dp"
+                android:layout_height="263dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:layout_editor_absoluteX="19dp">
+
+                <LinearLayout
+                    android:id="@+id/llHeaderRouter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Sitios Recientes"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llRouters"
+                    android:layout_width="375dp"
+                    android:layout_height="204dp"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llHeader3">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenRouter1"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloRouter1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenRouter1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textRouter1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloRouter1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Router"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenRouter2"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloRouter2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenRouter2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textRouter2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloRouter2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Router"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerieRouter2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textRouter2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenRouter3"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloRouter3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenRouter3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textRouter3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloRouter3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Router"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerieRouter3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textRouter3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <!-- Fin del bloque repetido -->
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:id="@+id/textNumeroSerieRouter1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="ABC - 123456"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/frameSwitches"
+                android:layout_width="380dp"
+                android:layout_height="263dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/frameEnergia"
+                app:layout_constraintTop_toBottomOf="@+id/frameRouters"
+                tools:layout_editor_absoluteX="19dp">
+
+                <LinearLayout
+                    android:id="@+id/llHeaderSwitches"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Equipos Recientes"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llEquipos"
+                    android:layout_width="375dp"
+                    android:layout_height="204dp"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llHeader3">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenEquipo1"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloEquipo1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenEquipo1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textTipoEquipo1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloEquipo1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Switch"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerie1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTipoEquipo1"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenEquipo2"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloEquipo2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenEquipo2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textTipoEquipo2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloEquipo2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Switch"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerie2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTipoEquipo2"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="2dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="16dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagenEquipo3"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/perfil_icono"
+                                        android:foregroundGravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/textTituloEquipo3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/imagenEquipo3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Cisco ISC 100 Series"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/textTipoEquipo3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTituloEquipo3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="Switch"
+                                        android:textColor="#3C9AC5"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:id="@+id/textNumeroSerie3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/textTipoEquipo3"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:text="ABC - 123456"
+                                        android:textSize="12sp" />
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <!-- Fin del bloque repetido -->
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/frameEnergia"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameSwitches"
+                tools:layout_editor_absoluteX="19dp">
+
+                <LinearLayout
+                    android:id="@+id/llHeaderEnergia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Panel de Energia"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
+
+
+
+
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/frameRectificador"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameEnergia"
+                tools:layout_editor_absoluteX="19dp">
+
+                <LinearLayout
+                    android:id="@+id/llHeaderRectificador"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Rectificador"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <!--<View
         android:id="@+id/vacio333"
         android:layout_width="282dp"
         android:layout_height="44dp"
@@ -60,36 +802,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18"
         tools:ignore="MissingConstraints" />
-
-    <View
-        android:id="@+id/vacio33"
-        android:layout_width="282dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="35dp"
-        android:background="@drawable/boton_redondeado"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:ignore="MissingConstraints" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_marginTop="190dp"
-        android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </ScrollView>
 
     <TextView
     android:id="@+id/navega"
@@ -105,7 +817,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.307" />
 
-
+-->
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="65dp"
@@ -119,7 +831,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintTop_toTopOf="parent"/>
-
+<!--
     <TextView
     android:id="@+id/texto2"
     android:layout_width="278dp"
@@ -214,18 +926,6 @@
         app:layout_constraintStart_toStartOf="@+id/vacio333"
         app:layout_constraintTop_toTopOf="@+id/vacio333" />
 
-    <TextView
-        android:id="@+id/acti1"
-        android:layout_width="68dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="19dp"
-        android:text="Actividad"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/vacio33"
-        app:layout_constraintTop_toBottomOf="@+id/textViewD" />
-
     <ImageButton
         android:id="@+id/flecha3"
         android:layout_width="35dp"
@@ -236,18 +936,6 @@
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="@+id/vacio333"
         app:layout_constraintTop_toTopOf="@+id/vacio333"
-        app:srcCompat="@mipmap/flechaderecha" />
-
-    <ImageButton
-        android:id="@+id/flecharepetida"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/boton_redondeado"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="@+id/vacio33"
-        app:layout_constraintTop_toTopOf="@+id/vacio33"
         app:srcCompat="@mipmap/flechaderecha" />
 
 
@@ -286,26 +974,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vacio333" />
+        app:layout_constraintTop_toBottomOf="@+id/vacio333" /> -->
 
-    <TextView
-        android:id="@+id/textViewD"
-        android:layout_width="38dp"
-        android:layout_height="10dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="7dp"
-        android:text="Fecha"
-        android:textSize="8sp"
-        app:layout_constraintStart_toStartOf="@+id/vacio33"
-        app:layout_constraintTop_toTopOf="@+id/vacio33" />
 
-    <TextView
-        android:id="@+id/textViewDD"
-        android:layout_width="55dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="19dp"
-        android:text="Descripción"
-        android:textSize="8sp"
-        app:layout_constraintStart_toStartOf="@+id/vacio33"
-        app:layout_constraintTop_toBottomOf="@+id/acti1" /> -->
 </androidx.constraintlayout.widget.ConstraintLayout>

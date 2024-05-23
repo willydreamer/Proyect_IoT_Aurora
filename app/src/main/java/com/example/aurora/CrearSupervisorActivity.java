@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 
 public class CrearSupervisorActivity extends AppCompatActivity {
@@ -68,14 +69,17 @@ public class CrearSupervisorActivity extends AppCompatActivity {
 
         //nombre del archivo a guardar
         String fileName = "listaSupervisores" ;
+        ArrayList<Supervisor> listaSupers = new ArrayList<>();
+        listaSupers.add(supervisor);
         //Se utiliza la clase FileOutputStream para poder almacenar en Android
         try (FileOutputStream fileOutputStream = this.openFileOutput(fileName , Context.MODE_PRIVATE);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             //con objectOutputStream se realiza la escritura como objeto
-            objectOutputStream.writeObject(supervisor) ;
+            objectOutputStream.writeObject(listaSupers) ;
+            Log.d("msg-test79", "supervisor guardado");
         } catch (IOException e) {
             e.printStackTrace();
-            Log.d("guardarSupervisor", "IOException al guardar el supervisor", e);
+            Log.d("msg-test79", "IOException al guardar el supervisor", e);
         }
 
         Intent intent = new Intent(this, AdminSupervisoresFragment.class); // Reemplaza "TuActivity" con el nombre de tu Activity
@@ -94,13 +98,13 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         String fileName = "listaSupervisores";
         try (FileInputStream fileInputStream = openFileInput(fileName);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-            Supervisor[] arregloSupervisores = (Supervisor[]) objectInputStream.readObject();
+            ArrayList<Supervisor> arregloSupervisores = (ArrayList<Supervisor>) objectInputStream.readObject();
             for(Supervisor s: arregloSupervisores ){
                 Log.d("super:",s.getNombre());
             }
         } catch (FileNotFoundException | ClassNotFoundException e) {
             e.printStackTrace();
-            Log.e("guardarSupervisor", "Error al leer el supervisor guardado", e);
+            Log.e("super", "Error al leer el supervisor guardado", e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

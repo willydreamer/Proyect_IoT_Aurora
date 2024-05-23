@@ -74,7 +74,24 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         tools:ignore="MissingConstraints" />
 
-<TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="190dp"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <TextView
     android:id="@+id/navega"
     android:layout_width="277dp"
     android:layout_height="58dp"
@@ -290,5 +307,5 @@
         android:text="Descripción"
         android:textSize="8sp"
         app:layout_constraintStart_toStartOf="@+id/vacio33"
-        app:layout_constraintTop_toBottomOf="@+id/acti1" />
+        app:layout_constraintTop_toBottomOf="@+id/acti1" /> -->
 </androidx.constraintlayout.widget.ConstraintLayout>

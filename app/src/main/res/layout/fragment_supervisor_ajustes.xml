@@ -13,7 +13,7 @@
         android:layout_height="99dp"
         android:layout_marginLeft="160sp"
         android:layout_marginTop="110sp"
-        android:src="@drawable/circle" />
+        android:src="@drawable/profile" />
 
     <TextView
         android:id="@+id/textView8"
@@ -41,15 +41,16 @@
         android:layout_marginLeft="50sp"
         android:layout_marginTop="290sp"
         android:text="Nombres:"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView66"
         android:layout_width="171dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200sp"
+        android:layout_marginLeft="180sp"
         android:layout_marginTop="290sp"
-        android:text="Data"
+        android:text="Dana Paola"
         android:textAlignment="textEnd"
         android:textSize="15sp" />
 
@@ -60,15 +61,16 @@
         android:layout_marginLeft="50sp"
         android:layout_marginTop="440sp"
         android:text="Teléfono:"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView55"
         android:layout_width="171dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200sp"
+        android:layout_marginLeft="180sp"
         android:layout_marginTop="440sp"
-        android:text="Data"
+        android:text="951899507"
         android:textAlignment="textEnd"
         android:textSize="15sp" />
 
@@ -79,15 +81,16 @@
         android:layout_marginLeft="50sp"
         android:layout_marginTop="320sp"
         android:text="Apellidos:"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView44"
         android:layout_width="171dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200sp"
+        android:layout_marginLeft="180sp"
         android:layout_marginTop="320sp"
-        android:text="Data"
+        android:text="Nolasco Vallejos"
         android:textAlignment="textEnd"
         android:textSize="15sp" />
 
@@ -98,17 +101,19 @@
         android:layout_marginLeft="50sp"
         android:layout_marginTop="350sp"
         android:text="DNI:"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView33"
         android:layout_width="171dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200sp"
+        android:layout_marginLeft="180sp"
         android:layout_marginTop="350sp"
-        android:text="Data"
+        android:text="75749561"
         android:textAlignment="textEnd"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        />
 
     <TextView
         android:id="@+id/textView2"
@@ -117,15 +122,16 @@
         android:layout_marginLeft="50sp"
         android:layout_marginTop="380sp"
         android:text="Correo:"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView22"
         android:layout_width="171dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200sp"
+        android:layout_marginLeft="180sp"
         android:layout_marginTop="380sp"
-        android:text="Data"
+        android:text="dnolasco@pucp.edu.pe"
         android:textAlignment="textEnd"
         android:textSize="15sp" />
 
@@ -133,9 +139,9 @@
         android:id="@+id/textView11"
         android:layout_width="171dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200sp"
+        android:layout_marginLeft="180sp"
         android:layout_marginTop="410sp"
-        android:text="Data"
+        android:text="Pedro Garezon 2080"
         android:textAlignment="textEnd"
         android:textSize="15sp" />
 
@@ -146,15 +152,16 @@
         android:layout_marginLeft="50sp"
         android:layout_marginTop="410sp"
         android:text="Domicilio:"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/button24"
-        android:layout_width="167dp"
-        android:layout_height="36dp"
+        android:id="@+id/cerrarsesion"
+        android:layout_width="158dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="130sp"
+        android:layout_marginTop="610sp"
         android:background="@drawable/boton_redondeado_verde"
         android:text="Cerrar Sesión"
-        app:backgroundTint="@null"
-        android:layout_marginLeft="130sp"
-        android:layout_marginTop="610sp"/>
+        app:backgroundTint="@null" />
 </FrameLayout>

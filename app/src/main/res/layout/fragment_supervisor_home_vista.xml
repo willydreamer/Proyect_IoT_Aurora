@@ -142,7 +142,7 @@
         app:layout_constraintTop_toTopOf="@+id/vacio333" />
 
     <ImageButton
-        android:id="@+id/flecha3"
+        android:id="@+id/flecha4"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="290dp"
@@ -154,7 +154,7 @@
         app:srcCompat="@mipmap/flechaderecha" />
 
     <ImageButton
-        android:id="@+id/flecharepetida"
+        android:id="@+id/flecha3"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="290dp"

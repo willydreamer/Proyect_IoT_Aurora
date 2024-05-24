@@ -13,13 +13,25 @@
         android:theme="@style/Theme.Aurora"
         tools:targetApi="31">
         <activity
+            android:name=".CambiarContrasenaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SupervisorListaSupervisores"
+            android:exported="false" />
+        <activity
+            android:name=".SupervisorListaSitios"
+            android:exported="false" />
+        <activity
+            android:name=".SupervisorListaDeEquipos"
+            android:exported="false" />
+        <activity
             android:name=".MensajeriaChatActivity"
             android:exported="false"
-            android:parentActivityName=".MensajeriaActivity"/>
+            android:parentActivityName=".MensajeriaActivity" />
         <activity
             android:name=".CrearEquipoActivity"
             android:exported="false"
-            android:parentActivityName=".HomeFragment"/>
+            android:parentActivityName=".HomeFragment" />
         <activity
             android:name=".MensajeriaActivity"
             android:exported="false"

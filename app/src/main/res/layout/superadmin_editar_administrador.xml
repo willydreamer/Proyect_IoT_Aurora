@@ -284,4 +284,12 @@
         app:layout_constraintStart_toStartOf="@+id/textViewTE"
         app:layout_constraintTop_toTopOf="@+id/textViewTE" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="412dp"
+        android:layout_height="52dp"
+        android:background="@drawable/boton_redondeado"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="678dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

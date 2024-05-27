@@ -163,16 +163,6 @@
                                         android:textStyle="bold" />
 
 
-                                    <TextView
-                                        android:id="@+id/textNumeroSerieRouter1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textRouter1"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="ABC - 123456"
-                                        android:textSize="12sp" />
-
                                 </RelativeLayout>
                             </androidx.cardview.widget.CardView>
 
@@ -296,6 +286,15 @@
 
                         </LinearLayout>
                     </HorizontalScrollView>
+
+                    <TextView
+                        android:id="@+id/textNumeroSerieRouter1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="ABC - 123456"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
             </FrameLayout>

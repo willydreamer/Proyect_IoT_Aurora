@@ -2,49 +2,52 @@ package com.example.aurora;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.aurora.Bean.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+
 public class LoginFragment extends AppCompatActivity {
+    EditText correo;
+    EditText contrasena;
+    Button btnLogin;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_fragment);
 
-        EditText usuario = findViewById(R.id.usuario);
-        EditText contrasena = findViewById(R.id.contrasena);
+        correo = findViewById(R.id.correo);
+        contrasena = findViewById(R.id.contrasena);
+        btnLogin = findViewById(R.id.ingresarbotonlogin);
+        mAuth = FirebaseAuth.getInstance();
 
-
-        Button buttonIngresarbotonlogin = findViewById(R.id.ingresarbotonlogin);
-
-        buttonIngresarbotonlogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String usuarioobtenido = usuario.getText().toString();
-                String contrasenaobtenido = contrasena.getText().toString();
-                if (usuarioobtenido.equals("supervisor")) {
-                    Intent intent = new Intent(LoginFragment.this, Supervisor.class);
-                    startActivity(intent);
-                    finish();
-                } else if (usuarioobtenido.equals("superadmin")) {
-                    Intent intent = new Intent(LoginFragment.this, SuperAdminListUsuarios.class);
-                    startActivity(intent);
-                    finish();
-                } else if (usuarioobtenido.equals("administrador")) {
-                    Intent intent = new Intent(LoginFragment.this, Administrador.class);
-                    startActivity(intent);
-                    finish();
-                }
+                login();
             }
         });
 
+        // Olvidar contraseña
         TextView olvidemicontrasena = findViewById(R.id.olvidemicontrasena);
         olvidemicontrasena.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +57,85 @@ public class LoginFragment extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private void login() {
+        String correoLogin = correo.getText().toString().trim();
+        String pswdLogin = contrasena.getText().toString().trim();
+        String TAG = "msg-auth";
 
+        if (correoLogin.isEmpty() || pswdLogin.isEmpty()) {
+            Toast.makeText(LoginFragment.this, "Ingrese correo y contraseña.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        mAuth.signInWithEmailAndPassword(correoLogin, pswdLogin)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null && user.isEmailVerified()) {
+                                // Se obtiene el rol del usuario
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                db.collection("usuarios")
+                                        .whereEqualTo("correo", correoLogin)
+                                        .get()
+                                        .addOnCompleteListener(userTask -> {
+                                            if (userTask.isSuccessful()) {
+                                                if (!userTask.getResult().isEmpty()) {
+                                                    for (QueryDocumentSnapshot document : userTask.getResult()) {
+                                                        String role = document.getString("rol");
+                                                        redirectToRoleSpecificActivity(role);
+                                                    }
+                                                } else {
+                                                    Log.d(TAG, "No matching documents found.");
+                                                    Toast.makeText(LoginFragment.this, "No se encontró el perfil del usuario.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } else {
+                                                Log.d(TAG, "Error getting documents: ", userTask.getException());
+                                                Toast.makeText(LoginFragment.this, "Error obteniendo el perfil del usuario.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            } else if (user != null) {
+                                user.sendEmailVerification().addOnCompleteListener(task2 -> {
+                                    Toast.makeText(LoginFragment.this, "Se le ha enviado un correo para validar su cuenta", Toast.LENGTH_SHORT).show();
+                                });
+                            }
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginFragment.this, "Autenticación fallida.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void redirectToRoleSpecificActivity(String role) {
+        if (role == null) {
+            // Manejar el caso cuando el rol es nulo
+            Log.e("TAG-role", "Role is null");
+            return;
+        }
+
+        Intent intent;
+        switch (role) {
+            case "superadmin":
+                intent = new Intent(this, SupervisorHomeFragmentVista.class);
+                startActivity(intent);
+                break;
+            case "administrador":
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case "supervisor":
+                intent = new Intent(this, SuperAdminListUsuarios.class);
+                startActivity(intent);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected role: " + role);
+        }
     }
 }

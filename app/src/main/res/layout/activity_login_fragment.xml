@@ -8,7 +8,6 @@
     android:background="@drawable/loginfondo"
     tools:context=".LoginFragment">
 
-
     <TextView
         android:id="@+id/BienvenidoNetwieser"
         android:layout_width="wrap_content"
@@ -51,7 +50,7 @@
 
     <EditText
         android:id="@+id/correo"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="32dp"
         android:background="@drawable/ingreso_datos"
         android:drawableTint="@color/white"
@@ -64,14 +63,14 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.703" />
 
     <EditText
         android:id="@+id/contrasena"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="32dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/ingreso_datos"
@@ -92,8 +91,8 @@
 
     <Button
         android:id="@+id/ingresarbotonlogin"
-        android:layout_width="223dp"
-        android:layout_height="30dp"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
         android:background="@drawable/boton_redondeado"
         android:padding="2sp"
         android:text="Ingresar"
@@ -111,26 +110,27 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="35dp"
-        android:layout_height="42dp"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.303"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.705"
-        app:srcCompat="@mipmap/iconpersona_foreground" />
+        app:layout_constraintVertical_bias="0.699"
+        app:srcCompat="@drawable/ic_alternate_email_24px"
+        app:tint="@android:color/white" />
 
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="30dp"
-        android:layout_height="29dp"
+        android:layout_width="25dp"
+        android:layout_height="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.299"
+        app:layout_constraintHorizontal_bias="0.243"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.759"
+        app:layout_constraintVertical_bias="0.758"
         app:srcCompat="@mipmap/iconcontrasena_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,5 +7,7 @@
     </style>
 
     <style name="Theme.Aurora" parent="Base.Theme.Aurora">
+        <item name="android:fontFamily">@font/varelaround</item>
+        <item name="fontFamily">@font/varelaround</item>
     </style>
 </resources>

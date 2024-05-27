@@ -26,7 +26,7 @@
         android:layout_height="39dp"
         android:background="@drawable/boton_redondeado"
         android:text="Ingresar"
-        android:textColor="@color/black"
+        android:textColor="@color/fondologin_background"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

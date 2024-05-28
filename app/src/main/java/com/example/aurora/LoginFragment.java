@@ -27,6 +27,7 @@ public class LoginFragment extends AppCompatActivity {
     EditText correo;
     EditText contrasena;
     Button btnLogin;
+    private final static String TAG = "msg-test";
 
     private FirebaseAuth mAuth;
 
@@ -39,6 +40,13 @@ public class LoginFragment extends AppCompatActivity {
         contrasena = findViewById(R.id.contrasena);
         btnLogin = findViewById(R.id.ingresarbotonlogin);
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) { //user logged-in
+            if (currentUser.isEmailVerified()) {
+                Log.d(TAG, "Firebase uid: " + currentUser.getUid());
+                goToMainActivity();
+            }
+        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,5 +145,10 @@ public class LoginFragment extends AppCompatActivity {
             default:
                 throw new IllegalStateException("Unexpected role: " + role);
         }
+    }
+    public void goToMainActivity() {
+        Intent intent = new Intent(LoginFragment.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

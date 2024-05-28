@@ -130,7 +130,7 @@ public class LoginFragment extends AppCompatActivity {
         Intent intent;
         switch (role) {
             case "superadmin":
-                intent = new Intent(this, SupervisorHomeFragmentVista.class);
+                intent = new Intent(this, SuperAdmin.class);
                 startActivity(intent);
                 break;
             case "administrador":

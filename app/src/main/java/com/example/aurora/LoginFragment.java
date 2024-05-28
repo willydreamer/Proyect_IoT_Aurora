@@ -29,7 +29,6 @@ public class LoginFragment extends AppCompatActivity {
     Button btnLogin;
     private final static String TAG = "msg-test";
 
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class LoginFragment extends AppCompatActivity {
         correo = findViewById(R.id.correo);
         contrasena = findViewById(R.id.contrasena);
         btnLogin = findViewById(R.id.ingresarbotonlogin);
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) { //user logged-in
             if (currentUser.isEmailVerified()) {
@@ -76,7 +75,7 @@ public class LoginFragment extends AppCompatActivity {
             Toast.makeText(LoginFragment.this, "Ingrese correo y contraseña.", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(correoLogin, pswdLogin)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

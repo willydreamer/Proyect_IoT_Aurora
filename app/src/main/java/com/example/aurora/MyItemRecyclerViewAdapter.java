@@ -1,14 +1,13 @@
 package com.example.aurora;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.aurora.placeholder.PlaceholderContent.PlaceholderItem;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.aurora.databinding.FragmentItemBinding;
+import com.example.aurora.placeholder.PlaceholderContent.PlaceholderItem;
 
 import java.util.List;
 

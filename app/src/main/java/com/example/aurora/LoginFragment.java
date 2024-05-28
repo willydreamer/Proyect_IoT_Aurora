@@ -1,6 +1,7 @@
 package com.example.aurora;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.aurora.Bean.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +36,7 @@ public class LoginFragment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_fragment);
+
 
         correo = findViewById(R.id.correo);
         contrasena = findViewById(R.id.contrasena);
@@ -64,6 +67,11 @@ public class LoginFragment extends AppCompatActivity {
                 finish();
             }
         });
+
+//        TextView netwieserTextView = findViewById(R.id.Netwieser);
+//        Typeface typeface = ResourcesCompat.getFont(this, R.font.rem);
+//        netwieserTextView.setTypeface(typeface);
+
     }
 
     private void login() {

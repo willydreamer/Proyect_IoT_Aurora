@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.374"
-        app:srcCompat="@mipmap/logonetwise_foreground" />
+        app:srcCompat="@drawable/netwise_1000" />
 
     <Button
         android:id="@+id/buttonIngresar"
@@ -26,6 +26,7 @@
         android:layout_height="41dp"
         android:background="@drawable/boton_redondeado"
         android:text="Ingresar"
+        android:textStyle="bold"
         android:textColor="@color/fondologin_background"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -45,11 +45,10 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         //recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
         listaSitios = new ArrayList<>();
-        listaSitios.add(new Sitio("NW000001","Junín","Huancayo","Center","Urbana","Móvil"));
-        listaSitios.add(new Sitio("NW000002","Cusco","Cusco","Center","Rural","Fijo"));
-        listaSitios.add(new Sitio("NW000003","Arequipa","Arequipa","Center","Urbana","Móvil"));
-        listaSitios.add(new Sitio("NW000004","Lima","Yauyos","Center","Rural","Fijo"));
-
+        listaSitios.add(new Sitio("NW000001", "Junín", "Huancayo", "Center", "Urbana", "-12.0651", "-75.2048", "Móvil","Cristiano Ronaldo"));
+        listaSitios.add(new Sitio("NW000002", "Cusco", "Cusco", "Center", "Rural", "-13.5226", "-71.9673", "Fijo","Cristiano Ronaldo"));
+        listaSitios.add(new Sitio("NW000003", "Arequipa", "Arequipa", "Center", "Urbana", "-16.4090", "-71.5375", "Móvil","Cristiano Ronaldo"));
+        listaSitios.add(new Sitio("NW000004", "Lima", "Yauyos", "Center", "Rural", "-12.4841", "-75.7835", "Fijo","Cristiano Ronaldo"));
         ListaSitiosAdapter adapter = new ListaSitiosAdapter();
         adapter.setContext(InformacionSupervisorActivity.this);
         adapter.setListaSitios(listaSitios);
@@ -109,10 +108,6 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
         alertDialog.show();
     }
-
-
-
-
 
 }
 

@@ -204,7 +204,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:id="@+id/llCodigoUbigeo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
                         android:paddingStart="16dp"
                         android:textStyle="bold" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:id="@+id/llLatitud"
@@ -244,7 +244,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llCodigoUbigeo">
+                    app:layout_constraintTop_toBottomOf="@id/llDistrito">
 
                     <TextView
                         android:id="@+id/tituloLatitud"

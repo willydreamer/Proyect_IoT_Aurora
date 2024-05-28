@@ -5,26 +5,60 @@ import java.io.Serializable;
 public class Sitio implements Serializable {
 
     private String idSitio;
-
     private String departamento;
     private String provincia;
     private String distrito;
-
     private String tipoDeZona;
+    private String latitud;
+    private String longitud;
+    private String operadora;
+    private String encargado;
 
-    private String tipoDeSitio;
+    public Sitio() {
+    }
 
-    public Sitio(String idSitio,String departamento,
-                 String provincia,String distrito, String tipoDeZona,
-                 String tipoDeSitio ){
-
+    public Sitio(String idSitio, String departamento, String provincia, String distrito, String tipoDeZona, String latitud, String longitud, String operadora, String encargado) {
         this.idSitio = idSitio;
         this.departamento = departamento;
         this.provincia = provincia;
-        this.distrito = distrito ;
+        this.distrito = distrito;
         this.tipoDeZona = tipoDeZona;
-        this.tipoDeSitio = tipoDeSitio;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.operadora = operadora;
+        this.encargado = encargado;
+    }
 
+    public String getEncargado() {
+        return encargado;
+    }
+
+    public void setEncargado(String encargado) {
+        this.encargado = encargado;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getOperadora() {
+        return operadora;
+    }
+
+    public void setOperadora(String operadora) {
+        this.operadora = operadora;
     }
 
     public String getIdSitio() {
@@ -65,13 +99,5 @@ public class Sitio implements Serializable {
 
     public void setTipoDeZona(String tipoDeZona) {
         this.tipoDeZona = tipoDeZona;
-    }
-
-    public String getTipoDeSitio() {
-        return tipoDeSitio;
-    }
-
-    public void setTipoDeSitio(String tipoDeSitio) {
-        this.tipoDeSitio = tipoDeSitio;
     }
 }

@@ -130,9 +130,12 @@ public class ListaSitiosAdapter
         Sitio s = listaSitios.get(position) ;
         holder.sitio = s;
         TextView codigoSitio = holder.itemView.findViewById(R.id.textTitle1);
-        codigoSitio.setText("Código: " + s.getIdSitio());
+        codigoSitio.setText(s.getIdSitio());
         TextView ubicacionSitio= holder.itemView.findViewById(R.id.textSubtitle1);
-        ubicacionSitio.setText(s.getDepartamento() + "," + s.getProvincia() + "," + s.getDistrito());
+        ubicacionSitio.setText(s.getDepartamento() + ", " + s.getProvincia() + ", " + s.getDistrito());
+
+        TextView nombreEncargado= holder.itemView.findViewById(R.id.textNombre);
+        nombreEncargado.setText(s.getEncargado());
 
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);

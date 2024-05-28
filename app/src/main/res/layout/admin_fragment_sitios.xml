@@ -22,8 +22,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.043"></TextView>
 
-    <ImageButton
-        android:id="@+id/bottonCrear"
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:background="@drawable/ingreso_datos"
+        android:id="@+id/bottonCrearSitio"
         android:layout_width="57dp"
         android:layout_height="53dp"
         android:layout_marginTop="20dp"
@@ -34,7 +35,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/text1"
         app:layout_constraintTop_toTopOf="parent">
-    </ImageButton>
+    </androidx.appcompat.widget.AppCompatImageButton>
 
     <TextView
         android:fontFamily="@font/conforma"
@@ -79,165 +80,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:background="@color/white"
-                android:layout_marginBottom="-10dp"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="2dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:id="@+id/imageTitulo1"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/circle"
-                        android:src="@mipmap/ic_marcador_foreground" />
-
-                    <TextView
-                        android:fontFamily="@font/conforma"
-
-                        android:id="@+id/textTitle1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@id/imageTitulo1"
-                        android:text="I.E. Micaela Bastidas"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:fontFamily="@font/conforma"
-
-                        android:id="@+id/textSubtitle1"
-                        android:layout_width="192dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/textTitle1"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_toEndOf="@id/imageTitulo1"
-                        android:text="Apurímac, Abancay, Urb La victoria 345" />
-
-                    <TextView
-                        android:fontFamily="@font/conforma"
-
-                        android:id="@+id/textView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="24dp"
-                        android:layout_below="@+id/textSubtitle1"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/imageTitulo1"
-                        android:background="@drawable/rounded_background"
-                        android:paddingStart="12dp"
-                        android:paddingTop="3dp"
-                        android:paddingEnd="12dp"
-                        android:text="Alejandro Gutierrez"
-                        android:textColor="@color/white"
-                        android:textSize="11dp" />
-
-                    <ImageButton
-                        android:id="@+id/flecha1"
-                        android:layout_width="41dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="300dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/boton_redondeado"
-                        android:onClick="irInfoSupervisor"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/flechaderecha"
-                        tools:layout_editor_absoluteX="289dp"
-                        tools:layout_editor_absoluteY="311dp" />
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:background="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:layout_marginBottom="-10dp"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="2dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:id="@+id/imageTitulo2"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/circle"
-                        android:src="@mipmap/ic_marcador_foreground" />
-
-                    <TextView
-                        android:id="@+id/textTitle2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@id/imageTitulo2"
-                        android:text="Banco CPP"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textSubtitle2"
-                        android:layout_width="192dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/textTitle2"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_toEndOf="@id/imageTitulo2"
-                        android:text="Apurímac, Abancay, Urb La victoria 345" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="24dp"
-                        android:layout_below="@+id/textSubtitle2"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/imageTitulo2"
-                        android:background="@drawable/rounded_background"
-                        android:paddingStart="12dp"
-                        android:paddingTop="3dp"
-                        android:paddingEnd="12dp"
-                        android:text="Papilon"
-                        android:textColor="@color/white"
-                        android:textSize="11dp" />
-
-                    <ImageButton
-                        android:id="@+id/flecha2"
-                        android:layout_width="41dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="300dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/boton_redondeado"
-                        android:onClick="irInfoSupervisor"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/flechaderecha"
-                        tools:layout_editor_absoluteX="289dp"
-                        tools:layout_editor_absoluteY="311dp" />
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_lista_asignacion_sitios"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"/>
 
         </LinearLayout>
 

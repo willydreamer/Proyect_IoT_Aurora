@@ -237,6 +237,16 @@
                             android:text="San Mateo"
                             android:textStyle="bold" />
 
+                        <TextView
+                            android:id="@+id/tituloCodigoUbigeo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="4dp"
+                            android:text="Código de Ubigeo"
+                            android:textSize="16dp" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -248,16 +258,6 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/llDistrito">
-
-                        <TextView
-                            android:id="@+id/tituloCodigoUbigeo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="16dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="4dp"
-                            android:text="Código de Ubigeo"
-                            android:textSize="16dp" />
 
                         <TextView
                             android:layout_width="match_parent"

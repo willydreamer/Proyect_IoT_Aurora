@@ -2,6 +2,7 @@ package com.example.aurora;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -13,10 +14,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aurora.Bean.Sitio;
 import com.example.aurora.databinding.ActivityCrearSitioBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Random;
 
 public class CrearSitioActivity extends AppCompatActivity {
     private ActivityCrearSitioBinding binding;
+    FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,49 @@ public class CrearSitioActivity extends AppCompatActivity {
             Toast.makeText(this, "Sitio creado exitosamente", Toast.LENGTH_SHORT).show();
         });
 
+        // Instanciar Firebase
+        db = FirebaseFirestore.getInstance();
+        binding.buttonGuardar.setOnClickListener(v -> {
+            guardarSitio();
+        });
 
+    }
+
+    private void guardarSitio() {
+        // Obtener los datos ingresados por el usuario
+        String departamento = binding.editDepartamento.getText().toString();
+        String idSitio = generarIdSitio(departamento);
+        String provincia = binding.editProvincia.getText().toString();
+        String distrito = binding.editDistrito.getText().toString();
+        String tipoDeZona = binding.spinnerTipoZona.getSelectedItem().toString();
+        //String codigoUbigeo = binding.editCodigoUbigeo.getText().toString();
+        String latitud = binding.editLatitud.getText().toString();
+        String longitud = binding.editLongitud.getText().toString();
+        String operadora = binding.spinnerOperadora.getSelectedItem().toString();
+        String encargado = "Cristiano Ronaldo Siu";
+
+        // Crear un objeto Sitio con los datos obtenidos
+        Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora, encargado);
+
+        // Guardar los datos en Firestore
+        db.collection("sitios")
+                .document(idSitio)
+                .set(sitio)
+                .addOnSuccessListener(unused -> {
+                    Log.d("msg-test", "Sitio guardado exitosamente");
+                    Toast.makeText(CrearSitioActivity.this, "Sitio creado exitosamente", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CrearSitioActivity.this, AdminSitiosFragment.class);
+                    startActivity(intent);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("msg-test", "Error al guardar el sitio", e);
+                    Toast.makeText(CrearSitioActivity.this, "Error al crear el sitio", Toast.LENGTH_SHORT).show();
+                });
+    }
+    private String generarIdSitio(String departamento) {
+        String letrasDepartamento = departamento.substring(0, Math.min(departamento.length(), 3)).toUpperCase();
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
+        return letrasDepartamento + numeroAleatorio;
     }
 }

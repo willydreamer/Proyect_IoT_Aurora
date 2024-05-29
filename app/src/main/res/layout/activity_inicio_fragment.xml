@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="233dp"
-        android:layout_height="236dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -26,13 +26,13 @@
         android:layout_height="41dp"
         android:background="@drawable/boton_redondeado"
         android:text="Ingresar"
-        android:textStyle="bold"
         android:textColor="@color/fondologin_background"
+        android:textStyle="bold"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.667" />
+        app:layout_constraintVertical_bias="0.681" />
 </androidx.constraintlayout.widget.ConstraintLayout>

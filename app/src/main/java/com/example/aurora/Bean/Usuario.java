@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Usuario implements Serializable {
 
 
-    private Integer idUsuario;
+    private String idUsuario;
 
     private String nombre;
 
@@ -21,7 +21,12 @@ public class Usuario implements Serializable {
 
     private String rol;
 
-    public Usuario (Integer idUsuario, String nombre, String apellido, String dni, String correo, String domicilio, String telefono, String rol){
+    //private String estado;
+
+    public Usuario() {
+    }
+
+    public Usuario (String idUsuario, String nombre, String apellido, String dni, String correo, String domicilio, String telefono, String rol){
 
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -31,6 +36,7 @@ public class Usuario implements Serializable {
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.rol = rol;
+        //this.estado = estado;
     }
 
     public String getRol() {
@@ -41,11 +47,11 @@ public class Usuario implements Serializable {
         this.rol = rol;
     }
 
-    public Integer getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -96,4 +102,6 @@ public class Usuario implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+
 }

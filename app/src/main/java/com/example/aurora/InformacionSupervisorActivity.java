@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Adapter.ListaSitiosAdapter;
 import com.example.aurora.Bean.Sitio;
+import com.example.aurora.Bean.Usuario;
 
 import java.util.ArrayList;
 
@@ -35,11 +36,46 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    TextView nombre;
+    TextView apellido;
+    TextView dni;
+    TextView correo ;
+    TextView domicilio;
+    TextView telefono;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_informacion_supervisor);
+
+        Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
+
+
+        nombre = findViewById(R.id.editText);
+        apellido = findViewById(R.id.editText1);
+        dni = findViewById(R.id.editText2);
+        correo = findViewById(R.id.editText3);
+        domicilio = findViewById(R.id.editText4);
+        telefono = findViewById(R.id.editText5);
+
+
+        String nombreStr = supervisor.getNombre();
+        String apellidoStr = supervisor.getApellido();
+        String dniStr = supervisor.getDni();
+        String correoStr = supervisor.getCorreo();
+        String domicilioStr = supervisor.getDomicilio();
+        String telefonoStr = supervisor.getTelefono();
+
+        nombre.setText(nombreStr);
+        apellido.setText(apellidoStr);
+        dni.setText(dniStr);
+        correo.setText(correoStr);
+        domicilio.setText(domicilioStr);
+        telefono.setText(telefonoStr);
 
         recyclerView = findViewById(R.id.recyclerview_listasitios);
         //recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -56,7 +92,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(InformacionSupervisorActivity.this));
 
 
-        //recyclerView.setAdapter(adapter);
+
 
         ImageButton cambiarEstado = findViewById(R.id.imageButton5);
         cambiarEstado.setOnClickListener(view->{
@@ -64,14 +100,6 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         });
 
     }
-
-    /* Como Fragment
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Infla el layout de tu fragmento
-        return inflater.inflate(R.layout.activity_informacion_supervisor, container, false);
-    }*/
 
      public void irAsignarSitio(View view) {
 

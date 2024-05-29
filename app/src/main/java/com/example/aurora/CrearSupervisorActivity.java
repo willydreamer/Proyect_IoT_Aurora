@@ -9,11 +9,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
+import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Supervisor;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityCrearSupervisorBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,6 +27,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class CrearSupervisorActivity extends AppCompatActivity {
@@ -35,6 +41,11 @@ public class CrearSupervisorActivity extends AppCompatActivity {
 
     private EditText domicilio;
 
+    private Button botonGuardar;
+
+    FirebaseFirestore db;
+
+
     ActivityCrearSupervisorBinding binding;
 
 
@@ -44,12 +55,18 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_crear_supervisor);
 
-        listarArchivosGuardados();
-        leerArchivoObjeto();
+        // Instanciar Firebase
+        db = FirebaseFirestore.getInstance();
+
+        botonGuardar = findViewById(R.id.button);
+
+        botonGuardar.setOnClickListener(view->{
+            guardarSupervisor();
+        });
 
     }
 
-    public void guardarSupervisor () {
+    public void guardarSupervisor() {
 
         nombre = findViewById(R.id.editText);
         apellido = findViewById(R.id.editText1);
@@ -58,35 +75,45 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         domicilio = findViewById(R.id.editText4);
         telefono = findViewById(R.id.editText5);
 
+        String idUsuarioSupervisor = generarIdSupervisor();
         String nombreStr = nombre.getEditableText().toString();
         String apellidoStr = apellido.getEditableText().toString();
         String dniStr = dni.getEditableText().toString();
         String correoStr = correo.getEditableText().toString();
         String domicilioStr = domicilio.getEditableText().toString();
         String telefonoStr = telefono.getEditableText().toString();
+        String rol = "supervisor";
 
-        Supervisor supervisor = new Supervisor(1,nombreStr,apellidoStr,dniStr,correoStr,domicilioStr,telefonoStr);
+        Usuario usuarioSupervisor = new Usuario(idUsuarioSupervisor, nombreStr, apellidoStr, dniStr, correoStr, domicilioStr, telefonoStr,rol);
 
-        //nombre del archivo a guardar
-        String fileName = "listaSupervisores" ;
-        ArrayList<Supervisor> listaSupers = new ArrayList<>();
-        listaSupers.add(supervisor);
-        //Se utiliza la clase FileOutputStream para poder almacenar en Android
-        try (FileOutputStream fileOutputStream = this.openFileOutput(fileName , Context.MODE_PRIVATE);
-             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
-            //con objectOutputStream se realiza la escritura como objeto
-            objectOutputStream.writeObject(listaSupers) ;
-            Log.d("msg-test79", "supervisor guardado");
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("msg-test79", "IOException al guardar el supervisor", e);
-        }
 
-        Intent intent = new Intent(this, AdminSupervisoresFragment.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-        startActivity(intent);
+        // Guardar los datos en Firestore
+        db.collection("usuarios")
+                .document(idUsuarioSupervisor)
+                .set(usuarioSupervisor)
+                .addOnSuccessListener(unused -> {
+                    Log.d("msg-test2", "Supervisor guardado exitosamente");
+                    Toast.makeText(CrearSupervisorActivity.this, "Supervisor creado exitosamente", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CrearSupervisorActivity.this, AdminSupervisoresFragment.class);
+                    startActivity(intent);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("msg-test3", "Error al guardar el sitio", e);
+                    Toast.makeText(CrearSupervisorActivity.this, "Error al crear el supervisor", Toast.LENGTH_SHORT).show();
+                });
+
     }
 
-    public void listarArchivosGuardados(){
+
+    private String generarIdSupervisor() {
+        String letrasAdmin = "SUPER";
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
+        return letrasAdmin+numeroAleatorio;
+    }
+}
+
+   /* public void listarArchivosGuardados(){
         String[] archivosGuardados = fileList();
 
         for(String archivo: archivosGuardados){
@@ -108,7 +135,6 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    } */
 
 
-}

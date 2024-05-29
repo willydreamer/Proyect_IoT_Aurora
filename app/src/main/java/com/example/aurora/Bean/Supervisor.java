@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public class Supervisor implements Serializable {
@@ -23,6 +24,7 @@ public class Supervisor implements Serializable {
     private String telefono;
 
     private String domicilio;
+
 
     //private String foto;
     //private Integer tipoDeUsuario;

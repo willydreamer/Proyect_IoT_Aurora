@@ -68,10 +68,12 @@ public class CrearSitioActivity extends AppCompatActivity {
         String latitud = binding.editLatitud.getText().toString();
         String longitud = binding.editLongitud.getText().toString();
         String operadora = binding.spinnerOperadora.getSelectedItem().toString();
-        String encargado = "Cristiano Ronaldo Siu";
+        //String encargado = "Cristiano Ronaldo Siu";
 
         // Crear un objeto Sitio con los datos obtenidos
-        Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora, encargado);
+        //Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora, encargado);
+        Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora);
+
 
         // Guardar los datos en Firestore
         db.collection("sitios")

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.AdminInformacionSitioActivity;
+import com.example.aurora.AsignarSitioActivity;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.InformacionSupervisorActivity;
 import com.example.aurora.R;
@@ -135,13 +136,22 @@ public class ListaSitiosAdapter
         ubicacionSitio.setText(s.getDepartamento() + ", " + s.getProvincia() + ", " + s.getDistrito());
 
         TextView nombreEncargado= holder.itemView.findViewById(R.id.textNombre);
-        nombreEncargado.setText(s.getEncargado());
+        nombreEncargado.setText("Cristiano Ronaldo");
 
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {
-            Intent intent = new Intent(getContext(), AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-            context.startActivity(intent);
+            if(s.getSupervisor()!=null) {
+                Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("sitio", s);
+                context.startActivity(intent);
+            }else if(s.getSupervisor() == null){
+                Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("sitio", s);
+                context.startActivity(intent);
+            }
         });
 
     }

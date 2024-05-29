@@ -12,12 +12,16 @@ public class Sitio implements Serializable {
     private String latitud;
     private String longitud;
     private String operadora;
-    private String encargado;
+    //private String encargado;
+
+    private Usuario supervisor;
+
+    //private List<Equipo> equipos;
 
     public Sitio() {
     }
 
-    public Sitio(String idSitio, String departamento, String provincia, String distrito, String tipoDeZona, String latitud, String longitud, String operadora, String encargado) {
+    public Sitio(String idSitio, String departamento, String provincia, String distrito, String tipoDeZona, String latitud, String longitud, String operadora) {
         this.idSitio = idSitio;
         this.departamento = departamento;
         this.provincia = provincia;
@@ -26,16 +30,16 @@ public class Sitio implements Serializable {
         this.latitud = latitud;
         this.longitud = longitud;
         this.operadora = operadora;
-        this.encargado = encargado;
+        //this.encargado = encargado;
     }
 
-    public String getEncargado() {
+    /*public String getEncargado() {
         return encargado;
     }
 
     public void setEncargado(String encargado) {
         this.encargado = encargado;
-    }
+    }*/
 
     public String getLatitud() {
         return latitud;
@@ -99,5 +103,13 @@ public class Sitio implements Serializable {
 
     public void setTipoDeZona(String tipoDeZona) {
         this.tipoDeZona = tipoDeZona;
+    }
+
+    public Usuario getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(Usuario supervisor) {
+        this.supervisor = supervisor;
     }
 }

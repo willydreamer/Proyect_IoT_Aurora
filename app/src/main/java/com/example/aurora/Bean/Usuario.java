@@ -1,6 +1,7 @@
 package com.example.aurora.Bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Usuario implements Serializable {
 
@@ -21,12 +22,16 @@ public class Usuario implements Serializable {
 
     private String rol;
 
-    //private String estado;
+    private String estado;
+
+    private List<Sitio> sitios;
+    //maximo 5 sitios por supervisor
+    //1 supervisor por sitio
 
     public Usuario() {
     }
 
-    public Usuario (String idUsuario, String nombre, String apellido, String dni, String correo, String domicilio, String telefono, String rol){
+    public Usuario (String idUsuario, String nombre, String apellido, String dni, String correo, String domicilio, String telefono, String rol, String estado){
 
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -36,7 +41,7 @@ public class Usuario implements Serializable {
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.rol = rol;
-        //this.estado = estado;
+        this.estado = estado;
     }
 
     public String getRol() {
@@ -103,5 +108,11 @@ public class Usuario implements Serializable {
         this.telefono = telefono;
     }
 
+    public String getEstado() {
+        return estado;
+    }
 
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

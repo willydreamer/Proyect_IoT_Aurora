@@ -123,7 +123,7 @@
                 android:text="DNI:70298682" />
 
             <TextView
-                android:id="@+id/textNombre"
+                android:id="@+id/textEstado"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_below="@+id/textSubtitle1"

@@ -2,6 +2,8 @@ package com.example.aurora.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +66,16 @@ public class ListaSupervisoresAdapter
         nombre.setText(s.getNombre()+" "+s.getApellido());
         TextView dni= holder.itemView.findViewById(R.id.textSubtitle1);
         dni.setText("DNI:"+s.getDni());
+        TextView estado = holder.itemView.findViewById(R.id.textEstado);
+        if(s.getEstado()!=null){
+            if(s.getEstado().equals("activo")){
+                estado.setText("Activo");
+            }else{
+                estado.setText("Inactivo");
+                estado.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F44336")));
 
+            }
+        }
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {

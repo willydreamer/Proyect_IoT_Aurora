@@ -1,5 +1,7 @@
 package com.example.aurora.Bean;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ public class Sitio implements Serializable {
     private String longitud;
     private String operadora;
     //private String encargado;
+
 
     private ArrayList<Usuario> supervisor;
 
@@ -107,6 +110,7 @@ public class Sitio implements Serializable {
         this.tipoDeZona = tipoDeZona;
     }
 
+    @Exclude
     public ArrayList<Usuario> getSupervisor() {
         return supervisor;
     }

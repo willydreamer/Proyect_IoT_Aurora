@@ -1,5 +1,7 @@
 package com.example.aurora.Bean;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

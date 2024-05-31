@@ -146,7 +146,7 @@ public class ListaSitiosAdapter
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {
-            if(s.getSupervisor() == null || s.getSupervisor().size() == 1) {
+            /*if(s.getSupervisor() == null || s.getSupervisor().size() == 1) {
                 Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("sitio", s);
@@ -156,6 +156,18 @@ public class ListaSitiosAdapter
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("sitio", s);
                 intent.putExtra("supervisor",supervisor);
+                context.startActivity(intent);
+            }*/
+            if(s.getSupervisor() == null) {
+                Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("sitio", s);
+                intent.putExtra("supervisor",supervisor);
+                context.startActivity(intent);
+            }else{
+                Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("sitio", s);
                 context.startActivity(intent);
             }
         });

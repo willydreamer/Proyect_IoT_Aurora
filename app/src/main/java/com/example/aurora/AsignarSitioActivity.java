@@ -19,6 +19,8 @@ import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityAsignarSitioBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class AsignarSitioActivity extends AppCompatActivity {
 
     ActivityAsignarSitioBinding binding;
@@ -46,14 +48,15 @@ public class AsignarSitioActivity extends AppCompatActivity {
 
     public void mostrarDialog2() {
 
-        Sitio sitio = (Sitio) getIntent().getSerializableExtra("sitio");
-        Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
-        Usuario supervisor2 = (Usuario) getIntent().getSerializableExtra("supervisor");
+
+        //Usuario supervisor2 = (Usuario) getIntent().getSerializableExtra("supervisor");
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setMessage("¿Estas Seguro de Continuar?");
 
         alertDialog.setPositiveButton("Si", (dialogInterface, i) -> {
+            Sitio sitio = (Sitio) getIntent().getSerializableExtra("sitio");
+            Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
             //Log.d("listasitios", String.valueOf(supervisor.getSitios()));
             supervisor.getSitios().add(sitio);
             Usuario supervisor_copy = supervisor;
@@ -89,6 +92,9 @@ public class AsignarSitioActivity extends AppCompatActivity {
                 startActivity(intent);
             });
             alertDialog2.show();
+            if (sitio.getSupervisor() == null) {
+                sitio.setSupervisor(new ArrayList<>());
+            }
             sitio.getSupervisor().add(supervisor_copy);
             db.collection("sitios")
                     .document(sitio.getIdSitio())

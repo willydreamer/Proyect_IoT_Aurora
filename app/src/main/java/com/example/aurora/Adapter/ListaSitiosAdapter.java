@@ -158,13 +158,13 @@ public class ListaSitiosAdapter
                 intent.putExtra("supervisor",supervisor);
                 context.startActivity(intent);
             }*/
-            if(s.getSupervisor() == null) {
+            if(s.getSupervisor()!=null) {
                 Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("sitio", s);
                 intent.putExtra("supervisor",supervisor);
                 context.startActivity(intent);
-            }else{
+            }else if (s.getSupervisor() == null){
                 Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("sitio", s);

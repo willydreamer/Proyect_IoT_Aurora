@@ -131,8 +131,6 @@ public class ListaSitiosAdapter
     @Override
     public void onBindViewHolder(@NonNull SitioViewHolder holder, int position) {
 
-
-
         Sitio s = listaSitios.get(position) ;
         holder.sitio = s;
         TextView codigoSitio = holder.itemView.findViewById(R.id.textTitle1);

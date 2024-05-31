@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Adapter.ListaSitiosAdapter;
 import com.example.aurora.Bean.Sitio;
+import com.example.aurora.Bean.Usuario;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -39,6 +40,9 @@ public class ListaAsignacionSitiosActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_lista_asignacion_sitios);
 
+        Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
+
+
 
         recyclerView = findViewById(R.id.recyclerview_lista_asignacion_sitios);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -49,6 +53,7 @@ public class ListaAsignacionSitiosActivity extends AppCompatActivity {
         adapter = new ListaSitiosAdapter();
         adapter.setContext(getApplicationContext());
         adapter.setListaSitios(listaSitios);
+        adapter.setSupervisor(supervisor);
         recyclerView.setAdapter(adapter);
 
         obtenerSitiosDeFirestore();
@@ -56,24 +61,28 @@ public class ListaAsignacionSitiosActivity extends AppCompatActivity {
 
     }
 
-     public void irAsignarSitio(View view) {
+     /*public void irAsignarSitio(View view) {
 
+         Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
 
-
-        //primero crear el intento
+         //primero crear el intento
         Intent intent = new Intent(ListaAsignacionSitiosActivity.this, AsignarSitioActivity.class);
+        intent.putExtra("supervisor",supervisor);
         //iniciar activity
         startActivity(intent);
-    }
+    }*/
 
     private void obtenerSitiosDeFirestore() {
+
+        Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
+
         db.collection("sitios")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Sitio sitio = document.toObject(Sitio.class);
-                            if(sitio.getSupervisor() == null){
+                            if(sitio.getSupervisor() == null || sitio.getSupervisor().isEmpty()){
                                 listaSitios.add(sitio);
                             }
                         }

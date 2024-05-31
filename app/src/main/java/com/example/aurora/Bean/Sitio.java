@@ -1,6 +1,7 @@
 package com.example.aurora.Bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Sitio implements Serializable {
 
@@ -14,14 +15,14 @@ public class Sitio implements Serializable {
     private String operadora;
     //private String encargado;
 
-    private Usuario supervisor;
+    private ArrayList<Usuario> supervisor;
 
     //private List<Equipo> equipos;
 
     public Sitio() {
     }
 
-    public Sitio(String idSitio, String departamento, String provincia, String distrito, String tipoDeZona, String latitud, String longitud, String operadora) {
+    public Sitio(String idSitio, String departamento, String provincia, String distrito, String tipoDeZona, String latitud, String longitud, String operadora,  ArrayList<Usuario> supervisor) {
         this.idSitio = idSitio;
         this.departamento = departamento;
         this.provincia = provincia;
@@ -30,6 +31,7 @@ public class Sitio implements Serializable {
         this.latitud = latitud;
         this.longitud = longitud;
         this.operadora = operadora;
+        this.supervisor = supervisor;
         //this.encargado = encargado;
     }
 
@@ -105,11 +107,11 @@ public class Sitio implements Serializable {
         this.tipoDeZona = tipoDeZona;
     }
 
-    public Usuario getSupervisor() {
+    public ArrayList<Usuario> getSupervisor() {
         return supervisor;
     }
 
-    public void setSupervisor(Usuario supervisor) {
+    public void setSupervisor(ArrayList<Usuario> supervisor) {
         this.supervisor = supervisor;
     }
 }

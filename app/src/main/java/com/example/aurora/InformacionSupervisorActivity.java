@@ -135,8 +135,10 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
      public void irAsignarSitio(View view) {
 
-        //primero crear el intento
+         Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
+         //primero crear el intento
         Intent intent = new Intent(this, ListaAsignacionSitiosActivity.class);
+        intent.putExtra("supervisor",supervisor);
         //iniciar activity
         startActivity(intent);
     }
@@ -202,13 +204,19 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
     }
 
     private void obtenerSitiosDeFirestore() {
+
+        Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
+
         db.collection("sitios")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Sitio sitio = document.toObject(Sitio.class);
-                            listaSitios.add(sitio);
+                            if(sitio.getSupervisor() == null || sitio.getSupervisor().size() == 1){
+                                listaSitios.add(sitio);
+                            }
+                            //listaSitios.add(sitio);
                         }
                         adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
                     }

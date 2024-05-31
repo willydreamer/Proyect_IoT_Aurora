@@ -1,7 +1,7 @@
 package com.example.aurora.Bean;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Usuario implements Serializable {
 
@@ -24,14 +24,15 @@ public class Usuario implements Serializable {
 
     private String estado;
 
-    private List<Sitio> sitios;
+    private ArrayList<Sitio> sitios;
     //maximo 5 sitios por supervisor
     //1 supervisor por sitio
 
     public Usuario() {
     }
 
-    public Usuario (String idUsuario, String nombre, String apellido, String dni, String correo, String domicilio, String telefono, String rol, String estado){
+    public Usuario (String idUsuario, String nombre, String apellido, String dni, String correo, String domicilio, String telefono, String rol, String estado,
+                    ArrayList<Sitio> sitios){
 
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -42,6 +43,7 @@ public class Usuario implements Serializable {
         this.telefono = telefono;
         this.rol = rol;
         this.estado = estado;
+        this.sitios = sitios;
     }
 
     public String getRol() {
@@ -114,5 +116,14 @@ public class Usuario implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+
+    public ArrayList<Sitio> getSitios() {
+        return sitios;
+    }
+
+    public void setSitios(ArrayList<Sitio> sitios) {
+        this.sitios = sitios;
     }
 }

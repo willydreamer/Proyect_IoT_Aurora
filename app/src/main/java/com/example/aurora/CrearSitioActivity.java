@@ -15,9 +15,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aurora.Bean.Sitio;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityCrearSitioBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CrearSitioActivity extends AppCompatActivity {
@@ -68,11 +70,12 @@ public class CrearSitioActivity extends AppCompatActivity {
         String latitud = binding.editLatitud.getText().toString();
         String longitud = binding.editLongitud.getText().toString();
         String operadora = binding.spinnerOperadora.getSelectedItem().toString();
+        ArrayList<Usuario> supervisor = new ArrayList<>();
         //String encargado = "Cristiano Ronaldo Siu";
 
         // Crear un objeto Sitio con los datos obtenidos
         //Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora, encargado);
-        Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora);
+        Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora,supervisor);
 
 
         // Guardar los datos en Firestore

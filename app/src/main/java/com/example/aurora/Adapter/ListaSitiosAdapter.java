@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aurora.AdminInformacionSitioActivity;
 import com.example.aurora.AsignarSitioActivity;
 import com.example.aurora.Bean.Sitio;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.InformacionSupervisorActivity;
 import com.example.aurora.R;
 
@@ -28,9 +29,12 @@ public class ListaSitiosAdapter
 
     private ArrayList<Sitio> listaSitios;
 
+    private Usuario supervisor;
+
     public class SitioViewHolder extends RecyclerView.ViewHolder{
         Sitio sitio;
         //TextView codigoSitio;
+        Usuario supervisor;
 
         public SitioViewHolder(@NonNull View itemView) {
 
@@ -128,6 +132,7 @@ public class ListaSitiosAdapter
     public void onBindViewHolder(@NonNull SitioViewHolder holder, int position) {
 
 
+
         Sitio s = listaSitios.get(position) ;
         holder.sitio = s;
         TextView codigoSitio = holder.itemView.findViewById(R.id.textTitle1);
@@ -141,15 +146,16 @@ public class ListaSitiosAdapter
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {
-            if(s.getSupervisor()!=null) {
+            if(s.getSupervisor() == null || s.getSupervisor().size() == 1) {
                 Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("sitio", s);
                 context.startActivity(intent);
-            }else if(s.getSupervisor() == null){
+            }else if (s.getSupervisor().isEmpty()){
                 Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("sitio", s);
+                intent.putExtra("supervisor",supervisor);
                 context.startActivity(intent);
             }
         });
@@ -177,6 +183,14 @@ public class ListaSitiosAdapter
 
     public void setListaSitios(ArrayList<Sitio> listaSitios) {
         this.listaSitios = listaSitios;
+    }
+
+    public Usuario getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(Usuario supervisor) {
+        this.supervisor = supervisor;
     }
 }
 

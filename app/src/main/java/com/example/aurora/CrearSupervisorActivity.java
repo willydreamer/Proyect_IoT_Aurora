@@ -84,8 +84,8 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         String telefonoStr = telefono.getEditableText().toString();
         String rol = "supervisor";
         String estado = "activo";
-
-        Usuario usuarioSupervisor = new Usuario(idUsuarioSupervisor, nombreStr, apellidoStr, dniStr, correoStr, domicilioStr, telefonoStr,rol,estado);
+        ArrayList<Sitio> listaSitios = new ArrayList<>();
+        Usuario usuarioSupervisor = new Usuario(idUsuarioSupervisor, nombreStr, apellidoStr, dniStr, correoStr, domicilioStr, telefonoStr,rol,estado,listaSitios);
 
 
         // Guardar los datos en Firestore

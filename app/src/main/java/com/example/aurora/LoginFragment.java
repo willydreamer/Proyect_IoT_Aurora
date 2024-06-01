@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -44,10 +46,29 @@ public class LoginFragment extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) { //user logged-in
-            if (currentUser.isEmailVerified()) {
-                Log.d(TAG, "Firebase uid: " + currentUser.getUid());
-                goToMainActivity();
-            }
+            String userId = currentUser.getUid();
+            Log.d(TAG, "Firebase uid: " + userId);
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference userRef = db.collection("users").document(userId);
+
+            userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            String role = document.getString("role");
+                            Log.d(TAG, "Role: " + role);
+                            redirectToRoleSpecificActivity(role); // Pass the role to your main activity
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
         }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {

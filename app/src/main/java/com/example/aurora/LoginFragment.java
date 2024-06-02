@@ -33,43 +33,14 @@ public class LoginFragment extends AppCompatActivity {
     Button btnLogin;
     private final static String TAG = "msg-test";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_fragment);
 
-
         correo = findViewById(R.id.correo);
         contrasena = findViewById(R.id.contrasena);
         btnLogin = findViewById(R.id.ingresarbotonlogin);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) { //user logged-in
-            String userId = currentUser.getUid();
-            Log.d(TAG, "Firebase uid: " + userId);
-
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference userRef = db.collection("users").document(userId);
-
-            userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            String role = document.getString("role");
-                            Log.d(TAG, "Role: " + role);
-                            redirectToRoleSpecificActivity(role); // Pass the role to your main activity
-                        } else {
-                            Log.d(TAG, "No such document");
-                        }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
-                    }
-                }
-            });
-        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +95,7 @@ public class LoginFragment extends AppCompatActivity {
                                                 if (!userTask.getResult().isEmpty()) {
                                                     for (QueryDocumentSnapshot document : userTask.getResult()) {
                                                         String role = document.getString("rol");
+                                                        Log.d("rol-autenticado-1", role);
                                                         redirectToRoleSpecificActivity(role);
                                                     }
                                                 } else {

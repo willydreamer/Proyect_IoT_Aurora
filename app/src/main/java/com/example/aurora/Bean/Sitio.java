@@ -110,7 +110,7 @@ public class Sitio implements Serializable {
         this.tipoDeZona = tipoDeZona;
     }
 
-    @Exclude
+    //@Exclude
     public ArrayList<Usuario> getSupervisor() {
         return supervisor;
     }

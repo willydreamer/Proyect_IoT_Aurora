@@ -1,16 +1,21 @@
 package com.example.aurora;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -19,6 +24,9 @@ import com.example.aurora.Bean.Supervisor;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityCrearSupervisorBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -49,6 +57,14 @@ public class CrearSupervisorActivity extends AppCompatActivity {
     ActivityCrearSupervisorBinding binding;
 
 
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_PICK = 2;
+    private ImageView imagen;
+    private Uri imagenUri;
+
+    //String storage_path = "fotosUsuario/*";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,15 +74,95 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         // Instanciar Firebase
         db = FirebaseFirestore.getInstance();
 
-        botonGuardar = findViewById(R.id.button);
+        botonGuardar = findViewById(R.id.buttonGuardar);
+
+        imagen = findViewById(R.id.imageView3);
+
+        Button botonSubirFoto =  findViewById(R.id.buttonSubirFoto);
 
         botonGuardar.setOnClickListener(view->{
-            guardarSupervisor();
+            //guardarSupervisor();
+            uploadImageAndSaveUserData();
+        });
+
+        // Botón para abrir la cámara
+        /*findViewById(R.id.btnCamera).setOnClickListener(v -> {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        });*/
+
+        // Botón para abrir la galería
+        botonSubirFoto.setOnClickListener(v -> {
+            Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            //todas las imagenes
+            pickPhotoIntent.setType("image/*");
+            startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
         });
 
     }
 
-    public void guardarSupervisor() {
+    //basado en gpt
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                imagen.setImageBitmap(imageBitmap);
+                imagenUri = getImageUri(imageBitmap);
+            } else if (requestCode == REQUEST_IMAGE_PICK && data != null) {
+                imagenUri = data.getData();
+                imagen.setImageURI(imagenUri);
+            }
+        }
+    }
+
+    private Uri getImageUri(Bitmap bitmap) {
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
+        return Uri.parse(path);
+    }
+
+    private void uploadImageAndSaveUserData() {
+        if (imagenUri != null) {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            //StorageReference imageReference = storageReference.child("images/" + System.currentTimeMillis() + ".jpg");
+            StorageReference imageReference = storageReference.child("fotosUsuario/*" + System.currentTimeMillis() + ".jpg");
+
+            UploadTask uploadTask = imageReference.putFile(imagenUri);
+            uploadTask.addOnSuccessListener(taskSnapshot -> {
+                imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                    String imageUrl = uri.toString();
+                    //saveUserDataToFirestore(imageUrl);
+                    guardarSupervisor(imageUrl);
+                });
+            }).addOnFailureListener(e -> {
+                Toast.makeText(CrearSupervisorActivity.this, "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
+        } else {
+            Toast.makeText(this, "Foto no seleccionada", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /*private void saveUserDataToFirestore(String userId, String userName, String imageUrl) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Usuario usuario = new Usuario(userId, userName, imageUrl);
+
+        db.collection("usuarios").document(userId)
+                .set(usuario)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(ProfileActivity.this, "User data saved to Firestore", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(ProfileActivity.this, "Failed to save user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }*/
+
+
+
+    public void guardarSupervisor(String imageUrl) {
 
         nombre = findViewById(R.id.editText);
         apellido = findViewById(R.id.editText1);
@@ -85,7 +181,7 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         String rol = "supervisor";
         String estado = "activo";
         ArrayList<Sitio> listaSitios = new ArrayList<>();
-        Usuario usuarioSupervisor = new Usuario(idUsuarioSupervisor, nombreStr, apellidoStr, dniStr, correoStr, domicilioStr, telefonoStr,rol,estado,listaSitios);
+        Usuario usuarioSupervisor = new Usuario(idUsuarioSupervisor, nombreStr, apellidoStr, dniStr, correoStr, domicilioStr, telefonoStr,rol,estado,listaSitios,imageUrl);
 
 
         // Guardar los datos en Firestore
@@ -99,7 +195,7 @@ public class CrearSupervisorActivity extends AppCompatActivity {
                     startActivity(intent);
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("msg-test3", "Error al guardar el sitio", e);
+                    Log.e("msg-test3", "Error al guardar el supervisor", e);
                     Toast.makeText(CrearSupervisorActivity.this, "Error al crear el supervisor", Toast.LENGTH_SHORT).show();
                 });
 

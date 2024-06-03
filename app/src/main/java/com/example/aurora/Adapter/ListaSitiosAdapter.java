@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,8 @@ import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.InformacionSupervisorActivity;
 import com.example.aurora.R;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +34,14 @@ public class ListaSitiosAdapter
 
     private Usuario supervisor;
 
+    FirebaseFirestore db;
+
     public class SitioViewHolder extends RecyclerView.ViewHolder{
         Sitio sitio;
         //TextView codigoSitio;
         Usuario supervisor;
+
+        FirebaseFirestore db;
 
         public SitioViewHolder(@NonNull View itemView) {
 
@@ -125,37 +132,45 @@ public class ListaSitiosAdapter
     @Override
     //Para inflar la vista
     public SitioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        db = FirebaseFirestore.getInstance();
         View view = LayoutInflater.from(context).inflate(R.layout.item_lista_sitios, parent, false);
         return new SitioViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull SitioViewHolder holder, int position) {
 
-        Sitio s = listaSitios.get(position) ;
+        db = FirebaseFirestore.getInstance();
+
+        Sitio s = listaSitios.get(position);
         holder.sitio = s;
         TextView codigoSitio = holder.itemView.findViewById(R.id.textTitle1);
         codigoSitio.setText(s.getIdSitio());
-        TextView ubicacionSitio= holder.itemView.findViewById(R.id.textSubtitle1);
+        TextView ubicacionSitio = holder.itemView.findViewById(R.id.textSubtitle1);
         ubicacionSitio.setText(s.getDepartamento() + ", " + s.getProvincia() + ", " + s.getDistrito());
 
-        TextView nombreEncargado= holder.itemView.findViewById(R.id.textNombre);
+        TextView nombreEncargado = holder.itemView.findViewById(R.id.textNombre);
         nombreEncargado.setText("Cristiano Ronaldo");
 
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {
-            /*if(s.getSupervisor() == null || s.getSupervisor().size() == 1) {
-                Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("sitio", s);
-                context.startActivity(intent);
-            }else if (s.getSupervisor().isEmpty()){
-                Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("sitio", s);
-                intent.putExtra("supervisor",supervisor);
-                context.startActivity(intent);
-            }*/
+            /*db.collection("sitios").document(s.getIdSitio()).get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    Sitio sitio = documentSnapshot.toObject(Sitio.class);
+                    if (sitio.getSupervisor() != null) {
+                        Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("sitio", s);
+                        intent.putExtra("supervisor", supervisor);
+                        context.startActivity(intent);
+                    } else if (sitio.getSupervisor() != null) {
+                        Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("sitio", s);
+                        context.startActivity(intent);
+                    }
+                }
+                */
             if(s.getSupervisor()!=null) {
                 Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -168,8 +183,8 @@ public class ListaSitiosAdapter
                 intent.putExtra("sitio", s);
                 context.startActivity(intent);
             }
-        });
-
+            });
+        
     }
 
     @Override

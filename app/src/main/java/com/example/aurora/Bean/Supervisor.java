@@ -20,9 +20,7 @@ public class Supervisor implements Serializable {
     private String dni;
 
     private String correo;
-
     private String telefono;
-
     private String domicilio;
 
 

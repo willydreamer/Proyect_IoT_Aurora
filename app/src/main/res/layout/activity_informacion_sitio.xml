@@ -124,7 +124,7 @@
                         android:padding="8dp"
                         android:text="Guardar"
                         android:textSize="16sp"
-                        android:backgroundTint="@color/cardview_dark_background"
+                        android:backgroundTint="@color/color_accent"
                         android:visibility="gone"/>
 
                 </LinearLayout>
@@ -234,39 +234,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/llCodigoUbigeo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llDistrito">
-
-                    <TextView
-                        android:id="@+id/tituloCodigoUbigeo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="4dp"
-                        android:text="Código de Ubigeo"
-                        android:textSize="16dp" />
-
-                    <EditText
-                        android:id="@+id/editCodigoUbigeo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/text_background"
-                        android:padding="8dp"
-                        android:paddingStart="16dp"
-                        android:text="123456"
-                        android:textStyle="bold"
-                        android:enabled="false"/>
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llLatitud"
@@ -276,7 +243,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llCodigoUbigeo">
+                    app:layout_constraintTop_toBottomOf="@id/llDistrito">
 
                     <TextView
                         android:id="@+id/tituloLatitud"
@@ -428,6 +395,15 @@
                         android:text="Responsable"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/alertSinAsignar"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sin asignar"
+                        android:textColor="@color/red"
+                        android:textSize="17dp">
+                    </TextView>
 
 
                 </LinearLayout>
@@ -435,28 +411,17 @@
                 <LinearLayout
                     android:id="@+id/llSupervisorEncargado"
                     android:layout_width="380dp"
-                    android:layout_height="121dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/llHeader2">
 
-                    <Spinner
-                        android:id="@+id/spinnerNombres"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp"
-                        android:dropDownVerticalOffset="40dp"
-                        android:entries="@array/nombres_ficticios">
-
-                    </Spinner>
-
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardViewResponsable"
                         android:layout_width="wrap_content"
-                        android:layout_height="110dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="16dp"
                         android:background="@color/white"
@@ -465,47 +430,46 @@
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="110dp"
+                            android:layout_height="wrap_content"
                             android:padding="16dp">
 
                             <ImageView
                                 android:id="@+id/imageTitulo1"
-                                android:layout_width="66dp"
-                                android:layout_height="65dp"
+                                android:layout_width="53dp"
+                                android:layout_height="53dp"
                                 android:layout_alignParentStart="true"
                                 android:layout_marginStart="4dp"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="4dp"
                                 android:background="@drawable/perfil_icono" />
 
                             <TextView
-                                android:id="@+id/textTitle1"
+                                android:id="@+id/textNombres"
                                 android:layout_width="166dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_toEndOf="@id/imageTitulo1"
-                                android:text="Christian Luis Gonzales Fernández"
+                                android:text=""
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/textSubtitle1"
+                                android:id="@+id/textDni"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/textTitle1"
+                                android:layout_below="@id/textNombres"
                                 android:layout_marginStart="16dp"
                                 android:layout_toEndOf="@id/imageTitulo1"
-                                android:text="DNI:70298682" />
+                                android:text="DNI: " />
 
 
                             <TextView
-                                android:id="@+id/textSubtitle2"
+                                android:id="@+id/textCorreo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/textTitle1"
+                                android:layout_below="@id/textDni"
                                 android:layout_marginStart="16dp"
-                                android:layout_marginTop="20dp"
                                 android:layout_toEndOf="@id/imageTitulo1"
-                                android:text="Correo:christia@gmail.com" />
+                                android:text="Correo: " />
 
 
                             <ImageButton
@@ -513,7 +477,7 @@
                                 android:layout_width="46dp"
                                 android:layout_height="49dp"
                                 android:layout_marginLeft="290dp"
-                                android:layout_marginTop="17dp"
+                                android:layout_marginTop="6dp"
                                 android:background="@drawable/boton_redondeado"
                                 android:onClick="irInfoSupervisor"
                                 android:scaleType="fitCenter"
@@ -522,6 +486,19 @@
 
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
+
+                    <Spinner
+                        android:id="@+id/spinnerSupervisores"
+                        android:visibility="invisible"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:dropDownVerticalOffset="40dp"
+                        android:entries="@array/nombres_ficticios">
+                    </Spinner>
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -790,7 +767,7 @@
                     <Button
                         android:gravity="center"
                         android:id="@+id/buttonEliminarSitio"
-                        android:layout_width="140dp"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#F44336"
                         android:text="Eliminar Sitio"

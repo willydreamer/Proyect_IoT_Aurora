@@ -15,17 +15,17 @@ public class Sitio implements Serializable {
     private String latitud;
     private String longitud;
     private String operadora;
-    //private String encargado;
+    private String encargado;
 
 
-    private ArrayList<Usuario> supervisor;
+    private ArrayList<Usuario> supervisores;
 
     //private List<Equipo> equipos;
 
     public Sitio() {
     }
 
-    public Sitio(String idSitio, String departamento, String provincia, String distrito, String tipoDeZona, String latitud, String longitud, String operadora,  ArrayList<Usuario> supervisor) {
+    public Sitio(String idSitio, String departamento, String provincia, String distrito, String tipoDeZona, String latitud, String longitud, String operadora,  String encargado, ArrayList<Usuario> supervisores) {
         this.idSitio = idSitio;
         this.departamento = departamento;
         this.provincia = provincia;
@@ -34,17 +34,17 @@ public class Sitio implements Serializable {
         this.latitud = latitud;
         this.longitud = longitud;
         this.operadora = operadora;
-        this.supervisor = supervisor;
-        //this.encargado = encargado;
+        this.supervisores = supervisores;
+        this.encargado = encargado;
     }
 
-    /*public String getEncargado() {
+    public String getEncargado() {
         return encargado;
     }
 
     public void setEncargado(String encargado) {
         this.encargado = encargado;
-    }*/
+    }
 
     public String getLatitud() {
         return latitud;
@@ -112,10 +112,10 @@ public class Sitio implements Serializable {
 
     @Exclude
     public ArrayList<Usuario> getSupervisor() {
-        return supervisor;
+        return supervisores;
     }
 
-    public void setSupervisor(ArrayList<Usuario> supervisor) {
-        this.supervisor = supervisor;
+    public void setSupervisor(ArrayList<Usuario> supervisores) {
+        this.supervisores = supervisores;
     }
 }

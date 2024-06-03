@@ -71,11 +71,11 @@ public class CrearSitioActivity extends AppCompatActivity {
         String longitud = binding.editLongitud.getText().toString();
         String operadora = binding.spinnerOperadora.getSelectedItem().toString();
         ArrayList<Usuario> supervisor = new ArrayList<>();
-        //String encargado = "Cristiano Ronaldo Siu";
+        String encargado = "";
 
         // Crear un objeto Sitio con los datos obtenidos
         //Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora, encargado);
-        Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora,supervisor);
+        Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora,encargado,supervisor);
 
 
         // Guardar los datos en Firestore
@@ -85,7 +85,7 @@ public class CrearSitioActivity extends AppCompatActivity {
                 .addOnSuccessListener(unused -> {
                     Log.d("msg-test", "Sitio guardado exitosamente");
                     Toast.makeText(CrearSitioActivity.this, "Sitio creado exitosamente", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CrearSitioActivity.this, AdminSitiosFragment.class);
+                    Intent intent = new Intent(CrearSitioActivity.this, MainActivity.class);
                     startActivity(intent);
                 })
                 .addOnFailureListener(e -> {

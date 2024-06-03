@@ -8,16 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.AdminInformacionSitioActivity;
+import com.example.aurora.AdminSitiosFragment;
 import com.example.aurora.AsignarSitioActivity;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
+import com.example.aurora.CrearSitioActivity;
 import com.example.aurora.InformacionSupervisorActivity;
 import com.example.aurora.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +33,7 @@ import java.util.List;
 public class ListaSitiosAdapter
         extends RecyclerView.Adapter<ListaSitiosAdapter.SitioViewHolder>{
     private Context context;
-
+    FirebaseFirestore db;
     private ArrayList<Sitio> listaSitios;
 
     private Usuario supervisor;
@@ -139,37 +146,49 @@ public class ListaSitiosAdapter
         ubicacionSitio.setText(s.getDepartamento() + ", " + s.getProvincia() + ", " + s.getDistrito());
 
         TextView nombreEncargado= holder.itemView.findViewById(R.id.textNombre);
-        nombreEncargado.setText("Cristiano Ronaldo");
+
+        //Por si existe un supervisor
+        if (s.getEncargado() == null || s.getEncargado().isEmpty()) {
+            nombreEncargado.setText("Sin asignar");
+            nombreEncargado.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.rounded_background_red));
+            //Log.d("supervisor-asignado", s.getSupervisor().get(0).getNombre());
+        } else {
+            nombreEncargado.setText("Sin asignar");
+            db = FirebaseFirestore.getInstance();
+            db.collection("usuarios")
+                    .document(s.getEncargado())
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            Usuario supervisor  = document.toObject(Usuario.class);
+                            nombreEncargado.setText(supervisor.getNombre() + " " + supervisor.getApellido());
+                        } else {
+                            Log.d("msg-test", "get failed with ", task.getException());
+                        }
+                    });
+        }
 
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {
-            /*if(s.getSupervisor() == null || s.getSupervisor().size() == 1) {
-                Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("sitio", s);
-                context.startActivity(intent);
-            }else if (s.getSupervisor().isEmpty()){
-                Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("sitio", s);
-                intent.putExtra("supervisor",supervisor);
-                context.startActivity(intent);
-            }*/
-            if(s.getSupervisor()!=null) {
-                Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("sitio", s);
-                intent.putExtra("supervisor",supervisor);
-                context.startActivity(intent);
-            }else if (s.getSupervisor() == null){
-                Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("sitio", s);
-                context.startActivity(intent);
-            }
-        });
+            Intent intent = new Intent(context, AdminInformacionSitioActivity.class);
+            intent.putExtra("sitio", s);
+            context.startActivity(intent);
 
+//            if(s.getSupervisor()!=null) {
+//                Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.putExtra("sitio", s);
+//                intent.putExtra("supervisor",supervisor);
+//                context.startActivity(intent);
+//            }else if (s.getSupervisor() == null){
+//                Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.putExtra("sitio", s);
+//                context.startActivity(intent);
+//            }
+        });
     }
 
     @Override

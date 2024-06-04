@@ -15,7 +15,7 @@ import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityAsignarSitioBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.gson.JsonObject;
+//import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -69,27 +69,27 @@ public class AsignarSitioActivity extends AppCompatActivity {
             sitio.getSupervisor().add(supervisor);
 
 
-            JsonObject supervisorJson = JsonUtils.serializeUsuario(supervisor);
-            JsonObject sitioJson = JsonUtils.serializeSitio(sitio);
+            //JsonObject supervisorJson = JsonUtils.serializeUsuario(supervisor);
+            //JsonObject sitioJson = JsonUtils.serializeSitio(sitio);
 
             // Convertir JsonObject a Map<String, Object>
-            Map<String, Object> supervisorMap = JsonUtils.convertJsonObjectToMap(supervisorJson);
-            Map<String, Object> sitioMap = JsonUtils.convertJsonObjectToMap(sitioJson);
+            //Map<String, Object> supervisorMap = JsonUtils.convertJsonObjectToMap(supervisorJson);
+            //Map<String, Object> sitioMap = JsonUtils.convertJsonObjectToMap(sitioJson);
             //Usuario supervisor_copy = supervisor;
             //sitio.getSupervisor().add(supervisor);
             // Guardar los datos en Firestore
-            db.collection("usuarios")
-                    .document(supervisor.getIdUsuario())
-                    //.set(supervisor)
-                    .set(supervisorMap)
-                    .addOnSuccessListener(unused -> {
-                        Log.d("msg-test", "Sitio asignado exitosamente");
-                        Toast.makeText(this, "Sitio asignado exitosamente", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        Log.e("msg-test", "Error al asignar el sitio", e);
-                        Toast.makeText(this, "Error  al asignar el sitio", Toast.LENGTH_SHORT).show();
-                    });
+//            db.collection("usuarios")
+//                    .document(supervisor.getIdUsuario())
+//                    //.set(supervisor)
+//                    .set(supervisorMap)
+//                    .addOnSuccessListener(unused -> {
+//                        Log.d("msg-test", "Sitio asignado exitosamente");
+//                        Toast.makeText(this, "Sitio asignado exitosamente", Toast.LENGTH_SHORT).show();
+//                    })
+//                    .addOnFailureListener(e -> {
+//                        Log.e("msg-test", "Error al asignar el sitio", e);
+//                        Toast.makeText(this, "Error  al asignar el sitio", Toast.LENGTH_SHORT).show();
+//                    });
 
             /*db.collection("sitios")
                     .document(sitio.getIdSitio())
@@ -112,16 +112,16 @@ public class AsignarSitioActivity extends AppCompatActivity {
                 sitio.setSupervisor(new ArrayList<>());
             }
             //sitio.getSupervisor().add(supervisor_copy);
-            db.collection("sitios")
-                    .document(sitio.getIdSitio())
-                    //.set(sitio)
-                    .set(sitioMap)
-                    .addOnSuccessListener(unused -> {
-                        Log.d("msg-test", "supervisor asignado exitosamente");
-                    })
-                    .addOnFailureListener(e -> {
-                        Log.e("msg-test", "Error al asignar supervisor al sitio", e);
-                    });
+//            db.collection("sitios")
+//                    .document(sitio.getIdSitio())
+//                    //.set(sitio)
+//                    .set(sitioMap)
+//                    .addOnSuccessListener(unused -> {
+//                        Log.d("msg-test", "supervisor asignado exitosamente");
+//                    })
+//                    .addOnFailureListener(e -> {
+//                        Log.e("msg-test", "Error al asignar supervisor al sitio", e);
+//                    });
         });
 
         alertDialog.setNegativeButton("Cancelar", (dialogInterface, i) -> {

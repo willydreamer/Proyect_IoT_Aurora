@@ -96,12 +96,14 @@
 
             <ImageView
                 android:id="@+id/imageTitulo1"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/perfil_icono" />
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
+                android:src="@drawable/perfil_icono" />
 
             <TextView
                 android:id="@+id/textTitle1"

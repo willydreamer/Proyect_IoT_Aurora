@@ -8,17 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.InformacionSupervisorActivity;
 import com.example.aurora.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class ListaSupervisoresAdapter
         extends RecyclerView.Adapter<ListaSupervisoresAdapter.SupervisorViewHolder>{
@@ -36,8 +39,11 @@ public class ListaSupervisoresAdapter
         //TextView nombre;
 
         Usuario supervisor;
+        ImageView fotoSupervisor;
         public SupervisorViewHolder(@NonNull View itemView) {
             super(itemView);
+            fotoSupervisor = itemView.findViewById(R.id.imageTitulo1);
+
 
 
         }
@@ -75,6 +81,19 @@ public class ListaSupervisoresAdapter
                 estado.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F44336")));
 
             }
+        }
+        // Cargar la imagen usando Picasso con transformación circular - basado en gpt
+        if (s.getFotoURL() != null && !s.getFotoURL().isEmpty()) {
+            Picasso.get()
+                    .load(s.getFotoURL())
+                    .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
+                    .transform(new CropCircleTransformation())
+                    .into(holder.fotoSupervisor);
+        } else {
+            Picasso.get()
+                    .load(R.drawable.perfil_icono) // Imagen por defecto
+                    .transform(new CropCircleTransformation())
+                    .into(holder.fotoSupervisor);
         }
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);

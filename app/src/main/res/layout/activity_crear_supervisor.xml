@@ -74,6 +74,8 @@
                         android:text="Subir Foto"
                         android:textSize="15sp" />
 
+
+
                 </LinearLayout>
 
                 <LinearLayout

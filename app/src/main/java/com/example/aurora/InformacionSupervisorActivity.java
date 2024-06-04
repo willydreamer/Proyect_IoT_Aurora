@@ -6,23 +6,16 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,8 +24,11 @@ import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class InformacionSupervisorActivity extends AppCompatActivity {
 
@@ -53,6 +49,8 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
     Context context;
 
+    ImageView fotoSupervisor;
+
 
 
     @Override
@@ -70,6 +68,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         correo = findViewById(R.id.editText3);
         domicilio = findViewById(R.id.editText4);
         telefono = findViewById(R.id.editText5);
+        fotoSupervisor = findViewById(R.id.imageView3);
 
 
         String nombreStr = supervisor.getNombre();
@@ -79,12 +78,27 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         String domicilioStr = supervisor.getDomicilio();
         String telefonoStr = supervisor.getTelefono();
 
+        if (supervisor.getFotoURL() != null && !supervisor.getFotoURL().isEmpty()) {
+            Picasso.get()
+                    .load(supervisor.getFotoURL())
+                    .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
+                    .transform(new CropCircleTransformation())
+                    .into(fotoSupervisor);
+        } else {
+            Picasso.get()
+                    .load(R.drawable.perfil_icono) // Imagen por defecto
+                    .transform(new CropCircleTransformation())
+                    .into(fotoSupervisor);
+        }
+
         nombre.setText(nombreStr);
         apellido.setText(apellidoStr);
         dni.setText(dniStr);
         correo.setText(correoStr);
         domicilio.setText(domicilioStr);
         telefono.setText(telefonoStr);
+
+
 
         recyclerView = findViewById(R.id.recyclerview_listasitios);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));

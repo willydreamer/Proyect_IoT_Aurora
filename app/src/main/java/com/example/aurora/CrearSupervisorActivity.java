@@ -1,15 +1,8 @@
 package com.example.aurora;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -18,24 +11,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aurora.Bean.Sitio;
-import com.example.aurora.Bean.Supervisor;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityCrearSupervisorBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 
 public class CrearSupervisorActivity extends AppCompatActivity {
@@ -112,10 +104,12 @@ public class CrearSupervisorActivity extends AppCompatActivity {
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
                 imagen.setImageBitmap(imageBitmap);
-                imagenUri = getImageUri(imageBitmap);
+                //imagenUri = getImageUri(imageBitmap);
+                setImageUriWithCircularTransformation(imagenUri);
             } else if (requestCode == REQUEST_IMAGE_PICK && data != null) {
                 imagenUri = data.getData();
                 imagen.setImageURI(imagenUri);
+                setImageUriWithCircularTransformation(imagenUri);
             }
         }
     }
@@ -123,6 +117,15 @@ public class CrearSupervisorActivity extends AppCompatActivity {
     private Uri getImageUri(Bitmap bitmap) {
         String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
         return Uri.parse(path);
+    }
+
+
+    private void setImageUriWithCircularTransformation(Uri uri) {
+        Picasso.get()
+                .load(uri)
+                .placeholder(R.drawable.baseline_account_circle_24) // Reemplaza con tu imagen por defecto
+                .transform(new CropCircleTransformation())
+                .into(imagen);
     }
 
     private void uploadImageAndSaveUserData() {

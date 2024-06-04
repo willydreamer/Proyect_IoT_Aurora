@@ -133,7 +133,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/llNumeroSerie"
+                    android:id="@+id/llSKU"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -141,6 +141,38 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/llTipoEquipo">
+
+                    <TextView
+                        android:id="@+id/tituloSKU"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="SKU"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/editSKU"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/text_background"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llNumeroSerie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llSKU">
 
                     <TextView
                         android:id="@+id/tituloNumeroSerie"
@@ -281,8 +313,17 @@
                         android:text="Fecha de Registro"
                         android:textSize="16dp" />
 
-                    <EditText
-                        android:id="@+id/editFechaRegistro"
+                    <Button
+                        android:id="@+id/botonFecha"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:textAlignment="center"
+                        android:backgroundTint="#009688"
+                        android:text="Seleccionar"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/fechaRegistro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"

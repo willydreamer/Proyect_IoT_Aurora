@@ -1,17 +1,37 @@
 package com.example.aurora;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.aurora.Bean.Equipo;
 import com.example.aurora.databinding.ActivityCrearEquipoBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class CrearEquipoActivity extends AppCompatActivity {
     private ActivityCrearEquipoBinding binding;
@@ -25,6 +45,26 @@ public class CrearEquipoActivity extends AppCompatActivity {
     private ImageView imagen;
     private Uri imagenUri;
 
+
+    //datos equipo
+
+    private EditText SKU;
+    private EditText numeroDeSerie;
+    private Spinner tipoDeEquipo;
+
+    private EditText marca;
+    private EditText modelo;
+
+    private EditText descripcion;
+
+    private Date fechaDeRegistro;
+
+    private TextView fecha;
+
+    private Button botonGuardar;
+
+    private Button botonFecha;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +76,14 @@ public class CrearEquipoActivity extends AppCompatActivity {
         adapterTipoEquipo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerTipoEquipo.setAdapter(adapterTipoEquipo);
 
+        fecha = findViewById(R.id.fechaRegistro);
+
 
         botonSubirFoto = findViewById(R.id.buttonSubirFoto);
+
+        botonGuardar = findViewById(R.id.buttonGuardar);
+
+        botonFecha = findViewById(R.id.botonFecha);
 
         imagen = findViewById(R.id.imageView3);
 
@@ -53,10 +99,20 @@ public class CrearEquipoActivity extends AppCompatActivity {
             startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
         });
 
-    }
-}
+        botonFecha.setOnClickListener(v ->
+                fechaDialog()
+        );
 
-    /*
+        botonGuardar.setOnClickListener(view->{
+            //guardarSupervisor();
+            uploadImageAndSaveUserData();
+        });
+
+    }
+
+
+
+
 
     //basado en gpt
     @Override
@@ -97,7 +153,7 @@ public class CrearEquipoActivity extends AppCompatActivity {
         if (imagenUri != null) {
             StorageReference storageReference = FirebaseStorage.getInstance().getReference();
             //StorageReference imageReference = storageReference.child("images/" + System.currentTimeMillis() + ".jpg");
-            StorageReference imageReference = storageReference.child("fotosEquipo/*" + System.currentTimeMillis() + ".jpg");
+            StorageReference imageReference = storageReference.child("fotosEquipo/" + System.currentTimeMillis() + ".jpg");
 
             UploadTask uploadTask = imageReference.putFile(imagenUri);
             uploadTask.addOnSuccessListener(taskSnapshot -> {
@@ -116,50 +172,65 @@ public class CrearEquipoActivity extends AppCompatActivity {
 
     public void guardarEquipo(String imageUrl) {
 
-        nombre = findViewById(R.id.editText);
-        apellido = findViewById(R.id.editText1);
-        dni = findViewById(R.id.editText2);
-        correo = findViewById(R.id.editText3);
-        domicilio = findViewById(R.id.editText4);
-        telefono = findViewById(R.id.editText5);
+        SKU = findViewById(R.id.editSKU);
+        numeroDeSerie = findViewById(R.id.editNumeroSerie);
+        tipoDeEquipo = findViewById(R.id.spinnerTipoEquipo);
+        marca = findViewById(R.id.editMarca);
+        modelo = findViewById(R.id.editModelo);
+        descripcion = findViewById(R.id.editDescripcion);
 
-        String idUsuarioSupervisor = generarIdSupervisor();
-        String nombreStr = nombre.getEditableText().toString();
-        String apellidoStr = apellido.getEditableText().toString();
-        String dniStr = dni.getEditableText().toString();
-        String correoStr = correo.getEditableText().toString();
-        String domicilioStr = domicilio.getEditableText().toString();
-        String telefonoStr = telefono.getEditableText().toString();
-        String rol = "supervisor";
-        String estado = "activo";
-        //ArrayList<Sitio> listaSitios = new ArrayList<>();
-        ArrayList<String> listaSitios = new ArrayList<>();
-        Usuario usuarioSupervisor = new Usuario(idUsuarioSupervisor, nombreStr, apellidoStr, dniStr, correoStr, domicilioStr, telefonoStr,rol,estado,listaSitios,imageUrl);
+
+        String tipoDeEquipoStr = tipoDeEquipo.getSelectedItem().toString();
+        String idEquipo = generarIdEquipo(tipoDeEquipoStr);
+        String SKUstr = SKU.getEditableText().toString();
+        String numeroDeSerieStr = numeroDeSerie.getEditableText().toString();
+        String marcaStr = marca.getEditableText().toString();
+        String modeloStr = modelo.getEditableText().toString();
+        String descripcionStr = descripcion.getEditableText().toString();
+        //String fechaDeRegistroStr = fechaDeRegistro.getEditableText().toString();
+        ArrayList<String> sitios = new ArrayList<>();
+        String estado = "operativo";
+
+        Equipo equipo = new Equipo(idEquipo,SKUstr,numeroDeSerieStr ,marcaStr,modeloStr,descripcionStr,fechaDeRegistro,imageUrl,sitios,estado);
 
 
         // Guardar los datos en Firestore
         db.collection("equipos")
-                .document(idUsuarioSupervisor)
-                .set(usuarioSupervisor)
+                .document(idEquipo)
+                .set(equipo)
                 .addOnSuccessListener(unused -> {
-                    Log.d("msg-test2", "Supervisor guardado exitosamente");
-                    Toast.makeText(CrearEquipoActivity.this, "Supervisor creado exitosamente", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CrearEquipoActivity.this, AdminSupervisoresFragment.class);
+                    Log.d("msg-test2", "equipo guardado exitosamente");
+                    Toast.makeText(CrearEquipoActivity.this, "equipo creado exitosamente", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CrearEquipoActivity.this, EquiposFragment.class);
                     startActivity(intent);
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("msg-test3", "Error al guardar el supervisor", e);
-                    Toast.makeText(CrearEquipoActivity.this, "Error al crear el supervisor", Toast.LENGTH_SHORT).show();
+                    Log.e("msg-test3", "Error al guardar el equipo", e);
+                    Toast.makeText(CrearEquipoActivity.this, "Error al crear el equipo", Toast.LENGTH_SHORT).show();
                 });
 
     }
 
 
-    private String generarIdEquipo() {
-        String letrasAdmin = "SUPER";
+    private String generarIdEquipo(String tipoDeEquipoStr) {
+        String letrasEquipo = tipoDeEquipoStr.substring(0, Math.min(tipoDeEquipoStr.length(), 3)).toUpperCase();
         Random random = new Random();
         int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
-        return letrasAdmin+numeroAleatorio;
+        return letrasEquipo + numeroAleatorio;
     }
+
+    private void fechaDialog() {
+        final Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, year, month, dayOfMonth) -> {
+                    calendar.set(year, month, dayOfMonth);
+                    fechaDeRegistro = calendar.getTime();
+                    fecha.setText(fechaDeRegistro.toString());
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
 }
-*/

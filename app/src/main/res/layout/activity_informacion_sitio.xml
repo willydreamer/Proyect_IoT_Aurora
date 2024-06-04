@@ -234,73 +234,75 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout
-                    android:id="@+id/llLatitud"
+                    android:id="@+id/llcoordenadas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llDistrito">
-
-                    <TextView
-                        android:id="@+id/tituloLatitud"
-                        android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/llDistrito"
+                    >
+                    <LinearLayout
+                        android:id="@+id/llLatitud"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="4dp"
-                        android:text="Latitud"
-                        android:textSize="16dp" />
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/editLatitud"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tituloLatitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="4dp"
+                            android:text="Latitud"
+                            android:textSize="16dp" />
+
+                        <EditText
+                            android:id="@+id/editLatitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/text_background"
+                            android:padding="8dp"
+                            android:paddingStart="16dp"
+                            android:text="12.3456"
+                            android:textStyle="bold"
+                            android:enabled="false"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llLongitud"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/text_background"
-                        android:padding="8dp"
-                        android:paddingStart="16dp"
-                        android:text="12.3456"
-                        android:textStyle="bold"
-                        android:enabled="false"/>
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="35dp"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tituloLongitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="4dp"
+                            android:text="Longitud"
+                            android:textSize="16dp" />
 
-                <LinearLayout
-                    android:id="@+id/llLongitud"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llLatitud">
+                        <EditText
+                            android:id="@+id/editLongitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/text_background"
+                            android:padding="8dp"
+                            android:paddingStart="16dp"
+                            android:text="78.9012 "
+                            android:textStyle="bold"
+                            android:enabled="false"/>
 
-                    <TextView
-                        android:id="@+id/tituloLongitud"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="4dp"
-                        android:text="Longitud"
-                        android:textSize="16dp" />
-
-                    <EditText
-                        android:id="@+id/editLongitud"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/text_background"
-                        android:padding="8dp"
-                        android:paddingStart="16dp"
-                        android:text="78.9012 "
-                        android:textStyle="bold"
-                        android:enabled="false"/>
-
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -311,7 +313,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llLongitud">
+                    app:layout_constraintTop_toBottomOf="@id/llcoordenadas">
 
                     <TextView
                         android:id="@+id/tituloTipoZona"

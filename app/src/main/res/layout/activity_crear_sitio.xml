@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="40dp"
-                        android:backgroundTint="#009688"
+                        android:backgroundTint="@color/color_accent"
                         android:text="Subir Foto"
                         android:textSize="15sp" />
 
@@ -204,102 +204,93 @@
 
                 </LinearLayout>
 
-                <!--<LinearLayout
-                    android:id="@+id/llCodigoUbigeo"
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnSelectCoordinates"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="@color/color_accent"
+                    android:text="Seleccionar Coordenadas"
+                    android:textSize="13dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llDistrito">
+                    app:layout_constraintTop_toBottomOf="@id/llDistrito" />
 
-                    <TextView
-                        android:id="@+id/tituloCodigoUbigeo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="4dp"
-                        android:text="Código de Ubigeo"
-                        android:textSize="16dp" />
-
-                    <EditText
-                        android:id="@+id/editCodigoUbigeo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/text_background"
-                        android:padding="8dp"
-                        android:paddingStart="16dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>-->
 
                 <LinearLayout
-                    android:id="@+id/llLatitud"
+                    android:id="@+id/llcoordenadas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llDistrito">
-
-                    <TextView
-                        android:id="@+id/tituloLatitud"
-                        android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/btnSelectCoordinates"
+                    >
+                    <LinearLayout
+                        android:id="@+id/llLatitud"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="4dp"
-                        android:text="Latitud"
-                        android:textSize="16dp" />
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/editLatitud"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tituloLatitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="4dp"
+                            android:text="Latitud"
+                            android:textSize="16dp" />
+
+                        <EditText
+                            android:id="@+id/editLatitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/text_background"
+                            android:padding="8dp"
+                            android:text=""
+                            android:textStyle="bold"
+                            android:enabled="false"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llLongitud"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/text_background"
-                        android:padding="8dp"
-                        android:paddingStart="16dp"
-                        android:textStyle="bold"
-               />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="25dp"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/tituloLongitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="4dp"
+                            android:text="Longitud"
+                            android:textSize="16dp" />
+
+                        <EditText
+                            android:id="@+id/editLongitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/text_background"
+                            android:padding="8dp"
+                            android:text=""
+                            android:textStyle="bold"
+                            android:enabled="false"/>
+
+                    </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/llLongitud"
+                <FrameLayout
+                    android:id="@+id/map_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llLatitud">
-
-                    <TextView
-                        android:id="@+id/tituloLongitud"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="4dp"
-                        android:text="Longitud"
-                        android:textSize="16dp" />
-
-                    <EditText
-                        android:id="@+id/editLongitud"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/text_background"
-                        android:padding="8dp"
-                        android:paddingStart="16dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:id="@+id/llTipoZona"
@@ -309,7 +300,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llLongitud">
+                    app:layout_constraintTop_toBottomOf="@id/llcoordenadas">
 
                     <TextView
                         android:id="@+id/tituloTipoZona"
@@ -376,7 +367,7 @@
                         android:id="@+id/buttonGuardar"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#009688"
+                        android:backgroundTint="@color/color_accent"
                         android:text="Guardar"
                         android:textSize="15sp" />
                 </LinearLayout>

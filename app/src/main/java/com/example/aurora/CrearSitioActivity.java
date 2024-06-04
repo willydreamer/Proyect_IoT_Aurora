@@ -1,14 +1,17 @@
 package com.example.aurora;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,14 +20,25 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityCrearSitioBinding;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CrearSitioActivity extends AppCompatActivity {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener{
     private ActivityCrearSitioBinding binding;
     FirebaseFirestore db;
+    EditText txtLatitud, txtLongitud;
+    GoogleMap mMap;
+    Dialog mapDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +70,12 @@ public class CrearSitioActivity extends AppCompatActivity {
         binding.buttonGuardar.setOnClickListener(v -> {
             guardarSitio();
         });
+
+        //Mapa
+        // Initialize EditText fields
+        txtLatitud = binding.editLatitud;
+        txtLongitud = binding.editLongitud;
+        binding.btnSelectCoordinates.setOnClickListener(v -> openMapDialog());
 
     }
 
@@ -99,4 +119,72 @@ public class CrearSitioActivity extends AppCompatActivity {
         int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
         return letrasDepartamento + numeroAleatorio;
     }
+    private void openMapDialog() {
+
+        mapDialog = new Dialog(this);
+        mapDialog.setContentView(R.layout.dialog_map);
+        mapDialog.setCancelable(true);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().replace(R.id.map_container, mapFragment).commit();
+        }
+        mapFragment.getMapAsync(this);
+        mapDialog.show();
+    }
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Set initial location and zoom level
+        LatLng initialLocation = new LatLng(-13.515207, -71.968307);
+        float zoomLevel = 10.0f;
+
+        mMap.addMarker(new MarkerOptions()
+                .position(initialLocation)
+                .title("Perú"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, zoomLevel));
+
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMapLongClickListener(this);
+    }
+
+    @Override
+    public void onMapClick(@NonNull LatLng latLng) {
+        // Format latitude and longitude to display only 7 decimal places
+        DecimalFormat df = new DecimalFormat("#0.0000000");
+        String formattedLatitude = df.format(latLng.latitude);
+        String formattedLongitude = df.format(latLng.longitude);
+
+        // Update text views with formatted values
+        txtLatitud.setText(formattedLatitude);
+        txtLongitud.setText(formattedLongitude);
+
+        // Rest of your code for marker placement and camera movement
+        mMap.clear();
+        LatLng selectedLocation = new LatLng(latLng.latitude, latLng.longitude);
+        mMap.addMarker(new MarkerOptions().position(selectedLocation).title(""));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedLocation));
+    }
+
+    @Override
+    public void onMapLongClick(@NonNull LatLng latLng) {
+        // Reuse the formatted latitude and longitude from onMapClick
+        DecimalFormat df = new DecimalFormat("#0.0000000");
+        String formattedLatitude = df.format(latLng.latitude);
+        String formattedLongitude = df.format(latLng.longitude);
+
+        // Update text views with formatted values
+        txtLatitud.setText(formattedLatitude);
+        txtLongitud.setText(formattedLongitude);
+
+        // Rest of your code for marker placement and camera movement
+        mMap.clear();
+        LatLng selectedLocation = new LatLng(latLng.latitude, latLng.longitude);
+        mMap.addMarker(new MarkerOptions().position(selectedLocation).title(""));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedLocation));
+    }
+
 }

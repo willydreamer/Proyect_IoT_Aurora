@@ -1,16 +1,11 @@
 package com.example.aurora;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -82,7 +77,9 @@ public class ListaAsignacionSitiosActivity extends AppCompatActivity {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Sitio sitio = document.toObject(Sitio.class);
-                            if(sitio.getSupervisor() == null || sitio.getSupervisor().isEmpty()){
+                            //if(sitio.getSupervisor() == null || sitio.getSupervisor().isEmpty()){
+                            //if(sitio.getEncargado() == null){
+                            if(sitio.getEncargado() == null || sitio.getEncargado().isEmpty()){
                                 listaSitios.add(sitio);
                             }
                         }

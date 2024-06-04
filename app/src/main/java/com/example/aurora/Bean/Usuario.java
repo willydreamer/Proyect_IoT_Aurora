@@ -1,7 +1,5 @@
 package com.example.aurora.Bean;
 
-import com.google.firebase.firestore.Exclude;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -26,17 +24,21 @@ public class Usuario implements Serializable {
 
     private String estado;
 
-    private ArrayList<Sitio> sitios;
+
+
+    //private ArrayList<Sitio> sitios;
     //maximo 5 sitios por supervisor
     //1 supervisor por sitio
 
     private String fotoURL;
 
+    private ArrayList<String> sitios;
+
     public Usuario() {
     }
 
     public Usuario (String idUsuario, String nombre, String apellido, String dni, String correo, String domicilio, String telefono, String rol, String estado,
-                    ArrayList<Sitio> sitios,String fotoURL){
+                    ArrayList<String> sitios,String fotoURL){
 
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -124,11 +126,11 @@ public class Usuario implements Serializable {
     }
 
 
-    public ArrayList<Sitio> getSitios() {
+    public ArrayList<String> getSitios() {
         return sitios;
     }
 
-    public void setSitios(ArrayList<Sitio> sitios) {
+    public void setSitios(ArrayList<String> sitios) {
         this.sitios = sitios;
     }
 

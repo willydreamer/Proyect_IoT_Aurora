@@ -1,4 +1,5 @@
-package com.example.aurora.Adapter;
+/*package com.example.aurora.Adapter;
+
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.google.gson.Gson;
@@ -7,7 +8,6 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class JsonUtils{
@@ -32,8 +32,17 @@ public class JsonUtils{
 
 
         JsonArray sitiosArray = new JsonArray();
-        ArrayList<Sitio> sitios = usuario.getSitios();
+        //ArrayList<Sitio> sitios = usuario.getSitios();
+        ArrayList<String> sitios = usuario.getSitios();
         if (sitios != null) {
+            for (String sitio : sitios) {
+                JsonObject sitioJson = new JsonObject();
+                sitioJson.addProperty("idSitio", sitio);
+                sitiosArray.add(sitioJson);
+                sitiosArray.add(sitio);
+            }
+        }else {
+        }
             for (Sitio sitio : sitios) {
                 JsonObject sitioJson = new JsonObject();
                 sitioJson.addProperty("idSitio", sitio.getIdSitio());
@@ -46,7 +55,7 @@ public class JsonUtils{
                 sitioJson.addProperty("operadora",sitio.getOperadora());
                 sitiosArray.add(sitioJson);
             }
-        }
+
         jsonObject.add("sitios", sitiosArray);
 
         return jsonObject;
@@ -62,10 +71,12 @@ public class JsonUtils{
         jsonObject.addProperty("latitud",sitio.getLatitud());
         jsonObject.addProperty("longitud",sitio.getLongitud());
         jsonObject.addProperty("operadora",sitio.getOperadora());
+        jsonObject.addProperty("encargado",sitio.getEncargado());
 
-        JsonArray supervisoresArray = new JsonArray();
-        List<Usuario> supervisores = sitio.getSupervisor();
-        if (supervisores != null) {
+        //JsonArray supervisoresArray = new JsonArray();
+        //List<Usuario> supervisores = sitio.getSupervisor();
+        String supervisor = sitio.getEncargado();
+        if (supervisor != null) {
             for (Usuario supervisor : supervisores) {
                 JsonObject supervisorJson = new JsonObject();
                 supervisorJson.addProperty("idUsuario", supervisor.getIdUsuario());
@@ -86,6 +97,5 @@ public class JsonUtils{
         return jsonObject;
     }
 }
-
-
+*/
 

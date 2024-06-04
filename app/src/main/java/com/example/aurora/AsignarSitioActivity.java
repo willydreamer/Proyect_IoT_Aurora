@@ -10,15 +10,12 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.aurora.Adapter.JsonUtils;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityAsignarSitioBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
-//import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class AsignarSitioActivity extends AppCompatActivity {
 
@@ -58,15 +55,15 @@ public class AsignarSitioActivity extends AppCompatActivity {
             Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
             //Log.d("listasitios", String.valueOf(supervisor.getSitios()));
             if (supervisor.getSitios() == null) {
-                supervisor.setSitios(new ArrayList<>()); // Inicializa la lista si es nula
+                ArrayList<String> sitios = new ArrayList<>();
+                supervisor.setSitios(sitios); // Inicializa la lista si es nula
             }
-            if (sitio.getSupervisor() == null) {
+            /*if (sitio.getEncargado() == null) {
                 sitio.setSupervisor(new ArrayList<>()); // Inicializa la lista si es nula
-            }
+            }*/
 
-
-            supervisor.getSitios().add(sitio);
-            sitio.getSupervisor().add(supervisor);
+            supervisor.getSitios().add(sitio.getIdSitio());
+            sitio.setEncargado(supervisor.getIdUsuario());
 
 
             //JsonObject supervisorJson = JsonUtils.serializeUsuario(supervisor);
@@ -77,29 +74,29 @@ public class AsignarSitioActivity extends AppCompatActivity {
             //Map<String, Object> sitioMap = JsonUtils.convertJsonObjectToMap(sitioJson);
             //Usuario supervisor_copy = supervisor;
             //sitio.getSupervisor().add(supervisor);
-            // Guardar los datos en Firestore
-//            db.collection("usuarios")
-//                    .document(supervisor.getIdUsuario())
-//                    //.set(supervisor)
-//                    .set(supervisorMap)
-//                    .addOnSuccessListener(unused -> {
-//                        Log.d("msg-test", "Sitio asignado exitosamente");
-//                        Toast.makeText(this, "Sitio asignado exitosamente", Toast.LENGTH_SHORT).show();
-//                    })
-//                    .addOnFailureListener(e -> {
-//                        Log.e("msg-test", "Error al asignar el sitio", e);
-//                        Toast.makeText(this, "Error  al asignar el sitio", Toast.LENGTH_SHORT).show();
-//                    });
+            //Guardar los datos en Firestore
+            db.collection("usuarios")
+                    .document(supervisor.getIdUsuario())
+                    //.set(supervisor)
+                    .set(supervisor)
+                    .addOnSuccessListener(unused -> {
+                       Log.d("msg-test", "Sitio asignado exitosamente");
+                        Toast.makeText(this, "Sitio asignado exitosamente", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                       Log.e("msg-test", "Error al asignar el sitio", e);
+                       Toast.makeText(this, "Error  al asignar el sitio", Toast.LENGTH_SHORT).show();
+                    });
 
-            /*db.collection("sitios")
+            db.collection("sitios")
                     .document(sitio.getIdSitio())
                     .set(sitio)
                     .addOnSuccessListener(unused -> {
                         Log.d("msg-test", "supervisor asignado exitosamente");
                     })
                     .addOnFailureListener(e -> {
-                        Log.e("msg-test", "Error al asignar supervisor al sitio", e);
-                    });*/
+                        Log.e("msg-test", "Error al asignar el supervisor al sitio", e);
+                    });
             AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(this);
             alertDialog2.setMessage("Sitio Asignado Correctamente");
             alertDialog2.setPositiveButton("Listo", (dialogInterface2, i2) -> {

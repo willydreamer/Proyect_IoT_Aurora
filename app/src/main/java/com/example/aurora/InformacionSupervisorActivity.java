@@ -227,7 +227,8 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Sitio sitio = document.toObject(Sitio.class);
-                            if(sitio.getSupervisor() == null || sitio.getSupervisor().size() == 1){
+                            //if(sitio.getSupervisor() == null || sitio.getSupervisor().size() == 1){
+                            if(sitio.getEncargado().equals(supervisor.getIdUsuario())){
                                 listaSitios.add(sitio);
                             }
                             //listaSitios.add(sitio);

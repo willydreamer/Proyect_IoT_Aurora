@@ -15,7 +15,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityCrearSupervisorBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -85,6 +84,9 @@ public class CrearSupervisorActivity extends AppCompatActivity {
             }
         });*/
 
+
+        //inicio foto
+
         // Botón para abrir la galería
         botonSubirFoto.setOnClickListener(v -> {
             Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -149,6 +151,9 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         }
     }
 
+    //fin foto
+
+
     /*private void saveUserDataToFirestore(String userId, String userName, String imageUrl) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Usuario usuario = new Usuario(userId, userName, imageUrl);
@@ -183,7 +188,8 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         String telefonoStr = telefono.getEditableText().toString();
         String rol = "supervisor";
         String estado = "activo";
-        ArrayList<Sitio> listaSitios = new ArrayList<>();
+        //ArrayList<Sitio> listaSitios = new ArrayList<>();
+        ArrayList<String> listaSitios = new ArrayList<>();
         Usuario usuarioSupervisor = new Usuario(idUsuarioSupervisor, nombreStr, apellidoStr, dniStr, correoStr, domicilioStr, telefonoStr,rol,estado,listaSitios,imageUrl);
 
 

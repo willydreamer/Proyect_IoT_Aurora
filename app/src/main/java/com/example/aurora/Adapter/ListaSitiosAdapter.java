@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.AdminInformacionSitioActivity;
+import com.example.aurora.AsignarSitioActivity;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
@@ -171,10 +172,18 @@ public class ListaSitiosAdapter
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {
-            Intent intent = new Intent(context, AdminInformacionSitioActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("sitio", s);
-            context.startActivity(intent);
+            if(s.getEncargado() == null || s.getEncargado().isEmpty()){
+                Intent intent = new Intent(context, AsignarSitioActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("sitio", s);
+                intent.putExtra("supervisor", getSupervisor());
+                context.startActivity(intent);
+            }else if(s.getEncargado() != null) {
+                Intent intent = new Intent(context, AdminInformacionSitioActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("sitio", s);
+                context.startActivity(intent);
+            }
 
             //            if(s.getSupervisor()!=null) {
 //                Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity

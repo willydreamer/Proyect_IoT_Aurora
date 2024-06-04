@@ -82,6 +82,7 @@ public class ListaSupervisoresAdapter
 
             }
         }
+        //inicio foto
         // Cargar la imagen usando Picasso con transformación circular - basado en gpt
         if (s.getFotoURL() != null && !s.getFotoURL().isEmpty()) {
             Picasso.get()
@@ -95,6 +96,7 @@ public class ListaSupervisoresAdapter
                     .transform(new CropCircleTransformation())
                     .into(holder.fotoSupervisor);
         }
+        //fin foto
         context = holder.itemView.getContext();
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {

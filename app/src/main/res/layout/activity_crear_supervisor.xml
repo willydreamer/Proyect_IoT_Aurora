@@ -25,15 +25,340 @@
             android:textSize="15sp" />
 
         <TextView
-            android:fontFamily="@font/conforma"
+            android:gravity="center"
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:paddingRight="170dp"
             android:text="Crear Supervisor"
-            android:textAlignment="center"
-            android:textSize="25sp" />
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="27sp"
+            android:layout_marginTop="80dp"/>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="180dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="16dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <!-- Fila para el encabezado 'General' y el icono de editar -->
+                <LinearLayout
+                    android:id="@+id/container2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="137dp"
+                        android:layout_height="131dp"
+                        android:layout_marginLeft="20dp"
+                        app:srcCompat="@drawable/baseline_account_circle_24" />
+
+
+                    <Button
+                        android:id="@+id/buttonSubirFoto"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="40dp"
+                        android:backgroundTint="#009688"
+                        android:text="Subir Foto"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/container2">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="General"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <!-- Fila para 'Departamento' -->
+                <LinearLayout
+                    android:id="@+id/llDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llHeader">
+
+                    <TextView
+                        android:id="@+id/tituloDepartamento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Nombre"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/text_background"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:textStyle="bold"
+                        android:inputType="text"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llProvincia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llDepartment">
+
+                    <TextView
+                        android:id="@+id/tituloProvincia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Apellido"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/editText1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/text_background"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:textStyle="bold"
+                        android:inputType="text"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llDistrito"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llProvincia">
+
+                    <TextView
+                        android:id="@+id/tituloDistrito"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="DNI"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/text_background"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:textStyle="bold"
+                        android:inputType="number"
+                        />
+
+                </LinearLayout>
+
+                <!--<LinearLayout
+                    android:id="@+id/llCodigoUbigeo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llDistrito">
+
+                    <TextView
+                        android:id="@+id/tituloCodigoUbigeo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Código de Ubigeo"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/editCodigoUbigeo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/text_background"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>-->
+
+                <LinearLayout
+                    android:id="@+id/llLatitud"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llDistrito">
+
+                    <TextView
+                        android:id="@+id/tituloLatitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Correo"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/editText3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/text_background"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:textStyle="bold"
+                        android:inputType="textEmailAddress"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llLongitud"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llLatitud">
+
+                    <TextView
+                        android:id="@+id/tituloLongitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Domicilio"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/editText4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/text_background"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:textStyle="bold"
+                        android:inputType="text"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llTipoZona"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llLongitud">
+
+                    <TextView
+                        android:id="@+id/tituloTipoZona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Telefono"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/editText5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/text_background"
+                        android:padding="8dp"
+                        android:paddingStart="16dp"
+                        android:textStyle="bold"
+                        android:inputType="number"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    app:layout_constraintTop_toBottomOf="@id/llTipoZona"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:gravity="center"
+                        android:id="@+id/buttonGuardar"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#009688"
+                        android:text="Guardar"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
 
         <!-- <FrameLayout
             android:id="@+id/container2"
@@ -71,7 +396,7 @@
 
         </FrameLayout> -->
 
-        <ScrollView
+        <!--ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="160dp"
@@ -440,7 +765,7 @@
                     app:layout_constraintVertical_bias="0.5" />
 
 
-                <!--<Button
+                <Button
                         android:id="@+id/button8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -451,7 +776,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/et6" />-->
+                        app:layout_constraintTop_toBottomOf="@+id/et6" />
 
                 <Button
                     android:id="@+id/buttonGuardar"
@@ -470,7 +795,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </ScrollView>
+        </ScrollView> -->
 
 
     </FrameLayout>

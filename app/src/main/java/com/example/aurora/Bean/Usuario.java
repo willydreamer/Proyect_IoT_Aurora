@@ -30,11 +30,13 @@ public class Usuario implements Serializable {
     //maximo 5 sitios por supervisor
     //1 supervisor por sitio
 
+    private String fotoURL;
+
     public Usuario() {
     }
 
     public Usuario (String idUsuario, String nombre, String apellido, String dni, String correo, String domicilio, String telefono, String rol, String estado,
-                    ArrayList<Sitio> sitios){
+                    ArrayList<Sitio> sitios,String fotoURL){
 
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -46,6 +48,7 @@ public class Usuario implements Serializable {
         this.rol = rol;
         this.estado = estado;
         this.sitios = sitios;
+        this.fotoURL = fotoURL;
     }
 
     public String getRol() {
@@ -127,5 +130,13 @@ public class Usuario implements Serializable {
 
     public void setSitios(ArrayList<Sitio> sitios) {
         this.sitios = sitios;
+    }
+
+    public String getFotoURL() {
+        return fotoURL;
+    }
+
+    public void setFotoURL(String fotoURL) {
+        this.fotoURL = fotoURL;
     }
 }

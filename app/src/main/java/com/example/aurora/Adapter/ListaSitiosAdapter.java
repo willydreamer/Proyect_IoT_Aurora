@@ -22,6 +22,7 @@ import com.example.aurora.Bean.Usuario;
 import com.example.aurora.CrearSitioActivity;
 import com.example.aurora.InformacionSupervisorActivity;
 import com.example.aurora.R;
+
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -37,11 +38,12 @@ public class ListaSitiosAdapter
     private ArrayList<Sitio> listaSitios;
 
     private Usuario supervisor;
-
     public class SitioViewHolder extends RecyclerView.ViewHolder{
         Sitio sitio;
         //TextView codigoSitio;
         Usuario supervisor;
+
+        FirebaseFirestore db;
 
         public SitioViewHolder(@NonNull View itemView) {
 
@@ -132,37 +134,42 @@ public class ListaSitiosAdapter
     @Override
     //Para inflar la vista
     public SitioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        db = FirebaseFirestore.getInstance();
         View view = LayoutInflater.from(context).inflate(R.layout.item_lista_sitios, parent, false);
         return new SitioViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull SitioViewHolder holder, int position) {
+        db = FirebaseFirestore.getInstance();
 
-        Sitio s = listaSitios.get(position) ;
+        Sitio s = listaSitios.get(position);
         holder.sitio = s;
+
         TextView codigoSitio = holder.itemView.findViewById(R.id.textTitle1);
         codigoSitio.setText(s.getIdSitio());
-        TextView ubicacionSitio= holder.itemView.findViewById(R.id.textSubtitle1);
+
+        TextView ubicacionSitio = holder.itemView.findViewById(R.id.textSubtitle1);
         ubicacionSitio.setText(s.getDepartamento() + ", " + s.getProvincia() + ", " + s.getDistrito());
 
-        TextView nombreEncargado= holder.itemView.findViewById(R.id.textNombre);
+        TextView nombreEncargado = holder.itemView.findViewById(R.id.textNombre);
 
-        //Por si existe un supervisor
+        // Por si existe un supervisor
         if (s.getEncargado() == null || s.getEncargado().isEmpty()) {
             nombreEncargado.setText("Sin asignar");
             nombreEncargado.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.rounded_background_red));
-            //Log.d("supervisor-asignado", s.getSupervisor().get(0).getNombre());
         } else {
             nombreEncargado.setText("Sin asignar");
-            db = FirebaseFirestore.getInstance();
             db.collection("usuarios")
                     .document(s.getEncargado())
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
-                            Usuario supervisor  = document.toObject(Usuario.class);
-                            nombreEncargado.setText(supervisor.getNombre() + " " + supervisor.getApellido());
+                            Usuario supervisor = document.toObject(Usuario.class);
+                            if (supervisor != null) {
+                                nombreEncargado.setText(supervisor.getNombre() + " " + supervisor.getApellido());
+                            }
                         } else {
                             Log.d("msg-test", "get failed with ", task.getException());
                         }
@@ -176,7 +183,7 @@ public class ListaSitiosAdapter
             intent.putExtra("sitio", s);
             context.startActivity(intent);
 
-//            if(s.getSupervisor()!=null) {
+            //            if(s.getSupervisor()!=null) {
 //                Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                intent.putExtra("sitio", s);
@@ -187,9 +194,10 @@ public class ListaSitiosAdapter
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                intent.putExtra("sitio", s);
 //                context.startActivity(intent);
-//            }
         });
     }
+
+
 
     @Override
     public int getItemCount() {

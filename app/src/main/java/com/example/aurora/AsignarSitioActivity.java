@@ -14,12 +14,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.aurora.Adapter.JsonUtils;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.databinding.ActivityAsignarSitioBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class AsignarSitioActivity extends AppCompatActivity {
 
@@ -58,14 +61,31 @@ public class AsignarSitioActivity extends AppCompatActivity {
             Sitio sitio = (Sitio) getIntent().getSerializableExtra("sitio");
             Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
             //Log.d("listasitios", String.valueOf(supervisor.getSitios()));
+            if (supervisor.getSitios() == null) {
+                supervisor.setSitios(new ArrayList<>()); // Inicializa la lista si es nula
+            }
+            if (sitio.getSupervisor() == null) {
+                sitio.setSupervisor(new ArrayList<>()); // Inicializa la lista si es nula
+            }
+
+
             supervisor.getSitios().add(sitio);
-            Usuario supervisor_copy = supervisor;
+            sitio.getSupervisor().add(supervisor);
+
+
+            JsonObject supervisorJson = JsonUtils.serializeUsuario(supervisor);
+            JsonObject sitioJson = JsonUtils.serializeSitio(sitio);
+
+            // Convertir JsonObject a Map<String, Object>
+            Map<String, Object> supervisorMap = JsonUtils.convertJsonObjectToMap(supervisorJson);
+            Map<String, Object> sitioMap = JsonUtils.convertJsonObjectToMap(sitioJson);
+            //Usuario supervisor_copy = supervisor;
             //sitio.getSupervisor().add(supervisor);
-            //Log.d("sitio",sitio.getSupervisor().getNombre());
             // Guardar los datos en Firestore
             db.collection("usuarios")
                     .document(supervisor.getIdUsuario())
-                    .set(supervisor)
+                    //.set(supervisor)
+                    .set(supervisorMap)
                     .addOnSuccessListener(unused -> {
                         Log.d("msg-test", "Sitio asignado exitosamente");
                         Toast.makeText(this, "Sitio asignado exitosamente", Toast.LENGTH_SHORT).show();
@@ -95,10 +115,11 @@ public class AsignarSitioActivity extends AppCompatActivity {
             if (sitio.getSupervisor() == null) {
                 sitio.setSupervisor(new ArrayList<>());
             }
-            sitio.getSupervisor().add(supervisor_copy);
+            //sitio.getSupervisor().add(supervisor_copy);
             db.collection("sitios")
                     .document(sitio.getIdSitio())
-                    .set(sitio)
+                    //.set(sitio)
+                    .set(sitioMap)
                     .addOnSuccessListener(unused -> {
                         Log.d("msg-test", "supervisor asignado exitosamente");
                     })

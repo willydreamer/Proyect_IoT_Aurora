@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,7 @@ public class AdminSitiosFragment extends Fragment {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Sitio sitio = document.toObject(Sitio.class);
+                            Log.d("sitio", String.valueOf(sitio.getSupervisor()));
                             listaSitios.add(sitio);
                         }
                         adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado

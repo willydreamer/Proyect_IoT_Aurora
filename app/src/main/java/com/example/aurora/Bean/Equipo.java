@@ -25,10 +25,11 @@ public class Equipo implements Serializable {
 
     }
 
-    public Equipo(String idEquipo, String SKUstr, String numeroDeSerieStr, String marcaStr, String modeloStr, String descripcionStr, Date fechaDeRegistro, String imageUrl, ArrayList<String> sitios, String estado){
+    public Equipo(String idEquipo, String SKUstr, String numeroDeSerieStr, String tipoDeEquipo, String marcaStr, String modeloStr, String descripcionStr, Date fechaDeRegistro, String imageUrl, ArrayList<String> sitios, String estado){
         this.idEquipo = idEquipo;
         this.SKU = SKUstr;
         this.numeroDeSerie = numeroDeSerieStr;
+        this.tipoDeEquipo = tipoDeEquipo;
         this.marca = marcaStr;
         this.modelo = modeloStr;
         this.descripcion = descripcionStr;

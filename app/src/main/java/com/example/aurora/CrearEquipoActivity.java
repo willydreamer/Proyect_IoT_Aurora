@@ -191,7 +191,7 @@ public class CrearEquipoActivity extends AppCompatActivity {
         ArrayList<String> sitios = new ArrayList<>();
         String estado = "operativo";
 
-        Equipo equipo = new Equipo(idEquipo,SKUstr,numeroDeSerieStr ,marcaStr,modeloStr,descripcionStr,fechaDeRegistro,imageUrl,sitios,estado);
+        Equipo equipo = new Equipo(idEquipo,SKUstr,numeroDeSerieStr ,tipoDeEquipoStr,marcaStr,modeloStr,descripcionStr,fechaDeRegistro,imageUrl,sitios,estado);
 
 
         // Guardar los datos en Firestore

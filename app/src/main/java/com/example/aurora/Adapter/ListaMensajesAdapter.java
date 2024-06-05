@@ -67,7 +67,7 @@ public class ListaMensajesAdapter extends RecyclerView.Adapter<ListaMensajesAdap
         });*/
 
         context = holder.itemView.getContext();
-        ImageButton flecha1 = holder.itemView.findViewById(R.id.flechaSitios);
+        ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), MensajeriaChatActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
             context.startActivity(intent);

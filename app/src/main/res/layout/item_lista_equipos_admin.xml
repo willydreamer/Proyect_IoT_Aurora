@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/imagenEquipo2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/perfil_icono"
+            android:foregroundGravity="center" />
+
+        <TextView
+            android:id="@+id/textTituloEquipo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imagenEquipo2"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Cisco ISC 100 Series"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textTipoEquipo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textTituloEquipo2"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Switch"
+            android:textColor="#3C9AC5"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/textNumeroSerie2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textTipoEquipo2"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="ABC - 123456"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/buttonVer"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/textNumeroSerie2"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#3F51B5"
+            android:text="Ver"
+            android:layout_marginLeft="34dp"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:padding="0dp"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

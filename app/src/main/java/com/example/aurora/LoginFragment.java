@@ -139,7 +139,7 @@ public class LoginFragment extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case "supervisor":
-                intent = new Intent(this, SuperAdminListUsuarios.class);
+                intent = new Intent(this, Supervisor.class);
                 startActivity(intent);
                 break;
             default:

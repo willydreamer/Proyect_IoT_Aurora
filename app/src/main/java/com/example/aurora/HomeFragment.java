@@ -6,13 +6,10 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 public class HomeFragment extends Fragment {
@@ -24,7 +21,7 @@ public class HomeFragment extends Fragment {
         View homeView = inflater.inflate(R.layout.admin_fragment_home, container, false);
 
         //navegaciones
-        ImageButton goSitios = homeView.findViewById(R.id.flecha1);
+        ImageButton goSitios = homeView.findViewById(R.id.flechaSitios);
         goSitios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

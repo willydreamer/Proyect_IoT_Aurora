@@ -39,6 +39,7 @@ public class SupervisorAgregarFragment extends Fragment {
         new IntentIntegrator(this).initiateScan();
         textView36 = getView().findViewById(R.id.textView36);
 
+
     }
 
     @Override

@@ -7,20 +7,12 @@
     android:background="#292929"
     tools:context=".SupervisorAgregarFragment">
 
-    <ImageView
-        android:id="@+id/imageView8"
+    <TextView
+        android:id="@+id/textView36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30sp"
-        android:layout_marginTop="30sp"
-        android:background="@drawable/boton_redondeado"
-        android:src="?attr/actionModeCloseDrawable" />
+        android:text="INFOOOOOOOOOOOOOOOOOOOO"
+        android:textColor="@color/white"/>
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="276dp"
-        android:layout_height="256dp"
-        android:layout_marginLeft="60sp"
-        android:layout_marginTop="120sp"
-        android:src="@drawable/uwu" />
+
 </FrameLayout>

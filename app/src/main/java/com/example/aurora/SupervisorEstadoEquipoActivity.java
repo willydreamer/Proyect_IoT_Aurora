@@ -100,6 +100,7 @@ public class SupervisorEstadoEquipoActivity extends AppCompatActivity {
                                 return;
                             }
                         }
+
                         listener.onEquipoEncontrado(null); // No se encontró el equipo
                     }
                 })

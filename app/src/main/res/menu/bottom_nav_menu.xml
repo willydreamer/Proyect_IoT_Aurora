@@ -22,4 +22,9 @@
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="Mi Perfil" />
 
+    <item
+        android:id="@+id/navigation_message"
+        android:icon="@drawable/mensaje_icono"
+        android:title="Mensajes" />
+
 </menu>

@@ -48,6 +48,10 @@ public class SuperAdmin extends AppCompatActivity {
                 replaceFragment(new NotificationsFragment());
                 return true;
             }
+            else if (menuItemId ==  R.id.navigation_message) {
+                replaceFragment(new ChatsListFragment());
+                return true;
+            }
             return true;
         });
 

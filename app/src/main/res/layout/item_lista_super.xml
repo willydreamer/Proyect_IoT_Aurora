@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="20dp"
     android:layout_width="match_parent"
     android:background="@drawable/ingreso_datos2"
     android:layout_height="wrap_content">
@@ -80,7 +81,6 @@
 
 
     <androidx.cardview.widget.CardView
-        android:background="@drawable/ingreso_datos2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -89,9 +89,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
-            android:background="@drawable/ingreso_datos2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="16dp">
 
             <ImageView
@@ -99,16 +98,16 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_alignParentStart="true"
+                android:layout_gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
-                android:layout_gravity="center"
                 android:src="@drawable/perfil_icono" />
 
             <TextView
                 android:id="@+id/textTitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="190dp"
+                android:layout_height="42dp"
                 android:layout_marginStart="16dp"
                 android:layout_toEndOf="@id/imageTitulo1"
                 android:text="Christian Luis Gonzales Fernández"
@@ -117,7 +116,7 @@
 
             <TextView
                 android:id="@+id/textSubtitle1"
-                android:layout_width="219dp"
+                android:layout_width="150dp"
                 android:layout_height="18dp"
                 android:layout_below="@id/textTitle1"
                 android:layout_marginStart="16dp"
@@ -142,8 +141,8 @@
 
             <ImageButton
                 android:id="@+id/flecha1"
-                android:layout_width="41dp"
-                android:layout_height="50dp"
+                android:layout_width="39dp"
+                android:layout_height="56dp"
                 android:layout_marginLeft="300dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/boton_redondeado"

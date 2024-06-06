@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SupervisorListaSitios extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class SupervisorListaSitios extends AppCompatActivity {
         // Configurar el adapter y asociarlo al RecyclerView
         adaptador = new ListaSitiosAdapter();
         adaptador.setListaSitios(listaSitios);
+        adaptador.setContext(this);
         recyclerView.setAdapter(adaptador);
 
         obtenerSitiosDeFirestore();
@@ -57,8 +59,12 @@ public class SupervisorListaSitios extends AppCompatActivity {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Sitio sitio = document.toObject(Sitio.class);
-                            Log.d("sitio", String.valueOf(sitio.getSupervisor()));
-                            listaSitios.add(sitio);
+                            String dueno = sitio.getEncargado();
+                            Log.d("TAG", "obtenerSitiosDeFirestore: "+dueno);
+                            if(Objects.equals(dueno, "ADMIN111")) {
+                                listaSitios.add(sitio);
+                            }
+
                         }
                         adaptador.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
                     }

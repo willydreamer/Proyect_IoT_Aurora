@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Bean.EquipoAdmin;
-import com.example.aurora.CrearEquipoActivity;
+import com.example.aurora.InformacionEquipoActivity;
 import com.example.aurora.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -68,7 +68,7 @@ public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposA
         tipoEquipo.setText(e.getTipoDeEquipo());
 
         TextView numeroDeSerie = holder.itemView.findViewById(R.id.textNumeroSerie2);
-        numeroDeSerie.setText(e.getTipoDeEquipo());
+        numeroDeSerie.setText(e.getNumeroDeSerie());
 
         if (e.getFotoEquipo() != null && !e.getFotoEquipo().isEmpty()) {
             Picasso.get()
@@ -86,7 +86,7 @@ public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposA
         Button botonVer = holder.itemView.findViewById(R.id.buttonVer);
         botonVer.setOnClickListener(view -> {
             //if(s.getEncargado() == null || s.getEncargado().isEmpty()){
-            Intent intent = new Intent(context, CrearEquipoActivity.class);
+            Intent intent = new Intent(context, InformacionEquipoActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("equipo",e);
             context.startActivity(intent);

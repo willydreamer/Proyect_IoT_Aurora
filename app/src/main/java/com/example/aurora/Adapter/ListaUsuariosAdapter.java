@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,11 @@ public class ListaUsuariosAdapter extends RecyclerView.Adapter<ListaUsuariosAdap
 
     private Context context;
 
+    public ListaUsuariosAdapter(List<Usuario> listaUsuarios, Context context) {
+        this.listaUsuarios = listaUsuarios;
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public UsuarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,22 +35,32 @@ public class ListaUsuariosAdapter extends RecyclerView.Adapter<ListaUsuariosAdap
 
     @Override
     public void onBindViewHolder(@NonNull UsuarioViewHolder holder, int position) {
-
+        Usuario usuario = listaUsuarios.get(position);
+        holder.bind(usuario);
     }
 
     @Override
     public int getItemCount() {
 
-        return 0;
+        return listaUsuarios.size();
     }
 
     public class UsuarioViewHolder extends RecyclerView.ViewHolder{
+
+        TextView nombreUsuario;
+        TextView rolUsuario;
 
         Usuario usuario;
 
         public UsuarioViewHolder(@NonNull View itemView){
 
             super(itemView);
+            nombreUsuario = itemView.findViewById(R.id.textView25);
+            rolUsuario = itemView.findViewById(R.id.textView26);
+        }
+        public void bind(Usuario usuario) {
+            nombreUsuario.setText(usuario.getNombre());
+            rolUsuario.setText(usuario.getRol());
         }
     }
 

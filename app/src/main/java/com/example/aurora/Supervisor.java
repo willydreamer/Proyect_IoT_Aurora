@@ -1,6 +1,7 @@
 package com.example.aurora;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -32,7 +33,7 @@ public class Supervisor extends AppCompatActivity {
                 return true;
             }
             else if (menuItemId ==  R.id.agregar) {
-                replaceFragment(new SupervisorAgregarFragment());
+                replaceFragment(new com.example.qrscanner.SupervisorAgregarFragment());
                 return true;
             }
             else if (menuItemId ==  R.id.historial) {
@@ -53,5 +54,10 @@ public class Supervisor extends AppCompatActivity {
         transaction.replace(R.id.containerFrame, fragment);
         transaction.commit();
 
+    }
+
+    public void handleScanResult(String scanResult) {
+        Toast.makeText(this, "Resultado del escaneo: " + scanResult, Toast.LENGTH_LONG).show();
+        // Aquí puedes manejar el resultado del escaneo
     }
 }

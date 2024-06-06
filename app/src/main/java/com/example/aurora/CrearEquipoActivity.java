@@ -18,7 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.aurora.Bean.Equipo;
+import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.databinding.ActivityCrearEquipoBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -151,28 +151,48 @@ public class CrearEquipoActivity extends AppCompatActivity {
 
     private void uploadImageAndSaveUserData() {
         if (imagenUri != null) {
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-            //StorageReference imageReference = storageReference.child("images/" + System.currentTimeMillis() + ".jpg");
-            StorageReference imageReference = storageReference.child("fotosEquipo/" + System.currentTimeMillis() + ".jpg");
+            SKU = findViewById(R.id.editSKU);
+            numeroDeSerie = findViewById(R.id.editNumeroSerie);
+            tipoDeEquipo = findViewById(R.id.spinnerTipoEquipo);
+            marca = findViewById(R.id.editMarca);
+            modelo = findViewById(R.id.editModelo);
+            descripcion = findViewById(R.id.editDescripcion);
 
-            UploadTask uploadTask = imageReference.putFile(imagenUri);
-            uploadTask.addOnSuccessListener(taskSnapshot -> {
-                imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                    String imageUrl = uri.toString();
-                    //saveUserDataToFirestore(imageUrl);
-                    guardarEquipo(imageUrl);
+
+            String tipoDeEquipoStr = tipoDeEquipo.getSelectedItem().toString();
+            String idEquipo = generarIdEquipo(tipoDeEquipoStr);
+            String SKUstr = SKU.getEditableText().toString();
+            String numeroDeSerieStr = numeroDeSerie.getEditableText().toString();
+            String marcaStr = marca.getEditableText().toString();
+            String modeloStr = modelo.getEditableText().toString();
+            String descripcionStr = descripcion.getEditableText().toString();
+
+            if(!tipoDeEquipoStr.isEmpty() && !SKUstr.isEmpty() && !numeroDeSerieStr.isEmpty() && !marcaStr.isEmpty() && !modeloStr.isEmpty() && !descripcionStr.isEmpty() && fechaDeRegistro!=null) {
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                //StorageReference imageReference = storageReference.child("images/" + System.currentTimeMillis() + ".jpg");
+                StorageReference imageReference = storageReference.child("fotosEquipo/" + System.currentTimeMillis() + ".jpg");
+
+                UploadTask uploadTask = imageReference.putFile(imagenUri);
+                uploadTask.addOnSuccessListener(taskSnapshot -> {
+                    imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String imageUrl = uri.toString();
+                        //saveUserDataToFirestore(imageUrl);
+                        guardarEquipo(imageUrl,idEquipo,tipoDeEquipoStr,SKUstr,numeroDeSerieStr,marcaStr,modeloStr,descripcionStr);
+                    });
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(CrearEquipoActivity.this, "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
-            }).addOnFailureListener(e -> {
-                Toast.makeText(CrearEquipoActivity.this, "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            });
+            }else{
+                Toast.makeText(this, "No Deben haber Campos vacios", Toast.LENGTH_LONG).show();
+            }
         } else {
-            Toast.makeText(this, "Foto no seleccionada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Foto no seleccionada", Toast.LENGTH_LONG).show();
         }
     }
 
-    public void guardarEquipo(String imageUrl) {
+    public void guardarEquipo(String imageUrl,String idEquipo,String tipoDeEquipoStr,String SKUstr,String numeroDeSerieStr,String marcaStr,String modeloStr,String descripcionStr) {
 
-        SKU = findViewById(R.id.editSKU);
+        /*SKU = findViewById(R.id.editSKU);
         numeroDeSerie = findViewById(R.id.editNumeroSerie);
         tipoDeEquipo = findViewById(R.id.spinnerTipoEquipo);
         marca = findViewById(R.id.editMarca);
@@ -187,11 +207,11 @@ public class CrearEquipoActivity extends AppCompatActivity {
         String marcaStr = marca.getEditableText().toString();
         String modeloStr = modelo.getEditableText().toString();
         String descripcionStr = descripcion.getEditableText().toString();
-        //String fechaDeRegistroStr = fechaDeRegistro.getEditableText().toString();
+        //String fechaDeRegistroStr = fechaDeRegistro.getEditableText().toString();*/
         ArrayList<String> sitios = new ArrayList<>();
         String estado = "operativo";
 
-        Equipo equipo = new Equipo(idEquipo,SKUstr,numeroDeSerieStr ,tipoDeEquipoStr,marcaStr,modeloStr,descripcionStr,fechaDeRegistro,imageUrl,sitios,estado);
+        EquipoAdmin equipo = new EquipoAdmin(idEquipo,SKUstr,numeroDeSerieStr ,tipoDeEquipoStr,marcaStr,modeloStr,descripcionStr,fechaDeRegistro,imageUrl,sitios,estado);
 
 
         // Guardar los datos en Firestore

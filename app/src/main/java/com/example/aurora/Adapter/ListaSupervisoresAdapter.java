@@ -131,5 +131,6 @@ public class ListaSupervisoresAdapter
 
     public void setListaSupervisores(ArrayList<Usuario> listaSupervisores) {
         this.listaSupervisores = listaSupervisores;
+        notifyDataSetChanged();
     }
 }

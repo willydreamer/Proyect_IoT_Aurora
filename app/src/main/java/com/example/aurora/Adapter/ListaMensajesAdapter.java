@@ -11,9 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aurora.AdminInformacionSitioActivity;
-import com.example.aurora.Bean.Sitio;
-import com.example.aurora.InformacionSupervisorActivity;
 import com.example.aurora.MensajeriaChatActivity;
 import com.example.aurora.R;
 

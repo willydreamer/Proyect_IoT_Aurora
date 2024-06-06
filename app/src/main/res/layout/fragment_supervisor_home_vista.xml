@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SupervisorHomeFragmentVista"
-    android:background="@drawable/fondosupervisor">
+    android:background="#FFFFFF"
+    tools:context=".SupervisorHomeFragmentVista">
 
     <!-- TODO: Update blank fragment layout -->
-    <View
-        android:id="@+id/vacio333"
-        android:layout_width="282dp"
-        android:layout_height="44dp"
-        android:layout_marginLeft="50sp"
-        android:layout_marginTop="580sp"
-        android:background="@drawable/boton_redondeado"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="match_parent"
+        android:layout_height="733dp"
+        android:layout_marginTop="90sp"
+        android:background="@drawable/boton_redondeado_noblanco"
+        android:text="                                  " />
 
     <View
         android:id="@+id/vacio33"
         android:layout_width="278dp"
         android:layout_height="44dp"
         android:layout_marginLeft="50sp"
-        android:layout_marginTop="480sp"
+        android:layout_marginTop="430sp"
         android:background="@drawable/boton_redondeado"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +34,7 @@
         android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
-        android:layout_marginTop="210sp"
+        android:layout_marginTop="128sp"
         android:text="Navega por tus responsabilidades"
         android:textColor="#4C4C4C"
         android:textSize="25sp" />
@@ -50,8 +45,8 @@
         android:layout_width="278dp"
         android:layout_height="19dp"
         android:layout_marginLeft="50sp"
-        android:layout_marginTop="280sp"
-        android:text="Gestiona los Sitios bajo su cargo"
+        android:layout_marginTop="200sp"
+        android:text="Gestiona los sitios bajo su cargo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.353"
@@ -64,7 +59,7 @@
         android:layout_width="278dp"
         android:layout_height="44dp"
         android:layout_marginLeft="50sp"
-        android:layout_marginTop="395sp"
+        android:layout_marginTop="340sp"
         android:background="@drawable/boton_redondeado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +71,7 @@
         android:layout_width="278dp"
         android:layout_height="44dp"
         android:layout_marginLeft="50sp"
-        android:layout_marginTop="310sp"
+        android:layout_marginTop="230sp"
         android:background="@drawable/boton_redondeado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,19 +83,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
-        android:layout_marginTop="450sp"
-        android:text="Gestiona los Supervisores de la Empresa"
+        android:layout_marginTop="400sp"
+        android:text="Reportar estados de mis equipos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vacio1" />
 
     <TextView
         android:id="@+id/textView18"
-        android:layout_width="wrap_content"
+        android:layout_width="279dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
-        android:layout_marginTop="365sp"
-        android:text="Gestiona Los Equipos de la Empresa"
+        android:layout_marginTop="290sp"
+        android:text="Gestiona los equipos de cada sitio bajo tu cargo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vacio2" />
@@ -110,8 +105,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="492sp"
-        android:text="Lista de Sitios"
+        android:layout_marginTop="442sp"
+        android:text="Reportar estado de Equipos"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/vacio1"
@@ -122,8 +117,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="407dp"
-        android:text="Lista de Supervisores"
+        android:layout_marginTop="352dp"
+        android:text="Lista de Equipos"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/vacio2"
@@ -134,31 +129,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="323sp"
-        android:text="Lista de Equipos"
+        android:layout_marginTop="243sp"
+        android:text="Lista de Sitios"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/vacio333"
         app:layout_constraintTop_toTopOf="@+id/vacio333" />
 
     <ImageButton
-        android:id="@+id/flecha4"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="585dp"
-        android:background="@drawable/boton_redondeado"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="@+id/vacio333"
-        app:layout_constraintTop_toTopOf="@+id/vacio333"
-        app:srcCompat="@mipmap/flechaderecha" />
-
-    <ImageButton
         android:id="@+id/flecha3"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="290dp"
-        android:layout_marginTop="485dp"
+        android:layout_marginTop="433dp"
         android:background="@drawable/boton_redondeado"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="@+id/vacio33"
@@ -171,7 +154,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="290dp"
-        android:layout_marginTop="400sp"
+        android:layout_marginTop="343sp"
         android:background="@drawable/boton_redondeado"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="@+id/vacio2"
@@ -183,7 +166,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginLeft="290sp"
-        android:layout_marginTop="315sp"
+        android:layout_marginTop="234sp"
         android:background="@drawable/boton_redondeado"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="@+id/vacio1"
@@ -195,12 +178,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
-        android:layout_marginTop="540sp"
+        android:layout_marginTop="500sp"
         android:text="Tus últimas acciones"
         android:textColor="#4C4C4C"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vacio333" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="288dp"
+        android:layout_height="144dp"
+        android:layout_marginLeft="50sp"
+        android:layout_marginTop="540sp" />
 
 </FrameLayout>

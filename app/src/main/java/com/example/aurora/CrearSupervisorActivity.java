@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -132,22 +133,50 @@ public class CrearSupervisorActivity extends AppCompatActivity {
 
     private void uploadImageAndSaveUserData() {
         if (imagenUri != null) {
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-            //StorageReference imageReference = storageReference.child("images/" + System.currentTimeMillis() + ".jpg");
-            StorageReference imageReference = storageReference.child("fotosUsuario/*" + System.currentTimeMillis() + ".jpg");
 
-            UploadTask uploadTask = imageReference.putFile(imagenUri);
-            uploadTask.addOnSuccessListener(taskSnapshot -> {
-                imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                    String imageUrl = uri.toString();
-                    //saveUserDataToFirestore(imageUrl);
-                    guardarSupervisor(imageUrl);
-                });
-            }).addOnFailureListener(e -> {
-                Toast.makeText(CrearSupervisorActivity.this, "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            });
+            nombre = findViewById(R.id.editText);
+            apellido = findViewById(R.id.editText1);
+            dni = findViewById(R.id.editText2);
+            correo = findViewById(R.id.editText3);
+            domicilio = findViewById(R.id.editText4);
+            telefono = findViewById(R.id.editText5);
+
+            String idUsuarioSupervisor = generarIdSupervisor();
+            String nombreStr = nombre.getEditableText().toString();
+            String apellidoStr = apellido.getEditableText().toString();
+            String dniStr = dni.getEditableText().toString();
+            String correoStr = correo.getEditableText().toString();
+            String domicilioStr = domicilio.getEditableText().toString();
+            String telefonoStr = telefono.getEditableText().toString();
+
+            if(!nombreStr.isEmpty() && !apellidoStr.isEmpty() && !dniStr.isEmpty() && !correoStr.isEmpty() && !domicilioStr.isEmpty() && !telefonoStr.isEmpty()) {
+                if(dniStr.length()!=8){
+                    Toast.makeText(CrearSupervisorActivity.this, "DNI debe ser de 8 digitos", Toast.LENGTH_LONG).show();
+                }else if(telefonoStr.length()!=9) {
+                    Toast.makeText(CrearSupervisorActivity.this, "Telefono debe ser de 9 digitos", Toast.LENGTH_LONG).show();
+                }else if(!correoValido(correoStr)) {
+                    Toast.makeText(CrearSupervisorActivity.this, "Correo No Valido", Toast.LENGTH_LONG).show();
+                }else{
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                    //StorageReference imageReference = storageReference.child("images/" + System.currentTimeMillis() + ".jpg");
+                    StorageReference imageReference = storageReference.child("fotosUsuario/*" + System.currentTimeMillis() + ".jpg");
+
+                    UploadTask uploadTask = imageReference.putFile(imagenUri);
+                    uploadTask.addOnSuccessListener(taskSnapshot -> {
+                        imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                            String imageUrl = uri.toString();
+                            //saveUserDataToFirestore(imageUrl);
+                            guardarSupervisor(imageUrl,idUsuarioSupervisor,nombreStr,apellidoStr,dniStr,correoStr,domicilioStr,telefonoStr);
+                        });
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(CrearSupervisorActivity.this, "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    });
+                }
+            } else{
+                Toast.makeText(CrearSupervisorActivity.this, "No Debe Haber Campos Vacios", Toast.LENGTH_LONG).show();
+            }
         } else {
-            Toast.makeText(this, "Foto no seleccionada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Foto no seleccionada", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -170,9 +199,10 @@ public class CrearSupervisorActivity extends AppCompatActivity {
 
 
 
-    public void guardarSupervisor(String imageUrl) {
+    public void guardarSupervisor(String imageUrl,String idUsuarioSupervisor,String nombreStr,String apellidoStr,
+                                  String dniStr,String correoStr,String domicilioStr,String telefonoStr) {
 
-        nombre = findViewById(R.id.editText);
+        /*nombre = findViewById(R.id.editText);
         apellido = findViewById(R.id.editText1);
         dni = findViewById(R.id.editText2);
         correo = findViewById(R.id.editText3);
@@ -185,7 +215,7 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         String dniStr = dni.getEditableText().toString();
         String correoStr = correo.getEditableText().toString();
         String domicilioStr = domicilio.getEditableText().toString();
-        String telefonoStr = telefono.getEditableText().toString();
+        String telefonoStr = telefono.getEditableText().toString();*/
         String rol = "supervisor";
         String estado = "activo";
         //ArrayList<Sitio> listaSitios = new ArrayList<>();
@@ -217,30 +247,11 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
         return letrasAdmin+numeroAleatorio;
     }
-}
 
-   /* public void listarArchivosGuardados(){
-        String[] archivosGuardados = fileList();
-
-        for(String archivo: archivosGuardados){
-            Log.d("archivo",archivo);
-        }
+    //basado en gpt
+    private boolean correoValido(String correoStr) {
+        return Patterns.EMAIL_ADDRESS.matcher(correoStr).matches();
     }
-
-    public void leerArchivoObjeto() {
-        String fileName = "listaSupervisores";
-        try (FileInputStream fileInputStream = openFileInput(fileName);
-             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-            ArrayList<Supervisor> arregloSupervisores = (ArrayList<Supervisor>) objectInputStream.readObject();
-            for(Supervisor s: arregloSupervisores ){
-                Log.d("super:",s.getNombre());
-            }
-        } catch (FileNotFoundException | ClassNotFoundException e) {
-            e.printStackTrace();
-            Log.e("super", "Error al leer el supervisor guardado", e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    } */
+}
 
 

@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aurora.Adapter.ListaEquiposAdapter;
-import com.example.aurora.Bean.Equipo;
+import com.example.aurora.Adapter.ListaEquiposAdapterAdmin;
+import com.example.aurora.Bean.EquipoAdmin;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -21,15 +21,15 @@ import java.util.ArrayList;
 
 public class EquiposFragment extends Fragment {
 
-    ArrayList<Equipo> listaRouters;
+    ArrayList<EquipoAdmin> listaRouters;
 
-    ArrayList<Equipo> listaSwitches;
+    ArrayList<EquipoAdmin> listaSwitches;
     RecyclerView recyclerView;
     RecyclerView recyclerView2;
     FirebaseFirestore db;
-    ListaEquiposAdapter adapter;
+    ListaEquiposAdapterAdmin adapter;
 
-    ListaEquiposAdapter adapter2;
+    ListaEquiposAdapterAdmin adapter2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +47,7 @@ public class EquiposFragment extends Fragment {
         listaRouters = new ArrayList<>();
 
         // Configurar el adapter y asociarlo al RecyclerView
-        adapter = new ListaEquiposAdapter();
+        adapter = new ListaEquiposAdapterAdmin();
         adapter.setContext(getContext());
         adapter.setListaEquipos(listaRouters);
         recyclerView.setAdapter(adapter);
@@ -63,7 +63,7 @@ public class EquiposFragment extends Fragment {
         listaSwitches = new ArrayList<>();
 
         // Configurar el adapter y asociarlo al RecyclerView
-        adapter2 = new ListaEquiposAdapter();
+        adapter2 = new ListaEquiposAdapterAdmin();
         adapter2.setContext(getContext());
         adapter2.setListaEquipos(listaSwitches);
         recyclerView2.setAdapter(adapter2);
@@ -86,7 +86,7 @@ public class EquiposFragment extends Fragment {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            Equipo equipo = document.toObject(Equipo.class);
+                            EquipoAdmin equipo = document.toObject(EquipoAdmin.class);
                             if(equipo.getTipoDeEquipo().equals("Router")) {
                                 listaRouters.add(equipo);
                             }
@@ -105,7 +105,7 @@ public class EquiposFragment extends Fragment {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            Equipo equipo = document.toObject(Equipo.class);
+                            EquipoAdmin equipo = document.toObject(EquipoAdmin.class);
                             if(equipo.getTipoDeEquipo().equals("Switch")) {
                                 listaSwitches.add(equipo);
                             }

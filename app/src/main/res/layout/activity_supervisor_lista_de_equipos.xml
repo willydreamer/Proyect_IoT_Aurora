@@ -73,7 +73,7 @@
         app:srcCompat="?attr/homeAsUpIndicator" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/recyclerViewEquipos"
         android:layout_width="310dp"
         android:layout_height="459dp"
         app:layout_constraintBottom_toBottomOf="parent"

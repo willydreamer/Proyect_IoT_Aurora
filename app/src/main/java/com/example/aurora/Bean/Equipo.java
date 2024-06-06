@@ -1,69 +1,34 @@
 package com.example.aurora.Bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class Equipo implements Serializable {
 
-    private String idEquipo;
+    private String claveParaQR;
     private String SKU;
-    private String numeroDeSerie;
-
-    private String tipoDeEquipo;
+    private String numeroSerie;
     private String marca;
-    private String modelo;
     private String descripcion;
-    private Date fechaDeRegistro;
-    private String fotoEquipo;
+    private String fechaRegistro;
+    private String tipoEquipo;
 
-    private ArrayList<String> sitios;
+    private String fotos;
 
-    private String estado;
-
-    public Equipo(){
-
-    }
-
-    public Equipo(String idEquipo, String SKUstr, String numeroDeSerieStr, String tipoDeEquipo, String marcaStr, String modeloStr, String descripcionStr, Date fechaDeRegistro, String imageUrl, ArrayList<String> sitios, String estado){
-        this.idEquipo = idEquipo;
-        this.SKU = SKUstr;
-        this.numeroDeSerie = numeroDeSerieStr;
-        this.tipoDeEquipo = tipoDeEquipo;
-        this.marca = marcaStr;
-        this.modelo = modeloStr;
-        this.descripcion = descripcionStr;
-        this.fechaDeRegistro = fechaDeRegistro;
-        this.fotoEquipo = imageUrl;
-        this.sitios = sitios;
-        this.estado = estado;
-
-    }
-
-   /* public Equipo(String idEquipo, String SKU, String numeroDeSerie, String tipoDeEquipo, String marca, String modelo, String descripcion, Date fechaDeRegistro, String fotoEquipo, ArrayList<String> sitios, String estado) {
-        this.idEquipo = idEquipo;
+    public Equipo(String SKU, String numeroSerie, String marca, String descripcion, String fechaRegistro, String fotos) {
         this.SKU = SKU;
-        this.numeroDeSerie = numeroDeSerie;
-        this.tipoDeEquipo = tipoDeEquipo;
+        this.numeroSerie = numeroSerie;
         this.marca = marca;
-        this.modelo = modelo;
         this.descripcion = descripcion;
-        this.fechaDeRegistro = fechaDeRegistro;
-        this.fotoEquipo = fotoEquipo;
-        this.sitios = sitios;
-        this.estado = estado;
-    }*/
-
-
-
-
-
-    public String getIdEquipo() {
-        return idEquipo;
+        this.fechaRegistro = fechaRegistro;
+        this.fotos = fotos;
     }
 
-    public void setIdEquipo(String idEquipo) {
-        this.idEquipo = idEquipo;
+    public String getClaveParaQR() {
+        return claveParaQR;
+    }
+
+    public void setClaveParaQR(String claveParaQR) {
+        this.claveParaQR = claveParaQR;
     }
 
     public String getSKU() {
@@ -74,12 +39,12 @@ public class Equipo implements Serializable {
         this.SKU = SKU;
     }
 
-    public String getNumeroDeSerie() {
-        return numeroDeSerie;
+    public String getNumeroSerie() {
+        return numeroSerie;
     }
 
-    public void setNumeroDeSerie(String numeroDeSerie) {
-        this.numeroDeSerie = numeroDeSerie;
+    public void setNumeroSerie(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
     }
 
     public String getMarca() {
@@ -90,14 +55,6 @@ public class Equipo implements Serializable {
         this.marca = marca;
     }
 
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -106,43 +63,27 @@ public class Equipo implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getTipoDeEquipo() {
-        return tipoDeEquipo;
+    public String getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setTipoDeEquipo(String tipoDeEquipo) {
-        this.tipoDeEquipo = tipoDeEquipo;
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
-    public Date getFechaDeRegistro() {
-        return fechaDeRegistro;
+    public String getTipoEquipo() {
+        return tipoEquipo;
     }
 
-    public void setFechaDeRegistro(Date fechaDeRegistro) {
-        this.fechaDeRegistro = fechaDeRegistro;
+    public void setTipoEquipo(String tipoEquipo) {
+        this.tipoEquipo = tipoEquipo;
     }
 
-    public ArrayList<String> getSitios() {
-        return sitios;
+    public String getFotos() {
+        return fotos;
     }
 
-    public void setSitios(ArrayList<String> sitios) {
-        this.sitios = sitios;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getFotoEquipo() {
-        return fotoEquipo;
-    }
-
-    public void setFotoEquipo(String fotoEquipo) {
-        this.fotoEquipo = fotoEquipo;
+    public void setFotos(String fotos) {
+        this.fotos = fotos;
     }
 }

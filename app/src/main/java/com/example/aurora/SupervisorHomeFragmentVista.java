@@ -26,14 +26,14 @@ public class SupervisorHomeFragmentVista extends Fragment {
         flecha1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SupervisorListaDeEquipos.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                Intent intent = new Intent(getActivity(), SupervisorListaSitios.class); // Reemplaza "TuActivity" con el nombre de tu Activity
                 startActivity(intent);
             }
         });
         flecha2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SupervisorListaSupervisores.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                Intent intent = new Intent(getActivity(), SupervisorListaDeEquipos.class); // Reemplaza "TuActivity" con el nombre de tu Activity
                 startActivity(intent);
             }
         });

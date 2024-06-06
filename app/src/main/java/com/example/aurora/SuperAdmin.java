@@ -2,7 +2,6 @@ package com.example.aurora;
 
 import android.os.Bundle;
 
-import com.example.aurora.ui.dashboard.DashboardFragment;
 import com.example.aurora.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,21 +27,21 @@ public class SuperAdmin extends AppCompatActivity {
         binding = ActivitySuperAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        replaceFragment(new HomeFragment());
+        replaceFragment(new SuperAdminUsersFragment());
 
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             int menuItemId =  item.getItemId();
 
             if (menuItemId ==  R.id.navigation_home) {
-                replaceFragment(new HomeFragment());
+                replaceFragment(new SuperAdminUsersFragment());
                 return true;
             }
             else if (menuItemId ==  R.id.agregar) {
-                replaceFragment(new NotificationsFragment());
+                replaceFragment(new SuperAdminCrearAdministradorFragment());
                 return true;
             }
             else if (menuItemId ==  R.id.navigation_dashboard) {
-                replaceFragment(new DashboardFragment());
+                replaceFragment(new SuperAdminLogsFragment());
                 return true;
             }
             else if (menuItemId ==  R.id.navigation_notifications) {
@@ -57,7 +56,7 @@ public class SuperAdmin extends AppCompatActivity {
     private  void replaceFragment (Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.containerFrame, fragment);
+        transaction.replace(R.id.container1, fragment);
         transaction.commit();
 
     }

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="130dp"
         android:layout_marginTop="20sp"
-        android:text="Lista de Usuarios"/>
+        android:text="Lista de Usuarios" />
 
     <SearchView
         android:layout_width="330dp"
@@ -33,6 +33,7 @@
         android:background="@drawable/text_background" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleruser"
         android:layout_width="305dp"
         android:layout_height="463dp"
         android:layout_marginLeft="55sp"

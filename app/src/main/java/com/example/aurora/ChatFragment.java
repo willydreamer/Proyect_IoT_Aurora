@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.aurora.Adapter.MessageAdapter;
 import com.example.aurora.Bean.Message;
@@ -24,7 +25,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ChatFragment extends Fragment {
@@ -39,18 +42,18 @@ public class ChatFragment extends Fragment {
     private CollectionReference messagesRef;
 
     private String currentUserId;
-    private String chatId; // ID del chat entre los dos usuarios
-    private String receiverId; // ID del usuario receptor
+    private String user1; // ID del chat entre los dos usuarios
+    private String user2; // ID del usuario receptor
 
     public ChatFragment() {
         // Required empty public constructor
     }
 
-    public static ChatFragment newInstance(String chatId, String receiverId) {
+    public static ChatFragment newInstance(String user1, String user2) {
         ChatFragment fragment = new ChatFragment();
         Bundle args = new Bundle();
-        args.putString("chatId", chatId);
-        args.putString("receiverId", receiverId);
+        args.putString("user1", user1);
+        args.putString("user2", user2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,12 +62,31 @@ public class ChatFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            chatId = getArguments().getString("chatId");
-            receiverId = getArguments().getString("receiverId");
+            user1 = getArguments().getString("user1");
+            user2 = getArguments().getString("user2");
         }
         db = FirebaseFirestore.getInstance();
         currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        messagesRef = db.collection("chats").document(chatId).collection("messages");
+        db.collection("chat")
+                .whereEqualTo("user1", "SUPER111")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            Toast.makeText(getContext(), "Error al cargar mensajes", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
+                                messageList.add(dc.getDocument().toObject(Message.class));
+                                messageAdapter.notifyItemInserted(messageList.size() - 1);
+                                recyclerView.scrollToPosition(messageList.size() - 1);
+                            }
+                        }
+                    }
+                });
+
     }
 
     @Override
@@ -115,7 +137,12 @@ public class ChatFragment extends Fragment {
     private void sendMessage() {
         String messageText = editTextMessage.getText().toString();
         if (!messageText.isEmpty()) {
-            Message message = new Message(currentUserId, receiverId, messageText, System.currentTimeMillis());
+            long timestamp = System.currentTimeMillis();
+            Date date = new Date(timestamp);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = formatter.format(date);
+
+            Message message = new Message(currentUserId, messageList.size(), formattedDate, messageText);
             messagesRef.add(message);
             editTextMessage.setText("");
         }

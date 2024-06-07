@@ -2,6 +2,7 @@ package com.example.aurora.ui.notifications;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,32 +77,37 @@ public class NotificationsFragment extends Fragment {
 
     private void obtenerDatosUsuario() {
         FirebaseUser user = auth.getCurrentUser();
+        String user1 = auth.getUid();
+        Log.d("USARUAIOS",user1);
         if (user != null) {
-            String userId = user.getUid();
-            db.collection("usuarios").document(userId).get()
-                    .addOnSuccessListener(new com.google.android.gms.tasks.OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()) {
-                                Usuario usuario = documentSnapshot.toObject(Usuario.class);
-                                if (usuario != null) {
-                                    nombreEditText.setText(usuario.getNombre());
-                                    apellidoEditText.setText(usuario.getApellido());
-                                    correoEditText.setText(usuario.getCorreo());
-                                    domicilioEditText.setText(usuario.getDomicilio());
-                                    telefonoEditText.setText(usuario.getTelefono());
-                                }
-                            } else {
-                                Toast.makeText(getContext(), "Usuario no encontrado", Toast.LENGTH_SHORT).show();
+            String userId = user.getEmail();
+            Log.d("USUARIO",userId);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String idUsuario = "SUPER111"; // Valor que deseas buscar
+
+            db.collection("usuarios")
+                    .whereEqualTo("idUsuario", idUsuario)
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                            Usuario usuario = documentSnapshot.toObject(Usuario.class);
+                            if (usuario != null) {
+                                nombreEditText.setText(usuario.getNombre());
+                                apellidoEditText.setText(usuario.getApellido());
+                                correoEditText.setText(usuario.getCorreo());
+                                domicilioEditText.setText(usuario.getDomicilio());
+                                telefonoEditText.setText(usuario.getTelefono());
                             }
+                        } else {
+                            Toast.makeText(getContext(), "Usuario no encontrado", Toast.LENGTH_SHORT).show();
                         }
                     })
-                    .addOnFailureListener(new com.google.android.gms.tasks.OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
-                        }
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), "Error al buscar el usuario", Toast.LENGTH_SHORT).show();
+                        Log.e("FirestoreError", "Error al buscar el usuario", e);
                     });
+
         }
     }
 

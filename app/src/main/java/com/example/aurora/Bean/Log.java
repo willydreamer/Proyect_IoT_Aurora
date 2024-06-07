@@ -1,12 +1,17 @@
 package com.example.aurora.Bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Log implements Serializable {
 
     private Integer idLog;
 
     private String fecha;
+
+    private Date timestamp;
+
+    private String idUsuario;
 
     private String actividad;
 
@@ -17,6 +22,25 @@ public class Log implements Serializable {
     private Sitio sitio;
 
 
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Log(){
+
+    }
 
     public Log(Integer idLog, String fecha, String actividad, String description, Usuario usuario, Sitio sitio){
         this.idLog = idLog;

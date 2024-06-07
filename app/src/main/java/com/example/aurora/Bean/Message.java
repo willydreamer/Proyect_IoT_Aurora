@@ -4,35 +4,51 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
 
-    private String senderId;
-    private String receiverId;
-    private String message;
-    private long timestamp;
+    private String user;
+    private int idmessage ;
+    private String timestamp;
+    private String content;
 
     public Message() {
         // Constructor vacío requerido por Firestore
     }
 
-    public Message(String senderId, String receiverId, String message, long timestamp) {
-        this.senderId = senderId;
-        this.receiverId = receiverId;
-        this.message = message;
+    public Message(String user, int idmessage, String timestamp, String  content) {
+        this.user = user;
+        this.idmessage = idmessage;
+        this.timestamp = timestamp;
+        this.content = content;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public int getIdmessage() {
+        return idmessage;
+    }
+
+    public void setIdmessage(int idmessage) {
+        this.idmessage = idmessage;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
-    public String getSenderId() {
-        return senderId;
+    public String getContent() {
+        return content;
     }
 
-    public String getReceiverId() {
-        return receiverId;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

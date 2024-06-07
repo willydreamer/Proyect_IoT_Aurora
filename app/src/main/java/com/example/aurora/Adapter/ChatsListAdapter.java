@@ -55,7 +55,8 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
         }
 
         public void bind(final Chat chat, final OnItemClickListener listener) {
-            textViewChatName.setText(chat.getChatName());
+            textViewChatName.setText(chat.getUser2());
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

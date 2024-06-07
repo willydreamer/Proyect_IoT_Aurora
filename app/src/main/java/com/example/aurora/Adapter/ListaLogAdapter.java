@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aurora.Bean.Log;
 import com.example.aurora.R;
 
+import java.util.Date;
 import java.util.List;
 
 public class ListaLogAdapter extends RecyclerView.Adapter<ListaLogAdapter.LogViewHolder>{
@@ -18,6 +20,11 @@ public class ListaLogAdapter extends RecyclerView.Adapter<ListaLogAdapter.LogVie
     private List<Log> listaLog;
 
     private Context context;
+
+    public ListaLogAdapter(List<Log> listaLog, Context context) {
+        this.listaLog = listaLog;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -28,21 +35,31 @@ public class ListaLogAdapter extends RecyclerView.Adapter<ListaLogAdapter.LogVie
 
     @Override
     public void onBindViewHolder(@NonNull LogViewHolder holder, int position) {
+        Log log = listaLog.get(position);
+        Date hola = log.getTimestamp();
+        String fecha = String.valueOf(hola);
+        holder.textViewFecha.setText(fecha);
+        holder.textViewActividad.setText(log.getActividad());
+        holder.textViewDescripcion.setText(log.getDescription());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listaLog.size();
     }
 
-    public class LogViewHolder extends RecyclerView.ViewHolder{
+    public class LogViewHolder extends RecyclerView.ViewHolder {
 
-        Log log;
+        TextView textViewFecha;
+        TextView textViewActividad;
+        TextView textViewDescripcion;
 
-        public  LogViewHolder(@NonNull View itemView){
+        public LogViewHolder(@NonNull View itemView) {
             super(itemView);
+            textViewFecha = itemView.findViewById(R.id.textView27);
+            textViewActividad = itemView.findViewById(R.id.textView28);
+            textViewDescripcion = itemView.findViewById(R.id.textView29);
         }
-
     }
 }

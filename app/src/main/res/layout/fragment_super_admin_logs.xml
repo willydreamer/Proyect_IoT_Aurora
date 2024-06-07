@@ -34,8 +34,9 @@
         android:background="@drawable/text_background" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="305dp"
-        android:layout_height="463dp"
-        android:layout_marginLeft="55sp"
+        android:id="@+id/logsr"
+        android:layout_width="match_parent"
+        android:layout_height="521dp"
+        android:layout_marginLeft="0sp"
         android:layout_marginTop="210sp" />
 </FrameLayout>

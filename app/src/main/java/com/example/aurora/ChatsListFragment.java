@@ -66,7 +66,7 @@ public class ChatsListFragment extends Fragment {
             @Override
             public void onItemClick(Chat chat) {
                 // Navigate to the ChatFragment
-                ChatFragment chatFragment = ChatFragment.newInstance(chat.getChatId(), chat.getReceiverId());
+                ChatFragment chatFragment = ChatFragment.newInstance(chat.getUser1(), chat.getUser2());
                 getParentFragmentManager().beginTransaction()
                         .replace(R.id.container1, chatFragment)
                         .addToBackStack(null)

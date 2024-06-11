@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Bean.Usuario;
-import com.example.aurora.InformacionSupervisorActivity;
+import com.example.aurora.Supervisor.InformacionSupervisorActivity;
 import com.example.aurora.R;
 import com.squareup.picasso.Picasso;
 

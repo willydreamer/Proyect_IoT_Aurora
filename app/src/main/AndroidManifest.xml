@@ -21,89 +21,86 @@
         android:theme="@style/Theme.Aurora"
         tools:targetApi="31">
         <activity
-            android:name=".SupervisorEstadoEquipoActivity"
+            android:name=".Supervisor.SupervisorEstadoEquipoActivity"
             android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDN6lz5JvEuuKiQiaAP7uR_jCyV4E25jjc" />
         <activity
-            android:name=".InformacionEquipoActivity"
+            android:name=".Admin.InformacionEquipoActivity"
             android:exported="false" />
         <activity
-            android:name=".SuperAdmin"
+            android:name=".Superadmin.SuperAdmin"
             android:exported="false"
             android:label="@string/title_activity_super_admin" />
         <activity
-            android:name=".CambiarContrasenaActivity"
+            android:name=".General.CambiarContrasenaActivity"
             android:exported="false" />
         <activity
-            android:name=".SupervisorListaSupervisores"
+            android:name=".Supervisor.SupervisorListaSupervisores"
             android:exported="false" />
         <activity
-            android:name=".SupervisorListaSitios"
+            android:name=".Supervisor.SupervisorListaSitios"
             android:exported="false" />
         <activity
-            android:name=".SupervisorListaDeEquipos"
+            android:name=".Supervisor.SupervisorListaDeEquipos"
             android:exported="false" />
         <activity
             android:name=".MensajeriaChatActivity"
             android:exported="false"
             android:parentActivityName=".MensajeriaActivity" />
         <activity
-            android:name=".CrearEquipoActivity"
+            android:name=".Admin.CrearEquipoActivity"
             android:exported="false"
-            android:parentActivityName=".HomeFragment" />
+            android:parentActivityName=".Admin.FragmentHome" />
         <activity
             android:name=".MensajeriaActivity"
             android:exported="false"
-            android:parentActivityName=".HomeFragment" />
+            android:parentActivityName=".Admin.FragmentHome" />
         <activity
-            android:name=".AsignarSitioActivity"
+            android:name=".Admin.AsignarSitioActivity"
             android:exported="false"
-            android:parentActivityName=".ListaAsignacionSitiosActivity" />
+            android:parentActivityName=".Admin.ListaAsignacionSitiosActivity" />
         <activity
-            android:name=".AdminInformacionSitioActivity"
+            android:name=".Admin.AdminInformacionSitioActivity"
             android:exported="false"
-            android:parentActivityName=".InformacionSupervisorActivity" />
+            android:parentActivityName=".Supervisor.InformacionSupervisorActivity" />
         <activity
-            android:name=".CrearSitioActivity"
+            android:name=".Admin.CrearSitioActivity"
             android:exported="false" />
         <activity
-            android:name=".Supervisor"
+            android:name=".Supervisor.Supervisor"
             android:exported="false" />
         <activity
-            android:name=".SuperAdminListUsuarios"
+            android:name=".Superadmin.SuperAdminListUsuarios"
             android:exported="false" />
         <activity
-            android:name=".SuperAdminLogEventos"
+            android:name=".Superadmin.SuperAdminLogEventos"
             android:exported="false" />
         <activity
-            android:name=".Administrador"
+            android:name=".Admin.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".General.LoginFragment"
             android:exported="false" />
         <activity
-            android:name=".LoginFragment"
-            android:exported="false" />
-        <activity
-            android:name=".InformacionSupervisorActivity"
+            android:name=".Supervisor.InformacionSupervisorActivity"
             android:exported="false"
-            android:parentActivityName=".ListaSupervisoresActivity" />
+            android:parentActivityName=".Admin.ListaSupervisoresActivity" />
         <activity
-            android:name=".ListaAsignacionSitiosActivity"
+            android:name=".Admin.ListaAsignacionSitiosActivity"
             android:exported="false"
-            android:parentActivityName=".InformacionSupervisorActivity" />
+            android:parentActivityName=".Supervisor.InformacionSupervisorActivity" />
         <activity
-            android:name=".CrearSupervisorActivity"
+            android:name=".Admin.CrearSupervisorActivity"
             android:exported="false"
-            android:parentActivityName=".ListaSupervisoresActivity" />
+            android:parentActivityName=".Admin.ListaSupervisoresActivity" />
         <activity
-            android:name=".ListaSupervisoresActivity"
+            android:name=".Admin.ListaSupervisoresActivity"
             android:exported="false" />
         <activity
-            android:name=".InicioFragment"
+            android:name=".General.InicioFragment"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -112,7 +109,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdminSupervisoresFragment"
+            android:name=".Admin.FragmentSupervisores"
             android:exported="false" />
     </application>
 

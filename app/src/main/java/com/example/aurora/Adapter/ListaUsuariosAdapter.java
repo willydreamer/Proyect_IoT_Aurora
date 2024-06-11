@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
-import com.example.aurora.SuperAdmin;
-import com.example.aurora.SuperAdminEditarAdministradorFragment;
+import com.example.aurora.Superadmin.SuperAdmin;
+import com.example.aurora.Superadmin.SuperAdminEditarAdministradorFragment;
 
 import java.util.List;
 

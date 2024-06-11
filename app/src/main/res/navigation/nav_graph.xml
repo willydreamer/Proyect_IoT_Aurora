@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.aurora.HomeFragment"
+        android:name="com.example.aurora.Admin.FragmentHome"
         android:label="admin_fragment_home"
         tools:layout="@layout/admin_fragment_home" >
         <action
@@ -22,17 +22,17 @@
     </fragment>
     <fragment
         android:id="@+id/adminSitiosFragment"
-        android:name="com.example.aurora.AdminSitiosFragment"
+        android:name="com.example.aurora.Admin.FragmentSitios"
         android:label="admin_fragment_sitios"
         tools:layout="@layout/admin_fragment_sitios" />
     <fragment
         android:id="@+id/adminSupervisoresFragment"
-        android:name="com.example.aurora.AdminSupervisoresFragment"
+        android:name="com.example.aurora.Admin.FragmentSupervisores"
         android:label="admin_fragment_supervisor"
         tools:layout="@layout/admin_fragment_supervisor" />
     <fragment
         android:id="@+id/equiposFragment"
-        android:name="com.example.aurora.EquiposFragment"
+        android:name="com.example.aurora.Admin.FragmentEquipos"
         android:label="admin_fragment_equipos"
         tools:layout="@layout/admin_fragment_equipos" />
 </navigation>

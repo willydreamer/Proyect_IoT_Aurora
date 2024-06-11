@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/color_accent"
     android:background="@drawable/fondosupervisor"
-    tools:context=".InformacionSupervisorActivity">
+    tools:context=".Supervisor.InformacionSupervisorActivity">
 
     <FrameLayout
         android:id="@+id/container"

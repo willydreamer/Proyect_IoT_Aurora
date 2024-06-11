@@ -1,21 +1,14 @@
 package com.example.aurora.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aurora.AdminInformacionSitioActivity;
-import com.example.aurora.AsignarSitioActivity;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
-import com.example.aurora.R;
 
 import java.util.ArrayList;
 

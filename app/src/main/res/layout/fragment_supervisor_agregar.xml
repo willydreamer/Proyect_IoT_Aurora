@@ -4,21 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#292929"
+    android:background="@drawable/fondosupervisor"
     tools:context=".SupervisorAgregarFragment">
 
     <TextView
         android:id="@+id/textView36"
-        android:layout_width="wrap_content"
+        android:layout_width="231dp"
         android:layout_height="wrap_content"
-        android:text="INFOOOOOOOOOOOOOOOOOOOO"
-        android:textColor="@color/white"/>
+        android:layout_marginTop="200sp"
+        android:text="Obtener información de equipo a través de QR"
+        android:layout_marginLeft="75sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/scan_button"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="110sp"
+        android:layout_marginTop="550sp"
+        android:background="@drawable/boton_redondeado_verde"
+        android:text="Escanear QR"
+        app:backgroundTint="@null" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="303dp"
         android:layout_height="wrap_content"
-        android:text="Escanear QR" />
+        android:layout_marginTop="280sp"
+        android:layout_marginLeft="40sp"
+        android:textSize="20sp"
+        android:text="Cada equipo con un identificador único para guardar su información de manera segura y eficiente. Acércate al equipo en particular que desees conocer, da click en el botón en la parte inferior y acercate a su QR para acceder a su información."
+        android:textAlignment="center" />
 
 
 </FrameLayout>

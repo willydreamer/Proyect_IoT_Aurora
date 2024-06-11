@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class EquiposFragment extends Fragment {
 
     ArrayList<EquipoAdmin> listaRouters;
-
     ArrayList<EquipoAdmin> listaSwitches;
     RecyclerView recyclerView;
     RecyclerView recyclerView2;
@@ -69,7 +68,6 @@ public class EquiposFragment extends Fragment {
         recyclerView2.setAdapter(adapter2);
 
         obtenerEquiposSwitchesDeFirestore();
-
 
         ImageButton botonCrear = equiposView.findViewById(R.id.bottonCrear);
         botonCrear.setOnClickListener(v-> {

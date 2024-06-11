@@ -103,7 +103,9 @@ public class AdminSupervisoresFragment extends Fragment {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Usuario supervisor = document.toObject(Usuario.class);
-                            listaSupervisores.add(supervisor);
+                            if(supervisor.getRol().equals("supervisor")) {
+                                listaSupervisores.add(supervisor);
+                            }
                         }
                         adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
                     }

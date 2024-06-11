@@ -40,7 +40,7 @@ public class SupervisorHomeFragmentVista extends Fragment {
         flecha3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SupervisorListaSitios.class); // Reemplaza "TuActivity" con el nombre de tu Activity
+                Intent intent = new Intent(getActivity(), SupervisorEstadoEquipoActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
                 startActivity(intent);
             }
         });

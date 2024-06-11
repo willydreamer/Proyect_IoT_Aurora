@@ -4,9 +4,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.aurora.Bean.Usuario;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,41 +22,24 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String ARG_USUARIO = "usuario";
+    private Usuario usuario;
 
     public SuperAdminEditarAdministradorFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SuperAdminEditarAdministradorFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SuperAdminEditarAdministradorFragment newInstance(String param1, String param2) {
+    public static SuperAdminEditarAdministradorFragment newInstance(Usuario usuario) {
         SuperAdminEditarAdministradorFragment fragment = new SuperAdminEditarAdministradorFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_USUARIO, usuario);
         fragment.setArguments(args);
         return fragment;
     }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            usuario = (Usuario) getArguments().getSerializable(ARG_USUARIO);
         }
     }
 
@@ -59,6 +47,26 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_super_admin_editar_administrador, container, false);
+        View view = inflater.inflate(R.layout.fragment_super_admin_editar_administrador, container, false);
+
+        EditText nombreEditText = view.findViewById(R.id.editTextText);
+        EditText apellidoEditText = view.findViewById(R.id.editTextText3);
+        EditText correoEditText = view.findViewById(R.id.editTextText2);
+        EditText domicilioEditText = view.findViewById(R.id.editTextText4);
+        EditText telefonoEditText = view.findViewById(R.id.editTextText5);
+
+        Log.d("SuperAdmin", "Nombre: " + usuario.getNombre());
+        Log.d("SuperAdmin", "Apellido: " + usuario.getApellido());
+
+        if (usuario != null) {
+
+            nombreEditText.setText(usuario.getNombre());
+            apellidoEditText.setText(usuario.getApellido());
+            correoEditText.setText(usuario.getCorreo());
+            domicilioEditText.setText(usuario.getDomicilio());
+            telefonoEditText.setText(usuario.getTelefono());
+        }
+
+        return view;
     }
 }

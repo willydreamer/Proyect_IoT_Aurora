@@ -9,9 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.aurora.Adapter.ListaUsuariosAdapter;
 import com.example.aurora.Bean.Usuario;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,7 @@ public class SuperAdminUsersFragment extends Fragment {
     private RecyclerView recyclerView;
     private ListaUsuariosAdapter adapter;
     private List<Usuario> listaUsuarios;
+    FirebaseFirestore db;
 
     public SuperAdminUsersFragment() {
         // Required empty public constructor
@@ -65,6 +69,8 @@ public class SuperAdminUsersFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        db = FirebaseFirestore.getInstance(); // I
     }
 
     @Override
@@ -79,13 +85,34 @@ public class SuperAdminUsersFragment extends Fragment {
 
         // Inicializar la lista de usuarios (esto normalmente vendría de una fuente de datos)
         listaUsuarios = new ArrayList<>();
-        listaUsuarios.add(new Usuario("1","Alejandro","Gutierrez","75663999","a20200638@pucp.edu.pe","hola","912817406","administrador","activo",null,"asd"));
+        /*listaUsuarios.add(new Usuario("1","Alejandro","Gutierrez","75663999","a20200638@pucp.edu.pe","hola","912817406","administrador","activo",null,"asd"));
         listaUsuarios.add(new Usuario("2", "ASDA","ANSD","8529674","a65255875@pucp.edu.pe","asdadad","985274163","supervisor","activo",null,"asdnadsk"));
-
+        */
         // Configurar el adaptador
+
+
         adapter = new ListaUsuariosAdapter(listaUsuarios, getContext());
         recyclerView.setAdapter(adapter);
+        obtenerSupervisoresDeFirestore();
+
 
         return view;
+    }
+
+    private void obtenerSupervisoresDeFirestore() {
+        db.collection("usuarios")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            Usuario supervisor = document.toObject(Usuario.class);
+                            listaUsuarios.add(supervisor);
+                        }
+                        adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error al obtener los usuarios", Toast.LENGTH_SHORT).show();
+                });
     }
 }

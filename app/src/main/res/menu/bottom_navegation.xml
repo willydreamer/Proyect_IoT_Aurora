@@ -5,27 +5,27 @@
     <item
         android:id="@+id/home"
         android:title="Home"
-        android:icon="@mipmap/ic_launcher_2_foreground"
+        android:icon="@drawable/home_24px"
 
         />
     <item
         android:id="@+id/sites"
         android:title="Sitios"
-        android:icon="@mipmap/ic_launcher_foreground"
+        android:icon="@drawable/location_on_24px"
         />
     <item
         android:id="@+id/equipos"
         android:title="Equipos"
-        android:icon="@mipmap/ic_servidores2_foreground"
+        android:icon="@drawable/router_24px"
         />
     <item
         android:id="@+id/supervisor"
         android:title="Supervisores"
-        android:icon="@mipmap/ic_launcher_3_foreground"
+        android:icon="@drawable/group_24px"
         />
     <item
         android:id="@+id/configuration"
         android:title="Settings"
-        android:icon="@mipmap/ic_launcher_4_foreground"
+        android:icon="@drawable/settings_24px"
         />
 </menu>

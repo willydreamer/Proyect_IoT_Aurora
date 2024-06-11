@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:background="@drawable/btn_background_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:padding="15dp">
+        android:background="@drawable/btn_background_1"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="10dp">
 
         <ImageView
             android:id="@+id/imagenEquipo2"
@@ -25,8 +30,7 @@
             android:layout_below="@id/imagenEquipo2"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="Cisco ISC -
-                        100 Series"
+            android:text="Cisco ISC - 100 Series"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -35,7 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTituloEquipo2"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="Switch"
             android:textColor="#3C9AC5"
@@ -48,7 +51,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTipoEquipo2"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="ABC - 123456"
             android:textSize="12sp" />
@@ -68,6 +70,7 @@
             android:text="Ver"
             android:textAlignment="center"
             android:textSize="12sp" />
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

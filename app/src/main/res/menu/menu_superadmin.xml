@@ -4,23 +4,23 @@
     <item
         android:id="@+id/home"
         android:title="Log"
-        android:icon="@mipmap/ic_launcher_2_foreground"
+        android:icon="@drawable/home_24px"
         />
 
     <item
         android:id="@+id/agregar"
         android:title="Crear Supervisor"
-        android:icon="@mipmap/ic_launcher_foreground"
+        android:icon="@drawable/location_on_24px"
         />
     <item
         android:id="@+id/supervisor"
         android:title="Usuarios"
-        android:icon="@mipmap/ic_launcher_3_foreground"
+        android:icon="@drawable/group_24px"
         />
     <item
         android:id="@+id/configuration"
         android:title="Settings"
-        android:icon="@mipmap/ic_launcher_4_foreground"
+        android:icon="@drawable/settings_24px"
         />
 
 </menu>

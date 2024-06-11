@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="150dp"
     android:layout_height="wrap_content">
-
     <RelativeLayout
         android:background="@drawable/btn_background_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:padding="15dp">
 
         <ImageView
@@ -34,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTituloEquipo2"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="Switch"
             android:textColor="#3C9AC5"
@@ -47,7 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textTipoEquipo2"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="ABC - 123456"
             android:textSize="12sp" />
@@ -61,11 +61,8 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="center"
             android:layout_marginStart="25dp"
-            android:layout_marginLeft="34dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="25dp"
             android:backgroundTint="#3F51B5"
-            android:gravity="center_vertical"
             android:padding="0dp"
             android:text="Ver"
             android:textAlignment="center"

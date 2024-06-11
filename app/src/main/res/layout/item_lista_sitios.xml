@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/imageTitulo1"
@@ -25,7 +25,7 @@
                 android:layout_height="56dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
+                android:layout_centerVertical="true"
                 android:background="@drawable/circle"
                 android:src="@mipmap/ic_marcador_foreground" />
 
@@ -36,7 +36,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_toEndOf="@id/imageTitulo1"
                 android:text="I.E. Micaela Bastidas"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -46,34 +46,35 @@
                 android:layout_below="@id/textTitle1"
                 android:layout_marginStart="16dp"
                 android:layout_toEndOf="@id/imageTitulo1"
-                android:text="Apurímac, Abancay, Urb La victoria 345" />
+                android:text="Apurímac, Abancay, Urb La victoria 345"
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/textNombre"
                 android:layout_width="wrap_content"
-                android:layout_height="24dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/textSubtitle1"
                 android:layout_marginStart="14dp"
-                android:layout_marginTop="7dp"
                 android:layout_toEndOf="@+id/imageTitulo1"
                 android:background="@drawable/rounded_background"
+                android:paddingVertical="3dp"
                 android:paddingStart="12dp"
-                android:paddingTop="3dp"
                 android:paddingEnd="12dp"
                 android:text="Alejandro Gutierrez"
                 android:textColor="@color/white"
-                android:textSize="11dp" />
+                android:textSize="10dp" />
 
             <ImageButton
                 android:id="@+id/flecha1"
                 android:layout_width="41dp"
-                android:layout_height="50dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="300dp"
-                android:layout_marginTop="15dp"
                 android:background="@drawable/boton_redondeado"
                 android:onClick="irInfoSupervisor"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/flechaderecha" />
+                android:src="@mipmap/flechaderecha"
+                android:layout_centerVertical="true" />
+
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

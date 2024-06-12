@@ -1,4 +1,4 @@
-package com.example.aurora.Supervisor;
+package com.example.aurora.Admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aurora.Adapter.ListaSitiosAdapter;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
-import com.example.aurora.Admin.ListaAsignacionSitiosActivity;
 import com.example.aurora.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -147,9 +145,24 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
             mostrarDialog();
         });
 
+        Button asignarSitio = findViewById(R.id.button9);
+        asignarSitio.setOnClickListener(view->{
+            if(supervisor.getSitios().size()==5){
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setMessage("El Supervisor Solo Puede Tener 5 Sitios Asignados");
+                alertDialog.setPositiveButton("De Acuerdo", (dialogInterface, i) -> {
+                });
+                alertDialog.show();
+            }else{
+            Intent intent = new Intent(this, ListaAsignacionSitiosActivity.class);
+            intent.putExtra("supervisor",supervisor);
+            //iniciar activity
+            startActivity(intent);
+            }
+        });
     }
 
-     public void irAsignarSitio(View view) {
+     /*public void irAsignarSitio(View view) {
 
          Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
          //primero crear el intento
@@ -157,7 +170,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         intent.putExtra("supervisor",supervisor);
         //iniciar activity
         startActivity(intent);
-    }
+    }*/
 
     public void mostrarDialog() {
 

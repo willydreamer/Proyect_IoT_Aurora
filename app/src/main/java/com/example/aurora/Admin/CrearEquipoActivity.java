@@ -169,20 +169,24 @@ public class CrearEquipoActivity extends AppCompatActivity {
             String descripcionStr = descripcion.getEditableText().toString();
 
             if(!tipoDeEquipoStr.isEmpty() && !SKUstr.isEmpty() && !numeroDeSerieStr.isEmpty() && !marcaStr.isEmpty() && !modeloStr.isEmpty() && !descripcionStr.isEmpty() && fechaDeRegistro!=null) {
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                //StorageReference imageReference = storageReference.child("images/" + System.currentTimeMillis() + ".jpg");
-                StorageReference imageReference = storageReference.child("fotosEquipo/" + System.currentTimeMillis() + ".jpg");
+                if(descripcionStr.length()>250) {
+                    Toast.makeText(CrearEquipoActivity.this, "Máximo 250 Caracteres para Descripción", Toast.LENGTH_LONG).show();
+                }else{
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                    //StorageReference imageReference = storageReference.child("images/" + System.currentTimeMillis() + ".jpg");
+                    StorageReference imageReference = storageReference.child("fotosEquipo/" + System.currentTimeMillis() + ".jpg");
 
-                UploadTask uploadTask = imageReference.putFile(imagenUri);
-                uploadTask.addOnSuccessListener(taskSnapshot -> {
-                    imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                        String imageUrl = uri.toString();
-                        //saveUserDataToFirestore(imageUrl);
-                        guardarEquipo(imageUrl,idEquipo,tipoDeEquipoStr,SKUstr,numeroDeSerieStr,marcaStr,modeloStr,descripcionStr);
+                    UploadTask uploadTask = imageReference.putFile(imagenUri);
+                    uploadTask.addOnSuccessListener(taskSnapshot -> {
+                        imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                            String imageUrl = uri.toString();
+                            //saveUserDataToFirestore(imageUrl);
+                            guardarEquipo(imageUrl, idEquipo, tipoDeEquipoStr, SKUstr, numeroDeSerieStr, marcaStr, modeloStr, descripcionStr);
+                        });
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(CrearEquipoActivity.this, "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     });
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(CrearEquipoActivity.this, "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
+                }
             }else{
                 Toast.makeText(this, "No Deben haber Campos vacios", Toast.LENGTH_LONG).show();
             }

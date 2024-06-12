@@ -48,8 +48,8 @@
 
             <ImageView
                 android:id="@+id/imageEquipo"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:src="@drawable/profile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

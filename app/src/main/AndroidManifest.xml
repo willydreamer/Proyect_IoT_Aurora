@@ -21,12 +21,16 @@
         android:theme="@style/Theme.Aurora"
         tools:targetApi="31">
         <activity
+            android:name=".EditarPerfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".Supervisor.SupervisorEstadoEquipoActivity"
             android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDN6lz5JvEuuKiQiaAP7uR_jCyV4E25jjc" />
+
         <activity
             android:name=".Admin.InformacionEquipoActivity"
             android:exported="false" />
@@ -65,7 +69,7 @@
         <activity
             android:name=".Admin.AdminInformacionSitioActivity"
             android:exported="false"
-            android:parentActivityName=".Supervisor.InformacionSupervisorActivity" />
+            android:parentActivityName=".Admin.InformacionSupervisorActivity" />
         <activity
             android:name=".Admin.CrearSitioActivity"
             android:exported="false" />
@@ -85,13 +89,13 @@
             android:name=".General.LoginFragment"
             android:exported="false" />
         <activity
-            android:name=".Supervisor.InformacionSupervisorActivity"
+            android:name=".Admin.InformacionSupervisorActivity"
             android:exported="false"
             android:parentActivityName=".Admin.ListaSupervisoresActivity" />
         <activity
             android:name=".Admin.ListaAsignacionSitiosActivity"
             android:exported="false"
-            android:parentActivityName=".Supervisor.InformacionSupervisorActivity" />
+            android:parentActivityName=".Admin.InformacionSupervisorActivity" />
         <activity
             android:name=".Admin.CrearSupervisorActivity"
             android:exported="false"

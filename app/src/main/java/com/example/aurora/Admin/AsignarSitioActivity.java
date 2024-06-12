@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
-import com.example.aurora.Supervisor.InformacionSupervisorActivity;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivityAsignarSitioBinding;
 import com.google.firebase.firestore.FirebaseFirestore;

@@ -2,12 +2,15 @@ package com.example.aurora.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aurora.Adapter.ListaSupervisoresAdapter;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -32,6 +39,8 @@ public class FragmentSupervisores extends Fragment {
 
     ListaSupervisoresAdapter adapter;
 
+    SearchView buscador;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +49,8 @@ public class FragmentSupervisores extends Fragment {
 
 
         ImageButton crearBtn = view.findViewById(R.id.button19);
+
+        buscador = view.findViewById(R.id.search1);
 
 
         listaSupervisores = new ArrayList<>();
@@ -63,10 +74,40 @@ public class FragmentSupervisores extends Fragment {
         listaSupervisores = new ArrayList<>();
 
         // Configurar el adapter y asociarlo al RecyclerView
-        adapter = new ListaSupervisoresAdapter();
-        adapter.setContext(getContext());
-        adapter.setListaSupervisores(listaSupervisores);
+        adapter = new ListaSupervisoresAdapter(getContext(),listaSupervisores);
+        /*adapter.setContext(getContext());
+        adapter.setListaSupervisores(listaSupervisores);*/
         recyclerView.setAdapter(adapter);
+
+
+        //basado en gpt
+        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                buscarUsuarios(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    obtenerSupervisoresDeFirestore();
+                } else {
+                    buscarUsuarios(newText);
+                }
+                return true;
+            }
+        });
+
+        // Listener para detectar cuándo se limpia el texto del SearchView
+        buscador.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                obtenerSupervisoresDeFirestore();
+                return false;
+            }
+        });
+
 
 
         obtenerSupervisoresDeFirestore();
@@ -108,11 +149,40 @@ public class FragmentSupervisores extends Fragment {
                                 listaSupervisores.add(supervisor);
                             }
                         }
-                        adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        adapter.setListaSupervisores(listaSupervisores);
+                        // Notificar al adapter que los datos han cambiado
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al obtener los supervisores", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error al obtener los supervisores", Toast.LENGTH_LONG).show();
+                });
+    }
+
+    private void buscarUsuarios(String searchText) {
+        db.collection("usuarios")
+                .orderBy("nombre")
+                .orderBy("apellido")
+                .orderBy("dni")
+                .orderBy("estado")
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            ArrayList<Usuario> supervisores = new ArrayList<>();
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Usuario supervisor = document.toObject(Usuario.class);
+                                supervisores.add(supervisor);
+                            }
+                            adapter.setListaSupervisores(supervisores);
+                        }
+                    }
                 });
     }
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
+import com.example.aurora.EditarPerfilActivity;
 import com.example.aurora.General.LoginFragment;
 import com.example.aurora.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +24,9 @@ public class FragmentConfiguration extends Fragment {
 
         // Configurar el botón de cerrar sesión
         AppCompatButton buttonCerrarSesion = view.findViewById(R.id.buttonCerrarSesion);
+
+        AppCompatButton buttonEditarPerfil = view.findViewById(R.id.btnEditarPerfil);
+
         buttonCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,6 +38,17 @@ public class FragmentConfiguration extends Fragment {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        buttonEditarPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Redirigir a Editar Perfil (que es una actividad)
+                Intent intent = new Intent(getActivity(), EditarPerfilActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 

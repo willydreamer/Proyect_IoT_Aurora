@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/color_accent"
     android:background="@drawable/fondosupervisor"
-    tools:context=".Supervisor.InformacionSupervisorActivity">
+    tools:context=".Admin.InformacionSupervisorActivity">
 
     <FrameLayout
         android:id="@+id/container"
@@ -471,7 +471,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="240dp"
                         android:layout_marginTop="23dp"
-                        android:onClick="irAsignarSitio"
                         android:backgroundTint="#009688"
                         android:text="Asignar Sitio"
                         app:layout_constraintEnd_toEndOf="parent" />

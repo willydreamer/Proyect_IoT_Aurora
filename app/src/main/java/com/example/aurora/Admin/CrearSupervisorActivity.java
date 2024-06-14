@@ -203,20 +203,6 @@ public class CrearSupervisorActivity extends AppCompatActivity {
     public void guardarSupervisor(String imageUrl,String idUsuarioSupervisor,String nombreStr,String apellidoStr,
                                   String dniStr,String correoStr,String domicilioStr,String telefonoStr) {
 
-        /*nombre = findViewById(R.id.editText);
-        apellido = findViewById(R.id.editText1);
-        dni = findViewById(R.id.editText2);
-        correo = findViewById(R.id.editText3);
-        domicilio = findViewById(R.id.editText4);
-        telefono = findViewById(R.id.editText5);
-
-        String idUsuarioSupervisor = generarIdSupervisor();
-        String nombreStr = nombre.getEditableText().toString();
-        String apellidoStr = apellido.getEditableText().toString();
-        String dniStr = dni.getEditableText().toString();
-        String correoStr = correo.getEditableText().toString();
-        String domicilioStr = domicilio.getEditableText().toString();
-        String telefonoStr = telefono.getEditableText().toString();*/
         String rol = "supervisor";
         String estado = "activo";
         //ArrayList<Sitio> listaSitios = new ArrayList<>();

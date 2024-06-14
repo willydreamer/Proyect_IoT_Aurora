@@ -3,6 +3,7 @@ package com.example.aurora.Admin;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.aurora.Adapter.ListaFotosEquipoAdapter;
 import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivityInformacionEquipoBinding;
@@ -22,6 +26,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
@@ -32,6 +38,17 @@ public class InformacionEquipoActivity extends AppCompatActivity {
     private EquipoAdmin equipo;
 
     ImageView fotoEquipo;
+
+    private ListaFotosEquipoAdapter adapter;
+
+    private RecyclerView  recyclerViewFotosEquipo;
+
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_PICK = 2;
+
+    private List<Uri> imageUris;
+
+    private List<String> imageUrls;
 
 
     @Override
@@ -55,9 +72,9 @@ public class InformacionEquipoActivity extends AppCompatActivity {
             binding.spinnerTipoEquipo.setSelection(2);
             binding.editDescripcion.setText(equipo.getDescripcion());
 
-            if (equipo.getFotoEquipo() != null && !equipo.getFotoEquipo().isEmpty()) {
+            if (equipo.getFotosEquipo().get(0) != null && !equipo.getFotosEquipo().get(0).isEmpty()) {
                 Picasso.get()
-                        .load(equipo.getFotoEquipo())
+                        .load(equipo.getFotosEquipo().get(0))
                         .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
                         .transform(new CropCircleTransformation())
                         .into(fotoEquipo);
@@ -67,6 +84,12 @@ public class InformacionEquipoActivity extends AppCompatActivity {
                         .transform(new CropCircleTransformation())
                         .into(fotoEquipo);
             }
+
+            recyclerViewFotosEquipo = findViewById(R.id.recyclerViewFotosEquipos);
+            imageUrls = equipo.getFotosEquipo();
+            adapter = new ListaFotosEquipoAdapter(this, imageUrls);
+            recyclerViewFotosEquipo.setLayoutManager((new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)));
+            recyclerViewFotosEquipo.setAdapter(adapter);
 
         }
 

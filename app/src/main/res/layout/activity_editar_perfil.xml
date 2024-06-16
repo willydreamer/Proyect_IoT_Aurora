@@ -42,6 +42,7 @@
             android:textAlignment="center"
             android:textSize="27sp" />
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,10 +55,12 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#009688"
                 android:text="Subir Foto"
-                android:visibility="gone"
                 android:textSize="15sp"
+                android:visibility="gone"
+                android:layout_marginTop="35dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewNamePrincipal"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageUsuario"
@@ -80,13 +83,63 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageUsuario" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <LinearLayout
+                android:id="@+id/llHeader"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="195dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@mipmap/ic_servidores_foreground" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:text="General"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Editar"
+                    android:textColor="#E8B92C"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnGuardar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Guardar"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    android:backgroundTint="@color/color_accent"
+                    />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="530dp"
-            android:layout_marginTop="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="340dp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="16dp">
 
@@ -96,7 +149,7 @@
                 android:padding="16dp">
 
                 <!-- Fila para el encabezado 'General' y el icono de editar -->
-                <LinearLayout
+                <!--<LinearLayout
                     android:id="@+id/llHeader"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -142,7 +195,7 @@
                         android:backgroundTint="@color/color_accent"
                        />
 
-                </LinearLayout>
+                </LinearLayout>  -->
 
                 <!-- Fila para 'Departamento' -->
                 <LinearLayout

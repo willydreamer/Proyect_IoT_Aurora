@@ -209,5 +209,35 @@ public class SubiryGuardarFotos {
 
     }
 
+    //ADICIONAL: CARGAR LA FOTO DEL USUARIO GUARDADO EN OTR0 ACTIVITY:
+    //Basado en InformacionSupervisorActivity
+
+    //En OnCreate():
+
+    //Ejm: supervisor:
+    //obtenemos
+    Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
+
+    //si el usuario tiene foto
+    if (supervisor.getFotoURL() != null && !supervisor.getFotoURL().isEmpty()) {
+            Picasso.get()
+                    .load(supervisor.getFotoURL())
+                    .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
+                    .transform(new CropCircleTransformation())
+                    .into(fotoSupervisor);
+        } else {
+        //si no tiene tiene foto
+            Picasso.get()
+                    .load(R.drawable.perfil_icono) // Imagen por defecto
+                    .transform(new CropCircleTransformation())
+                    .into(fotoSupervisor);
+        }
+
+
      */
 }
+
+
+
+
+

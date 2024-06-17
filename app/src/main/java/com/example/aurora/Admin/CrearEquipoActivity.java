@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,7 +55,9 @@ public class CrearEquipoActivity extends AppCompatActivity {
 
     private List<Uri> imageUris;
     private Button buttonSelectFotos;
-    private Button buttonSubirFotos;
+
+
+    private Button buttonDelete;
 
     private List<String> imageUrls;
 
@@ -92,11 +95,15 @@ public class CrearEquipoActivity extends AppCompatActivity {
         fecha = findViewById(R.id.fechaRegistro);
 
 
+
+
         //botonSubirFoto = findViewById(R.id.buttonSubirFoto);
 
         botonGuardar = findViewById(R.id.buttonGuardar);
 
         botonFecha = findViewById(R.id.botonFecha);
+
+        buttonDelete = findViewById(R.id.buttonBorrar);
 
         imagen = findViewById(R.id.imageView3);
 
@@ -139,6 +146,10 @@ public class CrearEquipoActivity extends AppCompatActivity {
             uploadImagesToFirebase();
         });
 
+        buttonDelete.setOnClickListener(v -> {
+            selectedImagesAdapter.removeSelectedImages();
+        });
+
     }
 
     @Override
@@ -159,8 +170,16 @@ public class CrearEquipoActivity extends AppCompatActivity {
                     imageUris.add(imageUri);
                 }
                 selectedImagesAdapter.notifyDataSetChanged();
+                toggleEditMode(true);
             }
         }
+    }
+
+    private void toggleEditMode(boolean enable) {
+
+        // Mostrar el botón de guardar solo cuando esté en modo edición
+        buttonDelete.setVisibility(enable ? View.VISIBLE : View.GONE);
+
     }
 
     private void uploadImagesToFirebase() {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:backgroundTint="@color/color_accent"
     android:background="@drawable/fondosupervisor"
     tools:context=".Admin.InformacionSupervisorActivity">
@@ -12,7 +12,7 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/fondosupervisor">
 
         <TextView
@@ -83,14 +83,14 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="16dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <FrameLayout
@@ -489,8 +489,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/container4" /> -->
 
-                <SearchView
-                    android:id="@+id/search1"
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search2"
                     android:layout_width="297dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="12dp"
@@ -504,8 +504,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_listasitios"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintTop_toBottomOf="@id/search1"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/search2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="15dp"

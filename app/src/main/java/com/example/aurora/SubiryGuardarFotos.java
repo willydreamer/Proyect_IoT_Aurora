@@ -1,4 +1,6 @@
-package com.example.aurora.Admin;
+package com.example.aurora;
+
+//Importaciones
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,74 +33,61 @@ import java.util.Random;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 
-public class CrearSupervisorActivity extends AppCompatActivity {
 
-    private EditText nombre;
-    private EditText apellido;
-    private EditText dni;
+//basado en "CrearSupervisorActivity" de Admin
+public class SubiryGuardarFotos {
 
-    private EditText correo;
-    private EditText telefono;
-
-    private EditText domicilio;
-
-    private Button botonGuardar;
-
-    FirebaseFirestore db;
-
-
-    ActivityCrearSupervisorBinding binding;
-
+    //atributos para el activity
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_PICK = 2;
     private ImageView imagen;
+
     private Uri imagenUri;
+    private Button botonSubirFoto;
 
-    //String storage_path = "fotosUsuario/*";
+    private Button botonGuardar;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_crear_supervisor);
+    /* en onCreate():
 
-        // Instanciar Firebase
-        db = FirebaseFirestore.getInstance();
+    //Instanciar Firebase_
+    db = FirebaseFirestore.getInstance();
 
-        botonGuardar = findViewById(R.id.buttonGuardar);
+    //obtenemos la imagen
+    imagen = findViewById(R.id.imageView3);
 
-        imagen = findViewById(R.id.imageView3);
 
-        Button botonSubirFoto =  findViewById(R.id.buttonSubirFoto);
+    // obtenemos los botones:
 
-        botonGuardar.setOnClickListener(view->{
+
+    botonSubirFoto =  findViewById(R.id.buttonSubirFoto);
+
+    botonGuardar = findViewById(R.id.buttonGuardar);
+
+
+
+    //Para abrir galería:
+        botonSubirFoto.setOnClickListener(v -> {
+        Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        //todas las imagenes
+        pickPhotoIntent.setType("image/*");
+        startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
+    });
+
+    //para guardar con foto:
+    botonGuardar.setOnClickListener(view->{
             uploadImageAndSaveUserData();
         });
 
-        // Botón para abrir la cámara
-        /*findViewById(R.id.btnCamera).setOnClickListener(v -> {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-        });*/
+    //Fin de OnCreate()
 
 
-        //inicio foto
 
-        // Botón para abrir la galería
-        botonSubirFoto.setOnClickListener(v -> {
-            Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            //todas las imagenes
-            pickPhotoIntent.setType("image/*");
-            startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
-        });
+    //Agregar los siguientes metodos:
 
-    }
 
-    //basado en gpt
+    1)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -117,12 +106,8 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         }
     }
 
-    private Uri getImageUri(Bitmap bitmap) {
-        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
-        return Uri.parse(path);
-    }
 
-
+    2)
     private void setImageUriWithCircularTransformation(Uri uri) {
         Picasso.get()
                 .load(uri)
@@ -131,8 +116,16 @@ public class CrearSupervisorActivity extends AppCompatActivity {
                 .into(imagen);
     }
 
+
+    3)
     private void uploadImageAndSaveUserData() {
+        //se valida si se subió una imagen
         if (imagenUri != null) {
+
+            //Esta parte es mas que nada para
+            validar los atributos del supervisor antes de guardar en bd
+
+
 
             nombre = findViewById(R.id.editText);
             apellido = findViewById(R.id.editText1);
@@ -149,21 +142,31 @@ public class CrearSupervisorActivity extends AppCompatActivity {
             String domicilioStr = domicilio.getEditableText().toString();
             String telefonoStr = telefono.getEditableText().toString();
 
+
+            //1* validacion
             if(!nombreStr.isEmpty() && !apellidoStr.isEmpty() && !dniStr.isEmpty() && !correoStr.isEmpty() && !domicilioStr.isEmpty() && !telefonoStr.isEmpty()) {
+             //2* validacion
                 if(dniStr.length()!=8){
                     Toast.makeText(CrearSupervisorActivity.this, "DNI debe ser de 8 digitos", Toast.LENGTH_LONG).show();
+                //3* validacion
                 }else if(telefonoStr.length()!=9) {
                     Toast.makeText(CrearSupervisorActivity.this, "Telefono debe ser de 9 digitos", Toast.LENGTH_LONG).show();
+                 //4* validacion
                 }else if(!correoValido(correoStr)) {
                     Toast.makeText(CrearSupervisorActivity.this, "Correo No Valido", Toast.LENGTH_LONG).show();
                 }else{
+                    //Subimos la foto en BD
                     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                    StorageReference imageReference = storageReference.child("fotosUsuario/*" + System.currentTimeMillis() + ".jpg");
+                    StorageReference imageReference = storageReference.child("fotosUsuario/" + System.currentTimeMillis() + ".jpg");
+                                                                            ("fotosEquipo/"  + System.currentTimeMillis() + ".jpg");
+                                                                            (si se sube foto para equipo)
 
                     UploadTask uploadTask = imageReference.putFile(imagenUri);
                     uploadTask.addOnSuccessListener(taskSnapshot -> {
                         imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                            String imageUrl = uri.toString();
+                            //Una vez que ya se subio la imagen en BD , obtenemos la URL de la imagen:
+                            --> String imageUrl = uri.toString();
+                            //y guardarmos el objeto en BD.
                             guardarSupervisor(imageUrl,idUsuarioSupervisor,nombreStr,apellidoStr,dniStr,correoStr,domicilioStr,telefonoStr);
                         });
                     }).addOnFailureListener(e -> {
@@ -178,25 +181,8 @@ public class CrearSupervisorActivity extends AppCompatActivity {
         }
     }
 
-    //fin foto
 
-
-    /*private void saveUserDataToFirestore(String userId, String userName, String imageUrl) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Usuario usuario = new Usuario(userId, userName, imageUrl);
-
-        db.collection("usuarios").document(userId)
-                .set(usuario)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(ProfileActivity.this, "User data saved to Firestore", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(ProfileActivity.this, "Failed to save user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-    }*/
-
-
-
+    4)
     public void guardarSupervisor(String imageUrl,String idUsuarioSupervisor,String nombreStr,String apellidoStr,
                                   String dniStr,String correoStr,String domicilioStr,String telefonoStr) {
 
@@ -223,18 +209,5 @@ public class CrearSupervisorActivity extends AppCompatActivity {
 
     }
 
-
-    private String generarIdSupervisor() {
-        String letrasAdmin = "SUPER";
-        Random random = new Random();
-        int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
-        return letrasAdmin+numeroAleatorio;
-    }
-
-    //basado en gpt
-    private boolean correoValido(String correoStr) {
-        return Patterns.EMAIL_ADDRESS.matcher(correoStr).matches();
-    }
+     */
 }
-
-

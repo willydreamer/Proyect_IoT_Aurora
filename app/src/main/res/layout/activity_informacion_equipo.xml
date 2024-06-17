@@ -359,13 +359,39 @@
                         android:src="@mipmap/ic_servidores_foreground" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="15dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
                         android:text="Fotos"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="250dp"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/botonSubir"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Subir"
+                            android:visibility="gone"
+                            android:backgroundTint="#009688"
+                            android:layout_marginLeft="50dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            />
+
+                        <Button
+                            android:id="@+id/botonBorrar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Borrar"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 </LinearLayout>

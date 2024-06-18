@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aurora.AdminInformacionSitioActivity;
-import com.example.aurora.AsignarSitioActivity;
+import com.example.aurora.Admin.AdminInformacionSitioActivity;
+import com.example.aurora.Admin.AsignarSitioActivity;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;

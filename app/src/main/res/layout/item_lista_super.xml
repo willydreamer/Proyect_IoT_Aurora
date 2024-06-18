@@ -8,78 +8,6 @@
     android:layout_height="wrap_content">
 
 
-    <!--<androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
-
-            <ImageView
-                android:id="@+id/imageTitulo1"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/perfil_icono" />
-
-            <TextView
-                android:id="@+id/textTitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@id/imageTitulo1"
-                android:text="Christian Luis Gonzales Fernández"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textSubtitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textTitle1"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@id/imageTitulo1"
-                android:text="DNI:70298682" />
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_below="@+id/textSubtitle1"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="7dp"
-                android:layout_toEndOf="@+id/imageTitulo1"
-                android:background="@drawable/rounded_background"
-                android:paddingStart="12dp"
-                android:paddingTop="3dp"
-                android:paddingEnd="12dp"
-                android:text="Activo"
-                android:textColor="@color/white"
-                android:textSize="11dp" />
-
-            <ImageButton
-                android:id="@+id/flecha1"
-                android:layout_width="41dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="300dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/boton_redondeado"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/flechaderecha" />
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView> -->
-
-
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,28 +18,28 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/imageTitulo1"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="center"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/perfil_icono" />
 
             <TextView
                 android:id="@+id/textTitle1"
                 android:layout_width="190dp"
-                android:layout_height="42dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_toEndOf="@id/imageTitulo1"
                 android:text="Christian Luis Gonzales Fernández"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -120,35 +48,35 @@
                 android:layout_height="18dp"
                 android:layout_below="@id/textTitle1"
                 android:layout_marginStart="16dp"
+                android:textSize="12dp"
                 android:layout_toEndOf="@id/imageTitulo1"
                 android:text="DNI:70298682" />
 
             <TextView
                 android:id="@+id/textEstado"
                 android:layout_width="wrap_content"
-                android:layout_height="24dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/textSubtitle1"
                 android:layout_marginStart="14dp"
-                android:layout_marginTop="7dp"
                 android:layout_toEndOf="@+id/imageTitulo1"
                 android:background="@drawable/rounded_background"
+                android:paddingVertical="3dp"
                 android:paddingStart="12dp"
-                android:paddingTop="1dp"
                 android:paddingEnd="12dp"
                 android:text="Activo"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="10dp" />
 
             <ImageButton
                 android:id="@+id/flecha1"
-                android:layout_width="39dp"
-                android:layout_height="56dp"
+                android:layout_width="41dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="300dp"
-                android:layout_marginTop="25dp"
                 android:background="@drawable/boton_redondeado"
                 android:onClick="irInfoSupervisor"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/flechaderecha" />
+                android:src="@mipmap/flechaderecha"
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

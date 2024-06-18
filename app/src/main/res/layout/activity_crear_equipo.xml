@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondosupervisor"
-    tools:context=".CrearEquipoActivity">
+    tools:context=".Admin.CrearEquipoActivity">
 
     <FrameLayout
         android:id="@+id/container"
@@ -47,6 +47,24 @@
                 android:padding="16dp">
 
                 <!-- Fila para el encabezado 'General' y el icono de editar -->
+                <Button
+                    android:id="@+id/buttonSelectFotos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#009688"
+                    android:text="Seleccionar Fotos"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="@+id/container2"
+                    app:layout_constraintTop_toTopOf="@+id/container2" />
+
+
+                <Button
+                    android:id="@+id/buttonBorrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="Borrar Foto" />
+
                 <LinearLayout
                     android:id="@+id/container2"
                     android:layout_width="match_parent"
@@ -54,23 +72,21 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/llHeader">
 
-                    <ImageView
+                    <!--ImageView
                         android:id="@+id/imageView3"
                         android:layout_width="137dp"
                         android:layout_height="131dp"
                         android:layout_marginLeft="20dp"
-                        app:srcCompat="@drawable/baseline_account_circle_24" />
+                        app:srcCompat="@drawable/baseline_account_circle_24" /> -->
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewSelectedImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="60dp"
+                        android:orientation="horizontal"
+                        />
 
-                    <Button
-                        android:id="@+id/buttonSubirFoto"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="40dp"
-                        android:backgroundTint="#009688"
-                        android:text="Subir Foto"
-                        android:textSize="15sp" />
 
                 </LinearLayout>
 

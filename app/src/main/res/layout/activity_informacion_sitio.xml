@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondosupervisor"
-    tools:context=".AdminInformacionSitioActivity">
+    tools:context=".Admin.AdminInformacionSitioActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

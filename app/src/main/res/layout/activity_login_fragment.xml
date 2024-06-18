@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/mountains2"
     android:theme="@style/Base.Theme.Aurora"
-    tools:context=".LoginFragment">
+    tools:context=".General.LoginFragment">
 
     <ImageView
         android:id="@+id/imageView15"

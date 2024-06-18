@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Bean.Usuario;
-import com.example.aurora.InformacionSupervisorActivity;
+import com.example.aurora.Admin.InformacionSupervisorActivity;
 import com.example.aurora.R;
 import com.squareup.picasso.Picasso;
 
@@ -29,6 +29,11 @@ public class ListaSupervisoresAdapter
     private Context context;
 
     private ArrayList<Usuario> listaSupervisores;
+
+    public ListaSupervisoresAdapter(Context context, ArrayList<Usuario> supervisores) {
+        this.context = context;
+        this.listaSupervisores = supervisores;
+    }
 
     /*public ListaSupervisoresAdapter(ArrayList<String> listSupervisores){
         this.listaSupervisores= listSupervisores;
@@ -76,10 +81,9 @@ public class ListaSupervisoresAdapter
         if(s.getEstado()!=null){
             if(s.getEstado().equals("activo")){
                 estado.setText("Activo");
-            }else{
+            }else if(s.getEstado().equals("inactivo")){
                 estado.setText("Inactivo");
                 estado.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F44336")));
-
             }
         }
         //inicio foto

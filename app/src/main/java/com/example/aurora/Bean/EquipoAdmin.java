@@ -3,6 +3,7 @@ package com.example.aurora.Bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class EquipoAdmin implements Serializable {
 
@@ -15,17 +16,19 @@ public class EquipoAdmin implements Serializable {
     private String modelo;
     private String descripcion;
     private Date fechaDeRegistro;
-    private String fotoEquipo;
+    //private String fotoEquipo;
+
+    private List<String> fotosEquipo;
 
     private ArrayList<String> sitios;
 
     private String estado;
 
-    public EquipoAdmin(){
+    public EquipoAdmin() {
 
     }
 
-    public EquipoAdmin(String idEquipo, String SKUstr, String numeroDeSerieStr, String tipoDeEquipo, String marcaStr, String modeloStr, String descripcionStr, Date fechaDeRegistro, String imageUrl, ArrayList<String> sitios, String estado){
+    public EquipoAdmin(String idEquipo, String SKUstr, String numeroDeSerieStr, String tipoDeEquipo, String marcaStr, String modeloStr, String descripcionStr, Date fechaDeRegistro, ArrayList<String> sitios, String estado, List<String> fotoEquipos) {
         this.idEquipo = idEquipo;
         this.SKU = SKUstr;
         this.numeroDeSerie = numeroDeSerieStr;
@@ -34,9 +37,10 @@ public class EquipoAdmin implements Serializable {
         this.modelo = modeloStr;
         this.descripcion = descripcionStr;
         this.fechaDeRegistro = fechaDeRegistro;
-        this.fotoEquipo = imageUrl;
+        //this.fotoEquipo = fotoEquipo;
         this.sitios = sitios;
         this.estado = estado;
+        this.fotosEquipo = fotoEquipos;
 
     }
 
@@ -53,9 +57,6 @@ public class EquipoAdmin implements Serializable {
         this.sitios = sitios;
         this.estado = estado;
     }*/
-
-
-
 
 
     public String getIdEquipo() {
@@ -138,11 +139,13 @@ public class EquipoAdmin implements Serializable {
         this.estado = estado;
     }
 
-    public String getFotoEquipo() {
-        return fotoEquipo;
+    public List<String> getFotosEquipo() {
+        return fotosEquipo;
     }
 
-    public void setFotoEquipo(String fotoEquipo) {
-        this.fotoEquipo = fotoEquipo;
+    public void setFotosEquipo(List<String> fotosEquipo) {
+        this.fotosEquipo = fotosEquipo;
     }
+
+
 }

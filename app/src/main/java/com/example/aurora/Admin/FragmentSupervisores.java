@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -161,9 +161,6 @@ public class FragmentSupervisores extends Fragment {
     private void buscarUsuarios(String searchText) {
         db.collection("usuarios")
                 .orderBy("nombre")
-                .orderBy("apellido")
-                .orderBy("dni")
-                .orderBy("estado")
                 .startAt(searchText)
                 .endAt(searchText + "\uf8ff")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {

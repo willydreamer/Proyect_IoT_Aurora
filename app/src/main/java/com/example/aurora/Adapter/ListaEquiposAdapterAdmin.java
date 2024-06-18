@@ -70,9 +70,10 @@ public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposA
         TextView numeroDeSerie = holder.itemView.findViewById(R.id.textNumeroSerie2);
         numeroDeSerie.setText(e.getNumeroDeSerie());
 
-        if (e.getFotoEquipo() != null && !e.getFotoEquipo().isEmpty()) {
+
+        if (e.getFotosEquipo().get(0) != null && !e.getFotosEquipo().get(0).isEmpty()) {
             Picasso.get()
-                    .load(e.getFotoEquipo())
+                    .load(e.getFotosEquipo().get(0))
                     .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
                     .transform(new CropCircleTransformation())
                     .into(holder.fotoEquipo);

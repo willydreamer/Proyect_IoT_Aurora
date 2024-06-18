@@ -359,7 +359,7 @@
                         android:src="@mipmap/ic_servidores_foreground" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="15dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
@@ -367,10 +367,45 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="250dp"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/botonSubir"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Subir"
+                            android:visibility="gone"
+                            android:backgroundTint="#009688"
+                            android:layout_marginLeft="50dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            />
+
+                        <Button
+                            android:id="@+id/botonBorrar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Borrar"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 </LinearLayout>
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewFotosEquipos"
+                    android:layout_width="375dp"
+                    android:layout_height="204dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/llHeader3"
+                    />
+
+                <!--<LinearLayout
                     android:id="@+id/llEquipos"
                     android:layout_width="375dp"
                     android:layout_height="204dp"
@@ -564,18 +599,19 @@
                                 </RelativeLayout>
                             </androidx.cardview.widget.CardView>
 
-                            <!-- Fin del bloque repetido -->
+
 
                         </LinearLayout>
                     </HorizontalScrollView>
 
-                </LinearLayout>
+                </LinearLayout> -->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    app:layout_constraintTop_toBottomOf="@+id/llEquipos"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerViewFotosEquipos"
+                    android:layout_marginTop="10dp"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="933dp">
 

@@ -1,6 +1,11 @@
 package com.example.aurora.Superadmin;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,13 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.aurora.Adapter.ListaLogAdapter;
 import com.example.aurora.Bean.Log;
+import com.example.aurora.General.LoginFragment;
 import com.example.aurora.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -100,6 +103,18 @@ public class SuperAdminLogsFragment extends Fragment {
         logList = new ArrayList<>();
         adapter = new ListaLogAdapter(logList, getContext());
         recyclerView.setAdapter(adapter);
+
+        Button cerrar = view.findViewById(R.id.button15);
+        cerrar.setOnClickListener(v->{
+            // Cerrar sesión
+            FirebaseAuth.getInstance().signOut();
+
+            // Redirigir a LoginFragment (que es una actividad)
+            Intent intent = new Intent(getActivity(), LoginFragment.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            getActivity().finish();
+        });
 
         logsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override

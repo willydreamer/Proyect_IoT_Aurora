@@ -66,3 +66,6 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
         }
     }
 }
+
+
+

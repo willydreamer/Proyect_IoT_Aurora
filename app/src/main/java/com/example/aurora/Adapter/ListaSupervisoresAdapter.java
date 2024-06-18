@@ -81,10 +81,9 @@ public class ListaSupervisoresAdapter
         if(s.getEstado()!=null){
             if(s.getEstado().equals("activo")){
                 estado.setText("Activo");
-            }else{
+            }else if(s.getEstado().equals("inactivo")){
                 estado.setText("Inactivo");
                 estado.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F44336")));
-
             }
         }
         //inicio foto

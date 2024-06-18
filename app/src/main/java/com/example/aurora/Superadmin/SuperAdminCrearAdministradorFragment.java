@@ -1,9 +1,16 @@
 package com.example.aurora.Superadmin;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,13 +18,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.Random;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +57,13 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
     private Button buttonGuardar;
 
     private FirebaseFirestore db;
+
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_PICK = 2;
+    private ImageView imagen;
+
+    private Uri imagenUri;
+    private Button botonSubirFoto;
 
     public SuperAdminCrearAdministradorFragment() {
         // Required empty public constructor
@@ -89,8 +110,20 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
         editTextDomicilio = view.findViewById(R.id.editTextText4);
         editTextTelefono = view.findViewById(R.id.editTextText5);
         buttonGuardar = view.findViewById(R.id.button8);
+        //obtenemos la imagen
+        imagen = view.findViewById(R.id.fotoUsuario);
+        //obtener boton subir
+        botonSubirFoto =  view.findViewById(R.id.button12);
 
         buttonGuardar.setOnClickListener(v -> guardarAdministrador());
+
+        //Para abrir galería:
+        botonSubirFoto.setOnClickListener(v -> {
+            Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            //todas las imagenes
+            pickPhotoIntent.setType("image/*");
+            startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
+        });
 
         return view;
     }
@@ -102,6 +135,7 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
         String domicilio = editTextDomicilio.getText().toString().trim();
         String telefono = editTextTelefono.getText().toString().trim();
 
+
         if (TextUtils.isEmpty(nombre) || TextUtils.isEmpty(apellido) || TextUtils.isEmpty(correo) ||
                 TextUtils.isEmpty(domicilio) || TextUtils.isEmpty(telefono)) {
             Toast.makeText(getContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
@@ -110,18 +144,39 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
 
         String idadmin = generarIdAdmin();
 
-        Usuario nuevoAdministrador = new Usuario(idadmin, nombre, apellido, null, correo, domicilio, telefono, "administrador", "activo", null, null);
+        //si no hay foto vacia
+        if(imagenUri!=null) {
 
-        db.collection("usuarios")
-                .add(nuevoAdministrador)
-                .addOnSuccessListener(documentReference -> {
-                    Log.d("msg-test2", "Administrador guardado exitosamente");
-                    Toast.makeText(getContext(), "Administrador creado exitosamente", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("msg-test3", "Error al guardar el administrador", e);
-                    Toast.makeText(getContext(), "Error al crear el administrador", Toast.LENGTH_SHORT).show();
+            //Subimos la foto en BD
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            StorageReference imageReference = storageReference.child("fotosUsuario/" + System.currentTimeMillis() + ".jpg");
+
+            UploadTask uploadTask = imageReference.putFile(imagenUri);
+            uploadTask.addOnSuccessListener(taskSnapshot -> {
+                imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                    //Una vez que ya se subio la imagen en BD , obtenemos la URL de la imagen:
+                    String imageUrl = uri.toString();
+
+                    //y la seteamos para el nuevo usuario
+                    Usuario nuevoAdministrador = new Usuario(idadmin, nombre, apellido, null, correo, domicilio, telefono, "administrador", "activo", null, imageUrl);
+                    db.collection("usuarios")
+                            .add(nuevoAdministrador)
+                            .addOnSuccessListener(documentReference -> {
+                                Log.d("msg-test2", "Administrador guardado exitosamente");
+                                Toast.makeText(getContext(), "Administrador creado exitosamente", Toast.LENGTH_SHORT).show();
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.e("msg-test3", "Error al guardar el administrador", e);
+                                Toast.makeText(getContext(), "Error al crear el administrador", Toast.LENGTH_SHORT).show();
+                            });
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
+            });
+        }else{
+            //si no hay foto, mostrar toast make
+            Toast.makeText(getContext(), "Foto no seleccionada", Toast.LENGTH_LONG).show();
+        }
     }
 
     private String generarIdAdmin() {
@@ -130,4 +185,33 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
         int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
         return letrasAdmin+numeroAleatorio;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                imagen.setImageBitmap(imageBitmap);
+                //imagenUri = getImageUri(imageBitmap);
+                setImageUriWithCircularTransformation(imagenUri);
+            } else if (requestCode == REQUEST_IMAGE_PICK && data != null) {
+                imagenUri = data.getData();
+                imagen.setImageURI(imagenUri);
+                setImageUriWithCircularTransformation(imagenUri);
+            }
+        }
+    }
+
+    private void setImageUriWithCircularTransformation(Uri uri) {
+        Picasso.get()
+                .load(uri)
+                .placeholder(R.drawable.baseline_account_circle_24) // Reemplaza con tu imagen por defecto
+                .transform(new CropCircleTransformation())
+                .into(imagen);
+    }
+
+
+
 }

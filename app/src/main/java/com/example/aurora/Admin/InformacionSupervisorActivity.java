@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -13,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,8 +25,12 @@ import com.example.aurora.Adapter.ListaSitiosAdapter;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -51,6 +58,10 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
     ImageView fotoSupervisor;
 
+    SearchView buscador;
+
+    Usuario supervisor;
+
 
 
     @Override
@@ -59,7 +70,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_informacion_supervisor);
 
-        Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
+        supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
 
 
         nombre = findViewById(R.id.editText);
@@ -69,6 +80,9 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         domicilio = findViewById(R.id.editText4);
         telefono = findViewById(R.id.editText5);
         fotoSupervisor = findViewById(R.id.imageView3);
+
+
+        buscador = findViewById(R.id.search2);
 
 
         String nombreStr = supervisor.getNombre();
@@ -124,6 +138,35 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         adapter.setListaSitios(listaSitios);
         recyclerView.setAdapter(adapter);
 
+        //basado en gpt
+        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                buscarSitios(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    obtenerSitiosDeFirestore();
+                } else {
+                    buscarSitios(newText);
+                }
+                return true;
+            }
+        });
+
+        // Listener para detectar cuándo se limpia el texto del SearchView
+
+        buscador.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                obtenerSitiosDeFirestore();
+                return false;
+            }
+        });
+
         obtenerSitiosDeFirestore();
 
 
@@ -162,15 +205,36 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         });
     }
 
-     /*public void irAsignarSitio(View view) {
+    private void buscarSitios(String searchText) {
+        db.collection("sitios")
+                .orderBy("departamento")
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
+                        }
 
-         Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
-         //primero crear el intento
-        Intent intent = new Intent(this, ListaAsignacionSitiosActivity.class);
-        intent.putExtra("supervisor",supervisor);
-        //iniciar activity
-        startActivity(intent);
-    }*/
+                        if (snapshots != null) {
+                            ArrayList<Sitio> sitios = new ArrayList<>();
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Sitio sitio = document.toObject(Sitio.class);
+                                if(sitio.getEncargado().equals(supervisor.getIdUsuario())){
+                                    Log.d("sitio",sitio.getIdSitio());
+                                    sitios.add(sitio);
+                                }
+                            }
+                            adapter.setListaSitios(sitios);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+    }
+
+
 
     public void mostrarDialog() {
 
@@ -234,8 +298,6 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
     private void obtenerSitiosDeFirestore() {
 
-        Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
-
         db.collection("sitios")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -244,6 +306,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
                             Sitio sitio = document.toObject(Sitio.class);
                             //if(sitio.getSupervisor() == null || sitio.getSupervisor().size() == 1){
                             if(sitio.getEncargado().equals(supervisor.getIdUsuario())){
+                                Log.d("sitio",sitio.getIdSitio());
                                 listaSitios.add(sitio);
                             }
                             //listaSitios.add(sitio);

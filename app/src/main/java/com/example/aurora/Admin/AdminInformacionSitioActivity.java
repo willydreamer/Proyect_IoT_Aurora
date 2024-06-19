@@ -50,23 +50,24 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
             binding.editDistrito.setText(sitio.getDistrito());
             binding.editLatitud.setText(sitio.getLatitud());
             binding.editLongitud.setText(sitio.getLongitud());
-            binding.spinnerTipoZona.setSelection(2);
-            binding.spinnerOperadora.setSelection(1);
             Log.d("supervisor-uu", "onCreate: " + sitio.getEncargado());
 
+            setupSpinner(binding.spinnerTipoZona, R.array.tipo_zona_options);
+            setupSpinner(binding.spinnerOperadora, R.array.operadora_options);
+
+
+            binding.spinnerTipoZona.setSelection(getIndexFromArray(R.array.tipo_zona_options, sitio.getTipoDeZona()));
+            binding.spinnerOperadora.setSelection(getIndexFromArray(R.array.operadora_options, sitio.getOperadora()));
 
             if (sitio.getEncargado() != null && !sitio.getEncargado().isEmpty()) {
                 // Hay un encargado asignado, mostrar la información del encargado
                 mostrarInformacionEncargado(sitio.getEncargado());
             } else {
-                binding.alertSinAsignar.setVisibility(View.VISIBLE);
-                // No hay un encargado asignado, cargar la lista de supervisores disponibles
-                cargarSupervisoresDisponibles();
+                binding.elegirSupervisor.setVisibility(View.VISIBLE);
+                binding.elegirSupervisor.setOnClickListener(v -> cargarSupervisoresDisponibles());
+                binding.cardViewResponsable.setVisibility(View.GONE);
             }
         }
-
-        setupSpinner(binding.spinnerTipoZona, R.array.tipo_zona_options);
-        setupSpinner(binding.spinnerOperadora, R.array.operadora_options);
 
         binding.btnEditar.setOnClickListener(v -> toggleEditMode(true));
         binding.btnGuardar.setOnClickListener(v -> {
@@ -125,9 +126,8 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                                             Toast.makeText(AdminInformacionSitioActivity.this, "Encargado desasignado con éxito", Toast.LENGTH_SHORT).show();
                                             // Ocultar el CardView del encargado y mostrar el Spinner
                                             binding.cardViewResponsable.setVisibility(View.GONE);
-                                            binding.spinnerSupervisores.setVisibility(View.VISIBLE);
-                                            binding.alertSinAsignar.setVisibility(View.VISIBLE);
-                                            cargarSupervisoresDisponibles(); // Volver a cargar los supervisores disponibles
+                                            binding.elegirSupervisor.setVisibility(View.VISIBLE);
+                                            isSpinnerInitial = true;
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -149,6 +149,16 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
         });
 
     }
+    // Método para obtener el índice del valor en el array
+    private int getIndexFromArray(int arrayResId, String value) {
+        String[] array = getResources().getStringArray(arrayResId);
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(value)) {
+                return i;
+            }
+        }
+        return 0;
+    }
 
     private void mostrarInformacionEncargado(String encargadoId) {
         db = FirebaseFirestore.getInstance();
@@ -167,6 +177,8 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private boolean isSpinnerInitial = true;
 
     private void cargarSupervisoresDisponibles() {
         db = FirebaseFirestore.getInstance();
@@ -194,8 +206,11 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                         binding.spinnerSupervisores.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                                String selectedSupervisorId = supervisoresIds.get(position); // Obtener el ID del supervisor seleccionado
-                                mostrarConfirmacionAsignacionSupervisor(selectedSupervisorId);
+                                if (!isSpinnerInitial) {
+                                    String selectedSupervisorId = supervisoresIds.get(position); // Obtener el ID del supervisor seleccionado
+                                    mostrarConfirmacionAsignacionSupervisor(selectedSupervisorId);
+                                }
+                                isSpinnerInitial = false; // Cambiar el estado después de la primera vez
                             }
 
                             @Override
@@ -209,6 +224,7 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                 });
     }
 
+
     private void setupSpinner(Spinner spinner, int arrayId) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 arrayId, android.R.layout.simple_spinner_item);
@@ -221,8 +237,8 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
         binding.editDepartamento.setEnabled(enable);
         binding.editProvincia.setEnabled(enable);
         binding.editDistrito.setEnabled(enable);
-        binding.editLatitud.setEnabled(enable);
-        binding.editLongitud.setEnabled(enable);
+        //binding.editLatitud.setEnabled(enable);
+        //binding.editLongitud.setEnabled(enable);
         binding.spinnerTipoZona.setEnabled(enable);
         binding.spinnerOperadora.setEnabled(enable);
 
@@ -269,7 +285,6 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                 });
     }
 
-
     private void mostrarConfirmacionAsignacionSupervisor(String selectedSupervisorId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Está seguro que quiere designar a " + selectedSupervisorId + " como supervisor de este sitio?")
@@ -298,9 +313,8 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         // Mostrar el cardView del supervisor asignado
                         binding.cardViewResponsable.setVisibility(View.VISIBLE);
-                        binding.alertSinAsignar.setVisibility(View.GONE);
+                        binding.elegirSupervisor.setVisibility(View.GONE);
                         Toast.makeText(AdminInformacionSitioActivity.this, "Supervisor asignado con éxito", Toast.LENGTH_SHORT).show();
-
                         mostrarInformacionEncargado(selectedSupervisorId);
                     }
                 })

@@ -182,7 +182,7 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginStart="8dp"
-                        android:src="@mipmap/ic_servidores_foreground" />
+                        android:src="@drawable/bolt_24px" />
 
                     <TextView
                         android:layout_width="0dp"

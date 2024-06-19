@@ -60,7 +60,7 @@
                 android:paddingVertical="3dp"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:text="Alejandro Gutierrez"
+                android:text=" "
                 android:textColor="@color/white"
                 android:textSize="10dp" />
 

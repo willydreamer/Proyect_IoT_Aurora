@@ -152,7 +152,7 @@ public class ListaSitiosAdapter
             nombreEncargado.setText("Sin asignar");
             nombreEncargado.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.rounded_background_red));
         } else {
-            nombreEncargado.setText("Sin asignar");
+            //nombreEncargado.setText("Sin asignar");
             db.collection("usuarios")
                     .document(s.getEncargado())
                     .get()
@@ -173,7 +173,7 @@ public class ListaSitiosAdapter
         ImageButton flecha1 = holder.itemView.findViewById(R.id.flecha1);
         flecha1.setOnClickListener(view -> {
             if(s.getEncargado() == null || s.getEncargado().isEmpty()){
-                Intent intent = new Intent(context, AsignarSitioActivity.class);
+                Intent intent = new Intent(context, AdminInformacionSitioActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("sitio", s);
                 intent.putExtra("supervisor", getSupervisor());

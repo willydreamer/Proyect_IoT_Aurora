@@ -17,6 +17,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,12 +74,12 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
 
 
-        nombre = findViewById(R.id.editText);
-        apellido = findViewById(R.id.editText1);
-        dni = findViewById(R.id.editText2);
-        correo = findViewById(R.id.editText3);
-        domicilio = findViewById(R.id.editText4);
-        telefono = findViewById(R.id.editText5);
+        nombre = findViewById(R.id.nombre);
+        apellido = findViewById(R.id.apellido);
+        dni = findViewById(R.id.dni);
+        correo = findViewById(R.id.correo);
+        domicilio = findViewById(R.id.domicilio);
+        telefono = findViewById(R.id.telefono);
         fotoSupervisor = findViewById(R.id.imageView3);
 
 
@@ -188,7 +189,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
             mostrarDialog();
         });
 
-        Button asignarSitio = findViewById(R.id.button9);
+        AppCompatImageButton asignarSitio = findViewById(R.id.button9);
         asignarSitio.setOnClickListener(view->{
             if(supervisor.getSitios().size()==5){
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);

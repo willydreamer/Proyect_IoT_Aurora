@@ -70,11 +70,9 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="300dp"
                 android:background="@drawable/boton_redondeado"
-                android:onClick="irInfoSupervisor"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/flechaderecha"
+                android:src="@drawable/arrow_forward_ios_24px"
                 android:layout_centerVertical="true" />
-
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

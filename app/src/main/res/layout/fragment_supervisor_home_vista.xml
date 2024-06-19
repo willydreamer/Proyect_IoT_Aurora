@@ -11,10 +11,10 @@
     <TextView
         android:id="@+id/textView35"
         android:layout_width="match_parent"
-        android:layout_height="733dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="90sp"
         android:background="@drawable/boton_redondeado_noblanco"
-        android:text="                                  " />
+        android:text="" />
 
     <View
         android:id="@+id/vacio33"

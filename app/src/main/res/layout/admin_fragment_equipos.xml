@@ -8,36 +8,49 @@
     android:background="@drawable/fondosupervisor"
     tools:context=".Admin.FragmentEquipos" >
 
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/color_accent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="4dp"
+        android:padding="5dp">
 
-<TextView
-    android:id="@+id/text1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:text="Equipos"
-    android:textSize="16dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.043"></TextView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:src="@drawable/logotext2"
+                app:tint="@android:color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-<ImageButton
-    android:id="@+id/bottonCrear"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginEnd="24dp"
-    android:backgroundTint="@color/white"
-    android:src="@drawable/splitscreen_add_24px"
-    android:background="@drawable/btn_background_1"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="1.0"
-    app:layout_constraintStart_toEndOf="@+id/text1"
-    app:layout_constraintTop_toTopOf="parent">
-</ImageButton>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
 
-<TextView
+
+    <ImageButton
+        android:id="@+id/bottonCrear"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/btn_background_1"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/splitscreen_add_24px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageButton>
+
+    <TextView
     android:id="@+id/text2"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

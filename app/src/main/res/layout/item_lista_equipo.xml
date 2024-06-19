@@ -2,21 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/ingreso_datos2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="329dp"
-        android:layout_height="88dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
-            android:layout_width="329dp"
-            android:layout_height="88dp"
-            android:background="@drawable/boton_redondeado"
-            android:backgroundTint="#FAF7F7">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/textView28"
@@ -45,17 +46,17 @@
 
             <ImageView
                 android:id="@+id/imageView13"
-                android:layout_width="37dp"
-                android:layout_height="34dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="272dp"
-                android:layout_marginTop="26dp"
-                app:srcCompat="@drawable/flechaderecha" />
+                android:layout_width="41dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="300dp"
+                android:background="@drawable/boton_redondeado"
+                android:scaleType="fitCenter"
+                android:src="@drawable/arrow_forward_ios_24px"
+                android:layout_centerVertical="true"/>
 
             <Button
                 android:id="@+id/button14"
-                android:layout_width="105dp"
+                android:layout_width="70dp"
                 android:layout_height="24dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -69,11 +70,11 @@
 
             <Button
                 android:id="@+id/button143"
-                android:layout_width="105dp"
+                android:layout_width="70dp"
                 android:layout_height="24dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="130dp"
+                android:layout_marginStart="105dp"
                 android:layout_marginTop="35dp"
                 android:background="@drawable/boton_redondeado_verde_claro"
                 android:padding="1sp"

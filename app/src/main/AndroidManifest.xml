@@ -21,6 +21,9 @@
         android:theme="@style/Theme.Aurora"
         tools:targetApi="31">
         <activity
+            android:name=".Supervisor.SupervisorInfoSitio"
+            android:exported="false" />
+        <activity
             android:name=".Supervisor.SupervisorInfoEquiposActivity"
             android:exported="false" />
         <activity

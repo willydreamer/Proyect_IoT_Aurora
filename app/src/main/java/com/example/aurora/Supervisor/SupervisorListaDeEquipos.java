@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aurora.Adapter.ListaEquiposAdapter;
 import com.example.aurora.Adapter.ListaEquiposAdapterAdmin;
 import com.example.aurora.Adapter.ListaSitiosAdapter;
+import com.example.aurora.Admin.CrearEquipoActivity;
 import com.example.aurora.Bean.Equipo;
 import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -80,8 +84,79 @@ public class SupervisorListaDeEquipos extends AppCompatActivity {
         recyclerView2.setAdapter(adapter2);
 
         obtenerEquiposSwitchesDeFirestore();
+
+        FloatingActionButton botonCrear = findViewById(R.id.bottonCrear);
+        botonCrear.setOnClickListener(v-> {
+            Intent intent = new Intent(this, CrearEquipoActivity.class);
+            startActivity(intent);
+        });
+
+        SearchView buscadorEquipos = findViewById(R.id.buscadorEquipos);
+        buscadorEquipos.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                buscarEquipoPorIDRouter(newText);
+                buscarEquipoPorIDSwitch(newText);
+                return true;
+            }
+        });
+
     }
 
+    private void buscarEquipoPorIDRouter(String searchText) {
+        if (searchText.isEmpty()) {
+            adapter.updateList(listaRouters);
+            return;
+        }
+
+        db.collection("equipos")
+                .orderBy("numeroDeSerie")
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        ArrayList<EquipoAdmin> filteredList = new ArrayList<>();
+                        for (DocumentSnapshot document : task.getResult()) {
+                            EquipoAdmin equipoAdmin = document.toObject(EquipoAdmin.class);
+                            if(equipoAdmin.getTipoDeEquipo().equals("Router")){
+                                filteredList.add(equipoAdmin);
+                            }
+                        }
+                        adapter.updateList(filteredList);
+                    }
+                });
+    }
+
+    private void buscarEquipoPorIDSwitch(String searchText) {
+        if (searchText.isEmpty()) {
+            adapter2.updateList(listaSwitches);
+            return;
+        }
+
+        db.collection("equipos")
+                .orderBy("numeroDeSerie")
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        ArrayList<EquipoAdmin> filteredList = new ArrayList<>();
+                        for (DocumentSnapshot document : task.getResult()) {
+                            EquipoAdmin equipoAdmin = document.toObject(EquipoAdmin.class);
+                            if(equipoAdmin.getTipoDeEquipo().equals("Switch")){
+                                filteredList.add(equipoAdmin);
+                            }
+                        }
+                        adapter2.updateList(filteredList);
+                    }
+                });
+    }
 
     private void obtenerEquiposRouterDeFirestore() {
         db.collection("equipos")

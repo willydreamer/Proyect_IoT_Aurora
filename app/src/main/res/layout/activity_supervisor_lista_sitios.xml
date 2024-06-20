@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondosupervisor"
     tools:context=".Supervisor.SupervisorListaSitios">
 
 
@@ -16,43 +17,31 @@
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088" />
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="403dp"
-        android:layout_height="653dp"
-        android:background="@drawable/boton_redondeado_noblanco"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.111" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSitios"
-        android:layout_width="326dp"
-        android:layout_height="499dp"
+        android:layout_width="352dp"
+        android:layout_height="476dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.655" />
+        app:layout_constraintTop_toBottomOf="@+id/buscadorSitios"
+        app:layout_constraintVertical_bias="0.101" />
 
     <SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/buscadorSitios"
         android:layout_width="330dp"
         android:layout_height="40dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/boton_redondeado_parabuscador"
-        app:layout_constraintBottom_toBottomOf="@+id/textView30"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172" />
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

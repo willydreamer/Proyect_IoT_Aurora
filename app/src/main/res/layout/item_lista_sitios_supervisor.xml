@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/ingreso_datos2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/imageTitulo1"
+                android:layout_width="53dp"
+                android:layout_height="54dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/circle"
+                android:src="@drawable/location_pin_007" />
+
+            <TextView
+                android:id="@+id/textTitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_toEndOf="@id/imageTitulo1"
+                android:text="Codigo o Identificador"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textSubtitle1"
+                android:layout_width="219dp"
+                android:layout_height="14dp"
+                android:layout_below="@+id/sitio"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="4dp"
+                android:layout_toEndOf="@id/imageTitulo1"
+                android:text="Distrito, Provincia, Departamento"
+                android:textColor="#8E8E8E"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/zona"
+                android:layout_width="71dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textTitle1"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/imageTitulo1"
+                android:background="@drawable/boton_redondeado_verde"
+                android:paddingVertical="3dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="Zona"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/sitio"
+                android:layout_width="71dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textTitle1"
+
+
+                android:layout_marginStart="93dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/imageTitulo1"
+                android:background="@drawable/boton_redondeado_verde_claro"
+                android:paddingVertical="3dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="Sitio"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+            <ImageButton
+                android:id="@+id/flecha1"
+                android:layout_width="41dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="300dp"
+                android:background="@drawable/boton_redondeado"
+                android:scaleType="fitCenter"
+                android:src="@drawable/arrow_forward_ios_24px" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

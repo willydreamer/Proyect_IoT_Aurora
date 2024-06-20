@@ -90,7 +90,6 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
         txtLongitud = binding.editLongitud;
         binding.btnSelectCoordinates.setOnClickListener(v -> openMapDialog());
 
-
         //Imagen
         // Botón para abrir la galería
 
@@ -157,7 +156,9 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
                     Log.d("msg-test", "Sitio guardado exitosamente");
                     Toast.makeText(CrearSitioActivity.this, "Sitio creado exitosamente", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(CrearSitioActivity.this, MainActivity.class);
+                    intent.putExtra("fragment", "sitios");
                     startActivity(intent);
+                    finish(); // Cerrar la actividad actual
                 })
                 .addOnFailureListener(e -> {
                     Log.e("msg-test", "Error al guardar el sitio", e);

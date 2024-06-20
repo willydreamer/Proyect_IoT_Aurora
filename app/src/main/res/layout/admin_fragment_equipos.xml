@@ -189,7 +189,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        android:text="Panel de Energia"
+                        android:text="Panel de Energía"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
                 </LinearLayout>

@@ -49,6 +49,7 @@ public class ListaSitiosAdapter
         }
     }
 
+
     @NonNull
     @Override
     //Para inflar la vista
@@ -127,6 +128,7 @@ public class ListaSitiosAdapter
         return listaSitios.size();
     }
 
+
     public Context getContext() {
         return context;
     }
@@ -141,6 +143,7 @@ public class ListaSitiosAdapter
 
     public void setListaSitios(ArrayList<Sitio> listaSitios) {
         this.listaSitios = listaSitios;
+        notifyDataSetChanged();
     }
 
     public Usuario getSupervisor() {

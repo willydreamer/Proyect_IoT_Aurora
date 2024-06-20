@@ -22,6 +22,7 @@ import com.example.aurora.databinding.ActivityInformacionSitioBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
@@ -98,24 +99,43 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
             builder.setMessage("¿Desea eliminar definitivamente el sitio " + sitio.getIdSitio() + "?")
                     .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // Eliminar el sitio de la base de datos
-                            db.collection("sitios")
-                                    .document(sitio.getIdSitio())
-                                    .delete()
+                            // Primero, obtener el ID del supervisor actual
+                            String supervisorId = sitio.getEncargado();
+
+                            // Actualizar el documento del usuario para eliminar el sitio del array 'sitios'
+                            db.collection("usuarios")
+                                    .document(supervisorId)
+                                    .update("sitios", FieldValue.arrayRemove(sitio.getIdSitio()))
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Intent intent = new Intent(AdminInformacionSitioActivity.this, MainActivity.class);
-                                            startActivity(intent);
-                                            Toast.makeText(AdminInformacionSitioActivity.this, "Sitio eliminado exitosamente", Toast.LENGTH_SHORT).show();
-                                            finish(); // Cerrar la actividad actual
+                                            // Después, eliminar el sitio de la base de datos
+                                            db.collection("sitios")
+                                                    .document(sitio.getIdSitio())
+                                                    .delete()
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            Intent intent = new Intent(AdminInformacionSitioActivity.this, MainActivity.class);
+                                                            startActivity(intent);
+                                                            Toast.makeText(AdminInformacionSitioActivity.this, "Sitio eliminado exitosamente", Toast.LENGTH_SHORT).show();
+                                                            finish(); // Cerrar la actividad actual
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Log.e("AdminInformacionSitio", "Error al eliminar sitio", e);
+                                                            Toast.makeText(AdminInformacionSitioActivity.this, "Error al eliminar sitio", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Log.e("AdminInformacionSitio", "Error al eliminar sitio", e);
-                                            Toast.makeText(AdminInformacionSitioActivity.this, "Error al eliminar sitio", Toast.LENGTH_SHORT).show();
+                                            Log.e("AdminInformacionSitio", "Error al actualizar el documento del usuario", e);
+                                            Toast.makeText(AdminInformacionSitioActivity.this, "Error al actualizar el documento del usuario", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
@@ -134,6 +154,9 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
             builder.setMessage("¿Está seguro que quiere desasignar el encargado actual?")
                     .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            // Obtener el ID del supervisor actual
+                            String supervisorId = sitio.getEncargado();
+
                             // Actualizar el campo 'encargado' del sitio a un string vacío
                             db.collection("sitios")
                                     .document(sitio.getIdSitio())
@@ -141,11 +164,27 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Toast.makeText(AdminInformacionSitioActivity.this, "Encargado desasignado con éxito", Toast.LENGTH_SHORT).show();
-                                            // Ocultar el CardView del encargado y mostrar el Spinner
-                                            binding.cardViewResponsable.setVisibility(View.GONE);
-                                            binding.elegirSupervisor.setVisibility(View.VISIBLE);
-                                            isSpinnerInitial = true;
+                                            // Actualizar la colección de usuarios para eliminar el sitio del array 'sitios'
+                                            db.collection("usuarios")
+                                                    .document(supervisorId)
+                                                    .update("sitios", FieldValue.arrayRemove(sitio.getIdSitio()))
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            Toast.makeText(AdminInformacionSitioActivity.this, "Encargado desasignado con éxito", Toast.LENGTH_SHORT).show();
+                                                            // Ocultar el CardView del encargado y mostrar el Spinner
+                                                            binding.cardViewResponsable.setVisibility(View.GONE);
+                                                            binding.elegirSupervisor.setVisibility(View.VISIBLE);
+                                                            isSpinnerInitial = true;
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Log.e("AdminInformacionSitio", "Error al actualizar el documento del usuario", e);
+                                                            Toast.makeText(AdminInformacionSitioActivity.this, "Error al actualizar el documento del usuario", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -165,6 +204,7 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         });
+
 
     }
     // Método para obtener el índice del valor en el array
@@ -216,6 +256,7 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         db.collection("usuarios")
                 .whereEqualTo("rol", "supervisor")
+                .whereEqualTo("estado", "activo")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -343,19 +384,35 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        // Mostrar el cardView del supervisor asignado
-                        binding.cardViewResponsable.setVisibility(View.VISIBLE);
-                        binding.elegirSupervisor.setVisibility(View.GONE);
-                        Toast.makeText(AdminInformacionSitioActivity.this, "Supervisor asignado con éxito", Toast.LENGTH_SHORT).show();
-                        mostrarInformacionEncargado(selectedSupervisorId);
+                        // Actualizar la colección de usuarios
+                        db.collection("usuarios")
+                                .document(selectedSupervisorId)
+                                .update("sitios", FieldValue.arrayUnion(sitio.getIdSitio()))
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        // Mostrar el cardView del supervisor asignado
+                                        binding.cardViewResponsable.setVisibility(View.VISIBLE);
+                                        binding.elegirSupervisor.setVisibility(View.GONE);
+                                        Toast.makeText(AdminInformacionSitioActivity.this, "Supervisor asignado con éxito", Toast.LENGTH_SHORT).show();
+                                        mostrarInformacionEncargado(selectedSupervisorId);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("msg-test", "Error updating user document", e);
+                                    }
+                                });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("msg-test", "Error updating document", e);
+                        Log.d("msg-test", "Error updating site document", e);
                     }
                 });
+
     }
 }
 

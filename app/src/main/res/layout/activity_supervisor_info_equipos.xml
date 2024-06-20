@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondosupervisor"
-    tools:context=".Admin.InformacionEquipoActivity">
+    tools:context=".Supervisor.SupervisorInfoEquiposActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -114,8 +114,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="Editar"
-                        android:textColor="@color/white"
-                        android:background="@drawable/boton_redondeado_verde_claro"
+                        android:textColor="#E8B92C"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                     <Button

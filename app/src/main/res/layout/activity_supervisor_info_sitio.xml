@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondosupervisor"
-    tools:context=".Admin.InformacionEquipoActivity">
+    tools:context=".Supervisor.SupervisorInfoSitio">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,20 +36,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Equipos"
+            android:text="Sitios"
             android:textAlignment="center"
             android:textSize="15sp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="170dp"
             android:layout_marginTop="70dp"
             android:padding="16dp">
 
             <ImageView
-                android:id="@+id/imageEquipo"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:id="@+id/imageViewProfilePrincipal"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 android:src="@drawable/profile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -64,16 +64,14 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageEquipo" />
-
-
+                app:layout_constraintTop_toBottomOf="@+id/imageViewProfilePrincipal" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="530dp"
-            android:layout_marginTop="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            android:layout_marginBottom="15dp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="16dp">
 
@@ -94,13 +92,13 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="34dp"
+                        android:layout_height="38dp"
                         android:layout_marginStart="8dp"
-                        android:src="@mipmap/ic_servidores_foreground" />
+                        android:src="@drawable/info_24px" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="238dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
@@ -108,25 +106,6 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/btnEditar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Editar"
-                        android:textColor="@color/white"
-                        android:background="@drawable/boton_redondeado_verde_claro"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-                    <Button
-                        android:id="@+id/btnGuardar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Guardar"
-                        android:textSize="16sp"
-                        android:backgroundTint="@color/color_accent"
-                        android:visibility="gone"/>
 
                 </LinearLayout>
 
@@ -148,18 +127,18 @@
                         android:paddingStart="16dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="4dp"
-                        android:text="SKU"
+                        android:text="Departamento"
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/editSKU"
+                        android:id="@+id/editDepartamento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/text_background"
                         android:padding="8dp"
                         android:paddingStart="16dp"
-                        android:text="SKU"
+                        android:text="Apurimac"
                         android:textStyle="bold"
                         android:inputType="text"
                         android:enabled="false" />
@@ -183,18 +162,18 @@
                         android:paddingStart="16dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="4dp"
-                        android:text="Número de Serie"
+                        android:text="Provincia"
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/editNumSerie"
+                        android:id="@+id/editProvincia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/text_background"
                         android:padding="8dp"
                         android:paddingStart="16dp"
-                        android:text="NumSerie"
+                        android:text="Abancay"
                         android:textStyle="bold"
                         android:enabled="false"/>
 
@@ -217,18 +196,18 @@
                         android:paddingStart="16dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="4dp"
-                        android:text="Marca"
+                        android:text="Distrito"
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/editMarca"
+                        android:id="@+id/editDistrito"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/text_background"
                         android:padding="8dp"
                         android:paddingStart="16dp"
-                        android:text="Marca"
+                        android:text="San Mateo"
                         android:textStyle="bold"
                         android:enabled="false"
                         />
@@ -244,7 +223,7 @@
                     >
                     <LinearLayout
                         android:id="@+id/llLatitud"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:orientation="vertical">
@@ -256,23 +235,54 @@
                             android:paddingStart="16dp"
                             android:paddingTop="8dp"
                             android:paddingBottom="4dp"
-                            android:text="Modelo"
+                            android:text="Latitud"
                             android:textSize="16dp" />
 
                         <EditText
-                            android:id="@+id/editModelo"
-                            android:layout_width="match_parent"
+                            android:id="@+id/editLatitud"
+                            android:layout_width="170dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/text_background"
                             android:padding="8dp"
                             android:paddingStart="16dp"
-                            android:text="Modelo"
+                            android:text="12.3456"
                             android:textStyle="bold"
                             android:enabled="false"/>
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/llLongitud"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="35dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tituloLongitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="4dp"
+                            android:text="Longitud"
+                            android:textSize="16dp" />
+
+                        <EditText
+                            android:id="@+id/editLongitud"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/text_background"
+                            android:padding="8dp"
+                            android:paddingStart="16dp"
+                            android:text="78.9012 "
+                            android:textStyle="bold"
+                            android:enabled="false"/>
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -292,11 +302,11 @@
                         android:paddingStart="16dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="4dp"
-                        android:text="Tipo de Equipo"
+                        android:text="Tipo de Zona"
                         android:textSize="16dp" />
 
                     <Spinner
-                        android:id="@+id/spinnerTipoEquipo"
+                        android:id="@+id/spinnerTipoZona"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -324,23 +334,27 @@
                         android:paddingStart="16dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="4dp"
-                        android:text="Descripcion"
+                        android:text="Operadora"
                         android:textSize="16dp" />
 
-                    <EditText
-                        android:id="@+id/editDescripcion"
+                    <Spinner
+                        android:id="@+id/spinnerOperadora"
                         android:layout_width="match_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/text_background"
                         android:padding="8dp"
                         android:paddingStart="16dp"
-                        android:text="Descripcion"
+                        android:text="Claro"
                         android:textStyle="bold"
                         android:enabled="false"
                         />
 
                 </LinearLayout>
+
+
+
+
 
                 <LinearLayout
                     android:id="@+id/llHeader3"
@@ -348,65 +362,29 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llOperadora">
+                    app:layout_constraintTop_toBottomOf="@+id/llOperadora">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginStart="8dp"
-                        android:src="@mipmap/ic_servidores_foreground" />
+                        android:src="@drawable/router_24px" />
 
                     <TextView
-                        android:layout_width="15dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        android:text="Fotos"
+                        android:text="Equipos"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="250dp"
-                        android:layout_height="match_parent">
-
-                        <Button
-                            android:id="@+id/botonSubir"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Subir"
-                            android:visibility="gone"
-                            android:backgroundTint="#009688"
-                            android:layout_marginLeft="50dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            />
-
-                        <Button
-                            android:id="@+id/botonBorrar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Borrar"
-                            android:visibility="gone"
-                            app:layout_constraintEnd_toEndOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewFotosEquipos"
-                    android:layout_width="375dp"
-                    android:layout_height="204dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/llHeader3"
-                    />
-
-                <!--<LinearLayout
+                <LinearLayout
                     android:id="@+id/llEquipos"
                     android:layout_width="375dp"
                     android:layout_height="204dp"
@@ -600,32 +578,12 @@
                                 </RelativeLayout>
                             </androidx.cardview.widget.CardView>
 
-
+                            <!-- Fin del bloque repetido -->
 
                         </LinearLayout>
                     </HorizontalScrollView>
 
-                </LinearLayout> -->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerViewFotosEquipos"
-                    android:layout_marginTop="10dp"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="933dp">
-
-                    <Button
-                        android:id="@+id/buttonEliminarSitio"
-                        android:layout_width="160dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#F44336"
-                        android:gravity="center"
-                        android:text="Eliminar Equipo"
-                        android:textSize="15sp" />
                 </LinearLayout>
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,17 +13,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.Admin.InformacionEquipoActivity;
+import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.R;
+import com.example.aurora.Supervisor.SupervisorEstadoEquipoActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
-public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposAdapterAdmin.EquipoAdminViewHolder>{
+public class ListaEquiposAdapterSupervisor extends RecyclerView.Adapter<ListaEquiposAdapterSupervisor.EquipoAdminViewHolder>{
     private Context context;
     FirebaseFirestore db;
     private ArrayList<EquipoAdmin> listaEquipos;
@@ -44,30 +46,36 @@ public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposA
         }
     }
 
+    private WeakReference<SupervisorEstadoEquipoActivity> weakReference;
 
+
+    public ListaEquiposAdapterSupervisor(ArrayList<EquipoAdmin> listaEquipos, SupervisorEstadoEquipoActivity activity) {
+        this.listaEquipos = listaEquipos;
+        this.weakReference = new WeakReference<>(activity);
+    }
     @NonNull
     @Override
     //Para inflar la vista
-    public ListaEquiposAdapterAdmin.EquipoAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListaEquiposAdapterSupervisor.EquipoAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         db = FirebaseFirestore.getInstance();
-        View view = LayoutInflater.from(context).inflate(R.layout.item_lista_equipos_admin, parent, false);
-        return new ListaEquiposAdapterAdmin.EquipoAdminViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_lista_equipos_supervisor, parent, false);
+        return new ListaEquiposAdapterSupervisor.EquipoAdminViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListaEquiposAdapterAdmin.EquipoAdminViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListaEquiposAdapterSupervisor.EquipoAdminViewHolder holder, int position) {
         db = FirebaseFirestore.getInstance();
 
         EquipoAdmin e = listaEquipos.get(position);
         holder.equipo = e;
 
-        TextView nombreEquipo = holder.itemView.findViewById(R.id.textTituloEquipo2);
-        nombreEquipo.setText(e.getMarca()+" - "+e.getModelo());
+        TextView idEquipo = holder.itemView.findViewById(R.id.textTituloEquipo2);
+        idEquipo.setText(e.getIdEquipo());
 
-        TextView tipoEquipo = holder.itemView.findViewById(R.id.textTipoEquipo2);
-        tipoEquipo.setText(e.getTipoDeEquipo());
+        TextView estado = holder.itemView.findViewById(R.id.textNumeroSerie2);
+        estado.setText(e.getEstado());
 
-        TextView numeroDeSerie = holder.itemView.findViewById(R.id.textNumeroSerie2);
+        TextView numeroDeSerie = holder.itemView.findViewById(R.id.textTipoEquipo2);
         numeroDeSerie.setText(e.getNumeroDeSerie());
 
 
@@ -84,31 +92,13 @@ public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposA
                     .into(holder.fotoEquipo);
         }
         context = holder.itemView.getContext();
-        Button botonVer = holder.itemView.findViewById(R.id.buttonElegir);
-        botonVer.setOnClickListener(view -> {
-            //if(s.getEncargado() == null || s.getEncargado().isEmpty()){
-            Intent intent = new Intent(context, InformacionEquipoActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("equipo",e);
-            context.startActivity(intent);
-            /*}else if(s.getEncargado() != null) {
-                Intent intent = new Intent(context, AdminInformacionSitioActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("sitio", s);
-                context.startActivity(intent);
-            }*/});
-
-        //            if(s.getSupervisor()!=null) {
-//                Intent intent = new Intent(context, AsignarSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.putExtra("sitio", s);
-//                intent.putExtra("supervisor",supervisor);
-//                context.startActivity(intent);
-//            }else if (s.getSupervisor() == null){
-//                Intent intent = new Intent(context, AdminInformacionSitioActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.putExtra("sitio", s);
-//                context.startActivity(intent);
+        Button buttonElegir = holder.itemView.findViewById(R.id.buttonElegir);
+        buttonElegir.setOnClickListener(view -> {
+            SupervisorEstadoEquipoActivity activity = weakReference.get();
+            if (activity != null) {
+                activity.updateTextView(e.getIdEquipo());
+            }
+        });
 
     }
 

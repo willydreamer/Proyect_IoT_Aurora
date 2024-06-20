@@ -1,4 +1,4 @@
-package com.example.aurora.Admin;
+package com.example.aurora;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,18 +7,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.aurora.Adapter.ListaSupervisoresActivosAdapter;
 import com.example.aurora.Adapter.ListaSupervisoresAdapter;
+import com.example.aurora.Admin.CrearSupervisorActivity;
 import com.example.aurora.Bean.Usuario;
-import com.example.aurora.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,43 +32,44 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class FragmentSupervisores extends Fragment {
-
-    //ArrayList<String> listaSupervisores;
+public class MensajeriaSupervisoresActivosActivity extends AppCompatActivity {
 
     ArrayList<Usuario> listaSupervisores;
-    
+
     RecyclerView recyclerView;
 
     FirebaseFirestore db;
 
-    ListaSupervisoresAdapter adapter;
+    ListaSupervisoresActivosAdapter adapter;
 
     SearchView buscador;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.admin_fragment_supervisor, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_mensajeria_supervisores_activos);
 
 
-        FloatingActionButton crearBtn = view.findViewById(R.id.button19);
 
-        buscador = view.findViewById(R.id.search1);
+        buscador = findViewById(R.id.search1);
+
 
         listaSupervisores = new ArrayList<>();
 
-        recyclerView = view.findViewById(R.id.recyclerview_listasupervisores);
 
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView = findViewById(R.id.recyclerview_listasupervisoresactivos);
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         db = FirebaseFirestore.getInstance();
         listaSupervisores = new ArrayList<>();
 
         // Configurar el adapter y asociarlo al RecyclerView
-        adapter = new ListaSupervisoresAdapter(getContext(),listaSupervisores);
+        adapter = new ListaSupervisoresActivosAdapter(this,listaSupervisores);
         recyclerView.setAdapter(adapter);
 
 
@@ -96,16 +101,11 @@ public class FragmentSupervisores extends Fragment {
             }
         });
 
-        obtenerSupervisoresDeFirestore();
-        crearBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CrearSupervisorActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                startActivity(intent);
-            }
-        });
 
-        return view;
+
+        obtenerSupervisoresDeFirestore();
+
+
 
     }
 
@@ -117,7 +117,7 @@ public class FragmentSupervisores extends Fragment {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Usuario supervisor = document.toObject(Usuario.class);
-                            if(supervisor.getRol().equals("supervisor")) {
+                            if(supervisor.getRol().equals("supervisor") && supervisor.getEstado().equals("activo")) {
                                 listaSupervisores.add(supervisor);
                             }
                         }
@@ -126,7 +126,7 @@ public class FragmentSupervisores extends Fragment {
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al obtener los supervisores", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Error al obtener los supervisores", Toast.LENGTH_LONG).show();
                 });
     }
 
@@ -154,5 +154,6 @@ public class FragmentSupervisores extends Fragment {
                     }
                 });
     }
+
 
 }

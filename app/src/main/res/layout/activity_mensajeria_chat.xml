@@ -35,8 +35,15 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewChat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <!-- Chat Messages -->
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -48,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Sample messages -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,9 +76,9 @@
                 android:padding="8dp"
                 android:text="How are you?" />
 
-            <!-- Add more TextViews for each message -->
+
         </LinearLayout>
-    </ScrollView>
+    </ScrollView> -->
 
     <!-- Input area -->
     <LinearLayout
@@ -92,19 +99,19 @@
             android:layout_width="371dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Mensaje"
+            android:hint="Escribe un Mensaje..."
             android:padding="8dp" />
 
-        <TextView
-            android:gravity="center"
-            android:layout_width="100dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/color_accent"
+        <Button
+            android:id="@+id/botonEnviar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enviar">
-
-        </TextView>
+            android:backgroundTint="@color/color_accent"
+            android:gravity="center"
+            android:text="Enviar"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </LinearLayout>

@@ -111,16 +111,6 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         listaSitios = new ArrayList<>();
-        /*listaSitios.add(new Sitio("NW000001", "Junín", "Huancayo", "Center", "Urbana", "-12.0651", "-75.2048", "Móvil","Cristiano Ronaldo"));
-        listaSitios.add(new Sitio("NW000002", "Cusco", "Cusco", "Center", "Rural", "-13.5226", "-71.9673", "Fijo","Cristiano Ronaldo"));
-        listaSitios.add(new Sitio("NW000003", "Arequipa", "Arequipa", "Center", "Urbana", "-16.4090", "-71.5375", "Móvil","Cristiano Ronaldo"));
-        listaSitios.add(new Sitio("NW000004", "Lima", "Yauyos", "Center", "Rural", "-12.4841", "-75.7835", "Fijo","Cristiano Ronaldo"));
-        ListaSitiosAdapter adapter = new ListaSitiosAdapter();
-        adapter.setContext(InformacionSupervisorActivity.this);
-        adapter.setListaSitios(listaSitios);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(InformacionSupervisorActivity.this));*/
-
 
         // Configurar el adapter y asociarlo al RecyclerView
         adapter = new ListaSitiosAdapter();
@@ -218,7 +208,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
                                 }
                             }
                             adapter.setListaSitios(sitios);
-                            adapter.notifyDataSetChanged();
+                            //adapter.notifyDataSetChanged();
                         }
                     }
                 });

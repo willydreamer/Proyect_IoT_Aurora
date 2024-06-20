@@ -24,12 +24,18 @@ public class FragmentEquipos extends Fragment {
 
     ArrayList<EquipoAdmin> listaRouters;
     ArrayList<EquipoAdmin> listaSwitches;
+
+    ArrayList<EquipoAdmin> listaPaneles;
     RecyclerView recyclerView;
     RecyclerView recyclerView2;
+    RecyclerView recyclerView3;
+
     FirebaseFirestore db;
     ListaEquiposAdapterAdmin adapter;
 
     ListaEquiposAdapterAdmin adapter2;
+
+    ListaEquiposAdapterAdmin adapter3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +75,23 @@ public class FragmentEquipos extends Fragment {
         recyclerView2.setAdapter(adapter2);
 
         obtenerEquiposSwitchesDeFirestore();
+
+        //cargar paneles
+
+
+        recyclerView3 = equiposView.findViewById(R.id.recyclerViewEquipos3);
+        recyclerView3.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+
+        listaPaneles= new ArrayList<>();
+
+        // Configurar el adapter y asociarlo al RecyclerView
+        adapter3 = new ListaEquiposAdapterAdmin();
+        adapter3.setContext(getContext());
+        adapter3.setListaEquipos(listaPaneles);
+        recyclerView3.setAdapter(adapter3);
+
+        obtenerEquiposPanelesDeFirestore();
 
         ImageButton botonCrear = equiposView.findViewById(R.id.bottonCrear);
         botonCrear.setOnClickListener(v-> {
@@ -110,6 +133,25 @@ public class FragmentEquipos extends Fragment {
                             }
                         }
                         adapter2.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error al obtener los sitios", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void obtenerEquiposPanelesDeFirestore() {
+        db.collection("equipos")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            EquipoAdmin equipo = document.toObject(EquipoAdmin.class);
+                            if(equipo.getTipoDeEquipo().equals("Panel de Energia")) {
+                                listaPaneles.add(equipo);
+                            }
+                        }
+                        adapter3.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
                     }
                 })
                 .addOnFailureListener(e -> {

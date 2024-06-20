@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Perfil"
-            android:textColor="@color/white"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="27sp" />
@@ -220,7 +219,7 @@
                         android:text="Nombre"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/nombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -254,7 +253,7 @@
                         android:text="Apellido"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/apellido"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -289,7 +288,7 @@
                         android:text="DNI"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/dni"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -364,7 +363,7 @@
                         android:text="Domicilio"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/domicilio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

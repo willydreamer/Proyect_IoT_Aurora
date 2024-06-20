@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,15 +23,19 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class AdminInformacionSitioActivity extends AppCompatActivity {
 
     private ActivityInformacionSitioBinding binding;
     private FirebaseFirestore db;
     private Sitio sitio;
+    ImageView fotoSitio;
 
 
     @Override
@@ -50,6 +55,7 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
             binding.editDistrito.setText(sitio.getDistrito());
             binding.editLatitud.setText(sitio.getLatitud());
             binding.editLongitud.setText(sitio.getLongitud());
+            fotoSitio = findViewById(R.id.imageViewProfilePrincipal);
             Log.d("supervisor-uu", "onCreate: " + sitio.getEncargado());
 
             setupSpinner(binding.spinnerTipoZona, R.array.tipo_zona_options);
@@ -66,6 +72,18 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                 binding.elegirSupervisor.setVisibility(View.VISIBLE);
                 binding.elegirSupervisor.setOnClickListener(v -> cargarSupervisoresDisponibles());
                 binding.cardViewResponsable.setVisibility(View.GONE);
+            }
+            if (sitio.getFotoURL() != null && !sitio.getFotoURL().isEmpty()) {
+                Picasso.get()
+                        .load(sitio.getFotoURL())
+                        .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
+                        .transform(new CropCircleTransformation())
+                        .into(fotoSitio);
+            } else {
+                Picasso.get()
+                        .load(R.drawable.perfil_icono) // Imagen por defecto
+                        .transform(new CropCircleTransformation())
+                        .into(fotoSitio);
             }
         }
 

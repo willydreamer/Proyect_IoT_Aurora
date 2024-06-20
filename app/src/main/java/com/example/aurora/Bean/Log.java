@@ -42,12 +42,21 @@ public class Log implements Serializable {
 
     }
 
-    public Log(Integer idLog, String fecha, String actividad, String description, Usuario usuario, Sitio sitio){
+    public Log(Integer idLog, String fecha, String actividad, String description, String idUsuario, Usuario usuario, Sitio sitio){
         this.idLog = idLog;
         this.fecha = fecha;
         this.actividad = actividad;
         this.description = description;
+        this.idUsuario = idUsuario;
         this.usuario = usuario;
+        this.sitio = sitio;
+    }
+
+    public Log(Date timestamp, String actividad, String description, String idUsuario, Sitio sitio){
+        this.timestamp = timestamp;
+        this.actividad = actividad;
+        this.description = description;
+        this.idUsuario = idUsuario;
         this.sitio = sitio;
     }
 

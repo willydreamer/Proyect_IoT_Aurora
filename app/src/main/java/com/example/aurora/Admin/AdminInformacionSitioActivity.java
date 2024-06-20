@@ -180,6 +180,7 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
 
     private void mostrarInformacionEncargado(String encargadoId) {
         db = FirebaseFirestore.getInstance();
+        ImageView imagenSupervisor = findViewById(R.id.imageTitulo1);;
         db.collection("usuarios")
                 .document(encargadoId)
                 .get()
@@ -189,7 +190,20 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                         Usuario supervisor  = document.toObject(Usuario.class);
                         binding.textNombres.setText(supervisor.getNombre() + " " + supervisor.getApellido());
                         binding.textDni.setText("Dni: " + supervisor.getDni());
-                        binding.textCorreo.setText("Correo: " + supervisor.getCorreo());
+                        binding.textCorreo.setText(supervisor.getCorreo());
+
+                        if (supervisor.getFotoURL() != null && !supervisor.getFotoURL().isEmpty()) {
+                            Picasso.get()
+                                    .load(supervisor.getFotoURL())
+                                    .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
+                                    .transform(new CropCircleTransformation())
+                                    .into(imagenSupervisor);
+                        } else {
+                            Picasso.get()
+                                    .load(R.drawable.perfil_icono) // Imagen por defecto
+                                    .transform(new CropCircleTransformation())
+                                    .into(imagenSupervisor);
+                        }
                     } else {
                         Log.d("msg-test", "get failed with ", task.getException());
                     }

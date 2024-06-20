@@ -13,7 +13,6 @@
         android:id="@+id/button10"
         android:layout_width="114dp"
         android:layout_height="32dp"
-        android:layout_marginStart="220dp"
         android:layout_marginTop="250dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#96E6A7"
@@ -21,8 +20,8 @@
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toEndOf="@+id/button12"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -30,7 +29,6 @@
         android:id="@+id/button12"
         android:layout_width="105dp"
         android:layout_height="32dp"
-        android:layout_marginStart="80dp"
         android:layout_marginTop="250dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#96E6A7"
@@ -38,26 +36,24 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.251"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:background="@drawable/circle"
         app:circularflow_defaultRadius="15sp"
         app:circularflow_radiusInDP="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.135"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -67,6 +63,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="30dp"
         android:text="Mi Perfil"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,13 +76,11 @@
         android:id="@+id/textViewN"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="300dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -94,12 +89,10 @@
         android:id="@+id/textViewA"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewN" />
 
@@ -107,12 +100,10 @@
         android:id="@+id/textViewC"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewA" />
 
@@ -120,12 +111,10 @@
         android:id="@+id/textViewD"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewC" />
 
@@ -133,12 +122,10 @@
         android:id="@+id/textViewT"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewD" />
 
@@ -221,14 +208,14 @@
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="161dp"
-        android:layout_height="21dp"
+        android:layout_width="210dp"
+        android:layout_height="18dp"
         android:layout_marginStart="90dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
         android:ems="10"
         android:inputType="text"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewN"
         app:layout_constraintEnd_toEndOf="@+id/textViewN"
         app:layout_constraintHorizontal_bias="0.788"
@@ -238,66 +225,69 @@
 
     <EditText
         android:id="@+id/editTextText2"
-        android:layout_width="161dp"
-        android:layout_height="21dp"
+        android:layout_width="207dp"
+        android:layout_height="19dp"
         android:layout_marginStart="90dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
         android:ems="10"
         android:inputType="text"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewA"
         app:layout_constraintEnd_toEndOf="@+id/textViewA"
-        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="@+id/textViewA"
         app:layout_constraintTop_toTopOf="@+id/textViewA"
-        app:layout_constraintVertical_bias="0.56" />
+        app:layout_constraintVertical_bias="0.518" />
 
     <EditText
         android:id="@+id/editTextText3"
-        android:layout_width="161dp"
-        android:layout_height="21dp"
+        android:layout_width="203dp"
+        android:layout_height="19dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
         android:ems="10"
         android:inputType="text"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewC"
         app:layout_constraintEnd_toEndOf="@+id/textViewC"
-        app:layout_constraintHorizontal_bias="0.894"
+        app:layout_constraintHorizontal_bias="0.891"
         app:layout_constraintStart_toStartOf="@+id/textViewC"
         app:layout_constraintTop_toTopOf="@+id/textViewC"
-        app:layout_constraintVertical_bias="0.56" />
+        app:layout_constraintVertical_bias="0.518" />
 
     <EditText
         android:id="@+id/editTextText4"
-        android:layout_width="161dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="163dp"
+        android:layout_width="208dp"
+        android:layout_height="19dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
         android:ems="10"
         android:inputType="text"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewD"
         app:layout_constraintEnd_toEndOf="@+id/textViewD"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.924"
         app:layout_constraintStart_toStartOf="@+id/textViewD"
         app:layout_constraintTop_toTopOf="@+id/textViewD"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.555" />
 
     <EditText
         android:id="@+id/editTextText5"
-        android:layout_width="161dp"
-        android:layout_height="21dp"
+        android:layout_width="205dp"
+        android:layout_height="20dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
         android:ems="10"
         android:inputType="text"
 
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewT"
         app:layout_constraintEnd_toEndOf="@+id/textViewT"
-        app:layout_constraintHorizontal_bias="0.894"
+        app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="@+id/textViewT"
         app:layout_constraintTop_toTopOf="@+id/textViewT"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintVertical_bias="0.538" />
 
     <Button
         android:id="@+id/close"

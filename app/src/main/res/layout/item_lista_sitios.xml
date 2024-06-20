@@ -60,7 +60,7 @@
                 android:paddingVertical="3dp"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:text=" "
+                android:text="Sin asignar"
                 android:textColor="@color/white"
                 android:textSize="10dp" />
 

@@ -16,7 +16,7 @@
     <item
         android:id="@+id/equipos"
         android:title="Equipos"
-        android:icon="@drawable/router_24px"
+        android:icon="@drawable/devices_24px"
         />
     <item
         android:id="@+id/supervisor"

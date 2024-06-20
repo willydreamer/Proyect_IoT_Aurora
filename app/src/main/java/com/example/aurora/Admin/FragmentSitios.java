@@ -70,7 +70,7 @@ public class FragmentSitios extends Fragment {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Sitio sitio = document.toObject(Sitio.class);
-                            Log.d("sitio", String.valueOf(sitio.getSupervisor()));
+                            Log.d("sitio", String.valueOf(sitio.getEncargado()));
                             listaSitios.add(sitio);
                         }
                         adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado

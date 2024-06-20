@@ -468,7 +468,12 @@
                                 android:layout_below="@id/textDni"
                                 android:layout_marginStart="16dp"
                                 android:layout_toEndOf="@id/imageTitulo1"
-                                android:text="Correo: " />
+                                android:text="Correo: "
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:scrollHorizontally="true"
+                                />
 
 
                             <ImageButton

@@ -49,8 +49,6 @@ public class ListaSupervisoresAdapter
             super(itemView);
             fotoSupervisor = itemView.findViewById(R.id.imageTitulo1);
 
-
-
         }
 
         /* public void setearDatos(String name) {
@@ -69,7 +67,6 @@ public class ListaSupervisoresAdapter
     }
     @Override
     public void onBindViewHolder(@NonNull SupervisorViewHolder holder, int position) {
-
 
         Usuario s = listaSupervisores.get(position) ;
         holder.supervisor = s;

@@ -39,31 +39,20 @@ import java.util.ArrayList;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class InformacionSupervisorActivity extends AppCompatActivity {
-
     ArrayList<Sitio> listaSitios;
-
     RecyclerView recyclerView;
-
     TextView nombre;
     TextView apellido;
     TextView dni;
     TextView correo ;
     TextView domicilio;
     TextView telefono;
-
     FirebaseFirestore db;
-
     ListaSitiosAdapter adapter;
-
     Context context;
-
     ImageView fotoSupervisor;
-
     SearchView buscador;
-
     Usuario supervisor;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

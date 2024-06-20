@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aurora.Adapter.ListaEquiposAdapterAdmin;
 import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -70,7 +71,7 @@ public class FragmentEquipos extends Fragment {
 
         obtenerEquiposSwitchesDeFirestore();
 
-        ImageButton botonCrear = equiposView.findViewById(R.id.bottonCrear);
+        FloatingActionButton botonCrear = equiposView.findViewById(R.id.bottonCrear);
         botonCrear.setOnClickListener(v-> {
             Intent intent = new Intent(getActivity(), CrearEquipoActivity.class);
             startActivity(intent);

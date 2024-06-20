@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.aurora.Adapter.ListaSitiosAdapter;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -50,7 +51,7 @@ public class FragmentSitios extends Fragment {
 
         obtenerSitiosDeFirestore();
 
-        AppCompatImageButton btnCrear = view.findViewById(R.id.bottonCrearSitio);
+        FloatingActionButton btnCrear = view.findViewById(R.id.bottonCrearSitio);
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

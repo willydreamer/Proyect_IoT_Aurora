@@ -30,6 +30,9 @@
             android:layout_below="@id/imagenEquipo2"
             android:layout_marginTop="8dp"
             android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
             android:text="Cisco ISC - 100 Series"
             android:textSize="14sp"
             android:textStyle="bold" />

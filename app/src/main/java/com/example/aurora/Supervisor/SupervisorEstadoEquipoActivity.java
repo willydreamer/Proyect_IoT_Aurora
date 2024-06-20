@@ -23,10 +23,14 @@ import com.example.aurora.Adapter.ListaEquiposAdapterAdmin;
 import com.example.aurora.Adapter.ListaEquiposAdapterSupervisor;
 import com.example.aurora.Admin.InformacionEquipoActivity;
 import com.example.aurora.Bean.EquipoAdmin;
+import com.example.aurora.Bean.Sitio;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivitySupervisorEstadoEquipoBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,6 +41,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
+
+import com.google.firebase.Timestamp;
+import android.util.Log;
 
 public class SupervisorEstadoEquipoActivity extends AppCompatActivity {
     ArrayList<EquipoAdmin> listaRouters;
@@ -173,6 +181,9 @@ public class SupervisorEstadoEquipoActivity extends AppCompatActivity {
                 .document(idDocumento)
                 .set(equipoAdmin)
                 .addOnSuccessListener(aVoid -> {
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                    //crearLog("Se edito el estado del Equipo "+idDocumento,"Debido a cambios con los equipos, se ha realizado el cambio de estado del equipo mencionado a fin de brindar información actualizada",currentUser.getUid(),equipoAdmin);
                     Toast.makeText(SupervisorEstadoEquipoActivity.this, "Cambios guardados con éxito", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SupervisorEstadoEquipoActivity.this, SupervisorListaDeEquipos.class);
                     startActivity(intent);
@@ -182,4 +193,30 @@ public class SupervisorEstadoEquipoActivity extends AppCompatActivity {
                     Toast.makeText(SupervisorEstadoEquipoActivity.this, "Error al guardar cambios", Toast.LENGTH_LONG).show();
                 });
     }
+    /*
+    private void crearLog(String actividad, String descripcion, String idUsuario, EquipoAdmin equipoAdmin) {
+        Timestamp timestamp = Timestamp.now();
+        Random rand = new Random();
+        int idLog = rand.nextInt(100000) + 1;
+
+        Log log = new Log(idLog, timestamp.toString(), actividad, descripcion, Usuario usuario, Sitio sitio);
+
+        // Añade el documento a la colección "logs" en Firestore
+        db.collection("logs")
+                .add(log)
+                .addOnSuccessListener(documentReference -> {
+                    // Éxito al añadir el documento
+                    Toast.makeText(SupervisorEstadoEquipoActivity.this, "Log creado correctamente", Toast.LENGTH_SHORT).show();
+                    // Puedes realizar otras acciones aquí después de crear el log, como navegar a otra actividad
+                    Intent intent = new Intent(SupervisorEstadoEquipoActivity.this, OtraActividad.class);
+                    startActivity(intent);
+                })
+                .addOnFailureListener(e -> {
+                    // Error al añadir el documento
+                    Log.e("Firebase", "Error al crear el log", e);
+                    Toast.makeText(SupervisorEstadoEquipoActivity.this, "Error al crear el log", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+     */
 }

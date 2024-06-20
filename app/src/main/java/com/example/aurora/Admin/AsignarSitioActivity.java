@@ -105,12 +105,12 @@ public class AsignarSitioActivity extends AppCompatActivity {
                 intent.putExtra("supervisor",supervisor);
                 startActivity(intent);
             });
-            alertDialog2.show();
             if (sitio.getSupervisor() == null) {
                 sitio.setSupervisor(new ArrayList<>());
             }
             //sitio.getSupervisor().add(supervisor_copy);
 //            db.collection("sitios")
+            alertDialog2.show();
 //                    .document(sitio.getIdSitio())
 //                    //.set(sitio)
 //                    .set(sitioMap)

@@ -58,14 +58,6 @@ public class FragmentSupervisores extends Fragment {
 
 
         recyclerView = view.findViewById(R.id.recyclerview_listasupervisores);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-
-        /*listaSupervisores = new ArrayList<>();
-        listaSupervisores.add("Christian Luis Gonzales Fernández");
-        listaSupervisores.add("Willy Huallpa");
-        listaSupervisores.add("Alejandro Gutierrez");
-        listaSupervisores.add("Dana Nolasco");
-        listaSupervisores.add("Alfredo Benavides");*/
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -75,8 +67,6 @@ public class FragmentSupervisores extends Fragment {
 
         // Configurar el adapter y asociarlo al RecyclerView
         adapter = new ListaSupervisoresAdapter(getContext(),listaSupervisores);
-        /*adapter.setContext(getContext());
-        adapter.setListaSupervisores(listaSupervisores);*/
         recyclerView.setAdapter(adapter);
 
 

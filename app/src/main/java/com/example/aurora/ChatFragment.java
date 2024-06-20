@@ -105,7 +105,7 @@ public class ChatFragment extends Fragment {
         buttonSend = view.findViewById(R.id.button_send);
 
         messageList = new ArrayList<>();
-        messageAdapter = new MessageAdapter(messageList, currentUserId);
+        messageAdapter = new MessageAdapter(messageList,currentUserId);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(messageAdapter);
 

@@ -50,7 +50,7 @@
             android:textSize="14sp" />
 
         <ImageButton
-            android:id="@+id/flecha1"
+            android:id="@+id/flechaGo"
             android:layout_width="20dp"
             android:layout_height="37dp"
             android:layout_alignParentEnd="true"

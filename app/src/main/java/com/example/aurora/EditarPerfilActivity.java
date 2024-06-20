@@ -114,21 +114,6 @@ public class EditarPerfilActivity extends AppCompatActivity {
                                     binding.domicilio.setText(usuario.getDomicilio());
                                     binding.telefono.setText(usuario.getTelefono());
 
-                                        /*binding.editar.setOnClickListener(v -> toggleEditMode(true));
-                                        binding.btnGuardar.setOnClickListener(v -> {
-                                            toggleEditMode(false);
-                                            saveChanges();
-                                        });
-
-                                        //inicio foto
-
-                                        // Botón para abrir la galería
-                                        binding.buttonSubirFoto.setOnClickListener(v -> {
-                                            Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                            //todas las imagenes
-                                            pickPhotoIntent.setType("image/*");
-                                            startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
-                                        });*/
                                 }
                             } else {
                                 Log.d("Error", "no se encontro usuario");
@@ -141,66 +126,6 @@ public class EditarPerfilActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     });
-                        /*.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                if (queryDocumentSnapshots.isEmpty()) {
-                                    System.out.println("No se encontró ningún documento con el correo: " );
-                                } else {
-                                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                        // Mapear los datos del documento a un objeto Usuario
-                                        Log.d("document",document.toString());
-                                        usuario = document.toObject(Usuario.class);
-                                        Log.d("msg-test", usuario.getNombre());
-
-                                        if (usuario.getFotoURL() != null && !usuario.getFotoURL().isEmpty()) {
-                                            Picasso.get()
-                                                    .load(usuario.getFotoURL())
-                                                    .placeholder(R.drawable.profile) // Reemplaza con tu imagen por defecto
-                                                    .transform(new CropCircleTransformation())
-                                                    .into(fotoUsuario);
-                                        } else {
-                                            Picasso.get()
-                                                    .load(R.drawable.profile) // Imagen por defecto
-                                                    .transform(new CropCircleTransformation())
-                                                    .into(fotoUsuario);
-                                        }
-                                        binding.textViewNamePrincipal.setText(usuarioLogueado.getUid());
-                                        binding.nombre.setText(usuario.getNombre());
-                                        binding.apellido.setText(usuario.getApellido());
-                                        binding.dni.setText(usuario.getDni());
-                                        binding.correo.setText(usuario.getCorreo());
-                                        binding.domicilio.setText(usuario.getDomicilio());
-                                        binding.telefono.setText(usuario.getTelefono());
-                                    }
-                                }
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                System.out.println("Error al obtener los datos: " + e.getMessage());
-                            }
-                        });*/
-                /*if (usuario.getFotoURL() != null && !usuario.getFotoURL().isEmpty()) {
-                    Picasso.get()
-                            .load(usuario.getFotoURL())
-                            .placeholder(R.drawable.profile) // Reemplaza con tu imagen por defecto
-                            .transform(new CropCircleTransformation())
-                            .into(fotoUsuario);
-                } else {
-                    Picasso.get()
-                            .load(R.drawable.profile) // Imagen por defecto
-                            .transform(new CropCircleTransformation())
-                            .into(fotoUsuario);
-                }
-                /*binding.textViewNamePrincipal.setText(usuario.getIdUsuario());
-                binding.nombre.setText(usuario.getNombre());
-                binding.apellido.setText(usuario.getApellido());
-                binding.dni.setText(usuario.getDni());
-                binding.correo.setText(usuario.getCorreo());
-                binding.domicilio.setText(usuario.getDomicilio());
-                binding.telefono.setText(usuario.getTelefono());*/
         }
 
         editar = findViewById(R.id.editar);

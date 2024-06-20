@@ -18,6 +18,7 @@ import java.util.Locale;
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
     private List<Message> messageList;
+
     private String currentUserId;
 
     public MessageAdapter(List<Message> messageList, String currentUserId) {

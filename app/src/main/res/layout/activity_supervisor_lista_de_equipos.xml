@@ -5,32 +5,20 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/fondosupervisor"
     tools:context=".Supervisor.SupervisorListaDeEquipos">
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="415dp"
-        android:layout_height="590dp"
-        android:background="@drawable/boton_redondeado_noblanco"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
 
     <SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/buscadorEquipos"
         android:layout_width="330dp"
         android:layout_height="40dp"
+        android:layout_marginTop="128dp"
         android:background="@drawable/boton_redondeado_parabuscador"
-        app:layout_constraintBottom_toBottomOf="@+id/textView30"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.112" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView31"
@@ -40,27 +28,26 @@
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintHorizontal_bias="0.167"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047" />
+        app:layout_constraintVertical_bias="0.109" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp">
+        android:layout_width="387dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/buscadorEquipos"
+        tools:layout_editor_absoluteX="13dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <FrameLayout
                 android:id="@+id/frameRouters"
-                android:layout_width="332dp"
-                android:layout_height="267dp"
-                app:layout_constraintBottom_toTopOf="@+id/frameSwitches"
+                android:layout_width="333dp"
+                android:layout_height="250dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -70,9 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
@@ -89,23 +74,19 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
 
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llRouters"
-                    android:layout_width="375dp"
-                    android:layout_height="204dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
                     android:layout_marginTop="50dp"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llHeader3">
+                    android:orientation="horizontal">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewEquipos"
-                        android:layout_width="324dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:padding="8dp" />
@@ -115,11 +96,9 @@
 
             <FrameLayout
                 android:id="@+id/frameSwitches"
-                android:layout_width="332dp"
-                android:layout_height="265dp"
-                app:layout_constraintBottom_toTopOf="@+id/frameEnergia"
+                android:layout_width="333dp"
+                android:layout_height="250dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameRouters">
 
@@ -128,9 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
@@ -147,274 +124,40 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
 
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llEquipos"
-                    android:layout_width="375dp"
-                    android:layout_height="204dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
                     android:layout_marginTop="50dp"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llHeader3">
+                    android:orientation="horizontal">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewEquipos2"
-                        android:layout_width="323dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:padding="8dp" />
-
-
-                    <!--<HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="5dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="130dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                app:cardCornerRadius="15dp"
-                                app:cardElevation="2dp">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:id="@+id/imagenEquipo1"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="8dp"
-                                        android:background="@drawable/perfil_icono"
-                                        android:foregroundGravity="center" />
-
-                                    <TextView
-                                        android:id="@+id/textTituloEquipo1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/imagenEquipo1"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Cisco ISC 100 Series"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/textTipoEquipo1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTituloEquipo1"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Switch"
-                                        android:textColor="#3C9AC5"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-
-                                    <TextView
-                                        android:id="@+id/textNumeroSerie1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTipoEquipo1"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="ABC - 123456"
-                                        android:textSize="12sp" />
-
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="130dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                app:cardCornerRadius="15dp"
-                                app:cardElevation="2dp">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:id="@+id/imagenEquipo2"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="8dp"
-                                        android:background="@drawable/perfil_icono"
-                                        android:foregroundGravity="center" />
-
-                                    <TextView
-                                        android:id="@+id/textTituloEquipo2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/imagenEquipo2"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Cisco ISC 100 Series"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/textTipoEquipo2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTituloEquipo2"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Switch"
-                                        android:textColor="#3C9AC5"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-
-                                    <TextView
-                                        android:id="@+id/textNumeroSerie2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTipoEquipo2"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="ABC - 123456"
-                                        android:textSize="12sp" />
-
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="130dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                app:cardCornerRadius="15dp"
-                                app:cardElevation="2dp">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:id="@+id/imagenEquipo3"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="8dp"
-                                        android:background="@drawable/perfil_icono"
-                                        android:foregroundGravity="center" />
-
-                                    <TextView
-                                        android:id="@+id/textTituloEquipo3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/imagenEquipo3"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Cisco ISC 100 Series"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/textTipoEquipo3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTituloEquipo3"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Switch"
-                                        android:textColor="#3C9AC5"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-
-                                    <TextView
-                                        android:id="@+id/textNumeroSerie3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTipoEquipo3"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="ABC - 123456"
-                                        android:textSize="12sp" />
-
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-
-
-                        </LinearLayout>
-                    </HorizontalScrollView> -->
 
                 </LinearLayout>
             </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frameEnergia"
-                android:layout_width="339dp"
-                android:layout_height="38dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="333dp"
+                android:layout_height="250dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameSwitches">
 
                 <LinearLayout
-                    android:id="@+id/llHeaderEnergia"
-                    android:layout_width="361dp"
+                    android:id="@+id/llHeaderPanelEnergia"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="8dp"
-                        android:src="@mipmap/ic_servidores_foreground" />
-
-                    <TextView
-                        android:layout_width="283dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:text="Panel de Energia"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/frameRectificador"
-                android:layout_width="335dp"
-                android:layout_height="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frameEnergia">
-
-                <LinearLayout
-                    android:id="@+id/llHeaderRectificador"
-                    android:layout_width="361dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
@@ -427,196 +170,150 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        android:text="Rectificador"
+                        android:text="Energía"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPanelDeEnergia"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewPanel2"
+                        android:layout_width="323dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="8dp" />
 
                 </LinearLayout>
             </FrameLayout>
-            <!--            <FrameLayout-->
-            <!--                android:id="@+id/frameGabinete"-->
-            <!--                android:layout_width="380dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/frameRectificador"-->
-            <!--                tools:layout_editor_absoluteX="19dp">-->
 
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/llHeaderGabinete"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:orientation="horizontal"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent">-->
+            <FrameLayout
+                android:id="@+id/frameRectificador"
+                android:layout_width="333dp"
+                android:layout_height="250dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameEnergia">
 
-            <!--                    <ImageView-->
-            <!--                        android:layout_width="35dp"-->
-            <!--                        android:layout_height="35dp"-->
-            <!--                        android:layout_marginStart="8dp"-->
-            <!--                        android:src="@mipmap/ic_servidores_foreground" />-->
+                <LinearLayout
+                    android:id="@+id/llHeaderRectificador"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-            <!--                    <TextView-->
-            <!--                        android:layout_width="0dp"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_marginStart="10dp"-->
-            <!--                        android:layout_weight="1"-->
-            <!--                        android:text="Gabinete"-->
-            <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-            <!--                        android:textStyle="bold" />-->
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
 
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Rectificadores"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
 
-            <!--                </LinearLayout>-->
-            <!--            </FrameLayout>-->
-            <!--            <FrameLayout-->
-            <!--            android:id="@+id/frameBBU"-->
-            <!--            android:layout_width="380dp"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            app:layout_constraintStart_toStartOf="parent"-->
-            <!--            app:layout_constraintEnd_toEndOf="parent"-->
-            <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--            app:layout_constraintTop_toBottomOf="@+id/frameGabinete"-->
-            <!--            tools:layout_editor_absoluteX="19dp">-->
+                </LinearLayout>
 
-            <!--            <LinearLayout-->
-            <!--                android:id="@+id/llHeaderBBU"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:gravity="center_vertical"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent">-->
+                <LinearLayout
+                    android:id="@+id/llRectificador"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-            <!--                <ImageView-->
-            <!--                    android:layout_width="35dp"-->
-            <!--                    android:layout_height="35dp"-->
-            <!--                    android:layout_marginStart="8dp"-->
-            <!--                    android:src="@mipmap/ic_servidores_foreground" />-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewRectificador2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="8dp" />
 
-            <!--                <TextView-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginStart="10dp"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:text="BBU"-->
-            <!--                    android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-            <!--                    android:textStyle="bold" />-->
+                </LinearLayout>
+            </FrameLayout>
 
+            <FrameLayout
+                android:id="@+id/frameOtros"
+                android:layout_width="333dp"
+                android:layout_height="250dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameRectificador">
 
-            <!--            </LinearLayout>-->
-            <!--        </FrameLayout>-->
-            <!--            <FrameLayout-->
-            <!--                android:id="@+id/frameRRU"-->
-            <!--                android:layout_width="380dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/frameBBU"-->
-            <!--                tools:layout_editor_absoluteX="19dp">-->
+                <LinearLayout
+                    android:id="@+id/llHeaderOtros"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/llHeaderRRU"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:orientation="horizontal"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent">-->
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@mipmap/ic_servidores_foreground" />
 
-            <!--                    <ImageView-->
-            <!--                        android:layout_width="35dp"-->
-            <!--                        android:layout_height="35dp"-->
-            <!--                        android:layout_marginStart="8dp"-->
-            <!--                        android:src="@mipmap/ic_servidores_foreground" />-->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Otros"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textStyle="bold" />
 
-            <!--                    <TextView-->
-            <!--                        android:layout_width="0dp"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_marginStart="10dp"-->
-            <!--                        android:layout_weight="1"-->
-            <!--                        android:text="RRU"-->
-            <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-            <!--                        android:textStyle="bold" />-->
+                </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/llOtros"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-            <!--                </LinearLayout>-->
-            <!--            </FrameLayout>-->
-            <!--            <FrameLayout-->
-            <!--                android:id="@+id/frameBateria"-->
-            <!--                android:layout_width="380dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/frameRRU"-->
-            <!--                tools:layout_editor_absoluteX="19dp">-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewOtros"
+                        android:layout_width="323dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="8dp" />
 
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/llHeaderBateria"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:orientation="horizontal"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent">-->
-
-            <!--                    <ImageView-->
-            <!--                        android:layout_width="35dp"-->
-            <!--                        android:layout_height="35dp"-->
-            <!--                        android:layout_marginStart="8dp"-->
-            <!--                        android:src="@mipmap/ic_servidores_foreground" />-->
-
-            <!--                    <TextView-->
-            <!--                        android:layout_width="0dp"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_marginStart="10dp"-->
-            <!--                        android:layout_weight="1"-->
-            <!--                        android:text="Bateria"-->
-            <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-            <!--                        android:textStyle="bold" />-->
-            <!--                </LinearLayout>-->
-            <!--            </FrameLayout>-->
-            <!--            <FrameLayout-->
-            <!--                android:id="@+id/frameUPS"-->
-            <!--                android:layout_width="380dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/frameBateria"-->
-            <!--                tools:layout_editor_absoluteX="19dp">-->
-
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/llHeaderUPS"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:orientation="horizontal"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent">-->
-
-            <!--                    <ImageView-->
-            <!--                        android:layout_width="35dp"-->
-            <!--                        android:layout_height="35dp"-->
-            <!--                        android:layout_marginStart="8dp"-->
-            <!--                        android:src="@mipmap/ic_servidores_foreground" />-->
-
-            <!--                    <TextView-->
-            <!--                        android:layout_width="0dp"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_marginStart="10dp"-->
-            <!--                        android:layout_weight="1"-->
-            <!--                        android:text="UPS"-->
-            <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-            <!--                        android:textStyle="bold" />-->
-            <!--                </LinearLayout>-->
-            <!--            </FrameLayout>-->
+                </LinearLayout>
+            </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bottonCrear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="32dp"
+        android:backgroundTint="@color/color_accent"
+        android:src="@drawable/baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:tint="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

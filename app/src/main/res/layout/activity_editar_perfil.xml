@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Perfil"
-            android:textColor="@color/white"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="27sp" />
@@ -116,6 +115,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="Editar"
+                    android:backgroundTint="#00FFFFFF"
                     android:textColor="#E8B92C"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -206,7 +206,8 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llHeader">
+                    app:layout_constraintTop_toBottomOf="@id/llHeader"
+                    tools:ignore="NotSibling">
 
                     <TextView
                         android:id="@+id/tituloDepartamento"
@@ -218,7 +219,7 @@
                         android:text="Nombre"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/nombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -252,7 +253,7 @@
                         android:text="Apellido"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/apellido"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -287,7 +288,7 @@
                         android:text="DNI"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/dni"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -362,7 +363,7 @@
                         android:text="Domicilio"
                         android:textSize="16dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/domicilio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

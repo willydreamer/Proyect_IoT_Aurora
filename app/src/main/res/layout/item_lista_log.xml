@@ -3,64 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="320dp"
-        android:layout_height="76dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
-            android:layout_width="329dp"
-            android:layout_height="76dp"
-            android:background="@drawable/boton_redondeado"
-            android:backgroundTint="#FAF7F7">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/textView27"
-                android:layout_width="122dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="9dp"
                 android:text="Fecha"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView28"
-                android:layout_width="124dp"
+                android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="29dp"
                 android:text="Actividad"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView29"
-                android:layout_width="121dp"
+                android:layout_width="242dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="21dp"
                 android:layout_marginTop="49dp"
                 android:text="Descripción"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/imageView13"
-                android:layout_width="37dp"
-                android:layout_height="34dp"
+                android:layout_width="67dp"
+                android:layout_height="59dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="269dp"
-                android:layout_marginTop="18dp"
-                app:srcCompat="@drawable/flechaderecha" />
+                android:layout_marginStart="273dp"
+                android:layout_marginTop="0dp"
+                app:srcCompat="@drawable/arrow_forward_ios_24px" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

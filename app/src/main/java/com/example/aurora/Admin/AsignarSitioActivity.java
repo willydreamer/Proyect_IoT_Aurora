@@ -45,7 +45,6 @@ public class AsignarSitioActivity extends AppCompatActivity {
 
     public void mostrarDialog2() {
 
-
         //Usuario supervisor2 = (Usuario) getIntent().getSerializableExtra("supervisor");
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -105,21 +104,8 @@ public class AsignarSitioActivity extends AppCompatActivity {
                 intent.putExtra("supervisor",supervisor);
                 startActivity(intent);
             });
-            if (sitio.getSupervisor() == null) {
-                sitio.setSupervisor(new ArrayList<>());
-            }
-            //sitio.getSupervisor().add(supervisor_copy);
-//            db.collection("sitios")
             alertDialog2.show();
-//                    .document(sitio.getIdSitio())
-//                    //.set(sitio)
-//                    .set(sitioMap)
-//                    .addOnSuccessListener(unused -> {
-//                        Log.d("msg-test", "supervisor asignado exitosamente");
-//                    })
-//                    .addOnFailureListener(e -> {
-//                        Log.e("msg-test", "Error al asignar supervisor al sitio", e);
-//                    });
+            
         });
 
         alertDialog.setNegativeButton("Cancelar", (dialogInterface, i) -> {

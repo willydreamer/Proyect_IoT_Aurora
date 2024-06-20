@@ -46,9 +46,7 @@ public class CrearSupervisorActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
 
-
     ActivityCrearSupervisorBinding binding;
-
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_PICK = 2;

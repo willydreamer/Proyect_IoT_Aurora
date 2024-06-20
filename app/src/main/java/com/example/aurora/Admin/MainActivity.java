@@ -47,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        String fragmentToLoad = getIntent().getStringExtra("fragment");
+        if (fragmentToLoad != null && fragmentToLoad.equals("sitios")) {
+            replaceFragment(new FragmentSitios());
+        }
+
     }
     private  void replaceFragment (Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();

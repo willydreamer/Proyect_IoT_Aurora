@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Superadmin.SuperAdminLogDetalles"
+
+    android:background="@drawable/fondosupervisor">
+
+
+    <TextView
+        android:id="@+id/activitytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Actividad:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07" />
+
+    <TextView
+        android:id="@+id/descriptiontext"
+        android:layout_width="322dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="40dp"
+        android:shadowColor="#252525"
+        android:text="Descripción:"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acti" />
+
+    <TextView
+        android:id="@+id/acti"
+        android:layout_width="318dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="116dp"
+        android:backgroundTint="#FAFAFA"
+        android:text="Actividad:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activitytext" />
+
+    <TextView
+        android:id="@+id/timestamp"
+        android:layout_width="315dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="40dp"
+        android:text="Fecha:"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptiontext" />
+
+    <TextView
+        android:id="@+id/sitionombre"
+        android:layout_width="314dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="40dp"
+        android:text="Sitio:"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.443"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user" />
+
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="312dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="40dp"
+        android:text="Usuario:"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timestamp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

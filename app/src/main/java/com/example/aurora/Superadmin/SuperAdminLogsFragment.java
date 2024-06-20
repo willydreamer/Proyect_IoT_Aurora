@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Adapter.ListaLogAdapter;
 import com.example.aurora.Bean.Log;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.General.LoginFragment;
 import com.example.aurora.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -104,17 +105,6 @@ public class SuperAdminLogsFragment extends Fragment {
         adapter = new ListaLogAdapter(logList, getContext());
         recyclerView.setAdapter(adapter);
 
-        Button cerrar = view.findViewById(R.id.button15);
-        cerrar.setOnClickListener(v->{
-            // Cerrar sesión
-            FirebaseAuth.getInstance().signOut();
-
-            // Redirigir a LoginFragment (que es una actividad)
-            Intent intent = new Intent(getActivity(), LoginFragment.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            getActivity().finish();
-        });
 
         logsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -122,14 +112,30 @@ public class SuperAdminLogsFragment extends Fragment {
                 if (error != null) {
                     return;
                 }
-
                 logList.clear();
                 for (DocumentSnapshot doc : value.getDocuments()) {
                     Log log = doc.toObject(Log.class);
+                    db.collection("usuarios").document(log.getIdUsuario())
+                            .get()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful() && task.getResult() != null) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Usuario usuario = document.toObject(Usuario.class);
+                                    if (usuario != null) {
+                                        usuario.setIdUsuario(document.getId());
+                                        log.setUsuario(usuario);
+                                    }
+                                } else {
+                                    android.util.Log.d("msg-test", "Error getting document: ", task.getException());
+                                }
+                            });
                     logList.add(log);
                 }
                 adapter.notifyDataSetChanged();
             }
         });
     }
+
+
 }
+

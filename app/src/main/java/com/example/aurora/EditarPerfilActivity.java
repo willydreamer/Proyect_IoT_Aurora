@@ -52,16 +52,11 @@ public class EditarPerfilActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_PICK = 2;
 
     private Uri imagenUri;
-
     private Button editar;
-
     private Button subirFoto;
-
     private Button guardar;
 
-
     private static final String TAG = "MainActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +101,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                                                 .into(fotoUsuario);
                                     }
 
-                                    binding.textViewNamePrincipal.setText(usuario.getIdUsuario());
+                                    binding.textViewNamePrincipal.setText(usuario.getNombre() + " " + usuario.getApellido());
                                     binding.nombre.setText(usuario.getNombre());
                                     binding.apellido.setText(usuario.getApellido());
                                     binding.dni.setText(usuario.getDni());

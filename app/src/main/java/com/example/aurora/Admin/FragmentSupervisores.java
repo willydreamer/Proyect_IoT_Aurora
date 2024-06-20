@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aurora.Adapter.ListaSupervisoresAdapter;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -48,14 +49,11 @@ public class FragmentSupervisores extends Fragment {
         View view = inflater.inflate(R.layout.admin_fragment_supervisor, container, false);
 
 
-        ImageButton crearBtn = view.findViewById(R.id.button19);
+        FloatingActionButton crearBtn = view.findViewById(R.id.button19);
 
         buscador = view.findViewById(R.id.search1);
 
-
         listaSupervisores = new ArrayList<>();
-
-
 
         recyclerView = view.findViewById(R.id.recyclerview_listasupervisores);
 
@@ -98,11 +96,7 @@ public class FragmentSupervisores extends Fragment {
             }
         });
 
-
-
         obtenerSupervisoresDeFirestore();
-
-
         crearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,18 +106,6 @@ public class FragmentSupervisores extends Fragment {
         });
 
         return view;
-
-
-        //seteamos
-        //ListaSupervisoresAdapter adapter = new ListaSupervisoresAdapter(listaSupervisores);
-        //recyclerView.setAdapter(adapter);
-
-
-        //Crear instancia adapter
-        //ListaSupervisoresAdapter adapter = new ListaSupervisoresAdapter();
-        //adapter.setContext(AdminSupervisoresFragment.this);
-        //binding.recyclerView.setAdapter(adapter);
-        //binding.recyclerView.setLayoutManager(new LinearLayoutManager(AdminSupervisoresFragment.this);
 
     }
 
@@ -172,15 +154,5 @@ public class FragmentSupervisores extends Fragment {
                     }
                 });
     }
-
-    /*public void irInfoSupervisor(View view) {
-
-        //primero crear el intento
-        Intent intent = new Intent(Getactivity.this, InformacionSupervisorActivity.class);
-        //iniciar activity
-        Log.d("Iot", "si");
-        startActivity(intent);
-    }*/
-
 
 }

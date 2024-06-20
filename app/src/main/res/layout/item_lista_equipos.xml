@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="150dp"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="120dp"
+    android:layout_height="150sp">
+
     <RelativeLayout
+        android:layout_width="110dp"
+        android:layout_height="143dp"
         android:background="@drawable/btn_background_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="15dp">
+        app:layout_constraintVertical_bias="0.571">
 
         <ImageView
             android:id="@+id/imagenEquipo2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="42dp"
+            android:layout_height="39dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/perfil_icono"
             android:foregroundGravity="center" />
@@ -28,17 +32,6 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="Cisco ISC - 100 Series"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textTipoEquipo2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textTituloEquipo2"
-            android:gravity="center"
-            android:text="Switch"
-            android:textColor="#3C9AC5"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -47,22 +40,24 @@
             android:id="@+id/textNumeroSerie2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textTipoEquipo2"
+            android:layout_below="@+id/textTituloEquipo2"
+            android:layout_marginTop="-1dp"
             android:gravity="center"
-            android:text="ABC - 123456"
-            android:textSize="12sp" />
+            android:text="ABC - 1234"
+            android:textColor="#9A9A9A"
+            android:textSize="10sp" />
 
         <Button
-            android:id="@+id/buttonVer"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
+            android:id="@+id/buttonElegir"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
             android:layout_below="@id/textNumeroSerie2"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:backgroundTint="#3F51B5"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#368280"
             android:padding="0dp"
             android:text="Ver"
             android:textAlignment="center"

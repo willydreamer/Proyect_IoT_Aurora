@@ -84,7 +84,7 @@ public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposA
                     .into(holder.fotoEquipo);
         }
         context = holder.itemView.getContext();
-        Button botonVer = holder.itemView.findViewById(R.id.buttonVer);
+        Button botonVer = holder.itemView.findViewById(R.id.buttonElegir);
         botonVer.setOnClickListener(view -> {
             //if(s.getEncargado() == null || s.getEncargado().isEmpty()){
             Intent intent = new Intent(context, InformacionEquipoActivity.class);
@@ -113,7 +113,10 @@ public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposA
     }
 
 
-
+    public void updateList(ArrayList<EquipoAdmin> newList) {
+        listaEquipos = newList;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         //Este método debe indicar la cantidad total de elementos, en nuestro caso, del

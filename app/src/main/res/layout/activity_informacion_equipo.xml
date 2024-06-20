@@ -74,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="530dp"
             android:layout_marginTop="270dp"
+            android:paddingBottom="45dp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="16dp">
 
@@ -114,7 +115,8 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="Editar"
-                        android:textColor="#E8B92C"
+                        android:textColor="@color/white"
+                        android:background="@drawable/boton_redondeado_verde_claro"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                     <Button
@@ -356,10 +358,10 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginStart="8dp"
-                        android:src="@mipmap/ic_servidores_foreground" />
+                        android:src="@drawable/photo_library_24px" />
 
                     <TextView
-                        android:layout_width="25dp"
+                        android:layout_width="88dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
@@ -368,7 +370,7 @@
                         android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="250dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent">
 
                         <Button
@@ -396,227 +398,32 @@
 
                 </LinearLayout>
 
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewFotosEquipos"
-                    android:layout_width="375dp"
-                    android:layout_height="204dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/llHeader3"
-                    />
-
-                <!--<LinearLayout
-                    android:id="@+id/llEquipos"
-                    android:layout_width="375dp"
-                    android:layout_height="204dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/lastcontainer"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llHeader3">
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="5dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="150dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                app:cardCornerRadius="15dp"
-                                app:cardElevation="2dp">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:id="@+id/imagenEquipo1"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="8dp"
-                                        android:background="@drawable/perfil_icono"
-                                        android:foregroundGravity="center" />
-
-                                    <TextView
-                                        android:id="@+id/textTituloEquipo1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/imagenEquipo1"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Cisco ISC 100 Series"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/textTipoEquipo1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTituloEquipo1"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Router"
-                                        android:textColor="#3C9AC5"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-
-                                    <TextView
-                                        android:id="@+id/textNumeroSerie1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTipoEquipo1"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="ABC - 123456"
-                                        android:textSize="12sp" />
-
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="150dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                app:cardCornerRadius="15dp"
-                                app:cardElevation="2dp">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:id="@+id/imagenEquipo2"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="8dp"
-                                        android:background="@drawable/perfil_icono"
-                                        android:foregroundGravity="center" />
-
-                                    <TextView
-                                        android:id="@+id/textTituloEquipo2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/imagenEquipo2"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Cisco ISC 100 Series"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/textTipoEquipo2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTituloEquipo2"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Router"
-                                        android:textColor="#3C9AC5"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-
-                                    <TextView
-                                        android:id="@+id/textNumeroSerie2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTipoEquipo2"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="ABC - 123456"
-                                        android:textSize="12sp" />
-
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="150dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                app:cardCornerRadius="15dp"
-                                app:cardElevation="2dp">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:id="@+id/imagenEquipo3"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="8dp"
-                                        android:background="@drawable/perfil_icono"
-                                        android:foregroundGravity="center" />
-
-                                    <TextView
-                                        android:id="@+id/textTituloEquipo3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/imagenEquipo3"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Cisco ISC 100 Series"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/textTipoEquipo3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTituloEquipo3"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Router"
-                                        android:textColor="#3C9AC5"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-
-                                    <TextView
-                                        android:id="@+id/textNumeroSerie3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTipoEquipo3"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="ABC - 123456"
-                                        android:textSize="12sp" />
-
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-
-
-                        </LinearLayout>
-                    </HorizontalScrollView>
-
-                </LinearLayout> -->
+                    app:layout_constraintTop_toBottomOf="@id/llHeader3" />
 
                 <LinearLayout
+                    android:id="@+id/lastcontainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerViewFotosEquipos"
+                    android:layout_marginTop="10dp"
                     tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="933dp">
+                    tools:layout_editor_absoluteY="933dp"
+                   >
 
                     <Button
                         android:id="@+id/buttonEliminarSitio"
-                        android:layout_width="160dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#F44336"
                         android:gravity="center"

@@ -2,13 +2,19 @@ package com.example.aurora.Admin;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aurora.Bean.Sitio;
@@ -22,10 +28,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 
 public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener{
@@ -34,6 +46,12 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
     EditText txtLatitud, txtLongitud;
     GoogleMap mMap;
     Dialog mapDialog;
+
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_PICK = 2;
+    private ImageView imagen;
+    private String imageUrl;
+    private Uri imagenUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,26 +90,63 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
         txtLongitud = binding.editLongitud;
         binding.btnSelectCoordinates.setOnClickListener(v -> openMapDialog());
 
+        //Imagen
+        // Botón para abrir la galería
+
+        imagen = findViewById(R.id.imageView3);
+        Button botonSubirFoto =  findViewById(R.id.buttonSubirFoto);
+        botonSubirFoto.setOnClickListener(v -> {
+            Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            //todas las imagenes
+            pickPhotoIntent.setType("image/*");
+            startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
+        });
+
     }
 
     private void guardarSitio() {
-        // Obtener los datos ingresados por el usuario
-        String departamento = binding.editDepartamento.getText().toString();
-        String idSitio = generarIdSitio(departamento);
-        String provincia = binding.editProvincia.getText().toString();
-        String distrito = binding.editDistrito.getText().toString();
-        String tipoDeZona = binding.spinnerTipoZona.getSelectedItem().toString();
-        //String codigoUbigeo = binding.editCodigoUbigeo.getText().toString();
-        String latitud = binding.editLatitud.getText().toString();
-        String longitud = binding.editLongitud.getText().toString();
-        String operadora = binding.spinnerOperadora.getSelectedItem().toString();
-        ArrayList<Usuario> supervisor = new ArrayList<>();
-        String encargado = "";
+        if (imagenUri != null) {
+            // Obtener los datos ingresados por el usuario
+            String departamento = binding.editDepartamento.getText().toString();
+            String idSitio = generarIdSitio(departamento);
+            String provincia = binding.editProvincia.getText().toString();
+            String distrito = binding.editDistrito.getText().toString();
+            String tipoDeZona = binding.spinnerTipoZona.getSelectedItem().toString();
+            String latitud = binding.editLatitud.getText().toString();
+            String longitud = binding.editLongitud.getText().toString();
+            String operadora = binding.spinnerOperadora.getSelectedItem().toString();
+            //ArrayList<Usuario> supervisor = new ArrayList<>();
+            String encargado = "";
 
-        // Crear un objeto Sitio con los datos obtenidos
-        //Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora, encargado);
-        Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora,encargado,supervisor);
+            // Crear un objeto Sitio con los datos obtenidos
 
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            StorageReference imageReference = storageReference.child("fotosUsuario/*" + System.currentTimeMillis() + ".jpg");
+
+            UploadTask uploadTask = imageReference.putFile(imagenUri);
+            uploadTask.addOnSuccessListener(taskSnapshot -> {
+                imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                    imageUrl = uri.toString();
+                    guardarSitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora, encargado, imageUrl);
+
+                });
+            }).addOnFailureListener(e -> {
+                Toast.makeText(CrearSitioActivity.this, "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            });
+
+        }else {
+                Toast.makeText(this, "Foto no seleccionada", Toast.LENGTH_LONG).show();
+            }
+    }
+    private String generarIdSitio(String departamento) {
+        String letrasDepartamento = departamento.substring(0, Math.min(departamento.length(), 3)).toUpperCase();
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
+        return letrasDepartamento + numeroAleatorio;
+    }
+
+    public void guardarSitio(String idSitio, String departamento, String provincia, String distrito, String tipoDeZona, String latitud, String longitud,String operadora,String encargado,String imageUrl) {
+        Sitio sitio = new Sitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora, encargado, imageUrl);
 
         // Guardar los datos en Firestore
         db.collection("sitios")
@@ -101,19 +156,17 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
                     Log.d("msg-test", "Sitio guardado exitosamente");
                     Toast.makeText(CrearSitioActivity.this, "Sitio creado exitosamente", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(CrearSitioActivity.this, MainActivity.class);
+                    intent.putExtra("fragment", "sitios");
                     startActivity(intent);
+                    finish(); // Cerrar la actividad actual
                 })
                 .addOnFailureListener(e -> {
                     Log.e("msg-test", "Error al guardar el sitio", e);
                     Toast.makeText(CrearSitioActivity.this, "Error al crear el sitio", Toast.LENGTH_SHORT).show();
                 });
+
     }
-    private String generarIdSitio(String departamento) {
-        String letrasDepartamento = departamento.substring(0, Math.min(departamento.length(), 3)).toUpperCase();
-        Random random = new Random();
-        int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
-        return letrasDepartamento + numeroAleatorio;
-    }
+
     private void openMapDialog() {
 
         mapDialog = new Dialog(this);
@@ -180,6 +233,33 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
         LatLng selectedLocation = new LatLng(latLng.latitude, latLng.longitude);
         mMap.addMarker(new MarkerOptions().position(selectedLocation).title(""));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedLocation));
+    }
+
+    //basado en gpt
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                imagen.setImageBitmap(imageBitmap);
+                //imagenUri = getImageUri(imageBitmap);
+                setImageUriWithCircularTransformation(imagenUri);
+            } else if (requestCode == REQUEST_IMAGE_PICK && data != null) {
+                imagenUri = data.getData();
+                imagen.setImageURI(imagenUri);
+                setImageUriWithCircularTransformation(imagenUri);
+            }
+        }
+    }
+
+    private void setImageUriWithCircularTransformation(Uri uri) {
+        Picasso.get()
+                .load(uri)
+                .placeholder(R.drawable.baseline_account_circle_24) // Reemplaza con tu imagen por defecto
+                .transform(new CropCircleTransformation())
+                .into(imagen);
     }
 
 }

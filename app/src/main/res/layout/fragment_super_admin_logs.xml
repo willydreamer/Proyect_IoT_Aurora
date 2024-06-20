@@ -8,12 +8,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:id="@+id/button15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="cerrar sesion" />
-
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"

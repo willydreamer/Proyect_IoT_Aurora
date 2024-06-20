@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.aurora.Adapter.ListaEquiposAdapterAdmin;
 import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,14 +30,20 @@ public class SupervisorAgregarFragment extends Fragment {
 
     private String numSerie;
     FirebaseFirestore db;
+    private FirebaseAuth auth;
 
     ListaEquiposAdapterAdmin adapter;
     ArrayList<EquipoAdmin> equipoAdminArrayList;
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_supervisor_agregar, container, false);
+
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         view.findViewById(R.id.scan_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +65,7 @@ public class SupervisorAgregarFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        ArrayList<EquipoAdmin> equipoAdmins = new ArrayList<>();
         if(result != null) {
             if(result.getContents() == null) {
                 Log.d("ScanFragment", "Escaneo cancelado");
@@ -65,28 +73,18 @@ public class SupervisorAgregarFragment extends Fragment {
                 Log.d("ScanFragment", "Escaneo exitoso: " + result.getContents());
                 numSerie = result.getContents();
                 String contenidoEscaneado = numSerie.toString();
-                ((Supervisor) getActivity()).handleScanResult(contenidoEscaneado);
-                buscarEquiposPorNumSerie(contenidoEscaneado);
-                if(equipoAdmins.isEmpty()){
-                    showToast("Ups no pudimos encontrarlo.");
-                } else if (equipoAdmins.size() == 1) {
-                    showToast("¡Equipo encontrado! Visualiza su información a continuación.");
-                    Intent intent = new Intent(getActivity(), SupervisorInfoEquiposActivity.class);
-                    intent.putExtra("equipoEncontrado", equipoAdmins.get(0));
-                    startActivity(intent);
-                }else{
-                    showToast("Ups, hemos encontrado más de 1 equipo con ese código. Comunícate con Soporte para arreglarlo.");
-                }
+                //((Supervisor) getActivity()).handleScanResult(contenidoEscaneado);
+                Log.d("ScanFragment", "Escaneo string: " + contenidoEscaneado);
+                buscarEquiposPorNumSerie(contenidoEscaneado,equipoAdmins);
+
             }
         }
     }
 
-    ArrayList<EquipoAdmin> equipoAdmins = new ArrayList<>();
-    private void buscarEquiposPorNumSerie(String searchText) {
+
+    private void buscarEquiposPorNumSerie(String searchText, ArrayList<EquipoAdmin> equipoAdmins1) {
         db.collection("equipos")
-                .orderBy("numeroDeSerie")
-                .startAt(searchText)
-                .endAt(searchText + "\uf8ff")
+                .whereEqualTo("idEquipo",searchText)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
@@ -95,10 +93,23 @@ public class SupervisorAgregarFragment extends Fragment {
                         }
 
                         if (snapshots != null) {
+                            Log.d("DBCOLLECTION", "HAY SNAPSHOT ");
 
                             for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Log.d("DBCOLLECTION:", document.toString());
                                 EquipoAdmin equipoAdmin = document.toObject(EquipoAdmin.class);
-                                equipoAdmins.add(equipoAdmin);
+                                Log.d("AOISDNAONDASOND",equipoAdmin.getIdEquipo() + " " + equipoAdmin.getDescripcion());
+                                equipoAdmins1.add(equipoAdmin);
+                            }
+                            if(equipoAdmins1.isEmpty()){
+                                showToast("Ups no pudimos encontrarlo.");
+                            } else if (equipoAdmins1.size() == 1) {
+                                showToast("¡Equipo encontrado! Visualiza su información a continuación.");
+                                Intent intent = new Intent(getActivity(), SupervisorInfoEquiposActivity.class);
+                                intent.putExtra("equipoEncontrado", equipoAdmins1.get(0));
+                                startActivity(intent);
+                            }else{
+                                showToast("Ups, hemos encontrado más de 1 equipo con ese código. Comunícate con Soporte para arreglarlo.");
                             }
 
                         }

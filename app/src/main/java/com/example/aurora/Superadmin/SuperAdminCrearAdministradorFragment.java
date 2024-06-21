@@ -21,14 +21,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
 import java.util.Random;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
@@ -64,6 +68,7 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
 
     private Uri imagenUri;
     private Button botonSubirFoto;
+    private FirebaseAuth auth;
 
     public SuperAdminCrearAdministradorFragment() {
         // Required empty public constructor
@@ -169,6 +174,13 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
                                 Log.e("msg-test3", "Error al guardar el administrador", e);
                                 Toast.makeText(getContext(), "Error al crear el administrador", Toast.LENGTH_SHORT).show();
                             });
+
+                    FirebaseUser user = auth.getCurrentUser();
+                    if (user != null) {
+                        String user1 = auth.getUid();
+                        Log.d("USUARIO", user1);
+                        crearLog("Se creo un Administrador", "Se creo un nuevo administrador", user1, null);
+                    }
                 }).addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
@@ -212,6 +224,23 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
                 .into(imagen);
     }
 
+
+    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio){
+        Date fechaActual = new Date();
+
+        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio);
+
+        db.collection("logs")
+                .add(nuevoLog)
+                .addOnSuccessListener(documentReference -> {
+                    Log.d("msg-test2", "Log guardado exitosamente");
+                    Toast.makeText(getContext(), "Actividad Registrada", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("msg-test3", "Error al guardar el log", e);
+                    Toast.makeText(getContext(), "Error al registrar la activada", Toast.LENGTH_SHORT).show();
+                });
+    }
 
 
 }

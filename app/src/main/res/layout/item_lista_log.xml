@@ -33,14 +33,14 @@
 
             <TextView
                 android:id="@+id/textView28"
-                android:layout_width="233dp"
+                android:layout_width="252dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="29dp"
                 android:text="Actividad"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -60,8 +60,8 @@
                 android:layout_height="59dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="273dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginStart="278dp"
+                android:layout_marginTop="9dp"
                 app:srcCompat="@drawable/arrow_forward_ios_24px" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

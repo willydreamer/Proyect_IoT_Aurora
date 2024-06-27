@@ -61,7 +61,7 @@ public class ListaUsuariosAdapter extends RecyclerView.Adapter<ListaUsuariosAdap
         ImageView editImageView;
         ImageView foto;
 
-        Button button;
+        ImageView button;
 
         Usuario usuario;
 
@@ -72,7 +72,7 @@ public class ListaUsuariosAdapter extends RecyclerView.Adapter<ListaUsuariosAdap
             rolUsuario = itemView.findViewById(R.id.textView26);
             editImageView = itemView.findViewById(R.id.imageView16);
             foto = itemView.findViewById(R.id.imageView10);
-            button = itemView.findViewById(R.id.button13);
+            button = itemView.findViewById(R.id.imageView4);
         }
         public void bind(Usuario usuario) {
             nombreUsuario.setText(usuario.getNombre());

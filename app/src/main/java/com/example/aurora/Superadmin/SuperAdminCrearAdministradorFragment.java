@@ -58,6 +58,8 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
     private EditText editTextCorreo;
     private EditText editTextDomicilio;
     private EditText editTextTelefono;
+
+    private EditText editTextDNI;
     private Button buttonGuardar;
 
     private FirebaseFirestore db;
@@ -68,6 +70,7 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
 
     private Uri imagenUri;
     private Button botonSubirFoto;
+    private Button activobutton;
     private FirebaseAuth auth;
 
     public SuperAdminCrearAdministradorFragment() {
@@ -101,6 +104,8 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
         }
 
         db = FirebaseFirestore.getInstance();
+
+
     }
 
     @Override
@@ -110,15 +115,21 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_super_admin_crear_administrador, container, false);
 
         editTextNombre = view.findViewById(R.id.editTextText);
-        editTextApellido = view.findViewById(R.id.editTextText3);
-        editTextCorreo = view.findViewById(R.id.editTextText2);
+        editTextApellido = view.findViewById(R.id.editTextText2);
+        editTextCorreo = view.findViewById(R.id.editTextText3);
         editTextDomicilio = view.findViewById(R.id.editTextText4);
         editTextTelefono = view.findViewById(R.id.editTextText5);
         buttonGuardar = view.findViewById(R.id.button8);
+        editTextDNI = view.findViewById(R.id.editDNI);
         //obtenemos la imagen
         imagen = view.findViewById(R.id.fotoUsuario);
         //obtener boton subir
         botonSubirFoto =  view.findViewById(R.id.button12);
+
+        activobutton = view.findViewById(R.id.button10);
+        activobutton.setOnClickListener(v -> {
+            actualizarActivoCrear(view);
+        });
 
         buttonGuardar.setOnClickListener(v -> guardarAdministrador());
 
@@ -139,6 +150,16 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
         String correo = editTextCorreo.getText().toString().trim();
         String domicilio = editTextDomicilio.getText().toString().trim();
         String telefono = editTextTelefono.getText().toString().trim();
+        String act = activobutton.getText().toString().trim();
+        String dni = editTextDNI.getText().toString().trim();
+        String estado;
+        if(act.equals("Estado: activo")){
+            estado = "Activo";
+        } else if (act.equals("Estado: inactivo")) {
+            estado = "Inactivo";
+        } else {
+            estado = "Activo";
+        }
 
 
         if (TextUtils.isEmpty(nombre) || TextUtils.isEmpty(apellido) || TextUtils.isEmpty(correo) ||
@@ -163,7 +184,7 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
                     String imageUrl = uri.toString();
 
                     //y la seteamos para el nuevo usuario
-                    Usuario nuevoAdministrador = new Usuario(idadmin, nombre, apellido, null, correo, domicilio, telefono, "administrador", "activo", null, imageUrl);
+                    Usuario nuevoAdministrador = new Usuario(idadmin, nombre, apellido, dni, correo, domicilio, telefono, "administrador", estado, null, imageUrl);
                     db.collection("usuarios")
                             .add(nuevoAdministrador)
                             .addOnSuccessListener(documentReference -> {
@@ -175,9 +196,10 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
                                 Toast.makeText(getContext(), "Error al crear el administrador", Toast.LENGTH_SHORT).show();
                             });
 
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
                     FirebaseUser user = auth.getCurrentUser();
                     if (user != null) {
-                        String user1 = auth.getUid();
+                        String user1 = user.getUid();
                         Log.d("USUARIO", user1);
                         crearLog("Se creo un Administrador", "Se creo un nuevo administrador", user1, null);
                     }
@@ -240,6 +262,19 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
                     Log.e("msg-test3", "Error al guardar el log", e);
                     Toast.makeText(getContext(), "Error al registrar la activada", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+
+    public void actualizarActivoCrear(View view){
+
+        String textobutton = activobutton.getText().toString().trim();
+
+        if(textobutton.equals("Estado: activo")){
+            activobutton.setText("Estado: inactivo");
+        } else if (textobutton.equals("Estado: inactivo")) {
+            activobutton.setText("Estado: activo");
+        }
+
     }
 
 

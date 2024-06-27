@@ -71,7 +71,16 @@ public class ListaLogAdapter extends RecyclerView.Adapter<ListaLogAdapter.LogVie
             String fecha = String.valueOf(hola);
             textViewFecha.setText(fecha);
             textViewActividad.setText(log.getActividad());
-            textViewDescripcion.setText(log.getDescription());
+
+            String olausuario;
+
+            if(log.getUsuario()!= null) {
+                olausuario = log.getUsuario().getNombre() + " " +log.getUsuario().getApellido();
+            }else {
+                olausuario = "Sin Usuario";
+            }
+
+            textViewDescripcion.setText(olausuario);
             imageView13.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

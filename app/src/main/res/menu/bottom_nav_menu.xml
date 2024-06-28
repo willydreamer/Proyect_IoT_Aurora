@@ -3,23 +3,23 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/home_24px"
+        android:icon="@drawable/group_24px"
         android:title="Usuarios" />
 
     <item
         android:id="@+id/agregar"
-        android:title="Crear Supervisor"
+        android:title="Crear Administrador"
         android:icon="@drawable/person_add_24px"
         />
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/dashboard_24px"
+        android:icon="@drawable/history_24px"
         android:title="Registros" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/notifications_24px"
+        android:icon="@drawable/account_circle_24px"
         android:title="Mi Perfil" />
 
     <item

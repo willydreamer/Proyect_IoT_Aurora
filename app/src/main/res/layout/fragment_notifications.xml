@@ -10,86 +10,64 @@
 
 
     <Button
-        android:id="@+id/button10"
-        android:layout_width="114dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="250dp"
-        android:background="@drawable/boton_redondeado"
-        android:backgroundTint="#96E6A7"
-        android:text="Estado: activo"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toEndOf="@+id/button12"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
         android:id="@+id/button12"
-        android:layout_width="105dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="250dp"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#96E6A7"
         android:text="Subir foto"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.251"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.327" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/fotoUsuario"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        android:background="@drawable/circle"
-        app:circularflow_defaultRadius="15sp"
-        app:circularflow_radiusInDP="15sp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.135"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="30dp"
-        android:text="Mi Perfil"
-        android:textSize="16sp"
+        android:text="Mi perfil"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.208"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintVertical_bias="0.046" />
 
     <TextView
         android:id="@+id/textViewN"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginTop="300dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.41" />
 
     <TextView
         android:id="@+id/textViewA"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +78,7 @@
         android:id="@+id/textViewC"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,10 +86,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewA" />
 
     <TextView
-        android:id="@+id/textViewD"
+        android:id="@+id/textViewI"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,10 +97,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewC" />
 
     <TextView
+        android:id="@+id/textViewD"
+        android:layout_width="341dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/boton_redondeado"
+        android:clickable="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewI" />
+
+    <TextView
         android:id="@+id/textViewT"
         android:layout_width="341dp"
         android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/boton_redondeado"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
@@ -208,8 +197,8 @@
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="210dp"
-        android:layout_height="18dp"
+        android:layout_width="213dp"
+        android:layout_height="29dp"
         android:layout_marginStart="90dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
@@ -218,15 +207,14 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewN"
         app:layout_constraintEnd_toEndOf="@+id/textViewN"
-        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintHorizontal_bias="0.682"
         app:layout_constraintStart_toStartOf="@+id/textViewN"
-        app:layout_constraintTop_toTopOf="@+id/textViewN"
-        app:layout_constraintVertical_bias="0.44" />
+        app:layout_constraintTop_toTopOf="@+id/textViewN" />
 
     <EditText
         android:id="@+id/editTextText2"
-        android:layout_width="207dp"
-        android:layout_height="19dp"
+        android:layout_width="213dp"
+        android:layout_height="29dp"
         android:layout_marginStart="90dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
@@ -235,15 +223,14 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewA"
         app:layout_constraintEnd_toEndOf="@+id/textViewA"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="@+id/textViewA"
-        app:layout_constraintTop_toTopOf="@+id/textViewA"
-        app:layout_constraintVertical_bias="0.518" />
+        app:layout_constraintTop_toTopOf="@+id/textViewA" />
 
     <EditText
         android:id="@+id/editTextText3"
-        android:layout_width="203dp"
-        android:layout_height="19dp"
+        android:layout_width="213dp"
+        android:layout_height="29dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
         android:ems="10"
@@ -258,8 +245,8 @@
 
     <EditText
         android:id="@+id/editTextText4"
-        android:layout_width="208dp"
-        android:layout_height="19dp"
+        android:layout_width="213dp"
+        android:layout_height="29dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
         android:ems="10"
@@ -274,13 +261,12 @@
 
     <EditText
         android:id="@+id/editTextText5"
-        android:layout_width="205dp"
-        android:layout_height="20dp"
+        android:layout_width="213dp"
+        android:layout_height="29dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#E6E2E2"
         android:ems="10"
-        android:inputType="text"
-
+        android:inputType="number"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewT"
         app:layout_constraintEnd_toEndOf="@+id/textViewT"
@@ -290,16 +276,57 @@
         app:layout_constraintVertical_bias="0.538" />
 
     <Button
+        android:id="@+id/button8"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#8BC34A"
+        android:text="Guardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.327" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="DNI"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewI"
+        app:layout_constraintStart_toStartOf="@+id/textViewI"
+        app:layout_constraintTop_toTopOf="@+id/textViewI"
+        app:layout_constraintVertical_bias="0.481" />
+
+    <EditText
+        android:id="@+id/editDNI"
+        android:layout_width="213dp"
+        android:layout_height="29dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="#E6E2E2"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewI"
+        app:layout_constraintEnd_toEndOf="@+id/textViewI"
+        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/textViewI" />
+
+    <Button
         android:id="@+id/close"
         android:layout_width="184dp"
         android:layout_height="47dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/boton_redondeado"
         android:backgroundTint="#B83535"
         android:text="Cerrar Sesión"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewT" />
 

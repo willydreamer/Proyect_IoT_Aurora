@@ -212,18 +212,27 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
                                             .addOnSuccessListener(aVoid -> {
                                                 Log.d("msg-test2", "Administrador actualizado exitosamente");
                                                 Toast.makeText(getContext(), "Administrador actualizado exitosamente", Toast.LENGTH_SHORT).show();
+
+                                                SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola","comotas?");
+
+                                                // Navegar al nuevo fragmento
+                                                ((SuperAdmin) getContext()).getSupportFragmentManager()
+                                                        .beginTransaction()
+                                                        .replace(R.id.container1, fragment)
+                                                        .addToBackStack(null)
+                                                        .commit();
+                                                FirebaseAuth auth = FirebaseAuth.getInstance();
+                                                FirebaseUser user = auth.getCurrentUser();
+                                                if (user != null) {
+                                                    String user1 = user.getUid();
+                                                    Log.d("USUARIO", user1);
+                                                    crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null);
+                                                }
                                             })
                                             .addOnFailureListener(e -> {
                                                 Log.e("msg-test3", "Error al actualizar el administrador", e);
                                                 Toast.makeText(getContext(), "Error al actualizar el administrador", Toast.LENGTH_SHORT).show();
                                             });
-                                    FirebaseAuth auth = FirebaseAuth.getInstance();
-                                    FirebaseUser user = auth.getCurrentUser();
-                                    if (user != null) {
-                                        String user1 = user.getUid();
-                                        Log.d("USUARIO", user1);
-                                        crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null);
-                                    }
 
                                 } else {
                                     Log.e("msg-test4", "No se encontró un administrador con el ID especificado");
@@ -258,18 +267,26 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
                                         .addOnSuccessListener(aVoid -> {
                                             Log.d("msg-test2", "Administrador actualizado exitosamente");
                                             Toast.makeText(getContext(), "Administrador actualizado exitosamente", Toast.LENGTH_SHORT).show();
+                                            SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola","comotas?");
+
+                                            // Navegar al nuevo fragmento
+                                            ((SuperAdmin) getContext()).getSupportFragmentManager()
+                                                    .beginTransaction()
+                                                    .replace(R.id.container1, fragment)
+                                                    .addToBackStack(null)
+                                                    .commit();
+                                            FirebaseAuth auth = FirebaseAuth.getInstance();
+                                            FirebaseUser user = auth.getCurrentUser();
+                                            if (user != null) {
+                                                String user1 = user.getUid();
+                                                Log.d("USUARIO", user1);
+                                                crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null);
+                                            }
                                         })
                                         .addOnFailureListener(e -> {
                                             Log.e("msg-test3", "Error al actualizar el administrador", e);
                                             Toast.makeText(getContext(), "Error al actualizar el administrador", Toast.LENGTH_SHORT).show();
                                         });
-                                FirebaseAuth auth = FirebaseAuth.getInstance();
-                                FirebaseUser user = auth.getCurrentUser();
-                                if (user != null) {
-                                    String user1 = user.getUid();
-                                    Log.d("USUARIO", user1);
-                                    crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null);
-                                }
 
                             } else {
                                 Log.e("msg-test4", "No se encontró un administrador con el ID especificado");
@@ -330,7 +347,7 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
                 })
                 .addOnFailureListener(e -> {
                     Log.e("msg-test3", "Error al guardar el log", e);
-                    Toast.makeText(getContext(), "Error al registrar la activada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error al registrar la activadad", Toast.LENGTH_SHORT).show();
                 });
     }
 

@@ -7,23 +7,6 @@ android:layout_height="match_parent"
 android:background="@drawable/fondosupervisor">
 
 
-<!--<ImageView
-    android:id="@+id/imageView6"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="140dp"
-    android:layout_marginTop="100dp"
-    android:background="@drawable/circle"
-    app:circularflow_defaultRadius="15sp"
-    app:circularflow_radiusInDP="15sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.498"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.154"
-    tools:srcCompat="@tools:sample/avatars" /> -->
-
 <Button
     android:id="@+id/button10"
     android:layout_width="114dp"
@@ -142,7 +125,7 @@ android:background="@drawable/fondosupervisor">
     android:id="@+id/textViewT"
     android:layout_width="341dp"
     android:layout_height="46dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="20dp"
     android:background="@drawable/boton_redondeado"
     android:clickable="false"
     app:layout_constraintEnd_toEndOf="parent"

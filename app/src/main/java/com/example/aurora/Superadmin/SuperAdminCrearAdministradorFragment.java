@@ -190,19 +190,28 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
                             .addOnSuccessListener(documentReference -> {
                                 Log.d("msg-test2", "Administrador guardado exitosamente");
                                 Toast.makeText(getContext(), "Administrador creado exitosamente", Toast.LENGTH_SHORT).show();
+                                SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola","comotas?");
+
+                                // Navegar al nuevo fragmento
+                                ((SuperAdmin) getContext()).getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.container1, fragment)
+                                        .addToBackStack(null)
+                                        .commit();
+                                FirebaseAuth auth = FirebaseAuth.getInstance();
+                                FirebaseUser user = auth.getCurrentUser();
+                                if (user != null) {
+                                    String user1 = user.getUid();
+                                    Log.d("USUARIO", user1);
+                                    crearLog("Se creo un Administrador", "Se creo un nuevo administrador", user1, null);
+                                }
+
                             })
                             .addOnFailureListener(e -> {
                                 Log.e("msg-test3", "Error al guardar el administrador", e);
                                 Toast.makeText(getContext(), "Error al crear el administrador", Toast.LENGTH_SHORT).show();
                             });
 
-                    FirebaseAuth auth = FirebaseAuth.getInstance();
-                    FirebaseUser user = auth.getCurrentUser();
-                    if (user != null) {
-                        String user1 = user.getUid();
-                        Log.d("USUARIO", user1);
-                        crearLog("Se creo un Administrador", "Se creo un nuevo administrador", user1, null);
-                    }
                 }).addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });

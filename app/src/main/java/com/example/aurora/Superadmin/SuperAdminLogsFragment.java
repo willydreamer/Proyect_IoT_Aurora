@@ -115,11 +115,13 @@ public class SuperAdminLogsFragment extends Fragment {
                 logList.clear();
                 for (DocumentSnapshot doc : value.getDocuments()) {
                     Log log = doc.toObject(Log.class);
-                    db.collection("usuarios").document(log.getIdUsuario())
+                    db.collection("usuarios")
+                            .whereEqualTo("idUsuario", log.getIdUsuario())  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
                             .get()
                             .addOnCompleteListener(task -> {
-                                if (task.isSuccessful() && task.getResult() != null) {
-                                    DocumentSnapshot document = task.getResult();
+                                if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
+                                    // Obtener el primer documento que coincide con la consulta
+                                    DocumentSnapshot document = task.getResult().getDocuments().get(0);
                                     Usuario usuario = document.toObject(Usuario.class);
                                     if (usuario != null) {
                                         usuario.setIdUsuario(document.getId());
@@ -129,6 +131,7 @@ public class SuperAdminLogsFragment extends Fragment {
                                     android.util.Log.d("msg-test", "Error getting document: ", task.getException());
                                 }
                             });
+
                     logList.add(log);
                 }
                 adapter.notifyDataSetChanged();

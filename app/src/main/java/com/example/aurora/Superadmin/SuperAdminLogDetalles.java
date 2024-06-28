@@ -31,6 +31,15 @@ public class SuperAdminLogDetalles extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    TextView fecha;
+    TextView idUsuario;
+    TextView titulo;
+    TextView acti;
+    TextView sitio;
+    TextView descrip;
+
+    EditText editActividad, editDescription,editTimestamp,editUsuario,editSitio;
+
     private Log logu;
 
     public SuperAdminLogDetalles() {
@@ -60,40 +69,46 @@ public class SuperAdminLogDetalles extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_super_admin_log_detalles, container, false);
 
-        TextView fecha = view.findViewById(R.id.timestamp);
-        TextView idUsuario = view.findViewById(R.id.user);
-        TextView titulo = view.findViewById(R.id.activitytext);
-        TextView acti = view.findViewById(R.id.acti);
-        TextView sitio = view.findViewById(R.id.sitionombre);
-        TextView descrip = view.findViewById(R.id.descriptiontext);
+         fecha = view.findViewById(R.id.timestamp);
+         idUsuario = view.findViewById(R.id.user);
+         titulo = view.findViewById(R.id.activitytext);
+         acti = view.findViewById(R.id.acti);
+         sitio = view.findViewById(R.id.sitionombre);
+         descrip = view.findViewById(R.id.descriptiontext);
+         editActividad = view.findViewById(R.id.editActividad);
+         editDescription = view.findViewById(R.id.editDescription);
+         editTimestamp = view.findViewById(R.id.editTimestamp);
+         editUsuario = view.findViewById(R.id.editUsuario);
+         editSitio = view.findViewById(R.id.editSitio);
+
 
         android.util.Log.d("SuperAdmin", "Nombre: " + logu.getActividad());
         android.util.Log.d("SuperAdmin", "Apellido: " + logu.getDescription());
 
         if (logu != null) {
-            String olafecha = fecha.getText().toString().trim() + " " + logu.getFecha();
+            String olafecha = "" + logu.getTimestamp();
             String olausuario;
             if(logu.getUsuario()!= null) {
-                olausuario = idUsuario.getText().toString().trim() + " " + logu.getUsuario().getNombre() + " " +logu.getUsuario().getApellido();
+                olausuario = "" + logu.getUsuario().getNombre() + " " +logu.getUsuario().getApellido();
             }else {
-                olausuario = idUsuario.getText().toString().trim() + " Sin Usuario";
+                olausuario = "Sin Usuario";
             }
             String olasitio;
             if(logu.getSitio()!= null) {
-                olasitio = sitio.getText().toString().trim() + " " + logu.getSitio().getIdSitio();
+                olasitio = "" + logu.getSitio().getIdSitio();
             }else {
-                olasitio = sitio.getText().toString().trim() + " Sin Sitio";
+                olasitio ="Sin Sitio";
             }
 
             String olatitulo = titulo.getText().toString().trim() + " " + logu.getActividad();
-            String olaacti = acti.getText().toString().trim()+" " + logu.getActividad();
-            String oladescrip = descrip.getText().toString().trim() + " " + logu.getDescription();
-            fecha.setText(olafecha);
-            idUsuario.setText(olausuario);
+            String olaacti = "" + logu.getActividad();
+            String oladescrip = "" + logu.getDescription();
+            editTimestamp.setText(olafecha);
+            editUsuario.setText(olausuario);
             titulo.setText(olatitulo);
-            acti.setText(olaacti);
-            sitio.setText(olasitio);
-            descrip.setText(oladescrip);
+            editActividad.setText(olaacti);
+            editSitio.setText(olasitio);
+            editDescription.setText(oladescrip);
         }
 
         return view;

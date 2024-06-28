@@ -73,6 +73,7 @@ public class ListaLogAdapter extends RecyclerView.Adapter<ListaLogAdapter.LogVie
             textViewActividad.setText(log.getActividad());
 
             String olausuario;
+            android.util.Log.d("JIJIAJSIJAIDAJS", String.valueOf(log.getUsuario()));
 
             if(log.getUsuario()!= null) {
                 olausuario = log.getUsuario().getNombre() + " " +log.getUsuario().getApellido();

@@ -3,6 +3,7 @@ package com.example.aurora.Admin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Adapter.ListaSupervisoresAdapter;
+import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,10 +32,9 @@ import java.util.ArrayList;
 
 public class FragmentSupervisores extends Fragment {
 
-    //ArrayList<String> listaSupervisores;
 
     ArrayList<Usuario> listaSupervisores;
-    
+
     RecyclerView recyclerView;
 
     FirebaseFirestore db;
@@ -64,12 +65,26 @@ public class FragmentSupervisores extends Fragment {
         listaSupervisores = new ArrayList<>();
 
         // Configurar el adapter y asociarlo al RecyclerView
-        adapter = new ListaSupervisoresAdapter(getContext(),listaSupervisores);
+        adapter = new ListaSupervisoresAdapter(getContext(), listaSupervisores);
         recyclerView.setAdapter(adapter);
+
+        obtenerSupervisoresDeFirestore();
 
 
         //basado en gpt
         buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                buscarSupervisores(newText);
+                return true;
+            }
+        });
+        /*buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 buscarUsuarios(query);
@@ -94,9 +109,8 @@ public class FragmentSupervisores extends Fragment {
                 obtenerSupervisoresDeFirestore();
                 return false;
             }
-        });
+        });*/
 
-        obtenerSupervisoresDeFirestore();
         crearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +123,6 @@ public class FragmentSupervisores extends Fragment {
 
     }
 
-
     private void obtenerSupervisoresDeFirestore() {
         db.collection("usuarios")
                 .get()
@@ -117,7 +130,29 @@ public class FragmentSupervisores extends Fragment {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Usuario supervisor = document.toObject(Usuario.class);
-                            if(supervisor.getRol().equals("supervisor")) {
+                            int validador=1;
+                            if(supervisor.getRol().equals("supervisor") && validador==1) {
+                                listaSupervisores.add(supervisor);
+                                validador = 0;
+                            }
+                        }
+                        adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error al obtener los Supervisores", Toast.LENGTH_LONG).show();
+                });
+    }
+
+
+    /*private void obtenerSupervisoresDeFirestore() {
+        db.collection("usuarios")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            Usuario supervisor = document.toObject(Usuario.class);
+                            if (supervisor.getRol().equals("supervisor")) {
                                 listaSupervisores.add(supervisor);
                             }
                         }
@@ -128,9 +163,60 @@ public class FragmentSupervisores extends Fragment {
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Error al obtener los supervisores", Toast.LENGTH_LONG).show();
                 });
-    }
+    }*/
 
-    private void buscarUsuarios(String searchText) {
+    /*private void buscarporID(String searchText) {
+        if (searchText.isEmpty()) {
+            adapter.updateList(listaSupervisores);
+            return;
+        }
+
+        db.collection("equipos")
+                .orderBy("numeroDeSerie")
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        ArrayList<EquipoAdmin> filteredList = new ArrayList<>();
+                        for (DocumentSnapshot document : task.getResult()) {
+                            EquipoAdmin equipoAdmin = document.toObject(EquipoAdmin.class);
+                            if(equipoAdmin.getTipoDeEquipo().equals("Router")){
+                                filteredList.add(equipoAdmin);
+                            }
+                        }
+                        adapter.updateList(filteredList);
+                    }
+                });
+    }*/
+
+    private void buscarSupervisores(String searchText) {
+        if (searchText.isEmpty()) {
+            adapter.updateList(listaSupervisores);
+            return;
+        }
+
+        db.collection("usuarios")
+                .orderBy("nombre")
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        ArrayList<Usuario> filteredList = new ArrayList<>();
+                        for (DocumentSnapshot document : task.getResult()) {
+                            Usuario supervisor = document.toObject(Usuario.class);
+                            if(supervisor.getRol().equals("supervisor")){
+                                filteredList.add(supervisor);
+                            }
+                        }
+                        adapter.updateList(filteredList);
+                    }
+                });
+    }
+}
+
+    /*private void buscarUsuarios(String searchText) {
         db.collection("usuarios")
                 .orderBy("nombre")
                 .startAt(searchText)
@@ -153,6 +239,6 @@ public class FragmentSupervisores extends Fragment {
                         }
                     }
                 });
-    }
+    }*/
 
-}
+

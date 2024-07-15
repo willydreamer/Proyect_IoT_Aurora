@@ -29,7 +29,8 @@
             android:layout_height="15dp"
             android:layout_gravity="end|top"
             android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:visibility="gone" />
 
 
     </RelativeLayout>

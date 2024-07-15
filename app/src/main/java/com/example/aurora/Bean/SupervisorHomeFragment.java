@@ -15,7 +15,8 @@ import com.example.aurora.R;
  * Use the {@link SupervisorHomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SupervisorHomeFragment extends Fragment {
+public class
+SupervisorHomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

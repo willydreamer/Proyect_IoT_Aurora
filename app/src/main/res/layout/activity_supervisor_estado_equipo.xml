@@ -34,8 +34,8 @@
 
     <FrameLayout
         android:id="@+id/frameRouters"
-        android:layout_width="322dp"
-        android:layout_height="212dp"
+        android:layout_width="326dp"
+        android:layout_height="244dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"

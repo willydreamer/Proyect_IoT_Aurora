@@ -378,7 +378,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Subir"
+                            android:text="Subir Fotos"
                             android:visibility="gone"
                             android:backgroundTint="#009688"
                             android:layout_marginLeft="50dp"

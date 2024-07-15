@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aurora.Admin.MainActivity;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.example.aurora.Superadmin.SuperAdmin;
 import com.example.aurora.Supervisor.Supervisor;
@@ -118,9 +119,14 @@ public class LoginFragment extends AppCompatActivity {
                                             if (userTask.isSuccessful()) {
                                                 if (!userTask.getResult().isEmpty()) {
                                                     for (QueryDocumentSnapshot document : userTask.getResult()) {
-                                                        String role = document.getString("rol");
-                                                        Log.d("rol-autenticado-1", role);
-                                                        redirectToRoleSpecificActivity(role);
+                                                        Usuario usuarioLog = document.toObject(Usuario.class);
+                                                        if(usuarioLog.getEstado().equals("activo")) {
+                                                            String role = document.getString("rol");
+                                                            Log.d("rol-autenticado-1", role);
+                                                            redirectToRoleSpecificActivity(role);
+                                                        }else{
+                                                            Toast.makeText(LoginFragment.this, "Cuenta Inactiva", Toast.LENGTH_LONG).show();
+                                                        }
                                                     }
                                                 } else {
                                                     Log.d(TAG, "No matching documents found.");

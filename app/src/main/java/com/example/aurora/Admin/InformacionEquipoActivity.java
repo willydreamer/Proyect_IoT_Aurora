@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Adapter.ListaFotosEquipoAdapter;
+import com.example.aurora.Adapter.ListaFotosEquipoAdapter2;
 import com.example.aurora.Adapter.SelectedImagesAdapter;
 import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.R;
@@ -46,8 +47,8 @@ public class InformacionEquipoActivity extends AppCompatActivity {
 
     private ImageView fotoEquipo;
 
-    //private ListaFotosEquipoAdapter adapter;
-    private SelectedImagesAdapter adapter;
+    private ListaFotosEquipoAdapter2 adapter;
+    //private SelectedImagesAdapter adapter;
 
     private RecyclerView recyclerViewFotosEquipo;
 
@@ -59,9 +60,6 @@ public class InformacionEquipoActivity extends AppCompatActivity {
     private List<String> imageUrls;
 
     private Button buttonSelectFotos;
-
-
-    private Button buttonDelete;
 
 
     @Override
@@ -101,7 +99,7 @@ public class InformacionEquipoActivity extends AppCompatActivity {
             recyclerViewFotosEquipo = findViewById(R.id.recyclerViewFotosEquipos);
             imageUrls = equipo.getFotosEquipo();
             imageUris = new ArrayList<>();
-            adapter = new SelectedImagesAdapter(this, imageUris);
+            adapter = new ListaFotosEquipoAdapter2(this, imageUris);
             recyclerViewFotosEquipo.setLayoutManager((new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)));
             recyclerViewFotosEquipo.setAdapter(adapter);
 
@@ -111,7 +109,12 @@ public class InformacionEquipoActivity extends AppCompatActivity {
 
         setupSpinner(binding.spinnerTipoEquipo, R.array.tipo_equipo_options);
 
-        binding.btnEditar.setOnClickListener(v -> toggleEditMode(true));
+        binding.btnEditar.setOnClickListener(v ->{
+                toggleEditMode(true);
+                boolean isEditMode = !adapter.isEditMode;
+                adapter.setEditMode(isEditMode);
+            });
+
         binding.btnGuardar.setOnClickListener(v -> {
             toggleEditMode(false);
             saveChangesToFirebase();
@@ -123,12 +126,6 @@ public class InformacionEquipoActivity extends AppCompatActivity {
             Intent intent2 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent2.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             startActivityForResult(intent2, REQUEST_IMAGE_PICK);
-        });
-
-        buttonDelete = findViewById(R.id.botonBorrar);
-
-        buttonDelete.setOnClickListener(v -> {
-            adapter.removeSelectedImages();
         });
 
 
@@ -178,11 +175,11 @@ public class InformacionEquipoActivity extends AppCompatActivity {
                     int count = data.getClipData().getItemCount();
                     for (int i = 0; i < count; i++) {
                         Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                        adapter.addImage(imageUri);
+                        adapter.addPhoto(imageUri);
                     }
                 } else if (data.getData() != null) {
                     Uri imageUri = data.getData();
-                    adapter.addImage(imageUri);
+                    adapter.addPhoto(imageUri);
                 }
             }
         }
@@ -194,8 +191,7 @@ public class InformacionEquipoActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshot -> {
                     EquipoAdmin equipo1 = documentSnapshot.toObject(EquipoAdmin.class);
                     if (equipo1 != null && equipo1.getFotosEquipo() != null) {
-                        imageUrls.addAll(equipo1.getFotosEquipo());
-                        for (String imageUrl : imageUrls) {
+                        for (String imageUrl : equipo1.getFotosEquipo()) {
                             imageUris.add(Uri.parse(imageUrl));
                         }
                         adapter.notifyDataSetChanged();
@@ -223,7 +219,7 @@ public class InformacionEquipoActivity extends AppCompatActivity {
         // Mostrar el botón de guardar solo cuando esté en modo edición
         binding.btnGuardar.setVisibility(enable ? View.VISIBLE : View.GONE);
         binding.botonSubir.setVisibility(enable ? View.VISIBLE : View.GONE);
-        binding.botonBorrar.setVisibility(enable ? View.VISIBLE : View.GONE);
+        //binding.botonBorrar.setVisibility(enable ? View.VISIBLE : View.GONE);
         // Ocultar el botón de editar cuando esté en modo edición
         binding.btnEditar.setVisibility(enable ? View.GONE : View.VISIBLE);
     }
@@ -232,14 +228,23 @@ public class InformacionEquipoActivity extends AppCompatActivity {
     private void saveChangesToFirebase() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
-        List<String> updatedImageUrls = new ArrayList<>(imageUrls);
+        List<String> updatedImageUrls = new ArrayList<>(imageUrls); // URLs existentes
+        List<Uri> newImageUris = new ArrayList<>(); // Nuevas fotos seleccionadas
 
-        for (Uri imageUri : adapter.getSelectedImageUris()) {
+        // Separar las nuevas fotos de las existentes
+        for (Object photo : adapter.getFotosEquipo()) {
+            if (photo instanceof Uri) {
+                newImageUris.add((Uri) photo);
+            }
+        }
+
+
+        for (Uri imageUri : newImageUris) {
             StorageReference storageReference = storage.getReference().child("images/" + System.currentTimeMillis() + ".jpg");
             storageReference.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
                         updatedImageUrls.add(uri.toString());
-                        if (updatedImageUrls.size() == imageUris.size()) {
+                        if (updatedImageUrls.size() == adapter.getFotosEquipo().size()) {
                             saveChanges(updatedImageUrls);
                         }
                     }))
@@ -247,10 +252,23 @@ public class InformacionEquipoActivity extends AppCompatActivity {
         }
 
         // Eliminar las imágenes eliminadas
-        for (Uri uri : adapter.getSelectedImageUris()) {
+        /*for (Uri uri : adapter.getFotosEquipo()) {
             updatedImageUrls.remove(uri.toString());
+        }*/
+
+        // Si no hay nuevas fotos, guardar cambios directamente
+        if (newImageUris.isEmpty()) {
+            saveChanges(updatedImageUrls);
         }
 
+        // Eliminar las imágenes eliminadas
+        for (Object photo : imageUrls) {
+            if (!adapter.getFotosEquipo().contains(photo)) {
+                updatedImageUrls.remove(photo.toString());
+            }
+        }
+
+        // Guardar los cambios finales
         saveChanges(updatedImageUrls);
     }
 

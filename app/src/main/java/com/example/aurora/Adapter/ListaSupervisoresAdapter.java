@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.Admin.InformacionSupervisorActivity;
 import com.example.aurora.R;
@@ -108,6 +109,11 @@ public class ListaSupervisoresAdapter
 
         //holder.setearDatos(listaSupervisores.get(position));
         
+    }
+
+    public void updateList(ArrayList<Usuario> newList) {
+        listaSupervisores = newList;
+        notifyDataSetChanged();
     }
 
 

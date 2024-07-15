@@ -121,6 +121,12 @@ public class ListaSitiosAdapter
 
             });
     }
+
+    public void updateList(ArrayList<Sitio> newList) {
+        listaSitios = newList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         //Este método debe indicar la cantidad total de elementos, en nuestro caso, del

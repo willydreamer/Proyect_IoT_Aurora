@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -21,13 +22,13 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class SelectedImagesAdapter extends RecyclerView.Adapter<SelectedImagesAdapter.ImageViewHolder> {
 
     private Context context;
-    private List<Uri> imageUris;
     private List<Uri> selectedImageUris;
+    //private List<Uri> imageUris;
 
-    public SelectedImagesAdapter(Context context, List<Uri> imageUris) {
+    public SelectedImagesAdapter(Context context, List<Uri> selectedImageUris) {
         this.context = context;
-        this.imageUris = imageUris;
-        this.selectedImageUris = new ArrayList<>();
+        this.selectedImageUris = selectedImageUris;
+        //this.imageUris = imageUris;
     }
 
     @NonNull
@@ -39,7 +40,7 @@ public class SelectedImagesAdapter extends RecyclerView.Adapter<SelectedImagesAd
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        Uri imageUri = imageUris.get(position);
+        Uri imageUri = selectedImageUris.get(position);
         //Picasso.get().load(imageUri).into(holder.imageView);
         Picasso.get()
                 .load(imageUri)
@@ -48,7 +49,7 @@ public class SelectedImagesAdapter extends RecyclerView.Adapter<SelectedImagesAd
                 .into(holder.imageView);
 
         //basado de gpt
-        holder.imageView.setOnClickListener(v -> {
+        /*holder.imageView.setOnClickListener(v -> {
             if (selectedImageUris.contains(imageUri)) {
                 selectedImageUris.remove(imageUri);
                 holder.imageView.setAlpha(1.0f); // Quitar el efecto de selección
@@ -56,20 +57,27 @@ public class SelectedImagesAdapter extends RecyclerView.Adapter<SelectedImagesAd
                 selectedImageUris.add(imageUri);
                 holder.imageView.setAlpha(0.5f); // Añadir un efecto visual para indicar selección
             }
+        });*/
+        holder.buttonDelete.setOnClickListener(v -> {
+            selectedImageUris.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, selectedImageUris.size());
         });
     }
 
     @Override
     public int getItemCount() {
-        return imageUris.size();
+        return selectedImageUris.size();
     }
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        ImageButton buttonDelete;
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imagenEquipo2);
+            buttonDelete = itemView.findViewById(R.id.buttonDelete);
         }
     }
 
@@ -77,9 +85,14 @@ public class SelectedImagesAdapter extends RecyclerView.Adapter<SelectedImagesAd
         return selectedImageUris;
     }
 
+    public void addPhoto(Uri photoUri) {
+        selectedImageUris.add(photoUri);
+        notifyItemInserted(selectedImageUris.size() - 1);
+    }
+
 
     //basado en gpt
-    public void removeSelectedImages() {
+    /*public void removeSelectedImages() {
         imageUris.removeAll(selectedImageUris);
         selectedImageUris.clear();
         notifyDataSetChanged();
@@ -88,5 +101,5 @@ public class SelectedImagesAdapter extends RecyclerView.Adapter<SelectedImagesAd
     public void addImage(Uri imageUri) {
         imageUris.add(imageUri);
         notifyItemInserted(imageUris.size() - 1);
-    }
+    }*/
 }

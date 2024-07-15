@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,13 +52,9 @@ public class CrearEquipoActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_PICK = 2;
     private ImageView imagen;
-    private Uri imagenUri;
 
-    private List<Uri> imageUris;
+    private List<Uri> selectedImageUris;
     private Button buttonSelectFotos;
-
-
-    private Button buttonDelete;
 
     private List<String> imageUrls;
 
@@ -103,8 +100,6 @@ public class CrearEquipoActivity extends AppCompatActivity {
 
         botonFecha = findViewById(R.id.botonFecha);
 
-        buttonDelete = findViewById(R.id.buttonBorrar);
-
         imagen = findViewById(R.id.imageView3);
 
         // Instanciar Firebase
@@ -123,9 +118,10 @@ public class CrearEquipoActivity extends AppCompatActivity {
         });*/
 
         recyclerViewSelectedImages = findViewById(R.id.recyclerViewSelectedImages);
-        imageUris = new ArrayList<>();
+        selectedImageUris = new ArrayList<>();
         imageUrls = new ArrayList<>();
-        selectedImagesAdapter = new SelectedImagesAdapter(this, imageUris);
+        selectedImagesAdapter = new SelectedImagesAdapter(this, selectedImageUris);
+        //recyclerViewSelectedImages.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerViewSelectedImages.setLayoutManager((new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)));
         recyclerViewSelectedImages.setAdapter(selectedImagesAdapter);
 
@@ -134,8 +130,6 @@ public class CrearEquipoActivity extends AppCompatActivity {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             startActivityForResult(intent, REQUEST_IMAGE_PICK);
         });
-
-
 
         botonFecha.setOnClickListener(v ->
                 fechaDialog()
@@ -146,10 +140,6 @@ public class CrearEquipoActivity extends AppCompatActivity {
             uploadImagesToFirebase();
         });
 
-        buttonDelete.setOnClickListener(v -> {
-            selectedImagesAdapter.removeSelectedImages();
-        });
-
     }
 
     @Override
@@ -158,40 +148,30 @@ public class CrearEquipoActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE_PICK) {
             if (data != null) {
                 if (data.getClipData() != null) {
-                    // Selección múltiple de imágenes
                     int count = data.getClipData().getItemCount();
                     for (int i = 0; i < count; i++) {
                         Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                        imageUris.add(imageUri);
+                        selectedImagesAdapter.addPhoto(imageUri);
                     }
                 } else if (data.getData() != null) {
-                    // Selección única de imagen
                     Uri imageUri = data.getData();
-                    imageUris.add(imageUri);
+                    selectedImagesAdapter.addPhoto(imageUri);
                 }
-                selectedImagesAdapter.notifyDataSetChanged();
-                toggleEditMode(true);
             }
         }
     }
 
-    private void toggleEditMode(boolean enable) {
-
-        // Mostrar el botón de guardar solo cuando esté en modo edición
-        buttonDelete.setVisibility(enable ? View.VISIBLE : View.GONE);
-
-    }
 
     private void uploadImagesToFirebase() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        for (Uri imageUri : imageUris) {
+        for (Uri imageUri : selectedImageUris) {
             StorageReference storageReference = storage.getReference().child("fotosEquipo/" + System.currentTimeMillis() + ".jpg");
             storageReference.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
                         imageUrls.add(uri.toString());
-                        if (imageUrls.size() == imageUris.size()) {
+                        if (imageUrls.size() == selectedImageUris.size()) {
                             // Todas las imágenes se han subido, ahora guarda las URLs en Firestore
                             //Toast.makeText(CrearEquipoActivity.this,"Equipo Guardado Correctamente", Toast.LENGTH_LONG).show();
                             uploadImageAndSaveUserData();

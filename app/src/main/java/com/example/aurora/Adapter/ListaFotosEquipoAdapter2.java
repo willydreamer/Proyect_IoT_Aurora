@@ -22,10 +22,12 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class ListaFotosEquipoAdapter2 extends RecyclerView.Adapter<ListaFotosEquipoAdapter2.FotoEquipoViewHolder> {
 
     private Context context;
-    private List<Uri> fotosEquipo;
+    //private List<Uri> fotosEquipo;
+
+    private List<Object> fotosEquipo;
     public boolean isEditMode = false;
 
-    public ListaFotosEquipoAdapter2(Context context, List<Uri> fotosEquipo) {
+    public ListaFotosEquipoAdapter2(Context context, List<Object> fotosEquipo) {
         this.context = context;
         this.fotosEquipo =fotosEquipo;
     }
@@ -54,13 +56,26 @@ public class ListaFotosEquipoAdapter2 extends RecyclerView.Adapter<ListaFotosEqu
                     .transform(new CropCircleTransformation())
                     .into(holder.imageView);
         }*/
-        Uri imageUri = fotosEquipo.get(position);
+        Object photo = fotosEquipo.get(position);
         //Picasso.get().load(imageUri).into(holder.imageView);
-        Picasso.get()
+        /*Picasso.get()
                 .load(imageUri)
                 .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
                 .transform(new CropCircleTransformation())
-                .into(holder.imageView);
+                .into(holder.imageView);*/
+        if (photo instanceof Uri) {
+            Picasso.get()
+                    .load((Uri) photo)
+                    .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
+                    .transform(new CropCircleTransformation())
+                    .into(holder.imageView);
+        } else if (photo instanceof String) {
+            Picasso.get()
+                    .load((String) photo)
+                    .placeholder(R.drawable.perfil_icono) // Reemplaza con tu imagen por defecto
+                    .transform(new CropCircleTransformation())
+                    .into(holder.imageView);
+        }
 
 
 
@@ -94,15 +109,15 @@ public class ListaFotosEquipoAdapter2 extends RecyclerView.Adapter<ListaFotosEqu
         }
     }
 
-    public List<Uri> getFotosEquipo() {
+    public List<Object> getFotosEquipo() {
         return fotosEquipo;
     }
 
-    public void setFotosEquipo(List<Uri> fotosEquipo) {
+    public void setFotosEquipo(List<Object> fotosEquipo) {
         this.fotosEquipo = fotosEquipo;
     }
 
-    public void addPhoto(Uri photoUri) {
+    public void addPhoto(Object photoUri) {
         fotosEquipo.add(photoUri);
         notifyItemInserted(fotosEquipo.size() - 1);
     }

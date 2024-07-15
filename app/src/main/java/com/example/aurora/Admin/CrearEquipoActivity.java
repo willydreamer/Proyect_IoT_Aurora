@@ -285,7 +285,7 @@ public class CrearEquipoActivity extends AppCompatActivity {
                     Log.d("msg-test2", "equipo guardado exitosamente");
                     Toast.makeText(CrearEquipoActivity.this, "equipo creado exitosamente", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(CrearEquipoActivity.this, FragmentEquipos.class);
-                    startActivity(intent);
+                     startActivity(intent);
                 })
                 .addOnFailureListener(e -> {
                     Log.e("msg-test3", "Error al guardar el equipo", e);

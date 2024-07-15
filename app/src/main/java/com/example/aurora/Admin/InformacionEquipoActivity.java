@@ -99,7 +99,8 @@ public class InformacionEquipoActivity extends AppCompatActivity {
             recyclerViewFotosEquipo = findViewById(R.id.recyclerViewFotosEquipos);
             imageUrls = equipo.getFotosEquipo();
             imageUris = new ArrayList<>();
-            adapter = new ListaFotosEquipoAdapter2(this, imageUris);
+            List<Object> photoList = new ArrayList<>(); // Combina URLs existentes y nuevas Uri
+            adapter = new ListaFotosEquipoAdapter2(this, photoList);
             recyclerViewFotosEquipo.setLayoutManager((new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)));
             recyclerViewFotosEquipo.setAdapter(adapter);
 
@@ -186,6 +187,19 @@ public class InformacionEquipoActivity extends AppCompatActivity {
     }
 
     private void cargarFotosEquipo() {
+        db.collection("equipos").document(equipo.getIdEquipo()).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    EquipoAdmin equipo1 = documentSnapshot.toObject(EquipoAdmin.class);
+                    if (equipo1 != null && equipo1.getFotosEquipo() != null) {
+                        for (String imageUrl : equipo1.getFotosEquipo()) {
+                            adapter.addPhoto(imageUrl);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Error al cargar imágenes del Equipo", Toast.LENGTH_LONG).show());
+    }
+
+    /*private void cargarFotosEquipo() {
         db = FirebaseFirestore.getInstance();
         db.collection("equipos").document(equipo.getIdEquipo()).get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -198,7 +212,7 @@ public class InformacionEquipoActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Error al cargar imágenes del Equipo", Toast.LENGTH_LONG).show());
-    }
+    }*/
 
     private void setupSpinner(Spinner spinner, int arrayId) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -225,7 +239,7 @@ public class InformacionEquipoActivity extends AppCompatActivity {
     }
 
     //basado gpt
-    private void saveChangesToFirebase() {
+    /*private void saveChangesToFirebase() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
         List<String> updatedImageUrls = new ArrayList<>(imageUrls); // URLs existentes
@@ -251,12 +265,10 @@ public class InformacionEquipoActivity extends AppCompatActivity {
                     .addOnFailureListener(e -> Toast.makeText(this, "Error al subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show());
         }
 
-        // Eliminar las imágenes eliminadas
-        /*for (Uri uri : adapter.getFotosEquipo()) {
-            updatedImageUrls.remove(uri.toString());
-        }*/
 
-        // Si no hay nuevas fotos, guardar cambios directamente
+
+
+
         if (newImageUris.isEmpty()) {
             saveChanges(updatedImageUrls);
         }
@@ -270,7 +282,7 @@ public class InformacionEquipoActivity extends AppCompatActivity {
 
         // Guardar los cambios finales
         saveChanges(updatedImageUrls);
-    }
+    }*/
 
     /*private void updateUserImagesInFirestore(List<String> imageUrls) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -279,6 +291,46 @@ public class InformacionEquipoActivity extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> Toast.makeText(EditUserActivity.this, "Imágenes actualizadas correctamente", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(EditUserActivity.this, "Error al actualizar imágenes", Toast.LENGTH_SHORT).show());
     }*/
+
+    private void saveChangesToFirebase() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        List<String> updatedImageUrls = new ArrayList<>();
+        List<Uri> newImageUris = new ArrayList<>();
+
+        for (Object photo : adapter.getFotosEquipo()) {
+            if (photo instanceof Uri) {
+                newImageUris.add((Uri) photo);
+            } else if (photo instanceof String) {
+                updatedImageUrls.add((String) photo);
+            }
+        }
+
+        for (Uri imageUri : newImageUris) {
+            StorageReference storageReference = storage.getReference().child("images/" + System.currentTimeMillis() + ".jpg");
+            storageReference.putFile(imageUri)
+                    .addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                        updatedImageUrls.add(uri.toString());
+                        if (updatedImageUrls.size() == adapter.getFotosEquipo().size()) {
+                            saveChanges(updatedImageUrls);
+                        }
+                    }))
+                    .addOnFailureListener(e -> Toast.makeText(this, "Error al subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show());
+        }
+
+        if (newImageUris.isEmpty()) {
+            saveChanges(updatedImageUrls);
+        }
+
+        for (Object photo : imageUrls) {
+            if (!adapter.getFotosEquipo().contains(photo)) {
+                updatedImageUrls.remove(photo.toString());
+            }
+        }
+
+        saveChanges(updatedImageUrls);
+    }
 
     private void saveChanges(List<String> updatedImageUrls) {
 

@@ -2,6 +2,7 @@ package com.example.aurora.General;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -61,7 +62,8 @@ public class InicioFragment extends AppCompatActivity {
             if (currentUser != null) {
                 String userId = currentUser.getUid();
                 String emailLogueado = currentUser.getEmail();
-                //Log.d("text-logueado", "Firebase correo: " + currentUser.getEmail());
+                Log.d("text-logueado", "Firebase correo: " + currentUser.getEmail());
+
 
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("usuarios")
@@ -70,7 +72,7 @@ public class InicioFragment extends AppCompatActivity {
                         .addOnCompleteListener(userTask -> {
                             for (QueryDocumentSnapshot document : userTask.getResult()) {
                                 String role = document.getString("rol");
-                                //Log.d("rol-autenticado-2", role);
+                                Log.d("rol-autenticado-2", role);
                                 redirectToRoleSpecificActivity(role);
                             }
                         });

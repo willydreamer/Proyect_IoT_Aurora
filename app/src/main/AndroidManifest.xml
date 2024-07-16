@@ -11,7 +11,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,6 +21,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Aurora"
         tools:targetApi="31">
+        <activity
+            android:name=".Supervisor.SupervisorAsignarSitioActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Aurora" />
+        <activity
+            android:name=".Supervisor.AsignarSitioActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Aurora" />
+        <activity
+            android:name=".Supervisor.AsignarEquiposActivity"
+            android:exported="false" />
         <activity
             android:name=".Supervisor.SupervisorInfoSitio"
             android:exported="false" />
@@ -38,14 +48,17 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDN6lz5JvEuuKiQiaAP7uR_jCyV4E25jjc" />
-
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_appicon1_background" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
@@ -73,6 +86,9 @@
             android:name=".MensajeriaChatActivity"
             android:exported="false"
             android:parentActivityName=".MensajeriaActivity" />
+        <activity
+            android:name=".MensajeriaSupervisoresActivosActivity"
+            android:exported="false" />
         <activity
             android:name=".Admin.CrearEquipoActivity"
             android:exported="false"
@@ -123,13 +139,14 @@
             android:name=".Admin.ListaSupervisoresActivity"
             android:exported="false" />
         <activity
-        android:name=".Admin.FragmentSupervisores"
-        android:exported="false" />
+            android:name=".Admin.FragmentSupervisores"
+            android:exported="false" />
         <activity
             android:name=".General.InicioFragment"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -141,7 +158,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

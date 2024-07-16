@@ -23,9 +23,13 @@ import com.example.aurora.Bean.Usuario;
 import com.example.aurora.NotificationDismissReceiver;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivityAsignarSitioBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AsignarSitioActivity extends AppCompatActivity {
 
@@ -95,6 +99,28 @@ public class AsignarSitioActivity extends AppCompatActivity {
                     .addOnSuccessListener(unused -> {
                        Log.d("msg-test", "Sitio asignado exitosamente");
                         Toast.makeText(this, "Sitio asignado exitosamente", Toast.LENGTH_SHORT).show();
+                        FirebaseAuth auth = FirebaseAuth.getInstance();
+                        FirebaseUser user = auth.getCurrentUser();
+                        if (user != null) {
+                            String user1 = user.getUid();
+                            Log.d("USUARIO", user1);
+                            db.collection("usuarios")
+                                    .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                    .get()
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                            // Obtener el primer documento que coincide con la consulta
+                                            DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                            Usuario usuario = document.toObject(Usuario.class);
+                                            if (usuario != null) {
+                                                usuario.setIdUsuario(document.getId());
+                                                crearLog("Sitio asignado", "Se ha asignado el sitio"+" "+sitio+" al supervisor "+supervisor.getNombre(), user1, null,usuario);
+                                            }
+                                        } else {
+                                            android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                        }
+                                    });
+                        }
                     })
                     .addOnFailureListener(e -> {
                        Log.e("msg-test", "Error al asignar el sitio", e);
@@ -106,6 +132,7 @@ public class AsignarSitioActivity extends AppCompatActivity {
                     .set(sitio)
                     .addOnSuccessListener(unused -> {
                         Log.d("msg-test", "supervisor asignado exitosamente");
+
                     })
                     .addOnFailureListener(e -> {
                         Log.e("msg-test", "Error al asignar el supervisor al sitio", e);
@@ -178,4 +205,22 @@ public class AsignarSitioActivity extends AppCompatActivity {
         notificationManager.notify(0, summaryNotification);
 
     }
+
+    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio, Usuario usuario){
+        Date fechaActual = new Date();
+
+        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio, usuario);
+
+        db.collection("logs")
+                .add(nuevoLog)
+                .addOnSuccessListener(documentReference -> {
+                    Log.d("msg-test2", "Log guardado exitosamente");
+                    Toast.makeText(AsignarSitioActivity.this, "Actividad Registrada", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("msg-test3", "Error al guardar el log", e);
+                    Toast.makeText(AsignarSitioActivity.this, "Error al registrar la activada", Toast.LENGTH_SHORT).show();
+                });
+    }
+
 }

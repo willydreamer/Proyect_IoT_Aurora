@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,25 +31,36 @@ public class SupervisorHomeFragmentVista extends Fragment {
         flecha1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SupervisorListaSitios.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                startActivity(intent);
+                Fragment secondFragment = new SupervisorListaSitiosFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.containerFrame, secondFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         flecha2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SupervisorListaDeEquipos.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                startActivity(intent);
+                Fragment secondFragment2 = new SupervisorListaEquiposFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.containerFrame, secondFragment2)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         flecha3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SupervisorEstadoEquipoActivity.class); // Reemplaza "TuActivity" con el nombre de tu Activity
-                startActivity(intent);
+                Fragment secondFragment3 = new SupervisorEstadoEquipoFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.containerFrame, secondFragment3)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         return view;
 
     }
+
+
 }

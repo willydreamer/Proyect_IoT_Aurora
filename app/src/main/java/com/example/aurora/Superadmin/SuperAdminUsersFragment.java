@@ -2,10 +2,13 @@ package com.example.aurora.Superadmin;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +17,12 @@ import android.widget.Toast;
 import com.example.aurora.Adapter.ListaUsuariosAdapter;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +47,8 @@ public class SuperAdminUsersFragment extends Fragment {
     private ListaUsuariosAdapter adapter;
     private List<Usuario> listaUsuarios;
     FirebaseFirestore db;
+
+    SearchView buscador;
 
     public SuperAdminUsersFragment() {
         // Required empty public constructor
@@ -96,6 +105,33 @@ public class SuperAdminUsersFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         obtenerSupervisoresDeFirestore();
 
+        buscador = view.findViewById(R.id.search1);
+        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                buscarSupervisores(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    obtenerSupervisoresDeFirestore();
+                } else {
+                    buscarSupervisores(newText);
+                }
+                return true;
+            }
+        });
+        buscador.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                obtenerSupervisoresDeFirestore();
+                return false;
+            }
+        });
+
+
 
         return view;
     }
@@ -114,6 +150,32 @@ public class SuperAdminUsersFragment extends Fragment {
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Error al obtener los usuarios", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void buscarSupervisores(String searchText) {
+        db.collection("usuarios")
+                .orderBy("nombre") // Suponiendo que tienes un campo 'idSitio' en tu colección
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            ArrayList<Usuario> supers= new ArrayList<>();
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Usuario supervisor = document.toObject(Usuario.class);
+                                supers.add(supervisor);
+                            }
+                            adapter.notifyDataSetChanged();
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
+                    }
                 });
     }
 }

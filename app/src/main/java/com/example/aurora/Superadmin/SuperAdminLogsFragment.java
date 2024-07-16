@@ -2,6 +2,7 @@ package com.example.aurora.Superadmin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,6 +52,8 @@ public class SuperAdminLogsFragment extends Fragment {
     private RecyclerView recyclerView;
     private ListaLogAdapter adapter;
     private List<Log> logList;
+
+    SearchView buscador;
 
     private FirebaseFirestore db;
     private CollectionReference logsRef;
@@ -106,6 +110,59 @@ public class SuperAdminLogsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
+        buscador = view.findViewById(R.id.search1);
+
+        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                buscarSupervisores(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    logsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                            if (error != null) {
+                                return;
+                            }
+                            logList.clear();
+                            for (DocumentSnapshot doc : value.getDocuments()) {
+                                Log log = doc.toObject(Log.class);
+                                logList.add(log);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+                } else {
+                    buscarSupervisores(newText);
+                }
+                return true;
+            }
+        });
+        buscador.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                logsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            return;
+                        }
+                        logList.clear();
+                        for (DocumentSnapshot doc : value.getDocuments()) {
+                            Log log = doc.toObject(Log.class);
+                            logList.add(log);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                return false;
+            }
+        });
+
         logsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -115,28 +172,37 @@ public class SuperAdminLogsFragment extends Fragment {
                 logList.clear();
                 for (DocumentSnapshot doc : value.getDocuments()) {
                     Log log = doc.toObject(Log.class);
-                    /*db.collection("usuarios")
-                            .whereEqualTo("idUsuario", log.getIdUsuario())  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
-                            .get()
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
-                                    // Obtener el primer documento que coincide con la consulta
-                                    DocumentSnapshot document = task.getResult().getDocuments().get(0);
-                                    Usuario usuario = document.toObject(Usuario.class);
-                                    if (usuario != null) {
-                                        usuario.setIdUsuario(document.getId());
-                                        log.setUsuario(usuario);
-                                    }
-                                } else {
-                                    android.util.Log.d("msg-test", "Error getting document: ", task.getException());
-                                }
-                            });*/
-
                     logList.add(log);
                 }
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void buscarSupervisores(String searchText) {
+        db.collection("logs")
+                .orderBy("actividad") // Suponiendo que tienes un campo 'idSitio' en tu colección
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            logList.clear();
+                            for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                                Log log = doc.toObject(Log.class);
+                                logList.add(log);
+                            }
+                            adapter.notifyDataSetChanged();
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
+                    }
+                });
     }
 
 

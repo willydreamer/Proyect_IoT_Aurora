@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.aurora.Adapter.ListaLogAdapter;
 import com.example.aurora.Bean.Log;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -94,6 +95,22 @@ public class SuperadminLogUsuario extends Fragment {
                 if (value != null) {
                     for (DocumentSnapshot doc : value.getDocuments()) {
                         Log log = doc.toObject(Log.class);
+                        /*db.collection("usuarios")
+                                .whereEqualTo("idUsuario", log.getIdUsuario())  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
+                                        // Obtener el primer documento que coincide con la consulta
+                                        DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                                        Usuario usuario = document.toObject(Usuario.class);
+                                        if (usuario != null) {
+                                            usuario.setIdUsuario(document.getId());
+                                            log.setUsuario(usuario);
+                                        }
+                                    } else {
+                                        android.util.Log.d("msg-test", "Error getting document: ", task.getException());
+                                    }
+                                });*/
                         logList.add(log);
                     }
                 }

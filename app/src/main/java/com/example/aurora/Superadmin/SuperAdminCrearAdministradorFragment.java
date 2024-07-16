@@ -26,6 +26,7 @@ import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -183,34 +184,76 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
                     //Una vez que ya se subio la imagen en BD , obtenemos la URL de la imagen:
                     String imageUrl = uri.toString();
 
-                    //y la seteamos para el nuevo usuario
-                    Usuario nuevoAdministrador = new Usuario(idadmin, nombre, apellido, dni, correo, domicilio, telefono, "administrador", estado, null, imageUrl);
-                    db.collection("usuarios")
-                            .add(nuevoAdministrador)
-                            .addOnSuccessListener(documentReference -> {
-                                Log.d("msg-test2", "Administrador guardado exitosamente");
-                                Toast.makeText(getContext(), "Administrador creado exitosamente", Toast.LENGTH_SHORT).show();
-                                SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola","comotas?");
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    FirebaseUser originalUser = auth.getCurrentUser(); // Guardar el usuario actual
 
-                                // Navegar al nuevo fragmento
-                                ((SuperAdmin) getContext()).getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.container1, fragment)
-                                        .addToBackStack(null)
-                                        .commit();
-                                FirebaseAuth auth = FirebaseAuth.getInstance();
-                                FirebaseUser user = auth.getCurrentUser();
-                                if (user != null) {
-                                    String user1 = user.getUid();
-                                    Log.d("USUARIO", user1);
-                                    crearLog("Se creo un Administrador", "Se creo un nuevo administrador", user1, null);
+                    auth.createUserWithEmailAndPassword(correo, "123456")
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    String userId = task.getResult().getUser().getUid();
+                                    Usuario nuevoAdministrador = new Usuario(userId, nombre, apellido, dni, correo, domicilio, telefono, "administrador", estado, null, imageUrl);
+
+                                    db.collection("usuarios")
+                                            .add(nuevoAdministrador)
+                                            .addOnSuccessListener(documentReference -> {
+                                                Log.d("msg-test2", "Administrador guardado exitosamente");
+                                                Toast.makeText(getContext(), "Administrador creado exitosamente", Toast.LENGTH_SHORT).show();
+
+                                                // Navegar al nuevo fragmento
+                                                SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola", "comotas?");
+                                                ((SuperAdmin) getContext()).getSupportFragmentManager()
+                                                        .beginTransaction()
+                                                        .replace(R.id.container1, fragment)
+                                                        .addToBackStack(null)
+                                                        .commit();
+
+
+
+                                                // Volver a autenticar al usuario original
+                                                if (originalUser != null) {
+                                                    auth.signInWithEmailAndPassword(originalUser.getEmail(), "123456")
+                                                            .addOnCompleteListener(signInTask -> {
+                                                                if (signInTask.isSuccessful()) {
+                                                                    Log.d("msg-test4", "Usuario original reautenticado exitosamente");
+                                                                } else {
+                                                                    Log.e("msg-test4", "Error al reautenticar al usuario original", signInTask.getException());
+                                                                }
+                                                            });
+                                                }
+
+                                                // Crear el log de la operación con el UID del usuario original
+                                                if (originalUser != null) {
+                                                    db.collection("usuarios")
+                                                            .whereEqualTo("idUsuario", originalUser.getUid())  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                                            .get()
+                                                            .addOnCompleteListener(task1 -> {
+                                                                if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                                                    // Obtener el primer documento que coincide con la consulta
+                                                                    DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                                                    Usuario usuario = document.toObject(Usuario.class);
+                                                                    if (usuario != null) {
+                                                                        usuario.setIdUsuario(document.getId());
+                                                                        crearLog("Se creó un Administrador", "Se creó un nuevo administrador", originalUser.getUid(), null,usuario);
+                                                                    }
+                                                                } else {
+                                                                    android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                                                }
+                                                            });
+
+                                                }
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                Log.e("msg-test3", "Error al guardar el administrador", e);
+                                                Toast.makeText(getContext(), "Error al crear el administrador", Toast.LENGTH_SHORT).show();
+                                            });
+                                } else {
+                                    Toast.makeText(getContext(), "Error al crear usuario: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-
                             })
                             .addOnFailureListener(e -> {
-                                Log.e("msg-test3", "Error al guardar el administrador", e);
-                                Toast.makeText(getContext(), "Error al crear el administrador", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Falla en crear usuario: " + e.getMessage(), Toast.LENGTH_LONG).show();
                             });
+
 
                 }).addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -256,10 +299,10 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
     }
 
 
-    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio){
+    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio, Usuario usuario){
         Date fechaActual = new Date();
 
-        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio);
+        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio, usuario);
 
         db.collection("logs")
                 .add(nuevoLog)

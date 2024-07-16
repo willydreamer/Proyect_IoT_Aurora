@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -159,6 +160,7 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
     }
 
 
+
     private void actualizarAdministrador() {
         String nombre = editTextNombre.getText().toString().trim();
         String apellido = editTextApellido.getText().toString().trim();
@@ -177,162 +179,174 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
         }
 
 
-        if (TextUtils.isEmpty(nombre) || TextUtils.isEmpty(apellido) || TextUtils.isEmpty(correo) ||
+        /*if (TextUtils.isEmpty(nombre) || TextUtils.isEmpty(apellido) || TextUtils.isEmpty(correo) ||
                 TextUtils.isEmpty(domicilio) || TextUtils.isEmpty(telefono)) {
             Toast.makeText(getContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
 
-        //si no hay foto vacia
-        if((imagenUri!=null)) {
-
-            //Subimos la foto en BD
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-            StorageReference imageReference = storageReference.child("fotosUsuario/" + System.currentTimeMillis() + ".jpg");
-
-            UploadTask uploadTask = imageReference.putFile(imagenUri);
-            uploadTask.addOnSuccessListener(taskSnapshot -> {
-                imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                    //Una vez que ya se subio la imagen en BD , obtenemos la URL de la imagen:
-                    String imageUrl = uri.toString();
-
-                    db.collection("usuarios")
-                            .whereEqualTo("idUsuario", usuario.getIdUsuario())  // Buscar documentos donde el campo 'id' sea igual a usuario.getId()
-                            .get()
-                            .addOnSuccessListener(queryDocumentSnapshots -> {
-                                if (!queryDocumentSnapshots.isEmpty()) {
-                                    // Obtener el primer documento que coincide con la consulta
-                                    DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
-                                    String documentId = documentSnapshot.getId();
-
-                                    // Actualizar el documento
-                                    db.collection("usuarios")
-                                            .document(documentId)  // Accede al documento con el ID específico
-                                            .update("apellido", apellido, "correo",correo,"dni",dni,"domicilio",domicilio,"estado",estado,"fotoURL",imageUrl,"nombre",nombre,"telefono",telefono)  // Actualiza campos específicos
-                                            .addOnSuccessListener(aVoid -> {
-                                                Log.d("msg-test2", "Administrador actualizado exitosamente");
-                                                Toast.makeText(getContext(), "Administrador actualizado exitosamente", Toast.LENGTH_SHORT).show();
-
-                                                SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola","comotas?");
-
-                                                // Navegar al nuevo fragmento
-                                                ((SuperAdmin) getContext()).getSupportFragmentManager()
-                                                        .beginTransaction()
-                                                        .replace(R.id.container1, fragment)
-                                                        .addToBackStack(null)
-                                                        .commit();
-                                                FirebaseAuth auth = FirebaseAuth.getInstance();
-                                                FirebaseUser user = auth.getCurrentUser();
-                                                if (user != null) {
-                                                    String user1 = user.getUid();
-                                                    Log.d("USUARIO", user1);
-                                                    db.collection("usuarios")
-                                                            .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
-                                                            .get()
-                                                            .addOnCompleteListener(task1 -> {
-                                                                if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
-                                                                    // Obtener el primer documento que coincide con la consulta
-                                                                    DocumentSnapshot document = task1.getResult().getDocuments().get(0);
-                                                                    Usuario usuario = document.toObject(Usuario.class);
-                                                                    if (usuario != null) {
-                                                                        usuario.setIdUsuario(document.getId());
-                                                                        crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null,usuario);
-                                                                    }
-                                                                } else {
-                                                                    android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
-                                                                }
-                                                            });
-                                                }
-                                            })
-                                            .addOnFailureListener(e -> {
-                                                Log.e("msg-test3", "Error al actualizar el administrador", e);
-                                                Toast.makeText(getContext(), "Error al actualizar el administrador", Toast.LENGTH_SHORT).show();
-                                            });
-
-                                } else {
-                                    Log.e("msg-test4", "No se encontró un administrador con el ID especificado");
-                                    Toast.makeText(getContext(), "No se encontró un administrador con el ID especificado", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(e -> {
-                                Log.e("msg-test3", "Error al buscar el administrador", e);
-                                Toast.makeText(getContext(), "Error al buscar el administrador", Toast.LENGTH_SHORT).show();
-                            });
-
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
-            });
-        }else{
-            //si no hay foto, mostrar toast make
-            if((usuario.getFotoURL() != null && !usuario.getFotoURL().isEmpty())){
-                db.collection("usuarios")
-                        .whereEqualTo("idUsuario", usuario.getIdUsuario())  // Buscar documentos donde el campo 'id' sea igual a usuario.getId()
-                        .get()
-                        .addOnSuccessListener(queryDocumentSnapshots -> {
-                            if (!queryDocumentSnapshots.isEmpty()) {
-                                // Obtener el primer documento que coincide con la consulta
-                                DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
-                                String documentId = documentSnapshot.getId();
-
-                                // Actualizar el documento
-                                db.collection("usuarios")
-                                        .document(documentId)  // Accede al documento con el ID específico
-                                        .update("apellido", apellido, "correo",correo,"dni",dni,"domicilio",domicilio,"estado",estado                                                                                                   ,"nombre",nombre,"telefono",telefono)  // Actualiza campos específicos
-                                        .addOnSuccessListener(aVoid -> {
-                                            Log.d("msg-test2", "Administrador actualizado exitosamente");
-                                            Toast.makeText(getContext(), "Administrador actualizado exitosamente", Toast.LENGTH_SHORT).show();
-                                            SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola","comotas?");
-
-                                            // Navegar al nuevo fragmento
-                                            ((SuperAdmin) getContext()).getSupportFragmentManager()
-                                                    .beginTransaction()
-                                                    .replace(R.id.container1, fragment)
-                                                    .addToBackStack(null)
-                                                    .commit();
-                                            FirebaseAuth auth = FirebaseAuth.getInstance();
-                                            FirebaseUser user = auth.getCurrentUser();
-                                            if (user != null) {
-                                                String user1 = user.getUid();
-                                                Log.d("USUARIO", user1);
-                                                db.collection("usuarios")
-                                                        .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
-                                                        .get()
-                                                        .addOnCompleteListener(task1 -> {
-                                                            if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
-                                                                // Obtener el primer documento que coincide con la consulta
-                                                                DocumentSnapshot document = task1.getResult().getDocuments().get(0);
-                                                                Usuario usuario = document.toObject(Usuario.class);
-                                                                if (usuario != null) {
-                                                                    usuario.setIdUsuario(document.getId());
-                                                                    crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null,usuario);
-                                                                }
-                                                            } else {
-                                                                android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
-                                                            }
-                                                        });
-                                            }
-                                        })
-                                        .addOnFailureListener(e -> {
-                                            Log.e("msg-test3", "Error al actualizar el administrador", e);
-                                            Toast.makeText(getContext(), "Error al actualizar el administrador", Toast.LENGTH_SHORT).show();
-                                        });
-
-                            } else {
-                                Log.e("msg-test4", "No se encontró un administrador con el ID especificado");
-                                Toast.makeText(getContext(), "No se encontró un administrador con el ID especificado", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(e -> {
-                            Log.e("msg-test3", "Error al buscar el administrador", e);
-                            Toast.makeText(getContext(), "Error al buscar el administrador", Toast.LENGTH_SHORT).show();
-                        });
-
+        if(!nombre.isEmpty() && !apellido.isEmpty() && !dni.isEmpty() && !correo.isEmpty() && !domicilio.isEmpty() && !telefono.isEmpty()) {
+            if(dni.length()!=8){
+                Toast.makeText(getContext(), "DNI debe ser de 8 digitos", Toast.LENGTH_LONG).show();
+            }else if(telefono.length()!=9) {
+                Toast.makeText(getContext(), "Telefono debe ser de 9 digitos", Toast.LENGTH_LONG).show();
+            }else if(!correoValido(correo)) {
+                Toast.makeText(getContext(), "Correo No Valido", Toast.LENGTH_LONG).show();
             }else {
-                Toast.makeText(getContext(), "Foto no seleccionada", Toast.LENGTH_LONG).show();
-            }
+                if((imagenUri!=null)) {
 
+                    //Subimos la foto en BD
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                    StorageReference imageReference = storageReference.child("fotosUsuario/" + System.currentTimeMillis() + ".jpg");
+
+                    UploadTask uploadTask = imageReference.putFile(imagenUri);
+                    uploadTask.addOnSuccessListener(taskSnapshot -> {
+                        imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                            //Una vez que ya se subio la imagen en BD , obtenemos la URL de la imagen:
+                            String imageUrl = uri.toString();
+
+                            db.collection("usuarios")
+                                    .whereEqualTo("idUsuario", usuario.getIdUsuario())  // Buscar documentos donde el campo 'id' sea igual a usuario.getId()
+                                    .get()
+                                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                                        if (!queryDocumentSnapshots.isEmpty()) {
+                                            // Obtener el primer documento que coincide con la consulta
+                                            DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                                            String documentId = documentSnapshot.getId();
+
+                                            // Actualizar el documento
+                                            db.collection("usuarios")
+                                                    .document(documentId)  // Accede al documento con el ID específico
+                                                    .update("apellido", apellido, "correo",correo,"dni",dni,"domicilio",domicilio,"estado",estado,"fotoURL",imageUrl,"nombre",nombre,"telefono",telefono)  // Actualiza campos específicos
+                                                    .addOnSuccessListener(aVoid -> {
+                                                        Log.d("msg-test2", "Administrador actualizado exitosamente");
+                                                        Toast.makeText(getContext(), "Administrador actualizado exitosamente", Toast.LENGTH_SHORT).show();
+
+                                                        SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola","comotas?");
+
+                                                        // Navegar al nuevo fragmento
+                                                        ((SuperAdmin) getContext()).getSupportFragmentManager()
+                                                                .beginTransaction()
+                                                                .replace(R.id.container1, fragment)
+                                                                .addToBackStack(null)
+                                                                .commit();
+                                                        FirebaseAuth auth = FirebaseAuth.getInstance();
+                                                        FirebaseUser user = auth.getCurrentUser();
+                                                        if (user != null) {
+                                                            String user1 = user.getUid();
+                                                            Log.d("USUARIO", user1);
+                                                            db.collection("usuarios")
+                                                                    .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                                                    .get()
+                                                                    .addOnCompleteListener(task1 -> {
+                                                                        if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                                                            // Obtener el primer documento que coincide con la consulta
+                                                                            DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                                                            Usuario usuario = document.toObject(Usuario.class);
+                                                                            if (usuario != null) {
+                                                                                usuario.setIdUsuario(document.getId());
+                                                                                crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + nombre+ " "+apellido, user1, null,usuario);
+                                                                            }
+                                                                        } else {
+                                                                            android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                                                        }
+                                                                    });
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Log.e("msg-test3", "Error al actualizar el administrador", e);
+                                                        Toast.makeText(getContext(), "Error al actualizar el administrador", Toast.LENGTH_SHORT).show();
+                                                    });
+
+                                        } else {
+                                            Log.e("msg-test4", "No se encontró un administrador con el ID especificado");
+                                            Toast.makeText(getContext(), "No se encontró un administrador con el ID especificado", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.e("msg-test3", "Error al buscar el administrador", e);
+                                        Toast.makeText(getContext(), "Error al buscar el administrador", Toast.LENGTH_SHORT).show();
+                                    });
+
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(getContext(), "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        });
+                    });
+                }else{
+                    //si no hay foto, mostrar toast make
+                    if((usuario.getFotoURL() != null && !usuario.getFotoURL().isEmpty())){
+                        db.collection("usuarios")
+                                .whereEqualTo("idUsuario", usuario.getIdUsuario())  // Buscar documentos donde el campo 'id' sea igual a usuario.getId()
+                                .get()
+                                .addOnSuccessListener(queryDocumentSnapshots -> {
+                                    if (!queryDocumentSnapshots.isEmpty()) {
+                                        // Obtener el primer documento que coincide con la consulta
+                                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                                        String documentId = documentSnapshot.getId();
+
+                                        // Actualizar el documento
+                                        db.collection("usuarios")
+                                                .document(documentId)  // Accede al documento con el ID específico
+                                                .update("apellido", apellido, "correo",correo,"dni",dni,"domicilio",domicilio,"estado",estado                                                                                                   ,"nombre",nombre,"telefono",telefono)  // Actualiza campos específicos
+                                                .addOnSuccessListener(aVoid -> {
+                                                    Log.d("msg-test2", "Administrador actualizado exitosamente");
+                                                    Toast.makeText(getContext(), "Administrador actualizado exitosamente", Toast.LENGTH_SHORT).show();
+                                                    SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola","comotas?");
+
+                                                    // Navegar al nuevo fragmento
+                                                    ((SuperAdmin) getContext()).getSupportFragmentManager()
+                                                            .beginTransaction()
+                                                            .replace(R.id.container1, fragment)
+                                                            .addToBackStack(null)
+                                                            .commit();
+                                                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                                                    FirebaseUser user = auth.getCurrentUser();
+                                                    if (user != null) {
+                                                        String user1 = user.getUid();
+                                                        Log.d("USUARIO", user1);
+                                                        db.collection("usuarios")
+                                                                .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                                                .get()
+                                                                .addOnCompleteListener(task1 -> {
+                                                                    if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                                                        // Obtener el primer documento que coincide con la consulta
+                                                                        DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                                                        Usuario usuario = document.toObject(Usuario.class);
+                                                                        if (usuario != null) {
+                                                                            usuario.setIdUsuario(document.getId());
+                                                                            crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + nombre+ " "+apellido, user1, null,usuario);
+                                                                        }
+                                                                    } else {
+                                                                        android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                                                    }
+                                                                });
+                                                    }
+                                                })
+                                                .addOnFailureListener(e -> {
+                                                    Log.e("msg-test3", "Error al actualizar el administrador", e);
+                                                    Toast.makeText(getContext(), "Error al actualizar el administrador", Toast.LENGTH_SHORT).show();
+                                                });
+
+                                    } else {
+                                        Log.e("msg-test4", "No se encontró un administrador con el ID especificado");
+                                        Toast.makeText(getContext(), "No se encontró un administrador con el ID especificado", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.e("msg-test3", "Error al buscar el administrador", e);
+                                    Toast.makeText(getContext(), "Error al buscar el administrador", Toast.LENGTH_SHORT).show();
+                                });
+
+                    }else {
+                        Toast.makeText(getContext(), "Foto no seleccionada", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        } else{
+            Toast.makeText(getContext(), "No Debe Haber Campos Vacios", Toast.LENGTH_LONG).show();
         }
+        //si no hay foto vacia
+
     }
 
 
@@ -363,6 +377,10 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
                 .into(imagen);
     }
 
+
+    private boolean correoValido(String correoStr) {
+        return Patterns.EMAIL_ADDRESS.matcher(correoStr).matches();
+    }
 
     public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio, Usuario usuario){
         Date fechaActual = new Date();

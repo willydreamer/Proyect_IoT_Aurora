@@ -22,7 +22,7 @@
         />
     <item
         android:id="@+id/ajustes"
-        android:title="Ajustes"
-        android:icon="@drawable/settings_24px"
+        android:title="Mi perfil"
+        android:icon="@drawable/account_circle_24px"
         />
 </menu>

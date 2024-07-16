@@ -25,7 +25,7 @@
         />
     <item
         android:id="@+id/configuration"
-        android:title="Configuración"
-        android:icon="@drawable/settings_24px"
+        android:title="Mi Perfil"
+        android:icon="@drawable/account_circle_24px"
         />
 </menu>

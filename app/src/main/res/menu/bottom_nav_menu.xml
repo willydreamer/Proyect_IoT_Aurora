@@ -22,9 +22,5 @@
         android:icon="@drawable/account_circle_24px"
         android:title="Mi Perfil" />
 
-    <item
-        android:id="@+id/navigation_message"
-        android:icon="@drawable/chat_24px"
-        android:title="Mensajes" />
 
 </menu>

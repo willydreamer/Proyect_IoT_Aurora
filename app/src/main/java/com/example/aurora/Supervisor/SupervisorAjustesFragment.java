@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aurora.Bean.Usuario;
+import com.example.aurora.General.InicioFragment;
 import com.example.aurora.General.LoginFragment;
 import com.example.aurora.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -107,7 +108,7 @@ public class SupervisorAjustesFragment extends Fragment {
                 FirebaseAuth.getInstance().signOut();
 
                 // Redirigir a LoginFragment (que es una actividad)
-                Intent intent = new Intent(getActivity(), LoginFragment.class);
+                Intent intent = new Intent(getActivity(), InicioFragment.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 getActivity().finish();

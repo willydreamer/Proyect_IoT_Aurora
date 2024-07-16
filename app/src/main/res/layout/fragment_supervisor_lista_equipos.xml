@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondosupervisor"
-    tools:context=".Supervisor.SupervisorListaDeEquipos">
-
+    tools:context=".Supervisor.SupervisorListaEquiposFragment">
 
     <SearchView
         android:id="@+id/buscadorEquipos"
         android:layout_width="330dp"
         android:layout_height="40dp"
+        android:layout_marginLeft="30sp"
         android:layout_marginTop="128dp"
         android:background="@drawable/boton_redondeado_parabuscador"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +23,8 @@
         android:id="@+id/textView31"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="110sp"
+        android:layout_marginTop="50sp"
         android:text="Lista de Equipos"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,12 +35,12 @@
         app:layout_constraintVertical_bias="0.109" />
 
     <ScrollView
-        android:layout_width="387dp"
+        android:layout_width="373dp"
         android:layout_height="500dp"
-        android:layout_marginTop="30dp"
+
+        android:layout_marginTop="200sp"
         app:layout_constraintTop_toBottomOf="@+id/buscadorEquipos"
-        tools:layout_editor_absoluteX="13dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteX="13dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -299,16 +300,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bottonCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="32dp"
+        android:layout_marginLeft="330sp"
+        android:layout_marginTop="40sp"
         android:backgroundTint="@color/color_accent"
-        android:src="@drawable/baseline_add_24"
+        android:src="@drawable/edit_square_24px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -317,4 +318,4 @@
         app:layout_constraintVertical_bias="1.0"
         app:tint="@android:color/white" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

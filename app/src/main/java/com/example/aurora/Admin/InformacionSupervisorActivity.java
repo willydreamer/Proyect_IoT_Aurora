@@ -37,6 +37,7 @@ import com.example.aurora.Adapter.ListaSitiosAdapter;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.General.InicioFragment;
+import com.example.aurora.NotificationDismissReceiver;
 import com.example.aurora.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -66,9 +67,9 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
     SearchView buscador;
     Usuario supervisor;
 
-    private static final String canal_estado = "estado_channel";
+    private static final String canal1 = "canal_default";
 
-    private static final String GROUP_KEY_ESTADO = "estado_group";
+    private static final String GROUP_KEY = "notis_group";
 
 
 
@@ -361,18 +362,19 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
         //Crear notificación
         //Agregar información a la notificación que luego sea enviada a la actividad que se abre
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, NotificationDismissReceiver.class);
         intent.putExtra("pid","4616");
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         //
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, canal_estado)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, canal1)
                 .setSmallIcon(R.drawable.editicon)
                 .setContentTitle(title)
                 .setContentText(description)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
-                .setGroup(GROUP_KEY_ESTADO);
+                .setGroup(GROUP_KEY)
+                .setDeleteIntent(pendingIntent);
 
         Notification notification = builder.build();
 
@@ -384,40 +386,21 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         }
 
         // Crear una notificación de resumen para el grupo
-        Notification summaryNotification = new NotificationCompat.Builder(this, canal_estado)
-                .setContentTitle("Estados")
-                .setContentText("Tienes nuevas notificaciones sobre estados")
+        Notification summaryNotification = new NotificationCompat.Builder(this, canal1)
+                .setContentTitle("Notificaciones")
+                .setContentText("Tienes Nuevas notificaciones")
                 .setSmallIcon(R.drawable.netwise_1000)
                 .setStyle(new NotificationCompat.InboxStyle()
-                        .addLine(title + ": " + description)
-                        .setBigContentTitle("Notificaciones de Estados")
+                        .addLine("Notificaciones")
+                        .setBigContentTitle("Notificaciones")
                         .setSummaryText("Resúmen de notificaciones"))
-                .setGroup(GROUP_KEY_ESTADO)
+                .setGroup(GROUP_KEY)
                 .setGroupSummary(true)
                 .build();
 
         notificationManager.notify(0, summaryNotification);
 
     }
-
-    /*private void sendNotification(String title, String message) {
-        Intent intent = new Intent(this, InicioFragment.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, );
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.editicon)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
-    }*/
-
-
-
 
 
 }

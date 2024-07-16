@@ -2,9 +2,16 @@ package com.example.aurora.Supervisor;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.activity.EdgeToEdge;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,40 +20,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.aurora.Adapter.ListaEquiposAdapterAdmin;
 import com.example.aurora.Adapter.ListaEquiposAdapterSupervisor;
-import com.example.aurora.Admin.InformacionEquipoActivity;
 import com.example.aurora.Bean.EquipoAdmin;
-import com.example.aurora.Bean.Sitio;
-import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivitySupervisorEstadoEquipoBinding;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
 
-import com.google.firebase.Timestamp;
-import android.util.Log;
+public class SupervisorEstadoEquipoFragment extends Fragment {
 
-public class SupervisorEstadoEquipoActivity extends AppCompatActivity {
     ArrayList<EquipoAdmin> listaRouters;
     RecyclerView recyclerView;
     FirebaseFirestore db;
@@ -56,32 +44,32 @@ public class SupervisorEstadoEquipoActivity extends AppCompatActivity {
     ActivitySupervisorEstadoEquipoBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_supervisor_estado_equipo);
+        View view = inflater.inflate(R.layout.activity_supervisor_estado_equipo, container, false);
 
-        Spinner spinner = findViewById(R.id.spinner);
+        Spinner spinner = view.findViewById(R.id.spinner);
         ArrayList<String> spinnerItems = new ArrayList<>(Arrays.asList("Operativo", "En arreglo", "Descompuesto","Fuera de servicio"));
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerItems);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, spinnerItems);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter1);
 
-        recyclerView = findViewById(R.id.recyclerViewEquipos);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView = view.findViewById(R.id.recyclerViewEquipos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         db = FirebaseFirestore.getInstance();
         listaRouters = new ArrayList<>();
 
         // Configurar el adapter y asociarlo al RecyclerView
         adapter = new ListaEquiposAdapterSupervisor(listaRouters,this);
-        adapter.setContext(this);
+        adapter.setContext(getContext());
         adapter.setListaEquipos(listaRouters);
         recyclerView.setAdapter(adapter);
 
         obtenerEquiposDeFirestore();
 
-        SearchView buscadorEquipos = findViewById(R.id.buscadorEquipos);
+        SearchView buscadorEquipos = view.findViewById(R.id.buscadorEquipos);
         buscadorEquipos.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -95,17 +83,18 @@ public class SupervisorEstadoEquipoActivity extends AppCompatActivity {
             }
         });
 
-        textViewSeleccione = findViewById(R.id.textViewSeleccione);
+        textViewSeleccione = view.findViewById(R.id.textViewSeleccione);
 
 
-        Button buttonRegistrar = findViewById(R.id.buttonRegistrar);
+        Button buttonRegistrar = view.findViewById(R.id.buttonRegistrar);
         buttonRegistrar.setOnClickListener(v -> {
-           if(equipoId1 != null){
-               String opcionSeleccionada = spinner.getSelectedItem().toString();
-               Log.d("opcionSeleccionada", "onCreate: "+opcionSeleccionada);
-               actualizarAtributo(equipoId1,opcionSeleccionada);
-           }
+            if(equipoId1 != null){
+                String opcionSeleccionada = spinner.getSelectedItem().toString();
+                Log.d("opcionSeleccionada", "onCreate: "+opcionSeleccionada);
+                actualizarAtributo(equipoId1,opcionSeleccionada);
+            }
         });
+        return view;
     }
 
     String equipoId1;
@@ -151,12 +140,12 @@ public class SupervisorEstadoEquipoActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error al obtener los sitios", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error al obtener los sitios", Toast.LENGTH_SHORT).show();
                 });
     }
 
     private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     public void actualizarAtributo(String idDocumento, String nuevoValor) {
@@ -184,39 +173,13 @@ public class SupervisorEstadoEquipoActivity extends AppCompatActivity {
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     FirebaseUser currentUser = mAuth.getCurrentUser();
                     //crearLog("Se edito el estado del Equipo "+idDocumento,"Debido a cambios con los equipos, se ha realizado el cambio de estado del equipo mencionado a fin de brindar información actualizada",currentUser.getUid(),equipoAdmin);
-                    Toast.makeText(SupervisorEstadoEquipoActivity.this, "Cambios guardados con éxito", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(SupervisorEstadoEquipoActivity.this, SupervisorListaDeEquipos.class);
+                    Toast.makeText(getContext(), "Cambios guardados con éxito", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getContext(), SupervisorListaDeEquipos.class);
                     startActivity(intent);
                 })
                 .addOnFailureListener(e -> {
                     Log.e("Error equipo", "Error al guardar equipo", e);
-                    Toast.makeText(SupervisorEstadoEquipoActivity.this, "Error al guardar cambios", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Error al guardar cambios", Toast.LENGTH_LONG).show();
                 });
     }
-    /*
-    private void crearLog(String actividad, String descripcion, String idUsuario, EquipoAdmin equipoAdmin) {
-        Timestamp timestamp = Timestamp.now();
-        Random rand = new Random();
-        int idLog = rand.nextInt(100000) + 1;
-
-        Log log = new Log(idLog, timestamp.toString(), actividad, descripcion, Usuario usuario, Sitio sitio);
-
-        // Añade el documento a la colección "logs" en Firestore
-        db.collection("logs")
-                .add(log)
-                .addOnSuccessListener(documentReference -> {
-                    // Éxito al añadir el documento
-                    Toast.makeText(SupervisorEstadoEquipoActivity.this, "Log creado correctamente", Toast.LENGTH_SHORT).show();
-                    // Puedes realizar otras acciones aquí después de crear el log, como navegar a otra actividad
-                    Intent intent = new Intent(SupervisorEstadoEquipoActivity.this, OtraActividad.class);
-                    startActivity(intent);
-                })
-                .addOnFailureListener(e -> {
-                    // Error al añadir el documento
-                    Log.e("Firebase", "Error al crear el log", e);
-                    Toast.makeText(SupervisorEstadoEquipoActivity.this, "Error al crear el log", Toast.LENGTH_SHORT).show();
-                });
-    }
-
-     */
 }

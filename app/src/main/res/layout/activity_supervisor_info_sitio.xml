@@ -81,6 +81,7 @@
                 android:padding="16dp">
 
                 <!-- Fila para el encabezado 'General' y el icono de editar -->
+
                 <LinearLayout
                     android:id="@+id/llHeader"
                     android:layout_width="0dp"
@@ -386,8 +387,8 @@
 
                 <LinearLayout
                     android:id="@+id/llEquipos"
-                    android:layout_width="375dp"
-                    android:layout_height="204dp"
+                    android:layout_width="377dp"
+                    android:layout_height="250dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"

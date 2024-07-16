@@ -35,14 +35,14 @@
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="170dp"
-                    android:layout_height="136dp"
+                    android:layout_width="153dp"
+                    android:layout_height="127dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.565"
+                    app:layout_constraintHorizontal_bias="0.488"
                     app:layout_constraintStart_toStartOf="@+id/imageView"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
-                    app:layout_constraintVertical_bias="0.49"
+                    app:layout_constraintVertical_bias="0.527"
                     app:srcCompat="@drawable/profile" />
 
                 <TextView
@@ -71,11 +71,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2">
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:layout_constraintVertical_bias="1.0">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/button1"
@@ -97,65 +100,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/button2"
-                        style="@android:style/Widget.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/btn_background_1"
-                        android:drawableStart="@mipmap/ic_llave_foreground"
-                        android:drawableEnd="@mipmap/ic_siguiente_foreground"
-                        android:drawablePadding="-20dp"
-                        android:paddingStart="-20dp"
-                        android:paddingEnd="-30dp"
-                        android:text="Cambiar contraseña"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/button3"
-                        style="@android:style/Widget.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/btn_background_1"
-                        android:drawableStart="@mipmap/ic_info"
-                        android:drawableEnd="@mipmap/ic_siguiente_foreground"
-                        android:drawablePadding="-20dp"
-                        android:paddingStart="-20dp"
-                        android:paddingEnd="-30dp"
-                        android:text="Información"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/button4"
-                        style="@android:style/Widget.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/btn_background_1"
-                        android:drawableStart="@mipmap/ic_actualizar_foreground"
-                        android:drawableEnd="@mipmap/ic_siguiente_foreground"
-                        android:drawablePadding="-20dp"
-                        android:paddingStart="-20dp"
-                        android:paddingEnd="-30dp"
-                        android:text="Update"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/buttonCerrarSesion2"

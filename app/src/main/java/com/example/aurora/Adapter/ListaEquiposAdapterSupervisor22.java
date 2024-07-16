@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.R;
+import com.example.aurora.Supervisor.SupervisorAsignarSitioActivity;
 import com.example.aurora.Supervisor.SupervisorEstadoEquipoFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
-public class ListaEquiposAdapterSupervisor extends RecyclerView.Adapter<ListaEquiposAdapterSupervisor.EquipoAdminViewHolder> {
+public class ListaEquiposAdapterSupervisor22 extends RecyclerView.Adapter<ListaEquiposAdapterSupervisor22.EquipoAdminViewHolder> {
     private Context context;
     FirebaseFirestore db;
     private ArrayList<EquipoAdmin> listaEquipos;
@@ -38,23 +39,23 @@ public class ListaEquiposAdapterSupervisor extends RecyclerView.Adapter<ListaEqu
         }
     }
 
-    private WeakReference<SupervisorEstadoEquipoFragment> weakReference;
+    private WeakReference<SupervisorAsignarSitioActivity> weakReference;
 
-    public ListaEquiposAdapterSupervisor(ArrayList<EquipoAdmin> listaEquipos, SupervisorEstadoEquipoFragment fragment) {
+    public ListaEquiposAdapterSupervisor22(ArrayList<EquipoAdmin> listaEquipos, SupervisorAsignarSitioActivity activity) {
         this.listaEquipos = listaEquipos;
-        this.weakReference = new WeakReference<>(fragment);
+        this.weakReference = new WeakReference<>(activity);
     }
 
     @NonNull
     @Override
-    public ListaEquiposAdapterSupervisor.EquipoAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListaEquiposAdapterSupervisor22.EquipoAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         db = FirebaseFirestore.getInstance();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_lista_equipos_supervisor, parent, false);
-        return new ListaEquiposAdapterSupervisor.EquipoAdminViewHolder(view);
+        return new ListaEquiposAdapterSupervisor22.EquipoAdminViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListaEquiposAdapterSupervisor.EquipoAdminViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListaEquiposAdapterSupervisor22.EquipoAdminViewHolder holder, int position) {
         db = FirebaseFirestore.getInstance();
 
         EquipoAdmin e = listaEquipos.get(position);
@@ -85,7 +86,7 @@ public class ListaEquiposAdapterSupervisor extends RecyclerView.Adapter<ListaEqu
         context = holder.itemView.getContext();
         Button buttonElegir = holder.itemView.findViewById(R.id.buttonElegir);
         buttonElegir.setOnClickListener(view -> {
-            SupervisorEstadoEquipoFragment fragment = weakReference.get();
+            SupervisorAsignarSitioActivity fragment = weakReference.get();
             if (fragment != null) {
                 fragment.updateTextView(e.getIdEquipo());
             }

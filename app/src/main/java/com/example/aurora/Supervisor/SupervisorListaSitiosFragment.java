@@ -1,25 +1,20 @@
 package com.example.aurora.Supervisor;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aurora.Adapter.ListaSitiosAdapter;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SearchView;
+
 import com.example.aurora.Adapter.ListaSitiosAdapter2;
-import com.example.aurora.Bean.EquipoAdmin;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
@@ -29,27 +24,33 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class SupervisorListaSitios extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link SupervisorListaSitiosFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class SupervisorListaSitiosFragment extends Fragment {
 
     private ArrayList<Sitio> listaSitios;
     private RecyclerView recyclerView;
     private ListaSitiosAdapter2 adaptador;
     private FirebaseFirestore databaseReference;
+    public static SupervisorListaSitiosFragment newInstance(String param1, String param2) {
+        SupervisorListaSitiosFragment fragment = new SupervisorListaSitiosFragment();
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_supervisor_lista_sitios);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                            Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_supervisor_lista_sitios, container, false);
 
-        recyclerView = findViewById(R.id.recyclerViewSitios);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = view.findViewById(R.id.recyclerViewSitios);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         databaseReference = FirebaseFirestore.getInstance();
 
@@ -58,13 +59,13 @@ public class SupervisorListaSitios extends AppCompatActivity {
         // Configurar el adapter y asociarlo al RecyclerView
         adaptador = new ListaSitiosAdapter2();
         adaptador.setListaSitios(listaSitios);
-        adaptador.setContext(this);
+        adaptador.setContext(getContext());
         recyclerView.setAdapter(adaptador);
 
         obtenerSitiosDeFirestore();
         encontrarmeComoUsuario();
 
-        SearchView buscadorSitios = findViewById(R.id.buscadorSitios);
+        SearchView buscadorSitios = view.findViewById(R.id.buscadorSitios);
         buscadorSitios.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -77,26 +78,33 @@ public class SupervisorListaSitios extends AppCompatActivity {
                 return true;
             }
         });
+        return view;
     }
 
     private void obtenerSitiosDeFirestore() {
         databaseReference.collection("sitios")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            Sitio sitio = document.toObject(Sitio.class);
-                            String dueno = sitio.getEncargado();
-                            if(Objects.equals(dueno, "ADMIN111")) {
-                                listaSitios.add(sitio);
-                            }
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
 
+                            return;
                         }
-                        adaptador.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+
+                        if (snapshots != null) {
+                            Log.d("TAG", "uwu");
+                            listaSitios.clear(); // Limpiar la lista antes de agregar nuevos datos
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Sitio sitio = document.toObject(Sitio.class);
+                                listaSitios.add(sitio);
+                                Log.d("TAG", "onEvent: "+sitio.getIdSitio());
+                            }
+                            adaptador.setListaSitios(listaSitios);
+                            adaptador.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }else {
+                            Log.d("TAG", "onEvent: asdasfasdad no hay nada");
+                        }
                     }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this,"Error al obtener los sitios", Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -152,8 +160,5 @@ public class SupervisorListaSitios extends AppCompatActivity {
                     }
                 });
     }
-
-
-
 
 }

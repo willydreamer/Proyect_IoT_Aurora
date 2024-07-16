@@ -85,6 +85,8 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
         supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
 
+        buscador = findViewById(R.id.search1);
+
 
         nombre = findViewById(R.id.nombre);
         apellido = findViewById(R.id.apellido);
@@ -94,8 +96,6 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         telefono = findViewById(R.id.telefono);
         fotoSupervisor = findViewById(R.id.imageView3);
 
-
-        buscador = findViewById(R.id.search2);
 
 
         String nombreStr = supervisor.getNombre();
@@ -161,28 +161,25 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
                 return true;
             }
         });*/
+        //basado en gpt
         buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                buscarSitiosAsignados(query);
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                buscarSitios(newText);
+                if (TextUtils.isEmpty(newText)) {
+                    obtenerSitiosDeFirestore();
+                } else {
+                    buscarSitiosAsignados(newText);
+                }
                 return true;
             }
         });
-
-        // Listener para detectar cuándo se limpia el texto del SearchView
-
-        buscador.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                obtenerSitiosDeFirestore();
-                return false;
-            }
-        });
+        obtenerSitiosDeFirestore();
 
 
 
@@ -221,7 +218,61 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
         });
     }
 
-    private void buscarSitios(String searchText) {
+    private void obtenerSitiosDeFirestore() {
+        db.collection("sitios")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Toast.makeText(InformacionSupervisorActivity.this, "Error al obtener los sitios", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            listaSitios.clear(); // Limpiar la lista antes de agregar nuevos datos
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Sitio sitio = document.toObject(Sitio.class);
+                                if(sitio.getEncargado().equals(supervisor.getIdUsuario())) {
+                                    listaSitios.add(sitio);
+                                }
+                            }
+                            adapter.setListaSitios(listaSitios);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
+                    }
+                });
+    }
+
+    private void buscarSitiosAsignados(String searchText) {
+        db.collection("sitios")
+                .orderBy("idSitio") // Suponiendo que tienes un campo 'idSitio' en tu colección
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            ArrayList<Sitio> sitios = new ArrayList<>();
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Sitio sitio = document.toObject(Sitio.class);
+                                if(sitio.getEncargado().equals(supervisor.getIdUsuario())) {
+                                    sitios.add(sitio);
+                                }
+                            }
+                            adapter.setListaSitios(sitios);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
+                    }
+                });
+    }
+
+
+    /*private void buscarSitios(String searchText) {
         if (searchText.isEmpty()) {
             adapter.updateList(listaSitios);
             return;
@@ -242,7 +293,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
                         adapter.updateList(filteredList);
                     }
                 });
-    }
+    }*/
 
     public void mostrarDialog() {
 
@@ -312,7 +363,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
 
     }
 
-    private void obtenerSitiosDeFirestore() {
+    /*private void obtenerSitiosDeFirestore() {
 
         db.collection("sitios")
                 .get()
@@ -333,7 +384,7 @@ public class InformacionSupervisorActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error al obtener los sitios", Toast.LENGTH_SHORT).show();
                 });
-    }
+    }*/
 
     /*public void crearCanalesNotificacion() {
 

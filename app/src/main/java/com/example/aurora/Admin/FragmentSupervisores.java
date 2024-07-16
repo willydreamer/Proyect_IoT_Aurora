@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Adapter.ListaSupervisoresAdapter;
 import com.example.aurora.Bean.EquipoAdmin;
+import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -75,12 +76,17 @@ public class FragmentSupervisores extends Fragment {
         buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                buscarSupervisores(query);
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                buscarSupervisores(newText);
+                if (TextUtils.isEmpty(newText)) {
+                    obtenerSupervisoresDeFirestore();
+                } else {
+                    buscarSupervisores(newText);
+                }
                 return true;
             }
         });
@@ -110,6 +116,15 @@ public class FragmentSupervisores extends Fragment {
                 return false;
             }
         });*/
+        buscador.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                obtenerSupervisoresDeFirestore();
+                return false;
+            }
+        });
+
+        obtenerSupervisoresDeFirestore();
 
         crearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +138,7 @@ public class FragmentSupervisores extends Fragment {
 
     }
 
-    private void obtenerSupervisoresDeFirestore() {
+    /*private void obtenerSupervisoresDeFirestore() {
         db.collection("usuarios")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -141,6 +156,30 @@ public class FragmentSupervisores extends Fragment {
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Error al obtener los Supervisores", Toast.LENGTH_LONG).show();
+                });
+    }*/
+    private void obtenerSupervisoresDeFirestore() {
+        db.collection("usuarios")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Toast.makeText(getContext(), "Error al obtener los supervisores", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            listaSupervisores.clear(); // Limpiar la lista antes de agregar nuevos datos
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Usuario supervisor = document.toObject(Usuario.class);
+                                if(supervisor.getRol().equals("supervisor")) {
+                                    listaSupervisores.add(supervisor);
+                                }
+                            }
+                            adapter.setListaSupervisores(listaSupervisores);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
+                    }
                 });
     }
 
@@ -190,7 +229,7 @@ public class FragmentSupervisores extends Fragment {
                 });
     }*/
 
-    private void buscarSupervisores(String searchText) {
+    /*private void buscarSupervisores(String searchText) {
         if (searchText.isEmpty()) {
             adapter.updateList(listaSupervisores);
             return;
@@ -213,8 +252,35 @@ public class FragmentSupervisores extends Fragment {
                         adapter.updateList(filteredList);
                     }
                 });
+    }*/
+
+    private void buscarSupervisores(String searchText) {
+        db.collection("usuarios")
+                .orderBy("nombre") // Suponiendo que tienes un campo 'idSitio' en tu colección
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            ArrayList<Usuario> supers= new ArrayList<>();
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Usuario supervisor = document.toObject(Usuario.class);
+                                supers.add(supervisor);
+                            }
+                            adapter.setListaSupervisores(supers);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
+                    }
+                });
     }
 }
+
 
     /*private void buscarUsuarios(String searchText) {
         db.collection("usuarios")

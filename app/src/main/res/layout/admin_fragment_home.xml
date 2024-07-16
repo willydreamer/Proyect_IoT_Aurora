@@ -469,15 +469,14 @@
 
                 </LinearLayout>
             </FrameLayout>
+
             <FrameLayout
                 android:id="@+id/frameSwitches"
                 android:layout_width="380dp"
                 android:layout_height="263dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/frameEnergia"
-                app:layout_constraintTop_toBottomOf="@+id/frameRouters"
-                tools:layout_editor_absoluteX="19dp">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameRouters">
 
                 <LinearLayout
                     android:id="@+id/llHeaderSwitches"
@@ -705,82 +704,6 @@
 
                         </LinearLayout>
                     </HorizontalScrollView>
-
-                </LinearLayout>
-            </FrameLayout>
-            <FrameLayout
-                android:id="@+id/frameEnergia"
-                android:layout_width="380dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frameSwitches"
-                tools:layout_editor_absoluteX="19dp">
-
-                <LinearLayout
-                    android:id="@+id/llHeaderEnergia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="8dp"
-                        android:src="@mipmap/ic_servidores_foreground" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:text="Panel de Energia"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textStyle="bold" />
-
-
-
-
-                </LinearLayout>
-            </FrameLayout>
-            <FrameLayout
-                android:id="@+id/frameRectificador"
-                android:layout_width="380dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frameEnergia"
-                tools:layout_editor_absoluteX="19dp">
-
-                <LinearLayout
-                    android:id="@+id/llHeaderRectificador"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="8dp"
-                        android:src="@mipmap/ic_servidores_foreground" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:text="Rectificador"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textStyle="bold" />
-
 
                 </LinearLayout>
             </FrameLayout>

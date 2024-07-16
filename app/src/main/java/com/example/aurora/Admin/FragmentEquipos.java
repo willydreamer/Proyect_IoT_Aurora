@@ -2,11 +2,14 @@ package com.example.aurora.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
@@ -15,11 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Adapter.ListaEquiposAdapterAdmin;
 import com.example.aurora.Bean.EquipoAdmin;
+import com.example.aurora.Bean.Sitio;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -52,7 +60,9 @@ public class FragmentEquipos extends Fragment {
 
     ListaEquiposAdapterAdmin adapter5;
 
-    androidx.appcompat.widget.SearchView buscador;
+    SearchView buscadorEquipos;
+
+    //androidx.appcompat.widget.SearchView buscador;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -123,7 +133,7 @@ public class FragmentEquipos extends Fragment {
         adapter4.setListaEquipos(listaRectificadores);
         recyclerView4.setAdapter(adapter4);
 
-        obtenerEquiposRectificadoresDeFirestores();
+        obtenerEquiposRectificadoresDeFirestore();
 
 
         //cargar gabinetes
@@ -142,8 +152,8 @@ public class FragmentEquipos extends Fragment {
 
         obtenerEquiposGabinetesDeFirestore();
 
-        SearchView buscadorEquipos =  equiposView.findViewById(R.id.buscadorEquipos);
-        buscadorEquipos.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        buscadorEquipos =  equiposView.findViewById(R.id.buscadorEquipos);
+        /*buscadorEquipos.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -157,7 +167,39 @@ public class FragmentEquipos extends Fragment {
                 buscarEquipoPorIDPanel(newText);
                 return true;
             }
+        });*/
+        buscadorEquipos.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                buscarEquipoPorIDRouter(query);
+                buscarEquipoPorIDSwitch(query);
+                buscarEquipoPorIDPanel(query);
+                buscarEquipoPorIDRectificador(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    obtenerEquiposRouterDeFirestore();
+                    obtenerEquiposSwitchesDeFirestore();
+                    obtenerEquiposPanelesDeFirestore();
+                    obtenerEquiposRectificadoresDeFirestore();
+                } else {
+                    buscarEquipoPorIDRouter(newText);
+                    buscarEquipoPorIDSwitch(newText);
+                    buscarEquipoPorIDPanel(newText);
+                    buscarEquipoPorIDRectificador(newText);
+                }
+                return true;
+            }
+
+
         });
+        obtenerEquiposRouterDeFirestore();
+        obtenerEquiposSwitchesDeFirestore();
+        obtenerEquiposPanelesDeFirestore();
+        obtenerEquiposRectificadoresDeFirestore();
 
 
         FloatingActionButton botonCrear = equiposView.findViewById(R.id.bottonCrear);
@@ -169,7 +211,7 @@ public class FragmentEquipos extends Fragment {
     }
 
 
-    private void obtenerEquiposRouterDeFirestore() {
+    /*private void obtenerEquiposRouterDeFirestore() {
         db.collection("equipos")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -186,70 +228,111 @@ public class FragmentEquipos extends Fragment {
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Error al obtener los sitios", Toast.LENGTH_SHORT).show();
                 });
+    }*/
+
+    private void obtenerEquiposRouterDeFirestore() {
+        db.collection("equipos")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Toast.makeText(getContext(), "Error al obtener los equipos", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            listaRouters.clear(); // Limpiar la lista antes de agregar nuevos datos
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                EquipoAdmin router = document.toObject(EquipoAdmin.class);
+                                if(router.getTipoDeEquipo().equals("Router")) {
+                                    listaRouters.add(router);
+                                }
+                            }
+                            adapter.setListaEquipos(listaRouters);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
+                    }
+                });
     }
+
 
     private void obtenerEquiposSwitchesDeFirestore() {
         db.collection("equipos")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            EquipoAdmin equipo = document.toObject(EquipoAdmin.class);
-                            if(equipo.getTipoDeEquipo().equals("Switch")) {
-                                listaSwitches.add(equipo);
-                            }
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Toast.makeText(getContext(), "Error al obtener los equipos", Toast.LENGTH_SHORT).show();
+                            return;
                         }
-                        adapter2.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+
+                        if (snapshots != null) {
+                            listaSwitches.clear(); // Limpiar la lista antes de agregar nuevos datos
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                EquipoAdmin switch1= document.toObject(EquipoAdmin.class);
+                                if(switch1.getTipoDeEquipo().equals("Switch")) {
+                                    listaSwitches.add(switch1);
+                                }
+                            }
+                            adapter2.setListaEquipos(listaSwitches);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
                     }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al obtener los sitios", Toast.LENGTH_SHORT).show();
                 });
     }
 
     private void obtenerEquiposPanelesDeFirestore() {
         db.collection("equipos")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            EquipoAdmin equipo = document.toObject(EquipoAdmin.class);
-                            if(equipo.getTipoDeEquipo().equals("Panel de Energia")) {
-                                listaPaneles.add(equipo);
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Toast.makeText(getContext(), "Error al obtener los equipos", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            listaPaneles.clear(); // Limpiar la lista antes de agregar nuevos datos
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                EquipoAdmin panel = document.toObject(EquipoAdmin.class);
+                                if(panel.getTipoDeEquipo().equals("Panel de Energia")) {
+                                    listaPaneles.add(panel);
+                                }
                             }
+                            adapter3.setListaEquipos(listaPaneles);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
                         }
-                        if(listaPaneles.size()>=1){
-                            recyclerView3.setVisibility(true ? View.VISIBLE : View.GONE);
-                        }
-                        adapter3.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
                     }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al obtener los sitios", Toast.LENGTH_SHORT).show();
                 });
     }
 
-    private void obtenerEquiposRectificadoresDeFirestores() {
+    private void obtenerEquiposRectificadoresDeFirestore() {
         db.collection("equipos")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            EquipoAdmin equipo = document.toObject(EquipoAdmin.class);
-                            if(equipo.getTipoDeEquipo().equals("Rectificador")) {
-                                listaRectificadores.add(equipo);
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Toast.makeText(getContext(), "Error al obtener los equipos", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            listaRectificadores.clear(); // Limpiar la lista antes de agregar nuevos datos
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                EquipoAdmin rectificador = document.toObject(EquipoAdmin.class);
+                                if(rectificador.getTipoDeEquipo().equals("Rectificador")) {
+                                    listaRectificadores.add(rectificador);
+                                }
                             }
+                            adapter4.setListaEquipos(listaRectificadores);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
                         }
-                        if(listaRectificadores.size()>=1){
-                            recyclerView4.setVisibility(true ? View.VISIBLE : View.GONE);
-                        }
-                        adapter4.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
                     }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al obtener los rectificadores", Toast.LENGTH_SHORT).show();
                 });
     }
+
+
+
 
     private void obtenerEquiposGabinetesDeFirestore() {
         db.collection("equipos")
@@ -273,7 +356,7 @@ public class FragmentEquipos extends Fragment {
                 });
     }
 
-    private void buscarEquipoPorIDRouter(String searchText) {
+    /*private void buscarEquipoPorIDRouter(String searchText) {
         if (searchText.isEmpty()) {
             adapter.updateList(listaRouters);
             return;
@@ -296,79 +379,115 @@ public class FragmentEquipos extends Fragment {
                         adapter.updateList(filteredList);
                     }
                 });
-    }
-
-    private void buscarEquipoPorIDSwitch(String searchText) {
-        if (searchText.isEmpty()) {
-            adapter2.updateList(listaSwitches);
-            return;
-        }
-
+    }*/
+    private void buscarEquipoPorIDRouter(String searchText) {
         db.collection("equipos")
-                .orderBy("numeroDeSerie")
+                .orderBy("numeroDeSerie") // Suponiendo que tienes un campo 'idSitio' en tu colección
                 .startAt(searchText)
                 .endAt(searchText + "\uf8ff")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        ArrayList<EquipoAdmin> filteredList = new ArrayList<>();
-                        for (DocumentSnapshot document : task.getResult()) {
-                            EquipoAdmin equipoAdmin = document.toObject(EquipoAdmin.class);
-                            if(equipoAdmin.getTipoDeEquipo().equals("Switch")){
-                                filteredList.add(equipoAdmin);
-                            }
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
                         }
-                        adapter2.updateList(filteredList);
+
+                        if (snapshots != null) {
+                            ArrayList<EquipoAdmin> routers = new ArrayList<>();
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                EquipoAdmin router = document.toObject(EquipoAdmin.class);
+                                if(router.getTipoDeEquipo().equals("Router")){
+                                    routers.add(router);
+                                }
+                            }
+                            adapter.setListaEquipos(routers);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
                     }
                 });
     }
 
-    private void buscarEquipoPorIDRectificador(String searchText) {
-        if (searchText.isEmpty()) {
-            adapter3.updateList(listaRectificadores);
-            return;
-        }
-
+    private void buscarEquipoPorIDSwitch(String searchText) {
         db.collection("equipos")
-                .orderBy("numeroDeSerie")
+                .orderBy("numeroDeSerie") // Suponiendo que tienes un campo 'idSitio' en tu colección
                 .startAt(searchText)
                 .endAt(searchText + "\uf8ff")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        ArrayList<EquipoAdmin> filteredList = new ArrayList<>();
-                        for (DocumentSnapshot document : task.getResult()) {
-                            EquipoAdmin equipoAdmin = document.toObject(EquipoAdmin.class);
-                            if(equipoAdmin.getTipoDeEquipo().equals("Rectificador")){
-                                filteredList.add(equipoAdmin);
-                            }
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
                         }
-                        adapter3.updateList(filteredList);
+
+                        if (snapshots != null) {
+                            ArrayList<EquipoAdmin> switches = new ArrayList<>();
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                EquipoAdmin switch1 = document.toObject(EquipoAdmin.class);
+                                if(switch1.getTipoDeEquipo().equals("Switch")){
+                                    switches.add(switch1);
+                                }
+                            }
+                            adapter2.setListaEquipos(switches);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
                     }
                 });
     }
 
     private void buscarEquipoPorIDPanel(String searchText) {
-        if (searchText.isEmpty()) {
-            adapter4.updateList(listaPaneles);
-            return;
-        }
-
         db.collection("equipos")
-                .orderBy("numeroDeSerie")
+                .orderBy("numeroDeSerie") // Suponiendo que tienes un campo 'idSitio' en tu colección
                 .startAt(searchText)
                 .endAt(searchText + "\uf8ff")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        ArrayList<EquipoAdmin> filteredList = new ArrayList<>();
-                        for (DocumentSnapshot document : task.getResult()) {
-                            EquipoAdmin equipoAdmin = document.toObject(EquipoAdmin.class);
-                            if(equipoAdmin.getTipoDeEquipo().equals("Panel de Energia")){
-                                filteredList.add(equipoAdmin);
-                            }
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
                         }
-                        adapter4.updateList(filteredList);
+
+                        if (snapshots != null) {
+                            ArrayList<EquipoAdmin> paneles = new ArrayList<>();
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                EquipoAdmin panel = document.toObject(EquipoAdmin.class);
+                                if(panel.getTipoDeEquipo().equals("Panel de Energia")){
+                                    paneles.add(panel);
+                                }
+                            }
+                            adapter3.setListaEquipos(paneles);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
+                    }
+                });
+    }
+
+    private void buscarEquipoPorIDRectificador(String searchText) {
+        db.collection("equipos")
+                .orderBy("numeroDeSerie") // Suponiendo que tienes un campo 'idSitio' en tu colección
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            // Manejo de errores
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            ArrayList<EquipoAdmin> rectificadores = new ArrayList<>();
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                EquipoAdmin rectificador = document.toObject(EquipoAdmin.class);
+                                if(rectificador.getTipoDeEquipo().equals("Rectificador")){
+                                    rectificadores.add(rectificador);
+                                }
+                            }
+                            adapter4.setListaEquipos(rectificadores);
+                            //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado
+                        }
                     }
                 });
     }

@@ -113,6 +113,8 @@ public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposA
     }
 
 
+
+
     public void updateList(ArrayList<EquipoAdmin> newList) {
         listaEquipos = newList;
         notifyDataSetChanged();
@@ -138,5 +140,6 @@ public class ListaEquiposAdapterAdmin extends RecyclerView.Adapter<ListaEquiposA
 
     public void setListaEquipos(ArrayList<EquipoAdmin> listaEquipos) {
         this.listaEquipos = listaEquipos;
+        notifyDataSetChanged();
     }
 }

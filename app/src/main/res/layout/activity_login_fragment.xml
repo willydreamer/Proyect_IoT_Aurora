@@ -140,6 +140,7 @@
 
     <Button
         android:id="@+id/registrarseboton"
+        android:visibility="invisible"
         android:layout_width="270dp"
         android:layout_height="35dp"
         android:background="@drawable/boton_redondeado"

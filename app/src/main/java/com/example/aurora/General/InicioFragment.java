@@ -41,7 +41,7 @@ public class InicioFragment extends AppCompatActivity {
     //String canal1 = "importanteDefault";
     //private static final String CHANNEL_ID = "supervisor_channel";
 
-    private static final String canal_estado = "estado_channel";
+    private static final String canal1 = "canal_default";
     ActivityInicioFragmentBinding binding;
 
     @Override
@@ -120,10 +120,10 @@ public class InicioFragment extends AppCompatActivity {
 
     public void crearCanalesNotificacion() {
 
-        NotificationChannel channel = new NotificationChannel(canal_estado,
-                "Canal notificaciones cambio de estado",
+        NotificationChannel channel = new NotificationChannel(canal1,
+                "Canal de Notificaciones Default Netwise",
                 NotificationManager.IMPORTANCE_DEFAULT);
-        channel.setDescription("Canal para notificaciones de cambio de estado");
+        channel.setDescription("Canal para notificaciones de importance default");
         channel.enableVibration(true);
 
         NotificationManager notificationManager = getSystemService(NotificationManager.class);

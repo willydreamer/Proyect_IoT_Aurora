@@ -226,7 +226,22 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
                                                 if (user != null) {
                                                     String user1 = user.getUid();
                                                     Log.d("USUARIO", user1);
-                                                    crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null);
+                                                    db.collection("usuarios")
+                                                            .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                                            .get()
+                                                            .addOnCompleteListener(task1 -> {
+                                                                if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                                                    // Obtener el primer documento que coincide con la consulta
+                                                                    DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                                                    Usuario usuario = document.toObject(Usuario.class);
+                                                                    if (usuario != null) {
+                                                                        usuario.setIdUsuario(document.getId());
+                                                                        crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null,usuario);
+                                                                    }
+                                                                } else {
+                                                                    android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                                                }
+                                                            });
                                                 }
                                             })
                                             .addOnFailureListener(e -> {
@@ -280,7 +295,22 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
                                             if (user != null) {
                                                 String user1 = user.getUid();
                                                 Log.d("USUARIO", user1);
-                                                crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null);
+                                                db.collection("usuarios")
+                                                        .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                                        .get()
+                                                        .addOnCompleteListener(task1 -> {
+                                                            if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                                                // Obtener el primer documento que coincide con la consulta
+                                                                DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                                                Usuario usuario = document.toObject(Usuario.class);
+                                                                if (usuario != null) {
+                                                                    usuario.setIdUsuario(document.getId());
+                                                                    crearLog("Usuario Administrador Actualizado", "Se ha editado el usuario administrador " + usuario.getNombre()+ " "+usuario.getApellido(), user1, null,usuario);
+                                                                }
+                                                            } else {
+                                                                android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                                            }
+                                                        });
                                             }
                                         })
                                         .addOnFailureListener(e -> {
@@ -334,10 +364,10 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
     }
 
 
-    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio){
+    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio, Usuario usuario){
         Date fechaActual = new Date();
 
-        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio);
+        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio, usuario);
 
         db.collection("logs")
                 .add(nuevoLog)
@@ -347,7 +377,7 @@ public class SuperAdminEditarAdministradorFragment extends Fragment {
                 })
                 .addOnFailureListener(e -> {
                     Log.e("msg-test3", "Error al guardar el log", e);
-                    Toast.makeText(getContext(), "Error al registrar la activadad", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error al registrar la activada", Toast.LENGTH_SHORT).show();
                 });
     }
 

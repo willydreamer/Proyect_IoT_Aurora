@@ -1,7 +1,12 @@
 package com.example.aurora.Admin;
 
+import static android.Manifest.permission.POST_NOTIFICATIONS;
+
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,12 +23,16 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Adapter.SelectedImagesAdapter;
 import com.example.aurora.Bean.EquipoAdmin;
+import com.example.aurora.NotificationDismissReceiver;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivityCrearEquipoBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -77,6 +86,12 @@ public class CrearEquipoActivity extends AppCompatActivity {
     private Button botonGuardar;
 
     private Button botonFecha;
+
+    private static final String canal1 = "canal_default";
+
+    //private static final String GROUP_KEY_EQUIPO = "equipo_group";
+
+    private static final String GROUP_KEY = "notis_group";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -292,6 +307,9 @@ public class CrearEquipoActivity extends AppCompatActivity {
                     Toast.makeText(CrearEquipoActivity.this, "Error al crear el equipo", Toast.LENGTH_SHORT).show();
                 });
 
+        notificarImportanceDefault(tipoDeEquipoStr,idEquipo);
+
+
     }
 
 
@@ -314,6 +332,50 @@ public class CrearEquipoActivity extends AppCompatActivity {
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
+    }
+
+    public void notificarImportanceDefault(String tipoDeEquipoStr, String idEquipo){
+
+        //Crear notificación
+        //Agregar información a la notificación que luego sea enviada a la actividad que se abre
+        Intent intent = new Intent(this, NotificationDismissReceiver.class);
+        intent.putExtra("pid","4616");
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        //
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, canal1)
+                .setSmallIcon(R.drawable.splitscreen_add_24px)
+                .setContentTitle("Nuevo Equipo Creado")
+                .setContentText("Se creó con exito un nuevo equipo: "+ tipoDeEquipoStr+": "+idEquipo)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setGroup(GROUP_KEY)
+                .setDeleteIntent(pendingIntent);
+
+        Notification notification = builder.build();
+
+        //Lanzar notificación
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        if (ActivityCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            notificationManager.notify((int) System.currentTimeMillis(), notification);
+        }
+
+        // Crear una notificación de resumen para el grupo
+        Notification summaryNotification = new NotificationCompat.Builder(this, canal1)
+                .setContentTitle("Notificaciones")
+                .setContentText("Tienes Nuevas notificaciones")
+                .setSmallIcon(R.drawable.netwise_1000)
+                .setStyle(new NotificationCompat.InboxStyle()
+                        .addLine("Notificaciones")
+                        .setBigContentTitle("Notificaciones")
+                        .setSummaryText("Resúmen de notificaciones"))
+                .setGroup(GROUP_KEY)
+                .setGroupSummary(true)
+                .build();
+
+        notificationManager.notify(0, summaryNotification);
+
     }
 
 }

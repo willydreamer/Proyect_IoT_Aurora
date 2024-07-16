@@ -115,7 +115,7 @@ public class SuperAdminLogsFragment extends Fragment {
                 logList.clear();
                 for (DocumentSnapshot doc : value.getDocuments()) {
                     Log log = doc.toObject(Log.class);
-                    db.collection("usuarios")
+                    /*db.collection("usuarios")
                             .whereEqualTo("idUsuario", log.getIdUsuario())  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
                             .get()
                             .addOnCompleteListener(task -> {
@@ -130,7 +130,7 @@ public class SuperAdminLogsFragment extends Fragment {
                                 } else {
                                     android.util.Log.d("msg-test", "Error getting document: ", task.getException());
                                 }
-                            });
+                            });*/
 
                     logList.add(log);
                 }

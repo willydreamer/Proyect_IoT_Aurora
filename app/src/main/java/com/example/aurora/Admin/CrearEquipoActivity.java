@@ -32,9 +32,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Adapter.SelectedImagesAdapter;
 import com.example.aurora.Bean.EquipoAdmin;
+import com.example.aurora.Bean.Sitio;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.NotificationDismissReceiver;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivityCrearEquipoBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -273,6 +278,29 @@ public class CrearEquipoActivity extends AppCompatActivity {
                         Toast.makeText(CrearEquipoActivity.this, "Falla en subir Fotos del Equipo: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     });*/
                     guardarEquipo(idEquipo, tipoDeEquipoStr, SKUstr, numeroDeSerieStr, marcaStr, modeloStr, descripcionStr,imageUrls);
+
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    FirebaseUser user = auth.getCurrentUser();
+                    if (user != null) {
+                        String user1 = user.getUid();
+                        Log.d("USUARIO", user1);
+                        db.collection("usuarios")
+                                .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                .get()
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                        // Obtener el primer documento que coincide con la consulta
+                                        DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                        Usuario usuario = document.toObject(Usuario.class);
+                                        if (usuario != null) {
+                                            usuario.setIdUsuario(document.getId());
+                                            crearLog("Equipo Registrado", "Se ha registrado el equipo"+" "+numeroDeSerieStr, user1, null,usuario);
+                                        }
+                                    } else {
+                                        android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                    }
+                                });
+                    }
                 }
             }else{
                 Toast.makeText(this, "No Deben haber Campos vacios", Toast.LENGTH_LONG).show();
@@ -376,6 +404,23 @@ public class CrearEquipoActivity extends AppCompatActivity {
 
         notificationManager.notify(0, summaryNotification);
 
+    }
+
+    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio, Usuario usuario){
+        Date fechaActual = new Date();
+
+        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio, usuario);
+
+        db.collection("logs")
+                .add(nuevoLog)
+                .addOnSuccessListener(documentReference -> {
+                    Log.d("msg-test2", "Log guardado exitosamente");
+                    Toast.makeText(CrearEquipoActivity.this, "Actividad Registrada", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("msg-test3", "Error al guardar el log", e);
+                    Toast.makeText(CrearEquipoActivity.this, "Error al registrar la activada", Toast.LENGTH_SHORT).show();
+                });
     }
 
 }

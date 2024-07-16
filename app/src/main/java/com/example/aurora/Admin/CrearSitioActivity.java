@@ -36,6 +36,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -44,6 +47,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -142,6 +146,29 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
                 imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
                     imageUrl = uri.toString();
                     guardarSitio(idSitio, departamento, provincia, distrito, tipoDeZona, latitud, longitud, operadora, encargado, imageUrl);
+
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    FirebaseUser user = auth.getCurrentUser();
+                    if (user != null) {
+                        String user1 = user.getUid();
+                        Log.d("USUARIO", user1);
+                        db.collection("usuarios")
+                                .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                .get()
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                        // Obtener el primer documento que coincide con la consulta
+                                        DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                        Usuario usuario = document.toObject(Usuario.class);
+                                        if (usuario != null) {
+                                            usuario.setIdUsuario(document.getId());
+                                            crearLog("Sitio Creado", "Se ha registrado el sitio"+" "+idSitio+ " en "+departamento, user1, null,usuario);
+                                        }
+                                    } else {
+                                        android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                    }
+                                });
+                    }
 
                 });
             }).addOnFailureListener(e -> {
@@ -318,6 +345,23 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
                 .build();
 
         notificationManager.notify(0, summaryNotification);
+    }
+
+    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio, Usuario usuario){
+        Date fechaActual = new Date();
+
+        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio, usuario);
+
+        db.collection("logs")
+                .add(nuevoLog)
+                .addOnSuccessListener(documentReference -> {
+                    Log.d("msg-test2", "Log guardado exitosamente");
+                    Toast.makeText(CrearSitioActivity.this, "Actividad Registrada", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("msg-test3", "Error al guardar el log", e);
+                    Toast.makeText(CrearSitioActivity.this, "Error al registrar la activada", Toast.LENGTH_SHORT).show();
+                });
     }
 
 }

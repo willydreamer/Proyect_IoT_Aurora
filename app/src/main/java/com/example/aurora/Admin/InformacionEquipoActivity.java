@@ -25,16 +25,22 @@ import com.example.aurora.Adapter.ListaFotosEquipoAdapter;
 import com.example.aurora.Adapter.ListaFotosEquipoAdapter2;
 import com.example.aurora.Adapter.SelectedImagesAdapter;
 import com.example.aurora.Bean.EquipoAdmin;
+import com.example.aurora.Bean.Sitio;
+import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivityInformacionEquipoBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -146,6 +152,29 @@ public class InformacionEquipoActivity extends AppCompatActivity {
                                             startActivity(intent);
                                             Toast.makeText(InformacionEquipoActivity.this, "Equipo eliminado exitosamente", Toast.LENGTH_LONG).show();
                                             finish(); // Cerrar la actividad actual
+
+                                            FirebaseAuth auth = FirebaseAuth.getInstance();
+                                            FirebaseUser user = auth.getCurrentUser();
+                                            if (user != null) {
+                                                String user1 = user.getUid();
+                                                Log.d("USUARIO", user1);
+                                                db.collection("usuarios")
+                                                        .whereEqualTo("idUsuario", user1)  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                                        .get()
+                                                        .addOnCompleteListener(task1 -> {
+                                                            if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                                                // Obtener el primer documento que coincide con la consulta
+                                                                DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                                                Usuario usuario = document.toObject(Usuario.class);
+                                                                if (usuario != null) {
+                                                                    usuario.setIdUsuario(document.getId());
+                                                                    crearLog("Equipo Eliminado", "Se ha eliminado el equipo"+" "+equipo.getIdEquipo(), user1, null,usuario);
+                                                                }
+                                                            } else {
+                                                                android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                                            }
+                                                        });
+                                            }
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -379,6 +408,23 @@ public class InformacionEquipoActivity extends AppCompatActivity {
             Toast.makeText(InformacionEquipoActivity.this, "No deben haber campos vacios", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio, Usuario usuario){
+        Date fechaActual = new Date();
+
+        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio, usuario);
+
+        db.collection("logs")
+                .add(nuevoLog)
+                .addOnSuccessListener(documentReference -> {
+                    Log.d("msg-test2", "Log guardado exitosamente");
+                    Toast.makeText(InformacionEquipoActivity.this, "Actividad Registrada", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("msg-test3", "Error al guardar el log", e);
+                    Toast.makeText(InformacionEquipoActivity.this, "Error al registrar la activada", Toast.LENGTH_SHORT).show();
+                });
     }
 }
 

@@ -27,6 +27,7 @@
         android:text="Log" />
 
     <SearchView
+        android:id="@+id/search1"
         android:layout_width="330dp"
         android:layout_height="40dp"
         android:layout_marginLeft="43sp"
@@ -38,5 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="521dp"
         android:layout_marginLeft="0sp"
-        android:layout_marginTop="210sp" />
+        android:layout_marginTop="210sp"
+        android:layout_marginBottom="40dp"
+        android:paddingBottom="45dp"/>
 </FrameLayout>

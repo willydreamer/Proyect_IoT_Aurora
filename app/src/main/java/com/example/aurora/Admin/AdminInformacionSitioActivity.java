@@ -1,7 +1,12 @@
 package com.example.aurora.Admin;
 
+import static android.Manifest.permission.POST_NOTIFICATIONS;
+
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,9 +19,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
+import com.example.aurora.NotificationDismissReceiver;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivityInformacionSitioBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +46,11 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private Sitio sitio;
     ImageView fotoSitio;
+
+    private static final String canal1 = "canal_default";
+
+    private static final String GROUP_KEY = "notis_group";
+
 
 
     @Override
@@ -176,6 +190,10 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                                                             binding.cardViewResponsable.setVisibility(View.GONE);
                                                             binding.elegirSupervisor.setVisibility(View.VISIBLE);
                                                             isSpinnerInitial = true;
+                                                            String title= "Sitio Desasignado";
+                                                            String description = "Se desasignó el sitio: "+sitio.getIdSitio()+", al supervisor: "+supervisorId;
+                                                            notificarImportanceDefault(title , description);
+
                                                         }
                                                     })
                                                     .addOnFailureListener(new OnFailureListener() {
@@ -396,6 +414,9 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                                         binding.elegirSupervisor.setVisibility(View.GONE);
                                         Toast.makeText(AdminInformacionSitioActivity.this, "Supervisor asignado con éxito", Toast.LENGTH_SHORT).show();
                                         mostrarInformacionEncargado(selectedSupervisorId);
+                                        String title= "Nuevo Sitio Asignado";
+                                        String description = "Se asignó el sitio: "+sitio.getIdSitio()+", al supervisor: "+selectedSupervisorId;
+                                        notificarImportanceDefault(title , description);
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -412,6 +433,50 @@ public class AdminInformacionSitioActivity extends AppCompatActivity {
                         Log.d("msg-test", "Error updating site document", e);
                     }
                 });
+
+    }
+
+    public void notificarImportanceDefault(String title , String description){
+
+        //Crear notificación
+        //Agregar información a la notificación que luego sea enviada a la actividad que se abre
+        Intent intent = new Intent(this, NotificationDismissReceiver.class);
+        intent.putExtra("pid","4616");
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        //
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, canal1)
+                .setSmallIcon(R.drawable.editicon)
+                .setContentTitle(title)
+                .setContentText(description)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setGroup(GROUP_KEY)
+                .setDeleteIntent(pendingIntent);
+
+        Notification notification = builder.build();
+
+        //Lanzar notificación
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        if (ActivityCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            notificationManager.notify((int) System.currentTimeMillis(), notification);
+        }
+
+        // Crear una notificación de resumen para el grupo
+        Notification summaryNotification = new NotificationCompat.Builder(this, canal1)
+                .setContentTitle("Notificaciones")
+                .setContentText("Tienes Nuevas notificaciones")
+                .setSmallIcon(R.drawable.netwise_1000)
+                .setStyle(new NotificationCompat.InboxStyle()
+                        .addLine("Notificaciones")
+                        .setBigContentTitle("Notificaciones")
+                        .setSummaryText("Resúmen de notificaciones"))
+                .setGroup(GROUP_KEY)
+                .setGroupSummary(true)
+                .build();
+
+        notificationManager.notify(0, summaryNotification);
 
     }
 }

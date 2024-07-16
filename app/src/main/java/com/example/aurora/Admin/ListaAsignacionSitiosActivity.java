@@ -51,7 +51,7 @@ public class ListaAsignacionSitiosActivity extends AppCompatActivity {
         Usuario supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
 
         recyclerView = findViewById(R.id.recyclerview_lista_asignacion_sitios);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
         db = FirebaseFirestore.getInstance();

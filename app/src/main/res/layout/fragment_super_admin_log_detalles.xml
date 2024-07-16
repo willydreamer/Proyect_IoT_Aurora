@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="45dp"
     tools:context=".Superadmin.SuperAdminLogDetalles"
 
     android:background="@drawable/fondosupervisor">
@@ -25,41 +26,10 @@
         app:layout_constraintVertical_bias="0.071" />
 
     <TextView
-        android:id="@+id/descriptiontext"
-        android:layout_width="326dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="20dp"
-        android:shadowColor="#252525"
-        android:text="Descripción:"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editActividad" />
-
-    <EditText
-        android:id="@+id/editDescription"
-        android:layout_width="326dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/text_background"
-        android:enabled="false"
-        android:inputType="text"
-        android:padding="8dp"
-        android:paddingStart="16dp"
-        android:text="Descripción"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptiontext" />
-
-    <TextView
         android:id="@+id/acti"
         android:layout_width="326dp"
         android:layout_height="25dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="80dp"
         android:backgroundTint="#FAFAFA"
         android:text="Actividad:"
         android:textAllCaps="false"
@@ -74,82 +44,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activitytext" />
 
-    <EditText
-        android:id="@+id/editActividad"
-        android:layout_width="326dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/text_background"
-        android:enabled="false"
-        android:inputType="text"
-        android:padding="8dp"
-        android:paddingStart="16dp"
-        android:text="Actividad"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/acti" />
-
     <TextView
-        android:id="@+id/timestamp"
+        android:id="@+id/descriptiontext"
         android:layout_width="326dp"
         android:layout_height="25dp"
         android:layout_marginTop="20dp"
-        android:text="Fecha:"
+        android:shadowColor="#252525"
+        android:text="Descripción:"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDescription" />
-
-    <EditText
-        android:id="@+id/editTimestamp"
-        android:layout_width="326dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/text_background"
-        android:enabled="false"
-        android:inputType="text"
-        android:padding="8dp"
-        android:paddingStart="16dp"
-        android:text="Descripción"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timestamp" />
-
-    <TextView
-        android:id="@+id/sitionombre"
-        android:layout_width="326dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="20dp"
-        android:text="Sitio:"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editUsuario" />
-
-    <EditText
-        android:id="@+id/editSitio"
-        android:layout_width="326dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/text_background"
-        android:enabled="false"
-        android:inputType="text"
-        android:padding="8dp"
-        android:paddingStart="16dp"
-        android:text="Sitio"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sitionombre" />
+        app:layout_constraintTop_toBottomOf="@+id/editActividad" />
 
     <TextView
         android:id="@+id/user"
@@ -160,15 +67,51 @@
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTimestamp" />
+
+    <EditText
+        android:id="@+id/editSitio"
+        android:layout_width="326dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/text_background"
+        android:enabled="false"
+        android:inputType="text"
+        android:padding="8dp"
+        android:paddingStart="16dp"
+        android:text="Sitio"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sitionombre" />
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="326dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/text_background"
+        android:enabled="false"
+        android:inputType="text"
+        android:padding="8dp"
+        android:paddingStart="16dp"
+        android:text="Descripción"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptiontext" />
 
     <EditText
         android:id="@+id/editUsuario"
         android:layout_width="326dp"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/text_background"
         android:enabled="false"
         android:inputType="text"
@@ -178,7 +121,70 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user" />
+
+    <TextView
+        android:id="@+id/sitionombre"
+        android:layout_width="326dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
+        android:text="Sitio:"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editUsuario" />
+
+    <TextView
+        android:id="@+id/timestamp"
+        android:layout_width="326dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
+        android:text="Fecha:"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDescription" />
+
+    <EditText
+        android:id="@+id/editTimestamp"
+        android:layout_width="326dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/text_background"
+        android:enabled="false"
+        android:inputType="text"
+        android:padding="8dp"
+        android:paddingStart="16dp"
+        android:text="Descripción"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timestamp" />
+
+    <EditText
+        android:id="@+id/editActividad"
+        android:layout_width="326dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/text_background"
+        android:enabled="false"
+        android:inputType="text"
+        android:padding="8dp"
+        android:paddingStart="16dp"
+        android:text="Actividad"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acti" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

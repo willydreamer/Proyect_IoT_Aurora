@@ -90,32 +90,7 @@ public class FragmentSupervisores extends Fragment {
                 return true;
             }
         });
-        /*buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                buscarUsuarios(query);
-                return true;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-                    obtenerSupervisoresDeFirestore();
-                } else {
-                    buscarUsuarios(newText);
-                }
-                return true;
-            }
-        });
-
-        // Listener para detectar cuándo se limpia el texto del SearchView
-        buscador.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                obtenerSupervisoresDeFirestore();
-                return false;
-            }
-        });*/
         buscador.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
@@ -271,7 +246,9 @@ public class FragmentSupervisores extends Fragment {
                             ArrayList<Usuario> supers= new ArrayList<>();
                             for (DocumentSnapshot document : snapshots.getDocuments()) {
                                 Usuario supervisor = document.toObject(Usuario.class);
-                                supers.add(supervisor);
+                                if(supervisor.getRol().equals("supervisor")) {
+                                    supers.add(supervisor);
+                                }
                             }
                             adapter.setListaSupervisores(supers);
                             //adapter.notifyDataSetChanged(); // Notificar al adapter que los datos han cambiado

@@ -60,7 +60,7 @@ public class MensajeriaChatActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
-    private Usuario usuario;
+    private Usuario supervisor;
     private FirebaseUser usuarioLogueado;
 
     private Chat2 chat;
@@ -74,37 +74,44 @@ public class MensajeriaChatActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        usuarioLogueado = mAuth.getCurrentUser();
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        usuarioLogueado = firebaseAuth.getCurrentUser();
 
 
         chat = (Chat2) getIntent().getSerializableExtra("chat");
-        Log.d("chatID2",chat.getUsuario2());
 
-        db.collection("usuarios")
-                .whereEqualTo("idUsuario", chat.getUsuario1())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Usuario supervisor = document.toObject(Usuario.class);
-                                binding.contactName.setText(supervisor.getNombre()+" "+supervisor.getApellido());
+        supervisor = (Usuario) getIntent().getSerializableExtra("supervisor");
+
+        if(chat!=null) {
+            db.collection("usuarios")
+                    .whereEqualTo("idUsuario", chat.getUsuario1())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Usuario supervisor = document.toObject(Usuario.class);
+                                    binding.contactName.setText(supervisor.getNombre() + " " + supervisor.getApellido());
+                                }
+                            } else {
+                                Log.d("Error", "no se encontro usuario");
                             }
-                        } else {
-                            Log.d("Error", "no se encontro usuario");
                         }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+        }else if (supervisor!=null){
+            binding.contactName.setText(supervisor.getNombre() + " " + supervisor.getApellido());
+        }
 
-        if (usuarioLogueado != null) {
+        /*if (usuarioLogueado != null) {
             String correo = usuarioLogueado.getEmail();
             Log.d("correo", correo);
             db.collection("usuarios")
@@ -130,7 +137,7 @@ public class MensajeriaChatActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     });
-        }
+        }*/
 
 
         recyclerViewMessages = findViewById(R.id.recyclerViewChat);
@@ -154,31 +161,32 @@ public class MensajeriaChatActivity extends AppCompatActivity {
     }
 
     private void cargarMensajes() {
-        db.collection("Mensajes")
-                .whereEqualTo("idChat", chat.getIdChat())
-                .orderBy("fecha", Query.Direction.ASCENDING)
-                .addSnapshotListener((snapshots, e) -> {
-                    if (e != null) {
-                        //Toast.makeText(this, "Error al cargar mensajes", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    for (DocumentChange dc : snapshots.getDocumentChanges()) {
-                        switch (dc.getType()) {
-                            case ADDED:
-                                Message2 message = dc.getDocument().toObject(Message2.class);
-                                listaMensajes.add(message);
-                                messageAdapter.notifyItemInserted(listaMensajes.size() - 1);
-                                recyclerViewMessages.scrollToPosition(listaMensajes.size() - 1);
-                                break;
-                            case MODIFIED:
-                                // Manejar mensajes modificados si es necesario
-                                break;
-                            case REMOVED:
-                                // Manejar mensajes eliminados si es necesario
-                                break;
+        if(chat!=null) {
+            db.collection("Mensajes")
+                    .whereEqualTo("idChat", chat.getIdChat())
+                    .orderBy("fecha", Query.Direction.ASCENDING)
+                    .addSnapshotListener((snapshots, e) -> {
+                        if (e != null) {
+                            //Toast.makeText(this, "Error al cargar mensajes", Toast.LENGTH_LONG).show();
+                            return;
                         }
-                    }
-                });
+                        for (DocumentChange dc : snapshots.getDocumentChanges()) {
+                            switch (dc.getType()) {
+                                case ADDED:
+                                    Message2 message = dc.getDocument().toObject(Message2.class);
+                                    listaMensajes.add(message);
+                                    messageAdapter.notifyItemInserted(listaMensajes.size() - 1);
+                                    recyclerViewMessages.scrollToPosition(listaMensajes.size() - 1);
+                                    break;
+                                case MODIFIED:
+                                    // Manejar mensajes modificados si es necesario
+                                    break;
+                                case REMOVED:
+                                    // Manejar mensajes eliminados si es necesario
+                                    break;
+                            }
+                        }
+                    });
                 /*
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -227,6 +235,9 @@ public class MensajeriaChatActivity extends AppCompatActivity {
                     recyclerViewMessages.scrollToPosition(listaMensajes.size() - 1);
                 });
                 */
+        }else{
+
+        }
 
     }
 
@@ -237,20 +248,23 @@ public class MensajeriaChatActivity extends AppCompatActivity {
             return;
         }
         String idMensaje = generarIdMensaje();
-        Message2 message = new Message2(idMensaje, chat.getIdChat(), mensaje, usuario.getIdUsuario(), chat.getUsuario1(),new Date());
-        db.collection("Mensajes")
-                .document(idMensaje)
-                .set(message)
-                .addOnSuccessListener(documentReference -> {
-                    editTextMensaje.setText("");
-                    listaMensajes.add(message);
-                    messageAdapter.notifyItemInserted(listaMensajes.size() - 1);
-                    recyclerViewMessages.scrollToPosition(listaMensajes.size() - 1);
-                    chat.getListaMensajes().add(idMensaje);
-                    guardarMensajeEnChat(chat);
-                })
-                .addOnFailureListener(e -> Toast.makeText(this, "Error al enviar mensaje", Toast.LENGTH_LONG).show());
+        if(chat!=null) {
+            Message2 message = new Message2(idMensaje, chat.getIdChat(), mensaje, usuarioLogueado.getUid(), chat.getUsuario1(), new Date());
+            db.collection("Mensajes")
+                    .document(idMensaje)
+                    .set(message)
+                    .addOnSuccessListener(documentReference -> {
+                        editTextMensaje.setText("");
+                        listaMensajes.add(message);
+                        messageAdapter.notifyItemInserted(listaMensajes.size() - 1);
+                        recyclerViewMessages.scrollToPosition(listaMensajes.size() - 1);
+                        chat.getListaMensajes().add(idMensaje);
+                        guardarMensajeEnChat(chat);
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(this, "Error al enviar mensaje", Toast.LENGTH_LONG).show());
+        }else{
 
+        }
 
     }
 

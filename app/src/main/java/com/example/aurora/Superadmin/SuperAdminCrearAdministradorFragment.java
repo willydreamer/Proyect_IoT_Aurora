@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.aurora.Admin.CrearSupervisorActivity;
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.R;
@@ -144,6 +146,10 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
 
         return view;
     }
+    private boolean correoValido(String correoStr) {
+        return Patterns.EMAIL_ADDRESS.matcher(correoStr).matches();
+    }
+
 
     private void guardarAdministrador() {
         String nombre = editTextNombre.getText().toString().trim();
@@ -169,96 +175,110 @@ public class SuperAdminCrearAdministradorFragment extends Fragment {
             return;
         }
 
-        String idadmin = generarIdAdmin();
 
         //si no hay foto vacia
         if(imagenUri!=null) {
 
+            if(!nombre.isEmpty() && !apellido.isEmpty() && !dni.isEmpty() && !correo.isEmpty() && !domicilio.isEmpty() && !telefono.isEmpty()) {
+                if(dni.length()!=8){
+                    Toast.makeText(getContext(), "DNI debe ser de 8 digitos", Toast.LENGTH_LONG).show();
+                }else if(telefono.length()!=9) {
+                    Toast.makeText(getContext(), "Telefono debe ser de 9 digitos", Toast.LENGTH_LONG).show();
+                }else if(!correoValido(correo)) {
+                    Toast.makeText(getContext(), "Correo No Valido", Toast.LENGTH_LONG).show();
+                }else{
+
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                    StorageReference imageReference = storageReference.child("fotosUsuario/" + System.currentTimeMillis() + ".jpg");
+
+                    UploadTask uploadTask = imageReference.putFile(imagenUri);
+                    uploadTask.addOnSuccessListener(taskSnapshot -> {
+                        imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                            //Una vez que ya se subio la imagen en BD , obtenemos la URL de la imagen:
+                            String imageUrl = uri.toString();
+
+                            FirebaseAuth auth = FirebaseAuth.getInstance();
+                            FirebaseUser originalUser = auth.getCurrentUser(); // Guardar el usuario actual
+
+                            auth.createUserWithEmailAndPassword(correo, "123456")
+                                    .addOnCompleteListener(task -> {
+                                        if (task.isSuccessful()) {
+                                            String userId = task.getResult().getUser().getUid();
+                                            Usuario nuevoAdministrador = new Usuario(userId, nombre, apellido, dni, correo, domicilio, telefono, "administrador", estado, null, imageUrl);
+
+                                            db.collection("usuarios")
+                                                    .add(nuevoAdministrador)
+                                                    .addOnSuccessListener(documentReference -> {
+                                                        Log.d("msg-test2", "Administrador guardado exitosamente");
+                                                        Toast.makeText(getContext(), "Administrador creado exitosamente", Toast.LENGTH_SHORT).show();
+
+                                                        // Navegar al nuevo fragmento
+                                                        SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola", "comotas?");
+                                                        ((SuperAdmin) getContext()).getSupportFragmentManager()
+                                                                .beginTransaction()
+                                                                .replace(R.id.container1, fragment)
+                                                                .addToBackStack(null)
+                                                                .commit();
+
+
+
+                                                        // Volver a autenticar al usuario original
+                                                        if (originalUser != null) {
+                                                            auth.signInWithEmailAndPassword(originalUser.getEmail(), "123456")
+                                                                    .addOnCompleteListener(signInTask -> {
+                                                                        if (signInTask.isSuccessful()) {
+                                                                            Log.d("msg-test4", "Usuario original reautenticado exitosamente");
+                                                                        } else {
+                                                                            Log.e("msg-test4", "Error al reautenticar al usuario original", signInTask.getException());
+                                                                        }
+                                                                    });
+                                                        }
+
+                                                        // Crear el log de la operación con el UID del usuario original
+                                                        if (originalUser != null) {
+                                                            db.collection("usuarios")
+                                                                    .whereEqualTo("idUsuario", originalUser.getUid())  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                                                    .get()
+                                                                    .addOnCompleteListener(task1 -> {
+                                                                        if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                                                            // Obtener el primer documento que coincide con la consulta
+                                                                            DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                                                            Usuario usuario = document.toObject(Usuario.class);
+                                                                            if (usuario != null) {
+                                                                                usuario.setIdUsuario(document.getId());
+                                                                                crearLog("Se creó un Administrador", "Se creó un nuevo administrador", originalUser.getUid(), null,usuario);
+                                                                            }
+                                                                        } else {
+                                                                            android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                                                        }
+                                                                    });
+
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Log.e("msg-test3", "Error al guardar el administrador", e);
+                                                        Toast.makeText(getContext(), "Error al crear el administrador", Toast.LENGTH_SHORT).show();
+                                                    });
+                                        } else {
+                                            Toast.makeText(getContext(), "Error al crear usuario: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(getContext(), "Falla en crear usuario: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                    });
+
+
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(getContext(), "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        });
+                    });
+                }
+            } else{
+                Toast.makeText(getContext(), "No Debe Haber Campos Vacios", Toast.LENGTH_LONG).show();
+            }
+
             //Subimos la foto en BD
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-            StorageReference imageReference = storageReference.child("fotosUsuario/" + System.currentTimeMillis() + ".jpg");
 
-            UploadTask uploadTask = imageReference.putFile(imagenUri);
-            uploadTask.addOnSuccessListener(taskSnapshot -> {
-                imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                    //Una vez que ya se subio la imagen en BD , obtenemos la URL de la imagen:
-                    String imageUrl = uri.toString();
-
-                    FirebaseAuth auth = FirebaseAuth.getInstance();
-                    FirebaseUser originalUser = auth.getCurrentUser(); // Guardar el usuario actual
-
-                    auth.createUserWithEmailAndPassword(correo, "123456")
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    String userId = task.getResult().getUser().getUid();
-                                    Usuario nuevoAdministrador = new Usuario(userId, nombre, apellido, dni, correo, domicilio, telefono, "administrador", estado, null, imageUrl);
-
-                                    db.collection("usuarios")
-                                            .add(nuevoAdministrador)
-                                            .addOnSuccessListener(documentReference -> {
-                                                Log.d("msg-test2", "Administrador guardado exitosamente");
-                                                Toast.makeText(getContext(), "Administrador creado exitosamente", Toast.LENGTH_SHORT).show();
-
-                                                // Navegar al nuevo fragmento
-                                                SuperAdminUsersFragment fragment = SuperAdminUsersFragment.newInstance("hola", "comotas?");
-                                                ((SuperAdmin) getContext()).getSupportFragmentManager()
-                                                        .beginTransaction()
-                                                        .replace(R.id.container1, fragment)
-                                                        .addToBackStack(null)
-                                                        .commit();
-
-
-
-                                                // Volver a autenticar al usuario original
-                                                if (originalUser != null) {
-                                                    auth.signInWithEmailAndPassword(originalUser.getEmail(), "123456")
-                                                            .addOnCompleteListener(signInTask -> {
-                                                                if (signInTask.isSuccessful()) {
-                                                                    Log.d("msg-test4", "Usuario original reautenticado exitosamente");
-                                                                } else {
-                                                                    Log.e("msg-test4", "Error al reautenticar al usuario original", signInTask.getException());
-                                                                }
-                                                            });
-                                                }
-
-                                                // Crear el log de la operación con el UID del usuario original
-                                                if (originalUser != null) {
-                                                    db.collection("usuarios")
-                                                            .whereEqualTo("idUsuario", originalUser.getUid())  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
-                                                            .get()
-                                                            .addOnCompleteListener(task1 -> {
-                                                                if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
-                                                                    // Obtener el primer documento que coincide con la consulta
-                                                                    DocumentSnapshot document = task1.getResult().getDocuments().get(0);
-                                                                    Usuario usuario = document.toObject(Usuario.class);
-                                                                    if (usuario != null) {
-                                                                        usuario.setIdUsuario(document.getId());
-                                                                        crearLog("Se creó un Administrador", "Se creó un nuevo administrador", originalUser.getUid(), null,usuario);
-                                                                    }
-                                                                } else {
-                                                                    android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
-                                                                }
-                                                            });
-
-                                                }
-                                            })
-                                            .addOnFailureListener(e -> {
-                                                Log.e("msg-test3", "Error al guardar el administrador", e);
-                                                Toast.makeText(getContext(), "Error al crear el administrador", Toast.LENGTH_SHORT).show();
-                                            });
-                                } else {
-                                    Toast.makeText(getContext(), "Error al crear usuario: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(getContext(), "Falla en crear usuario: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                            });
-
-
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
-            });
         }else{
             //si no hay foto, mostrar toast make
             Toast.makeText(getContext(), "Foto no seleccionada", Toast.LENGTH_LONG).show();

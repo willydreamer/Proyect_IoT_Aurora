@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aurora.Bean.Chat2;
 import com.example.aurora.Bean.Message2;
+import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
+import com.example.aurora.MensajeriaActivity;
 import com.example.aurora.MensajeriaChatActivity;
 import com.example.aurora.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -112,6 +115,29 @@ public class ListaChatsAdapter extends RecyclerView.Adapter<ListaChatsAdapter.Me
         Log.d("lastmsg",ultimoMensajeID);
 
         db.collection("Mensajes")
+                .whereEqualTo("idChat",ch.getIdChat())
+                .orderBy("fecha" , Query.Direction.DESCENDING)
+                .limit(1)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Toast.makeText(context, "Error al obtener los mensajes", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (snapshots != null) {
+                            for (DocumentSnapshot document : snapshots.getDocuments()) {
+                                Message2 msg = document.toObject(Message2.class);
+                                ultimoMensaje.setText(msg.getMensaje());
+                                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+                                hora.setText(sdf.format(msg.getFecha()));
+                            }
+                        }
+                    }
+                });
+
+        /*db.collection("Mensajes")
                 .whereEqualTo("idMensaje", ultimoMensajeID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -136,7 +162,7 @@ public class ListaChatsAdapter extends RecyclerView.Adapter<ListaChatsAdapter.Me
                     public void onFailure(@NonNull Exception e) {
                         e.printStackTrace();
                     }
-                });
+                });*/
 
 
 
@@ -158,6 +184,11 @@ public class ListaChatsAdapter extends RecyclerView.Adapter<ListaChatsAdapter.Me
         return listaChats.size();
     }
 
+    public void updateList(ArrayList<Chat2> newList) {
+        listaChats = newList;
+        notifyDataSetChanged();
+    }
+
     public Context getContext() {
         return context;
     }
@@ -171,7 +202,9 @@ public class ListaChatsAdapter extends RecyclerView.Adapter<ListaChatsAdapter.Me
     }
 
     public void setListaChats(ArrayList<Chat2> listaChats) {
+
         this.listaChats = listaChats;
+        notifyDataSetChanged();
     }
 }
 

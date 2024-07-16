@@ -36,6 +36,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/logsr"
+        android:paddingBottom="45dp"
         android:layout_width="match_parent"
         android:layout_height="521dp"
         android:layout_marginLeft="0sp"

@@ -261,7 +261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        android:text="Sitios Recientes"
+                        android:text="Equipos Recientes"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
 
@@ -279,184 +279,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/llHeader3">
 
-                    <HorizontalScrollView
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewEquipos"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="5dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="130dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                app:cardCornerRadius="15dp"
-                                app:cardElevation="2dp">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:id="@+id/imagenRouter1"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="8dp"
-                                        android:background="@drawable/perfil_icono"
-                                        android:foregroundGravity="center" />
-
-                                    <TextView
-                                        android:id="@+id/textTituloRouter1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/imagenRouter1"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Cisco ISC 100 Series"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/textRouter1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTituloRouter1"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Router"
-                                        android:textColor="#3C9AC5"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="130dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                app:cardCornerRadius="15dp"
-                                app:cardElevation="2dp">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:id="@+id/imagenRouter2"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="8dp"
-                                        android:background="@drawable/perfil_icono"
-                                        android:foregroundGravity="center" />
-
-                                    <TextView
-                                        android:id="@+id/textTituloRouter2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/imagenRouter2"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Cisco ISC 100 Series"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/textRouter2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTituloRouter2"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Router"
-                                        android:textColor="#3C9AC5"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-
-                                    <TextView
-                                        android:id="@+id/textNumeroSerieRouter2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textRouter2"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="ABC - 123456"
-                                        android:textSize="12sp" />
-
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="130dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                app:cardCornerRadius="15dp"
-                                app:cardElevation="2dp">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:id="@+id/imagenRouter3"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="8dp"
-                                        android:background="@drawable/perfil_icono"
-                                        android:foregroundGravity="center" />
-
-                                    <TextView
-                                        android:id="@+id/textTituloRouter3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/imagenRouter3"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Cisco ISC 100 Series"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/textRouter3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textTituloRouter3"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="Router"
-                                        android:textColor="#3C9AC5"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-
-                                    <TextView
-                                        android:id="@+id/textNumeroSerieRouter3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/textRouter3"
-                                        android:layout_marginTop="8dp"
-                                        android:gravity="center"
-                                        android:text="ABC - 123456"
-                                        android:textSize="12sp" />
-
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-
-                            <!-- Fin del bloque repetido -->
-
-                        </LinearLayout>
-                    </HorizontalScrollView>
+                        android:layout_height="180dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp"/>
 
                     <TextView
                         android:id="@+id/textNumeroSerieRouter1"
@@ -498,7 +327,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        android:text="Equipos Recientes"
+                        android:text="Sitios Recientes"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold" />
 

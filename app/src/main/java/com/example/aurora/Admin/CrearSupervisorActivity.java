@@ -2,6 +2,8 @@ package com.example.aurora.Admin;
 
 import static android.Manifest.permission.POST_NOTIFICATIONS;
 
+import static java.security.AccessController.getContext;
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -24,10 +26,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
 import com.example.aurora.NotificationDismissReceiver;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivityCrearSupervisorBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -35,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -152,7 +159,7 @@ public class CrearSupervisorActivity extends AppCompatActivity {
             domicilio = findViewById(R.id.editText4);
             telefono = findViewById(R.id.editText5);
 
-            String idUsuarioSupervisor = generarIdSupervisor();
+            //String idUsuarioSupervisor = generarIdSupervisor();
             String nombreStr = nombre.getEditableText().toString();
             String apellidoStr = apellido.getEditableText().toString();
             String dniStr = dni.getEditableText().toString();
@@ -175,7 +182,7 @@ public class CrearSupervisorActivity extends AppCompatActivity {
                     uploadTask.addOnSuccessListener(taskSnapshot -> {
                         imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
                             String imageUrl = uri.toString();
-                            guardarSupervisor(imageUrl,idUsuarioSupervisor,nombreStr,apellidoStr,dniStr,correoStr,domicilioStr,telefonoStr);
+                            guardarSupervisor(imageUrl,nombreStr,apellidoStr,dniStr,correoStr,domicilioStr,telefonoStr);
                         });
                     }).addOnFailureListener(e -> {
                         Toast.makeText(CrearSupervisorActivity.this, "Falla en subir foto: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -208,49 +215,112 @@ public class CrearSupervisorActivity extends AppCompatActivity {
 
 
 
-    public void guardarSupervisor(String imageUrl,String idUsuarioSupervisor,String nombreStr,String apellidoStr,
+    public void guardarSupervisor(String imageUrl,String nombreStr,String apellidoStr,
                                   String dniStr,String correoStr,String domicilioStr,String telefonoStr) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser originalUser = auth.getCurrentUser(); // Guardar el usuario actual
+        auth.createUserWithEmailAndPassword(correoStr, "123456")
+                .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                String userId = task.getResult().getUser().getUid();
+                                String rol = "supervisor";
+                                String estado = "activo";
+                                ArrayList<String> listaSitios = new ArrayList<>();
+                                Usuario usuarioSupervisor = new Usuario(userId, nombreStr, apellidoStr, dniStr, correoStr, domicilioStr, telefonoStr, rol, estado, listaSitios, imageUrl);
+                                db.collection("usuarios")
+                                        .document(userId)
+                                        .set(usuarioSupervisor)
+                                        .addOnSuccessListener(unused -> {
+                                            Log.d("msg-test2", "Supervisor guardado exitosamente");
+                                            Toast.makeText(CrearSupervisorActivity.this, "Supervisor creado exitosamente", Toast.LENGTH_SHORT).show();
 
-        String rol = "supervisor";
-        String estado = "activo";
-        ArrayList<String> listaSitios = new ArrayList<>();
-        Usuario usuarioSupervisor = new Usuario(idUsuarioSupervisor, nombreStr, apellidoStr, dniStr, correoStr, domicilioStr, telefonoStr,rol,estado,listaSitios,imageUrl);
+                                            String title = "Nuevo Supervisor Creado";
+                                            String description = "Se creó con exito un nuevo supervisor: " + userId + "-" + nombreStr + " " + apellidoStr;
 
 
-        // Guardar los datos en Firestore
-        db.collection("usuarios")
-                .document(idUsuarioSupervisor)
-                .set(usuarioSupervisor)
-                .addOnSuccessListener(unused -> {
-                    Log.d("msg-test2", "Supervisor guardado exitosamente");
-                    Toast.makeText(CrearSupervisorActivity.this, "Supervisor creado exitosamente", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CrearSupervisorActivity.this, FragmentSupervisores.class);
-                    startActivity(intent);
+
+
+                                            // Volver a autenticar al usuario original
+                                            if (originalUser != null) {
+                                                auth.signInWithEmailAndPassword(originalUser.getEmail(), "123456")
+                                                        .addOnCompleteListener(signInTask -> {
+                                                            if (signInTask.isSuccessful()) {
+                                                                Log.d("msg-test4", "Usuario original reautenticado exitosamente");
+                                                            } else {
+                                                                Log.e("msg-test4", "Error al reautenticar al usuario original", signInTask.getException());
+                                                            }
+                                                        });
+                                            }
+
+                                            // Crear el log de la operación con el UID del usuario original
+                                            if (originalUser != null) {
+                                                db.collection("usuarios")
+                                                        .whereEqualTo("idUsuario", originalUser.getUid())  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                                        .get()
+                                                        .addOnCompleteListener(task1 -> {
+                                                            if (task1.isSuccessful() && task1.getResult() != null && !task1.getResult().isEmpty()) {
+                                                                // Obtener el primer documento que coincide con la consulta
+                                                                DocumentSnapshot document = task1.getResult().getDocuments().get(0);
+                                                                Usuario usuario = document.toObject(Usuario.class);
+                                                                if (usuario != null) {
+                                                                    usuario.setIdUsuario(document.getId());
+                                                                    crearLog("Se creó un Supervisor", "Se creó un nuevo supervisor", originalUser.getUid(), null,usuario);
+                                                                }
+                                                            } else {
+                                                                android.util.Log.d("msg-test", "Error getting document: ", task1.getException());
+                                                            }
+                                                        });
+
+                                            }
+                                            notificarImportanceDefault(title, description);
+                                            Intent intent = new Intent(CrearSupervisorActivity.this, FragmentSupervisores.class);
+                                            startActivity(intent);
+
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Log.e("msg-test3", "Error al guardar el supervisor", e);
+                                            Toast.makeText(CrearSupervisorActivity.this, "Error al crear el supervisor", Toast.LENGTH_SHORT).show();
+                                        });
+
+                            } else {
+                                Toast.makeText(CrearSupervisorActivity.this, "Error al crear usuario: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("msg-test3", "Error al guardar el supervisor", e);
-                    Toast.makeText(CrearSupervisorActivity.this, "Error al crear el supervisor", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrearSupervisorActivity.this, "Falla en crear usuario: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
-
-        String title="Nuevo Supervisor Creado";
-        String description = "Se creó con exito un nuevo supervisor: "+idUsuarioSupervisor+"-"+nombreStr+" "+apellidoStr;
-
-        notificarImportanceDefault(title,description);
 
     }
 
-
-    private String generarIdSupervisor() {
+    /*private String generarIdSupervisor() {
         String letrasAdmin = "SUPER";
         Random random = new Random();
         int numeroAleatorio = random.nextInt(900) + 100; // Generar un número entre 100 y 999
         return letrasAdmin+numeroAleatorio;
-    }
+    }*/
 
     //basado en gpt
     private boolean correoValido(String correoStr) {
         return Patterns.EMAIL_ADDRESS.matcher(correoStr).matches();
     }
+
+    public void crearLog(String actividad, String descripcion, String idUsuario, Sitio sitio, Usuario usuario){
+        Date fechaActual = new Date();
+
+        com.example.aurora.Bean.Log nuevoLog = new com.example.aurora.Bean.Log(fechaActual,  actividad,  descripcion, idUsuario, sitio, usuario);
+
+        db.collection("logs")
+                .add(nuevoLog)
+                .addOnSuccessListener(documentReference -> {
+                    Log.d("msg-test2", "Log guardado exitosamente");
+                    Toast.makeText(CrearSupervisorActivity.this, "Actividad Registrada", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("msg-test3", "Error al guardar el log", e);
+                    Toast.makeText(CrearSupervisorActivity.this, "Error al registrar la activada", Toast.LENGTH_SHORT).show();
+                });
+    }
+
 
     public void notificarImportanceDefault(String title , String description){
 

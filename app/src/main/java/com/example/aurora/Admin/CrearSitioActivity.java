@@ -1,7 +1,12 @@
 package com.example.aurora.Admin;
 
+import static android.Manifest.permission.POST_NOTIFICATIONS;
+
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,9 +21,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.example.aurora.Bean.Sitio;
 import com.example.aurora.Bean.Usuario;
+import com.example.aurora.NotificationDismissReceiver;
 import com.example.aurora.R;
 import com.example.aurora.databinding.ActivityCrearSitioBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -52,6 +61,11 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
     private ImageView imagen;
     private String imageUrl;
     private Uri imagenUri;
+
+    private static final String canal1 = "canal_default";
+
+    private static final String GROUP_KEY = "notis_group";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,6 +172,7 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
                     Intent intent = new Intent(CrearSitioActivity.this, MainActivity.class);
                     intent.putExtra("fragment", "sitios");
                     startActivity(intent);
+                    notificarImportanceDefault("Nuevo Sitio Creado", "Se creó con exito el nuevo sitio con ID:"+idSitio);
                     finish(); // Cerrar la actividad actual
                 })
                 .addOnFailureListener(e -> {
@@ -260,6 +275,49 @@ public class CrearSitioActivity extends AppCompatActivity implements OnMapReadyC
                 .placeholder(R.drawable.baseline_account_circle_24) // Reemplaza con tu imagen por defecto
                 .transform(new CropCircleTransformation())
                 .into(imagen);
+    }
+
+    public void notificarImportanceDefault(String title , String description) {
+
+        //Crear notificación
+        //Agregar información a la notificación que luego sea enviada a la actividad que se abre
+        Intent intent = new Intent(this, NotificationDismissReceiver.class);
+        intent.putExtra("pid", "4616");
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        //
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, canal1)
+                .setSmallIcon(R.drawable.editicon)
+                .setContentTitle(title)
+                .setContentText(description)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setGroup(GROUP_KEY)
+                .setDeleteIntent(pendingIntent);
+
+        Notification notification = builder.build();
+
+        //Lanzar notificación
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        if (ActivityCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            notificationManager.notify((int) System.currentTimeMillis(), notification);
+        }
+
+        // Crear una notificación de resumen para el grupo
+        Notification summaryNotification = new NotificationCompat.Builder(this, canal1)
+                .setContentTitle("Notificaciones")
+                .setContentText("Tienes Nuevas notificaciones")
+                .setSmallIcon(R.drawable.netwise_1000)
+                .setStyle(new NotificationCompat.InboxStyle()
+                        .addLine("Notificaciones")
+                        .setBigContentTitle("Notificaciones")
+                        .setSummaryText("Resúmen de notificaciones"))
+                .setGroup(GROUP_KEY)
+                .setGroupSummary(true)
+                .build();
+
+        notificationManager.notify(0, summaryNotification);
     }
 
 }

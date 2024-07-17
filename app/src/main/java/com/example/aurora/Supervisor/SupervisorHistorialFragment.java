@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -52,7 +53,8 @@ public class SupervisorHistorialFragment extends Fragment {
    // SearchView buscador;
 
     private FirebaseFirestore db;
-    private CollectionReference logsRef;
+
+    private Query logsRef;
 
     public SupervisorHistorialFragment() {
         // Required empty public constructor
@@ -90,9 +92,10 @@ public class SupervisorHistorialFragment extends Fragment {
             String user1 = user.getUid();
             android.util.Log.d("USUARIO", user1);
             db = FirebaseFirestore.getInstance();
-            logsRef = (CollectionReference) db.collection("logs");//whereEqualTo("idUsuario",user1 );
-        }
 
+            // Crear la consulta para filtrar los logs por idUsuario
+            logsRef = db.collection("logs").whereEqualTo("idUsuario", user1);
+        }
 
     }
 
@@ -107,66 +110,12 @@ public class SupervisorHistorialFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.logsr);
+        recyclerView = view.findViewById(R.id.holaaa);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         logList = new ArrayList<>();
         adapter = new ListaLogAdapter(logList, getContext());
         recyclerView.setAdapter(adapter);
-
-
-        //buscador = view.findViewById(R.id.search1);
-
-        /*buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                buscarSupervisores(query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-                    logsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                        @Override
-                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                            if (error != null) {
-                                return;
-                            }
-                            logList.clear();
-                            for (DocumentSnapshot doc : value.getDocuments()) {
-                                Log log = doc.toObject(Log.class);
-                                logList.add(log);
-                            }
-                            adapter.notifyDataSetChanged();
-                        }
-                    });
-                } else {
-                    buscarSupervisores(newText);
-                }
-                return true;
-            }
-        });
-        buscador.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                logsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (error != null) {
-                            return;
-                        }
-                        logList.clear();
-                        for (DocumentSnapshot doc : value.getDocuments()) {
-                            Log log = doc.toObject(Log.class);
-                            logList.add(log);
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-                return false;
-            }
-        });*/
 
         logsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -174,15 +123,35 @@ public class SupervisorHistorialFragment extends Fragment {
                 if (error != null) {
                     return;
                 }
+
                 logList.clear();
-                for (DocumentSnapshot doc : value.getDocuments()) {
-                    Log log = doc.toObject(Log.class);
-                    logList.add(log);
+                if (value != null) {
+                    for (DocumentSnapshot doc : value.getDocuments()) {
+                        Log log = doc.toObject(Log.class);
+                        /*db.collection("usuarios")
+                                .whereEqualTo("idUsuario", log.getIdUsuario())  // Buscar documentos donde el campo 'idUsuario' sea igual a log.getIdUsuario()
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
+                                        // Obtener el primer documento que coincide con la consulta
+                                        DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                                        Usuario usuario = document.toObject(Usuario.class);
+                                        if (usuario != null) {
+                                            usuario.setIdUsuario(document.getId());
+                                            log.setUsuario(usuario);
+                                        }
+                                    } else {
+                                        android.util.Log.d("msg-test", "Error getting document: ", task.getException());
+                                    }
+                                });*/
+                        logList.add(log);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
         });
     }
+
 
     private void buscarSupervisores(String searchText) {
         FirebaseAuth auth = FirebaseAuth.getInstance();

@@ -33,6 +33,7 @@
         android:background="@drawable/text_background" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/holaaa"
         android:layout_width="305dp"
         android:layout_height="463dp"
         android:layout_marginLeft="55sp"

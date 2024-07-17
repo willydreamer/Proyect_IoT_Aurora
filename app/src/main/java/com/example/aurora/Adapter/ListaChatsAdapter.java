@@ -111,8 +111,7 @@ public class ListaChatsAdapter extends RecyclerView.Adapter<ListaChatsAdapter.Me
                     }
                 });
 
-        String ultimoMensajeID = ch.getListaMensajes().get(listaChats.size()-1);
-        Log.d("lastmsg",ultimoMensajeID);
+
 
         db.collection("Mensajes")
                 .whereEqualTo("idChat",ch.getIdChat())
@@ -122,7 +121,7 @@ public class ListaChatsAdapter extends RecyclerView.Adapter<ListaChatsAdapter.Me
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
                         if (e != null) {
-                            Toast.makeText(context, "Error al obtener los mensajes", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "Error al obtener los mensajes", Toast.LENGTH_SHORT).show();
                             return;
                         }
 

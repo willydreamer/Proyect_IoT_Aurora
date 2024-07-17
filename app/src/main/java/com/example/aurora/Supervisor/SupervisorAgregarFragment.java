@@ -106,7 +106,8 @@ public class SupervisorAgregarFragment extends Fragment {
                             } else if (equipoAdmins1.size() == 1) {
                                 showToast("¡Equipo encontrado! Visualiza su información a continuación.");
                                 Intent intent = new Intent(getActivity(), SupervisorInfoEquiposActivity.class);
-                                intent.putExtra("equipoEncontrado", equipoAdmins1.get(0));
+                                intent.putExtra("equipo", equipoAdmins1.get(0));
+                                Log.d("Equipo uwuwuwuuw",equipoAdmins1.get(0).getIdEquipo() + " " + equipoAdmins1.get(0).getDescripcion());
                                 startActivity(intent);
                             }else{
                                 showToast("Ups, hemos encontrado más de 1 equipo con ese código. Comunícate con Soporte para arreglarlo.");

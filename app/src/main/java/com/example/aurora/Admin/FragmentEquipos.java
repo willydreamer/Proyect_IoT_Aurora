@@ -148,7 +148,7 @@ public class FragmentEquipos extends Fragment {
         adapter5 = new ListaEquiposAdapterAdmin();
         adapter5.setContext(getContext());
         adapter5.setListaEquipos(listaGabinetes);
-        recyclerView4.setAdapter(adapter5);
+        recyclerView5.setAdapter(adapter5);
 
         obtenerEquiposGabinetesDeFirestore();
 

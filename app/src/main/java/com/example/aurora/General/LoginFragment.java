@@ -120,14 +120,14 @@ public class LoginFragment extends AppCompatActivity {
                                                 if (!userTask.getResult().isEmpty()) {
                                                     for (QueryDocumentSnapshot document : userTask.getResult()) {
                                                         Usuario usuarioLog = document.toObject(Usuario.class);
-                                                        //if(usuarioLog.getEstado().equals("activo") || usuarioLog.getEstado().equals("Activo")) {
+                                                        if(usuarioLog.getEstado().equals("activo") || usuarioLog.getEstado().equals("Activo")) {
                                                             String role = document.getString("rol");
                                                             Log.d("rol-autenticado-1", role);
                                                             redirectToRoleSpecificActivity(role);
-                                                        /*}else{
+                                                        }else{
                                                             Toast.makeText(LoginFragment.this, "Cuenta Inactiva", Toast.LENGTH_LONG).show();
                                                             FirebaseAuth.getInstance().signOut();
-                                                        }*/
+                                                        }
                                                     }
                                                 } else {
                                                     Log.d(TAG, "No matching documents found.");

@@ -48,7 +48,7 @@ public class SuperAdminUsersFragment extends Fragment {
     private List<Usuario> listaUsuarios;
     FirebaseFirestore db;
 
-    SearchView buscador;
+    //SearchView buscador;
 
     public SuperAdminUsersFragment() {
         // Required empty public constructor
@@ -105,8 +105,8 @@ public class SuperAdminUsersFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         obtenerSupervisoresDeFirestore();
 
-        buscador = view.findViewById(R.id.search1);
-        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+       // buscador = view.findViewById(R.id.search1);
+        /*buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 buscarSupervisores(query);
@@ -129,7 +129,7 @@ public class SuperAdminUsersFragment extends Fragment {
                 obtenerSupervisoresDeFirestore();
                 return false;
             }
-        });
+        });*/
 
 
 

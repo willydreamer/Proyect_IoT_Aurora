@@ -36,9 +36,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleruser"
         android:layout_width="match_parent"
-        android:paddingBottom="45dp"
         android:layout_height="526dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="210sp" />
+        android:layout_marginTop="210sp"
+        android:paddingBottom="45dp" />
 
 </FrameLayout>

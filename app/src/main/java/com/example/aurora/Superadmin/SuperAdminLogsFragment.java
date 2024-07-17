@@ -53,7 +53,7 @@ public class SuperAdminLogsFragment extends Fragment {
     private ListaLogAdapter adapter;
     private List<Log> logList;
 
-    SearchView buscador;
+    //SearchView buscador;
 
     private FirebaseFirestore db;
     private CollectionReference logsRef;
@@ -110,9 +110,9 @@ public class SuperAdminLogsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        buscador = view.findViewById(R.id.search1);
+        //buscador = view.findViewById(R.id.search1);
 
-        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        /*buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 buscarSupervisores(query);
@@ -161,7 +161,7 @@ public class SuperAdminLogsFragment extends Fragment {
                 });
                 return false;
             }
-        });
+        });*/
 
         logsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override

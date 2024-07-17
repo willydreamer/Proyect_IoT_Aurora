@@ -120,7 +120,7 @@ public class LoginFragment extends AppCompatActivity {
                                                 if (!userTask.getResult().isEmpty()) {
                                                     for (QueryDocumentSnapshot document : userTask.getResult()) {
                                                         Usuario usuarioLog = document.toObject(Usuario.class);
-                                                        if(usuarioLog.getEstado().equals("activo") || usuarioLog.getEstado().equals("Activo")) {
+                                                        if(String.valueOf(usuarioLog.getEstado()).equals("activo") || String.valueOf(usuarioLog.getEstado()).equals("Activo")) {
                                                             String role = document.getString("rol");
                                                             Log.d("rol-autenticado-1", role);
                                                             redirectToRoleSpecificActivity(role);
